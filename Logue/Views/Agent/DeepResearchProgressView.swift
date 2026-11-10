@@ -54,12 +54,12 @@ struct DeepResearchProgressView: View {
         HStack(spacing: 8) {
             Image(systemName: "sparkle.magnifyingglass")
                 .foregroundStyle(AppThemeConstants.brandPrimary)
-            Text("Deep Research")
+            Text("深度研究")
                 .font(.callout)
                 .fontWeight(.semibold)
             Spacer()
             if coordinator.isRunning {
-                Button("Cancel") {
+                Button("取消") {
                     coordinator.cancel()
                 }
                 .buttonStyle(.bordered)
@@ -73,7 +73,7 @@ struct DeepResearchProgressView: View {
                         .foregroundStyle(.tertiary)
                 }
                 .buttonStyle(.plain)
-                .help("Dismiss")
+                .help("关闭")
             }
         }
     }
@@ -148,7 +148,7 @@ struct DeepResearchProgressView: View {
             Image(systemName: "arrow.right.circle")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
-            Text("Section \(idx + 1) of \(total): \(title)")
+            Text("第 \(idx + 1) 节，共 \(total) 节：\(title)")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)

@@ -26,10 +26,10 @@ struct BackupSettingsTab: View {
                 Section {
                     Label(
                         message,
-                        systemImage: message.contains("failed") ? "exclamationmark.triangle" : "checkmark.circle"
+                        systemImage: message.contains("失败") ? "exclamationmark.triangle" : "checkmark.circle"
                     )
                     .font(.callout)
-                    .foregroundStyle(message.contains("failed") ? .red : AppThemeConstants.success)
+                    .foregroundStyle(message.contains("失败") ? .red : AppThemeConstants.success)
                 }
             }
 
@@ -37,48 +37,48 @@ struct BackupSettingsTab: View {
 
             Section {
                 PrivacyBadge(
-                    "Local backups stay on your Mac. iCloud backups are encrypted end-to-end by Apple.",
+                    "本地备份保留在你的 Mac 上。iCloud 备份由 Apple 端到端加密。",
                     style: .standard
                 )
             } header: {
-                Text("Privacy & Security")
+                Text("隐私与安全")
             }
         }
         .formStyle(.grouped)
         .onAppear { backupManager.refreshICloudBackups() }
-        .confirmationDialog("Import backup?", isPresented: $showImportConfirmation, titleVisibility: .visible) {
-            Button("Import & Merge") { performLocalImport(mode: .merge) }
-            Button("Cancel", role: .cancel) {}
+        .confirmationDialog("导入备份？", isPresented: $showImportConfirmation, titleVisibility: .visible) {
+            Button("导入并合并") { performLocalImport(mode: .merge) }
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("New items from the backup will be added. Existing items will not be changed.")
+            Text("备份中的新项目将被添加，现有项目不会改变。")
         }
-        .confirmationDialog("Replace all data?", isPresented: $showReplaceWarning, titleVisibility: .visible) {
-            Button("Replace All Data", role: .destructive) { performLocalImport(mode: .replace) }
-            Button("Cancel", role: .cancel) {}
+        .confirmationDialog("替换所有数据？", isPresented: $showReplaceWarning, titleVisibility: .visible) {
+            Button("替换所有数据", role: .destructive) { performLocalImport(mode: .replace) }
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("This will delete all current data and replace it with the backup. This cannot be undone.")
+            Text("这将删除当前所有数据并替换为备份内容。此操作无法撤销。")
         }
         .confirmationDialog(
-            "Restore from iCloud?",
+            "从 iCloud 恢复？",
             isPresented: $showICloudRestoreConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Merge with existing data") { restoreSelectedICloudBackup(mode: .merge) }
-            Button("Cancel", role: .cancel) {}
+            Button("与现有数据合并") { restoreSelectedICloudBackup(mode: .merge) }
+            Button("取消", role: .cancel) {}
         } message: {
             if let entry = selectedICloudEntry {
-                Text("This will merge data from \(entry.id) into your current data.")
+                Text("这会将 \(entry.id) 的数据合并到当前数据中。")
             }
         }
         .confirmationDialog(
-            "Replace all data from iCloud?",
+            "从 iCloud 替换所有数据？",
             isPresented: $showICloudReplaceWarning,
             titleVisibility: .visible
         ) {
-            Button("Replace All Data", role: .destructive) { restoreSelectedICloudBackup(mode: .replace) }
-            Button("Cancel", role: .cancel) {}
+            Button("替换所有数据", role: .destructive) { restoreSelectedICloudBackup(mode: .replace) }
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("This will delete all current data and replace it with the iCloud backup. This cannot be undone.")
+            Text("这将删除当前所有数据并替换为 iCloud 备份内容。此操作无法撤销。")
         }
     }
 
@@ -89,7 +89,7 @@ struct BackupSettingsTab: View {
             if backupManager.isICloudAvailable {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
-                        Label("iCloud Drive", systemImage: "icloud.fill")
+                        Label("iCloud 云盘", systemImage: "icloud.fill")
                             .font(.callout.weight(.medium))
                             .foregroundStyle(AppThemeConstants.accent)
 
@@ -106,23 +106,23 @@ struct BackupSettingsTab: View {
                                 ProgressView()
                                     .controlSize(.small)
                             } else {
-                                Label("Back Up Now", systemImage: "icloud.and.arrow.up")
+                                Label("立即备份", systemImage: "icloud.and.arrow.up")
                             }
                         }
                         .buttonStyle(.borderedProminent)
                         .tint(AppThemeConstants.accent)
                         .controlSize(.small)
                         .disabled(backupManager.isSyncingToiCloud)
-                        .accessibilityLabel("Back up to iCloud")
-                        .accessibilityHint("Saves an encrypted backup to your iCloud Drive")
+                        .accessibilityLabel("备份到 iCloud")
+                        .accessibilityHint("将加密备份保存到你的 iCloud 云盘")
                     }
 
-                    Text("Backups are encrypted before uploading. They persist even if you uninstall Logue.")
+                    Text("备份会在上传前加密。即使卸载 Logue，备份仍会保留。")
                         .font(.caption)
                         .foregroundStyle(.secondary)
 
                     if let lastSync = backupManager.lastICloudBackupDate {
-                        Text("Last iCloud backup: \(lastSync.formatted(date: .abbreviated, time: .shortened))")
+                        Text("上次 iCloud 备份：\(lastSync.formatted(date: .abbreviated, time: .shortened))")
                             .font(.caption)
                             .foregroundStyle(.tertiary)
                     }
@@ -131,7 +131,7 @@ struct BackupSettingsTab: View {
                     if !backupManager.iCloudBackups.isEmpty {
                         Divider()
 
-                        Text("Available iCloud Backups")
+                        Text("可用的 iCloud 备份")
                             .font(.caption.weight(.medium))
                             .foregroundStyle(.secondary)
 
@@ -145,16 +145,16 @@ struct BackupSettingsTab: View {
                     Image(systemName: "icloud.slash")
                         .foregroundStyle(.secondary)
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("iCloud Not Available")
+                        Text("iCloud 不可用")
                             .font(.callout.weight(.medium))
-                        Text("Sign in to iCloud in System Settings to enable cloud backups.")
+                        Text("请在系统设置中登录 iCloud 以启用云备份。")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                 }
             }
         } header: {
-            Text("iCloud Backup")
+            Text("iCloud 备份")
         }
     }
 
@@ -175,14 +175,14 @@ struct BackupSettingsTab: View {
                     selectedICloudEntry = entry
                     showICloudRestoreConfirmation = true
                 } label: {
-                    Label("Restore (Merge)", systemImage: "arrow.down.circle")
+                    Label("恢复（合并）", systemImage: "arrow.down.circle")
                 }
 
                 Button {
                     selectedICloudEntry = entry
                     showICloudReplaceWarning = true
                 } label: {
-                    Label("Restore (Replace All)", systemImage: "arrow.counterclockwise.circle")
+                    Label("恢复（替换全部）", systemImage: "arrow.counterclockwise.circle")
                 }
 
                 Divider()
@@ -190,7 +190,7 @@ struct BackupSettingsTab: View {
                 Button(role: .destructive) {
                     backupManager.deleteICloudBackup(entry)
                 } label: {
-                    Label("Delete Backup", systemImage: "trash")
+                    Label("删除备份", systemImage: "trash")
                 }
             } label: {
                 Image(systemName: "ellipsis.circle")
@@ -199,7 +199,7 @@ struct BackupSettingsTab: View {
             }
             .menuStyle(.borderlessButton)
             .frame(width: 24)
-            .accessibilityLabel("Backup options for \(entry.date.formatted(date: .abbreviated, time: .shortened))")
+            .accessibilityLabel("\(entry.date.formatted(date: .abbreviated, time: .shortened)) 的备份选项")
         }
     }
 
@@ -208,7 +208,7 @@ struct BackupSettingsTab: View {
     private var localExportSection: some View {
         Section {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Export to a file on your Mac.")
+                Text("导出为 Mac 上的文件。")
                     .font(.callout)
                     .foregroundStyle(.secondary)
 
@@ -224,23 +224,23 @@ struct BackupSettingsTab: View {
                             spaceStore: spaceStore
                         )
                     } label: {
-                        Label("Export to File", systemImage: "square.and.arrow.up")
+                        Label("导出到文件", systemImage: "square.and.arrow.up")
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                     .disabled(backupManager.isExporting)
-                    .accessibilityLabel("Export backup to file")
-                    .accessibilityHint("Saves all data to a local file")
+                    .accessibilityLabel("将备份导出到文件")
+                    .accessibilityHint("将所有数据保存到本地文件")
                 }
 
                 if let lastExport = backupManager.lastExportDate {
-                    Text("Last local export: \(lastExport.formatted(date: .abbreviated, time: .shortened))")
+                    Text("上次本地导出：\(lastExport.formatted(date: .abbreviated, time: .shortened))")
                         .font(.caption)
                         .foregroundStyle(.tertiary)
                 }
             }
         } header: {
-            Text("Local Export")
+            Text("本地导出")
         }
     }
 
@@ -249,16 +249,16 @@ struct BackupSettingsTab: View {
     private var localImportSection: some View {
         Section {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Restore from a local backup file.")
+                Text("从本地备份文件恢复。")
                     .font(.callout)
                     .foregroundStyle(.secondary)
 
-                Picker("Import mode", selection: $importMode) {
-                    Text("Merge — add new items, keep existing").tag(BackupManager.ImportMode.merge)
-                    Text("Replace — overwrite all current data").tag(BackupManager.ImportMode.replace)
+                Picker("导入模式", selection: $importMode) {
+                    Text("合并 — 添加新项目，保留现有项目").tag(BackupManager.ImportMode.merge)
+                    Text("替换 — 覆盖当前所有数据").tag(BackupManager.ImportMode.replace)
                 }
                 .pickerStyle(.radioGroup)
-                .accessibilityLabel("Import mode")
+                .accessibilityLabel("导入模式")
 
                 HStack {
                     Spacer()
@@ -270,17 +270,17 @@ struct BackupSettingsTab: View {
                             showImportConfirmation = true
                         }
                     } label: {
-                        Label("Import from File", systemImage: "square.and.arrow.down")
+                        Label("从文件导入", systemImage: "square.and.arrow.down")
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                     .disabled(backupManager.isImporting)
-                    .accessibilityLabel("Import backup from file")
-                    .accessibilityHint("Restores data from a local backup file")
+                    .accessibilityLabel("从文件导入备份")
+                    .accessibilityHint("从本地备份文件恢复数据")
                 }
             }
         } header: {
-            Text("Local Import")
+            Text("本地导入")
         }
     }
 
@@ -288,9 +288,9 @@ struct BackupSettingsTab: View {
 
     private var dataSummary: some View {
         HStack(spacing: 16) {
-            summaryItem(count: meetingStore.meetings.count, label: "Meetings", icon: "mic.fill")
-            summaryItem(count: documentStore.documents.count, label: "Documents", icon: "doc.text.fill")
-            summaryItem(count: spaceStore.spaces.count, label: "Spaces", icon: "folder.fill")
+            summaryItem(count: meetingStore.meetings.count, label: "场会议", icon: "mic.fill")
+            summaryItem(count: documentStore.documents.count, label: "个文档", icon: "doc.text.fill")
+            summaryItem(count: spaceStore.spaces.count, label: "个空间", icon: "folder.fill")
         }
         .font(.caption)
         .foregroundStyle(.secondary)

@@ -16,23 +16,42 @@ struct CustomShortcut: Equatable {
         NSEvent.ModifierFlags(rawValue: modifierFlags)
     }
 
-    /// Human-readable display string, e.g. "Cmd + Shift + G".
+    /// Human-readable display string, e.g. "⌘⇧G".
     var displayString: String {
         var parts: [String] = []
         if flags.contains(.control) {
-            parts.append("Ctrl")
+            parts.append("⌃")
         }
         if flags.contains(.option) {
-            parts.append("Opt")
+            parts.append("⌥")
         }
         if flags.contains(.shift) {
-            parts.append("Shift")
+            parts.append("⇧")
         }
         if flags.contains(.command) {
-            parts.append("Cmd")
+            parts.append("⌘")
         }
-        parts.append(Self.keyName(for: keyCode))
-        return parts.joined(separator: " + ")
+        parts.append(Self.displayKeyName(for: keyCode))
+        return parts.joined()
+    }
+
+    /// Key names as macOS draws them, used only for display.
+    ///
+    /// Kept apart from `keyName(for:)`, which also derives `keyEquivalent`; turning
+    /// "Return" into "↩" there would change what a menu item receives.
+    private static func displayKeyName(for keyCode: UInt16) -> String {
+        switch keyCode {
+        case 36: "↩"
+        case 48: "⇥"
+        case 49: "空格"
+        case 51: "⌫"
+        case 53: "⎋"
+        case 123: "←"
+        case 124: "→"
+        case 125: "↓"
+        case 126: "↑"
+        default: keyName(for: keyCode)
+        }
     }
 
     /// Single-character key equivalent for NSMenuItem (uppercased letter).

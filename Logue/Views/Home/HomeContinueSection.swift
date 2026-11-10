@@ -26,7 +26,7 @@ struct HomeContinueSection: View {
         let items = Array(recentItems.prefix(HomeContinueGrid.maximumItems(forWidth: availableWidth)))
         if !items.isEmpty {
             VStack(alignment: .leading, spacing: 12) {
-                CardSectionHeader(icon: "arrow.uturn.forward", title: "Continue Where You Left Off")
+                CardSectionHeader(icon: "arrow.uturn.forward", title: "继续上次的工作")
 
                 LazyVGrid(
                     columns: Array(
@@ -41,7 +41,7 @@ struct HomeContinueSection: View {
                             .overlay(alignment: .topTrailing) {
                                 if let onAsk {
                                     HomeAskAffordance(
-                                        accessibilityLabel: "Ask Logue about \(item.title)"
+                                        accessibilityLabel: "向 Logue 询问 \(item.title)"
                                     ) {
                                         onAsk(prompt(for: item))
                                     }
@@ -168,9 +168,9 @@ struct HomeContinueSection: View {
             if !note.segments.isEmpty {
                 return note.segments.prefix(5).map(\.text).joined(separator: " ")
             }
-            return "No transcript yet"
+            return "还没有转写文本"
         case let .document(doc):
-            return doc.snippet.isEmpty ? "Empty document" : doc.snippet
+            return doc.snippet.isEmpty ? "空文档" : doc.snippet
         }
     }
 
@@ -179,7 +179,7 @@ struct HomeContinueSection: View {
         case let .meeting(note):
             note.duration > 0 ? note.formattedDuration : ""
         case let .document(doc):
-            "\(doc.wordCount)w"
+            "\(doc.wordCount) 字"
         }
     }
 

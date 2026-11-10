@@ -14,7 +14,7 @@ struct SourceMeetingChip: View {
                     .font(.caption)
                     .foregroundStyle(AppThemeConstants.accent)
 
-                Text("From meeting:")
+                Text("来自会议：")
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
@@ -46,7 +46,7 @@ struct SourceMeetingChip: View {
         .padding(.horizontal, 16)
         .padding(.top, 10)
         .padding(.bottom, 4)
-        .accessibilityLabel("Open source meeting: \(meeting.title)")
-        .help("Open source meeting")
+        .accessibilityLabel("打开来源会议：\(meeting.title)")
+        .help("打开来源会议")
     }
 }

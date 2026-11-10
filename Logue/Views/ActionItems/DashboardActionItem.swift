@@ -9,6 +9,17 @@ enum ActionItemSortOrder: String, CaseIterable {
     case createdOldest = "Oldest First"
     case meetingTitle = "Meeting Title"
     case status = "Status"
+
+    var displayName: String {
+        switch self {
+        case .dueDateAsc: "截止日期（最早）"
+        case .dueDateDesc: "截止日期（最晚）"
+        case .createdNewest: "最近添加"
+        case .createdOldest: "最早添加"
+        case .meetingTitle: "会议标题"
+        case .status: "状态"
+        }
+    }
 }
 
 // MARK: - Dashboard Action Item (aggregated view model)

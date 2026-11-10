@@ -35,6 +35,17 @@ struct ModelSettingsRow: View {
         LLMEngineStatus.shared.isBusy
     }
 
+    /// A download or activation failure for this row, in that order.
+    private var rowError: String? {
+        if let error = modelManager.downloadError, modelManager.downloadErrorModelID == record.id {
+            return error
+        }
+        if let error = modelManager.activationError, modelManager.activationErrorModelID == record.id {
+            return error
+        }
+        return nil
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             HStack(spacing: 12) {
@@ -44,7 +55,7 @@ struct ModelSettingsRow: View {
                         Text(record.displayName)
                             .font(.subheadline.weight(.medium))
                         if record.isRecommended {
-                            Text("Recommended")
+                            Text("推荐")
                                 .font(.caption2)
                                 .padding(.horizontal, 5)
                                 .padding(.vertical, 1)
@@ -52,7 +63,7 @@ struct ModelSettingsRow: View {
                                 .foregroundStyle(AppThemeConstants.brandPrimary)
                         }
                         if isActive {
-                            Text("Active")
+                            Text("使用中")
                                 .font(.caption2)
                                 .padding(.horizontal, 5)
                                 .padding(.vertical, 1)
@@ -96,14 +107,14 @@ struct ModelSettingsRow: View {
                             .foregroundStyle(.secondary)
                     }
                     .buttonStyle(.plain)
-                    .help("Cancel download")
-                    .accessibilityLabel("Cancel download")
+                    .help("取消下载")
+                    .accessibilityLabel("取消下载")
                 }
                 .padding(.top, 6)
             }
 
-            // Activation error
-            if let error = modelManager.activationError, modelManager.activationErrorModelID == record.id, !isDownloading {
+            // Failure from either half of the flow
+            if let error = rowError, !isDownloading {
                 HStack(spacing: 4) {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .font(.caption2)
@@ -127,20 +138,20 @@ struct ModelSettingsRow: View {
             RoundedRectangle(cornerRadius: AppThemeConstants.radiusMedium, style: .continuous)
                 .stroke(isActive ? AppThemeConstants.brandPrimary.opacity(AppThemeConstants.borderOpacity) : Color.clear, lineWidth: 1)
         )
-        .accessibilityLabel("\(record.displayName)\(isActive ? ", active" : "")\(isDownloaded ? "" : ", not downloaded")")
-        .alert(isDownloaded ? "Delete Model?" : "Remove Model?", isPresented: $showDeleteConfirm) {
-            Button(isDownloaded ? "Delete" : "Remove", role: .destructive) {
+        .accessibilityLabel("\(record.displayName)\(isActive ? "，使用中" : "")\(isDownloaded ? "" : "，未下载")")
+        .alert(isDownloaded ? "删除模型？" : "移除模型？", isPresented: $showDeleteConfirm) {
+            Button(isDownloaded ? "删除" : "移除", role: .destructive) {
                 if isDownloaded {
                     modelManager.deleteDownloadedModel(record)
                 } else {
                     modelManager.removeCustomModel(id: record.id)
                 }
             }
-            Button("Cancel", role: .cancel) {}
+            Button("取消", role: .cancel) {}
         } message: {
             Text(isDownloaded
-                ? "This will remove the downloaded files for \"\(record.displayName)\" from disk. You can re-download it later."
-                : "This will remove \"\(record.displayName)\" from your model list. You can add it again later.")
+                ? "这将从磁盘删除“\(record.displayName)”的已下载文件。之后可以重新下载。"
+                : "这将从模型列表中移除“\(record.displayName)”。之后可以再次添加。")
         }
     }
 
@@ -151,7 +162,7 @@ struct ModelSettingsRow: View {
             EmptyView()
         } else if isActivating {
             HStack(spacing: 4) {
-                InlineProgressLabel(text: "Activating…")
+                InlineProgressLabel(text: "正在启用…")
                 Button {
                     modelManager.cancelActivation()
                 } label: {
@@ -160,8 +171,8 @@ struct ModelSettingsRow: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .help("Cancel activation")
-                .accessibilityLabel("Cancel activation")
+                .help("取消启用")
+                .accessibilityLabel("取消启用")
             }
         } else if isDownloaded {
             HStack(spacing: 8) {
@@ -169,7 +180,7 @@ struct ModelSettingsRow: View {
                     Button {
                         modelManager.loadModel(record)
                     } label: {
-                        Text("Load")
+                        Text("加载")
                             .font(.caption.weight(.medium))
                             .padding(.horizontal, 8)
                             .padding(.vertical, 3)
@@ -178,7 +189,7 @@ struct ModelSettingsRow: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(isInferenceBusy)
-                    .help("Load model into memory")
+                    .help("将模型加载到内存")
                 }
 
                 Button {
@@ -191,8 +202,8 @@ struct ModelSettingsRow: View {
                 .buttonStyle(.plain)
                 .disabled(isActive)
                 .opacity(isActive ? 0.3 : 1.0)
-                .help(isActive ? "Unload model before deleting" : "Delete downloaded model")
-                .accessibilityLabel("Delete downloaded model")
+                .help(isActive ? "请先卸载模型再删除" : "删除已下载的模型")
+                .accessibilityLabel("删除已下载的模型")
             }
         } else {
             // Not downloaded — show download button
@@ -200,7 +211,7 @@ struct ModelSettingsRow: View {
                 Button {
                     modelManager.downloadModel(record)
                 } label: {
-                    Label("Download", systemImage: "arrow.down.circle")
+                    Label("下载", systemImage: "arrow.down.circle")
                         .font(.caption.weight(.medium))
                         .padding(.horizontal, 8)
                         .padding(.vertical, 3)
@@ -210,7 +221,7 @@ struct ModelSettingsRow: View {
                 .buttonStyle(.plain)
                 .disabled(isOtherDownloading)
                 .opacity(isOtherDownloading ? 0.5 : 1.0)
-                .help(isOtherDownloading ? "Another model is downloading" : "Download model")
+                .help(isOtherDownloading ? "另一个模型正在下载" : "下载模型")
 
                 // Allow removing custom models that aren't downloaded
                 if isCustomModel {
@@ -222,8 +233,8 @@ struct ModelSettingsRow: View {
                             .foregroundStyle(AppThemeConstants.error)
                     }
                     .buttonStyle(.plain)
-                    .help("Remove model")
-                    .accessibilityLabel("Remove model")
+                    .help("移除模型")
+                    .accessibilityLabel("移除模型")
                 }
             }
         }
@@ -232,7 +243,7 @@ struct ModelSettingsRow: View {
     private var downloadProgressLabel: String {
         let pct = Int(modelManager.downloadProgress * 100)
         if pct == 0 {
-            return "Preparing..."
+            return "准备中…"
         }
         if let totalGB = record.sizeGB {
             let downloadedMB = modelManager.downloadProgress * totalGB * 1024

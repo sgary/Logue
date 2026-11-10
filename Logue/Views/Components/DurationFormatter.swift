@@ -15,8 +15,8 @@ enum DurationFormatter {
         let hours = Int(seconds) / 3600
         let minutes = (Int(seconds) % 3600) / 60
         if hours > 0 {
-            return "\(hours)h \(minutes)m"
+            return "\(hours) 小时 \(minutes) 分钟"
         }
-        return "\(minutes)m"
+        return "\(minutes) 分钟"
     }
 }

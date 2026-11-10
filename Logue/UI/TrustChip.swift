@@ -14,7 +14,7 @@ struct TrustChip: View {
     let label: String
     let detail: String?
 
-    init(label: String = "Local", detail: String? = nil) {
+    init(label: String = "本地", detail: String? = nil) {
         self.label = label
         self.detail = detail
     }
@@ -41,12 +41,12 @@ struct TrustChip: View {
             Capsule(style: .continuous)
                 .stroke(Color.green.opacity(0.18), lineWidth: 0.5)
         )
-        .help(detail ?? "Everything happens on your Mac. No data leaves this device.")
-        .accessibilityLabel("On-device — \(detail ?? "no data leaves this Mac")")
+        .help(detail ?? "所有处理都在这台 Mac 上完成，数据不会离开这台设备。")
+        .accessibilityLabel("设备端，\(detail ?? "数据不会离开这台 Mac")")
     }
 }
 
 #Preview {
-    TrustChip(label: "Local")
+    TrustChip(label: "本地")
         .padding()
 }

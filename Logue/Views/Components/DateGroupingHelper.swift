@@ -45,19 +45,19 @@ enum DateGroupingHelper {
 
         var result: [Group<T>] = []
         if !today.isEmpty {
-            result.append(Group(label: "Today", items: today))
+            result.append(Group(label: "今天", items: today))
         }
         if !yesterday.isEmpty {
-            result.append(Group(label: "Yesterday", items: yesterday))
+            result.append(Group(label: "昨天", items: yesterday))
         }
         if !previous7Days.isEmpty {
-            result.append(Group(label: "Previous 7 Days", items: previous7Days))
+            result.append(Group(label: "最近 7 天", items: previous7Days))
         }
         if !previous30Days.isEmpty {
-            result.append(Group(label: "Previous 30 Days", items: previous30Days))
+            result.append(Group(label: "最近 30 天", items: previous30Days))
         }
         if !older.isEmpty {
-            result.append(Group(label: "Older", items: older))
+            result.append(Group(label: "更早", items: older))
         }
         return result
     }

@@ -43,7 +43,7 @@ enum MessageActions {
                 // Surfaced rather than only logged: the user asked for a file and there is
                 // now no file, which is not something to discover later.
                 Task { @MainActor in
-                    ToastCenter.shared.show("Could not export: \(error.localizedDescription)")
+                    ToastCenter.shared.show("无法导出：\(error.localizedDescription)")
                 }
             }
         }
@@ -54,7 +54,7 @@ enum MessageActions {
     /// Returns the new document's id so a caller can show its own confirmation against the
     /// message it came from — the island marks the row it saved, which needs the pairing.
     @discardableResult
-    static func saveAsNote(_ text: String, title: String = "Chat Note") -> UUID {
+    static func saveAsNote(_ text: String, title: String = "聊天笔记") -> UUID {
         let document = DocumentStore.shared.createDocument(title: title)
         var updated = document
         updated.body = text

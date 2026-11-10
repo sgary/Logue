@@ -21,10 +21,10 @@ struct ShortcutsSettingsTab: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Keyboard Shortcuts")
+            Text("键盘快捷键")
                 .font(.title3.weight(.semibold))
             Text(
-                "All shortcuts are listed below. Rebinding lands in a future update — open an issue if a default conflicts with another tool you use."
+                "所有快捷键列于下方。自定义绑定将在后续版本推出 — 如果默认快捷键与你使用的其他工具冲突，请提交 issue。"
             )
             .font(.caption)
             .foregroundStyle(.secondary)
@@ -80,29 +80,29 @@ private struct ShortcutGroup: Identifiable {
     let entries: [ShortcutEntry]
 
     static let all: [ShortcutGroup] = [
-        ShortcutGroup(title: "Chat", entries: [
-            ShortcutEntry(label: "New chat", combo: "⌘N"),
-            ShortcutEntry(label: "New chat (Ask Logue)", combo: "⌘L"),
-            ShortcutEntry(label: "Focus chat input", combo: "⌘⇧L"),
-            ShortcutEntry(label: "Send", combo: "⌘⏎"),
-            ShortcutEntry(label: "Stop generation", combo: "Esc"),
-            ShortcutEntry(label: "Copy last assistant message", combo: "⌘⇧C"),
-            ShortcutEntry(label: "Regenerate last response", combo: "⌘⇧R"),
+        ShortcutGroup(title: "聊天", entries: [
+            ShortcutEntry(label: "新建聊天", combo: "⌘N"),
+            ShortcutEntry(label: "新建聊天（询问 Logue）", combo: "⌘L"),
+            ShortcutEntry(label: "聚焦聊天输入框", combo: "⌘⇧L"),
+            ShortcutEntry(label: "发送", combo: "⌘⏎"),
+            ShortcutEntry(label: "停止生成", combo: "Esc"),
+            ShortcutEntry(label: "复制上一条助手消息", combo: "⌘⇧C"),
+            ShortcutEntry(label: "重新生成上一条回答", combo: "⌘⇧R"),
         ]),
-        ShortcutGroup(title: "Navigation", entries: [
-            ShortcutEntry(label: "Command palette", combo: "⌘K"),
-            ShortcutEntry(label: "Focus conversation search", combo: "⌘/"),
-            ShortcutEntry(label: "Toggle sidebar", combo: "⌘S"),
-            ShortcutEntry(label: "Settings", combo: "⌘,"),
-            ShortcutEntry(label: "Previous / next message", combo: "⌘↑ / ⌘↓"),
+        ShortcutGroup(title: "导航", entries: [
+            ShortcutEntry(label: "命令面板", combo: "⌘K"),
+            ShortcutEntry(label: "聚焦对话搜索", combo: "⌘/"),
+            ShortcutEntry(label: "切换侧边栏", combo: "⌘S"),
+            ShortcutEntry(label: "设置", combo: "⌘,"),
+            ShortcutEntry(label: "上一条/下一条消息", combo: "⌘↑ / ⌘↓"),
         ]),
-        ShortcutGroup(title: "Cross-app (Phase D)", entries: [
-            ShortcutEntry(label: "Inline writing assistant", combo: "⌘⌃I"),
-            ShortcutEntry(label: "Menu-bar companion (planned)", combo: "⌥Space"),
+        ShortcutGroup(title: "跨应用（阶段 D）", entries: [
+            ShortcutEntry(label: "内联写作助手", combo: "⌘⌃I"),
+            ShortcutEntry(label: "菜单栏助手（计划中）", combo: "⌥Space"),
         ]),
-        ShortcutGroup(title: "Conversation list", entries: [
-            ShortcutEntry(label: "Export selected conversation", combo: "⌘E"),
-            ShortcutEntry(label: "Branch from selected message", combo: "⌘;"),
+        ShortcutGroup(title: "对话列表", entries: [
+            ShortcutEntry(label: "导出所选对话", combo: "⌘E"),
+            ShortcutEntry(label: "从所选消息分支", combo: "⌘;"),
         ]),
     ]
 }

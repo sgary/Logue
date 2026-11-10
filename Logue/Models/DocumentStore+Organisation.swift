@@ -311,21 +311,21 @@ extension DocumentType {
     static var starterTypes: [DocumentType] {
         [
             DocumentType(
-                name: "Note", symbolName: "doc.text", colorName: "gray", sidebarOrder: 0
+                name: "笔记", symbolName: "doc.text", colorName: "gray", sidebarOrder: 0
             ),
             DocumentType(
-                name: "Project", symbolName: "briefcase", colorName: "blue", sidebarOrder: 10,
+                name: "项目", symbolName: "briefcase", colorName: "blue", sidebarOrder: 10,
                 pinnedProperties: ["status"],
-                defaultProperties: ["status": .text("Active")],
-                template: "## Goal\n\n## Next steps\n"
+                defaultProperties: ["status": .text("进行中")],
+                template: "## 目标\n\n## 下一步\n"
             ),
             DocumentType(
-                name: "Person", symbolName: "person", colorName: "green", sidebarOrder: 20,
+                name: "人物", symbolName: "person", colorName: "green", sidebarOrder: 20,
                 pinnedProperties: ["author"]
             ),
             DocumentType(
-                name: "Meeting Note", symbolName: "waveform", colorName: "purple", sidebarOrder: 30,
-                template: "## Attendees\n\n## Decisions\n\n## Follow-ups\n"
+                name: "会议笔记", symbolName: "waveform", colorName: "purple", sidebarOrder: 30,
+                template: "## 参会者\n\n## 决定\n\n## 跟进事项\n"
             ),
         ]
     }

@@ -93,7 +93,7 @@ final class BrowserBridgeServer {
         }
 
         let ports = AppConstants.BrowserBridge.candidatePorts.map(String.init).joined(separator: ", ")
-        lastError = "Could not listen on any of \(ports). Another program may be using them."
+        lastError = "无法在端口 \(ports) 上监听，可能被其他程序占用。"
         logger.error("Browser bridge could not start: no candidate port was free")
     }
 
@@ -232,7 +232,7 @@ final class BrowserBridgeServer {
 
         var errorDescription: String? {
             switch self {
-            case let .invalidPort(port): "Port \(port) is not usable."
+            case let .invalidPort(port): "端口 \(port) 不可用。"
             }
         }
     }

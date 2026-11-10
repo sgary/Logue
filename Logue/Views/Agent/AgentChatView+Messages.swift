@@ -48,7 +48,7 @@ extension AgentChatView {
                         if isProcessing, activeToolCalls.isEmpty, !isStreaming {
                             HStack(spacing: 8) {
                                 PulsingDot()
-                                Text("Thinking…")
+                                Text("思考中…")
                                     .font(.callout)
                                     .foregroundStyle(.secondary)
                             }
@@ -149,7 +149,7 @@ extension AgentChatView {
                             .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
-                    .help("Copy message")
+                    .help("复制消息")
 
                     Button {
                         editingText = message.content
@@ -162,7 +162,7 @@ extension AgentChatView {
                             .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
-                    .help("Edit message and regenerate")
+                    .help("编辑消息并重新生成")
                     .disabled(isProcessing)
                 }
             }
@@ -194,8 +194,8 @@ extension AgentChatView {
         private func attachmentPlaceholder(_ attachments: [TempAttachment]) -> String {
             switch attachments.count {
             case 0: ""
-            case 1: "Attached: \(attachments[0].displayName)"
-            default: "Attached \(attachments.count) files"
+            case 1: "已附加：\(attachments[0].displayName)"
+            default: "已附加 \(attachments.count) 个文件"
             }
         }
 
@@ -204,7 +204,7 @@ extension AgentChatView {
             VStack(alignment: .trailing, spacing: 6) {
                 HStack {
                     Spacer(minLength: 40)
-                    TextField("Edit message…", text: $editingText, axis: .vertical)
+                    TextField("编辑消息…", text: $editingText, axis: .vertical)
                         .font(.callout)
                         .textFieldStyle(.plain)
                         .padding(.horizontal, 14)
@@ -222,7 +222,7 @@ extension AgentChatView {
                 }
 
                 HStack(spacing: 8) {
-                    Button("Cancel") {
+                    Button("取消") {
                         editingMessageID = nil
                         editingText = ""
                     }
@@ -232,7 +232,7 @@ extension AgentChatView {
                     Button {
                         commitEdit(messageID: messageID)
                     } label: {
-                        Label("Send", systemImage: "arrow.up.circle.fill")
+                        Label("发送", systemImage: "arrow.up.circle.fill")
                             .labelStyle(.titleAndIcon)
                     }
                     .buttonStyle(.borderedProminent)
@@ -265,7 +265,7 @@ extension AgentChatView {
                     // No tokens yet — show a richer pulse instead of a bare spinner.
                     HStack(spacing: 8) {
                         PulsingDot()
-                        Text("Thinking…")
+                        Text("思考中…")
                             .font(.callout)
                             .foregroundStyle(.secondary)
                     }
@@ -287,7 +287,7 @@ extension AgentChatView {
                         // Tokens are arriving — show a subtle "Generating…" badge under the message.
                         HStack(spacing: 6) {
                             PulsingDot(size: 6)
-                            Text("Generating…")
+                            Text("生成中…")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }

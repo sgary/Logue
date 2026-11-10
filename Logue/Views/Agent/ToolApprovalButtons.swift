@@ -17,7 +17,7 @@ struct ToolApprovalButtons: View {
                 HStack(spacing: 4) {
                     Image(systemName: "touchid")
                         .font(.caption)
-                    Text("Touch ID required to approve")
+                    Text("批准需要 Touch ID")
                         .font(.caption)
                 }
                 .foregroundStyle(.secondary)
@@ -27,7 +27,7 @@ struct ToolApprovalButtons: View {
                 Button {
                     AgentCoordinator.shared.reject(toolCallID: toolCallID, in: conversationID)
                 } label: {
-                    Label("Reject", systemImage: "xmark")
+                    Label("拒绝", systemImage: "xmark")
                         .font(.caption)
                         .fontWeight(.medium)
                 }
@@ -50,7 +50,7 @@ struct ToolApprovalButtons: View {
     }
 
     private var approveLabel: String {
-        clearance == .dangerous ? "Approve with Touch ID" : "Approve"
+        clearance == .dangerous ? "使用 Touch ID 批准" : "批准"
     }
 
     private var approveIcon: String {

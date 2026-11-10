@@ -3,9 +3,9 @@ import SwiftUI
 // MARK: - VerifyTab
 
 enum VerifyTab: String, CaseIterable {
-    case facts = "Facts"
-    case privacy = "Privacy"
-    case aiDetection = "AI Detection"
+    case facts = "事实"
+    case privacy = "隐私"
+    case aiDetection = "AI 检测"
 
     var icon: String {
         switch self {
@@ -23,6 +23,16 @@ enum FactStatus: String, Codable {
     case unverified = "Unverified"
     case uncertain = "Uncertain"
     case misleading = "Misleading"
+
+    /// Localized status name shown in fact-check chips and cards.
+    var displayName: String {
+        switch self {
+        case .verified: "已核实"
+        case .unverified: "未核实"
+        case .uncertain: "不确定"
+        case .misleading: "有误导性"
+        }
+    }
 
     var icon: String {
         switch self {

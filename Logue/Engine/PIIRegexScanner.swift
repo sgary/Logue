@@ -97,26 +97,26 @@ enum PIIRegexScanner {
         // Date of birth – numeric (capture value only)
         Rule(
             pattern: #"(?:DOB|Date of Birth|Born|Birthday|D\.O\.B\.?)\s*[:：]?\s*(\d{1,2}[/\-\.]\d{1,2}[/\-\.]\d{2,4})"#,
-            detail: "Date of birth",
+            detail: "出生日期",
             captureGroup: 1
         ),
         // Date of birth – month name (capture value only)
         Rule(
             // swiftlint:disable:next line_length
             pattern: #"(?:DOB|Date of Birth|Born|Birthday|D\.O\.B\.?)\s*[:：]?\s*((?:January|February|March|April|May|June|July|August|September|October|November|December|Jan|Feb|Mar|Apr|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2},?\s+\d{4})"#,
-            detail: "Date of birth",
+            detail: "出生日期",
             captureGroup: 1
         ),
         // Age (capture value only)
         Rule(
             pattern: #"(?:Age|Aged)\s*[:：]?\s*(\d{1,3}\s*(?:years?|yrs?|y/?o)?)"#,
-            detail: "Age",
+            detail: "年龄",
             captureGroup: 1
         ),
         // Gender (capture value only)
         Rule(
             pattern: #"(?:Gender|Sex)\s*[:：]\s*((?:Male|Female|Non-binary|Other|M|F)\b)"#,
-            detail: "Gender",
+            detail: "性别",
             captureGroup: 1
         ),
     ]
@@ -127,29 +127,29 @@ enum PIIRegexScanner {
         // Email addresses
         Rule(
             pattern: #"[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"#,
-            detail: "Email address",
+            detail: "电子邮箱",
             options: []
         ),
         // US phone numbers (various formats)
         Rule(
             pattern: #"(?:\+?1[\s\-.]?)?\(?\d{3}\)?[\s\-.]?\d{3}[\s\-.]?\d{4}"#,
-            detail: "Phone number"
+            detail: "电话号码"
         ),
         // International phone numbers
         Rule(
             pattern: #"\+\d{1,3}[\s\-.]?\d{1,4}[\s\-.]?\d{3,4}[\s\-.]?\d{3,4}"#,
-            detail: "International phone number"
+            detail: "国际电话号码"
         ),
         // Street addresses (number + street name + type)
         Rule(
             // swiftlint:disable:next line_length
             pattern: #"\d{1,5}\s+(?:[A-Z][a-zA-Z]*\s+){1,3}(?:Street|St|Avenue|Ave|Boulevard|Blvd|Drive|Dr|Lane|Ln|Road|Rd|Way|Court|Ct|Circle|Cir|Place|Pl|Terrace|Ter)\.?\s*(?:#\s*\d+|Suite\s+\d+|Apt\.?\s*\d+|Unit\s+\d+)?"#,
-            detail: "Street address"
+            detail: "街道地址"
         ),
         // ZIP codes – capture code only
         Rule(
             pattern: #"(?:zip|postal)\s*(?:code)?\s*[:：]?\s*(\d{5}(?:-\d{4})?)"#,
-            detail: "ZIP/postal code",
+            detail: "邮政编码",
             captureGroup: 1
         ),
     ]
@@ -160,42 +160,42 @@ enum PIIRegexScanner {
         // SSN bare – entire match is the PII
         Rule(
             pattern: #"\b\d{3}-\d{2}-\d{4}\b"#,
-            detail: "Social Security Number (SSN)"
+            detail: "社会保障号（SSN）"
         ),
         // SSN with label – capture value only
         Rule(
             pattern: #"(?:SSN|Social Security)\s*(?:Number|No\.?|#)?\s*[:：]?\s*(\d{3}[\s\-]?\d{2}[\s\-]?\d{4})"#,
-            detail: "Social Security Number (SSN)",
+            detail: "社会保障号（SSN）",
             captureGroup: 1
         ),
         // Passport – capture value only
         Rule(
             pattern: #"(?:Passport)\s*(?:Number|No\.?|#)?\s*[:：]?\s*([A-Z]?\d{6,9})"#,
-            detail: "Passport number",
+            detail: "护照号码",
             captureGroup: 1
         ),
         // Driver's license – capture value only
         Rule(
             pattern: #"(?:Driver'?s?\s*License|DL)\s*(?:Number|No\.?|#)?\s*[:：]?\s*([A-Z0-9]{5,15})"#,
-            detail: "Driver's license number",
+            detail: "驾照号码",
             captureGroup: 1
         ),
         // Tax ID / EIN – capture value only
         Rule(
             pattern: #"(?:Tax\s*ID|TIN|EIN)\s*(?:Number|No\.?|#)?\s*[:：]?\s*(\d{2}-?\d{7})"#,
-            detail: "Tax ID / EIN",
+            detail: "税号 / EIN",
             captureGroup: 1
         ),
         // Visa number – capture value only
         Rule(
             pattern: #"(?:Visa)\s*(?:Number|No\.?|#)?\s*[:：]?\s*([A-Z0-9]{8,12})"#,
-            detail: "Visa number",
+            detail: "签证号码",
             captureGroup: 1
         ),
         // Generic government ID – capture value only
         Rule(
             pattern: #"(?:National\s*ID|Government\s*ID|State\s*ID|ID\s*Number)\s*(?:No\.?|#)?\s*[:：]?\s*([A-Z0-9\-]{5,15})"#,
-            detail: "Government ID number",
+            detail: "政府证件号码",
             captureGroup: 1
         ),
     ]
@@ -206,18 +206,18 @@ enum PIIRegexScanner {
         // Credit card numbers (Visa, MC, Amex, Discover)
         Rule(
             pattern: #"\b(?:4\d{3}|5[1-5]\d{2}|3[47]\d{2}|6(?:011|5\d{2}))[\s\-]?\d{4}[\s\-]?\d{4}[\s\-]?\d{3,4}\b"#,
-            detail: "Credit/debit card number"
+            detail: "信用卡/借记卡号"
         ),
         // Bank account – capture value only
         Rule(
             pattern: #"(?:Account|Acct)\s*(?:Number|No\.?|#)?\s*[:：]?\s*(\d{8,17})"#,
-            detail: "Bank account number",
+            detail: "银行账号",
             captureGroup: 1
         ),
         // Routing number – capture value only
         Rule(
             pattern: #"(?:Routing|ABA)\s*(?:Number|No\.?|#)?\s*[:：]?\s*(\d{9})"#,
-            detail: "Bank routing number",
+            detail: "银行路由号",
             captureGroup: 1
         ),
         // IBAN
@@ -229,13 +229,13 @@ enum PIIRegexScanner {
         // Crypto wallet addresses (Bitcoin)
         Rule(
             pattern: #"\b[13][a-km-zA-HJ-NP-Z1-9]{25,34}\b"#,
-            detail: "Bitcoin wallet address",
+            detail: "比特币钱包地址",
             options: []
         ),
         // Crypto wallet addresses (Ethereum)
         Rule(
             pattern: #"\b0x[a-fA-F0-9]{40}\b"#,
-            detail: "Ethereum wallet address"
+            detail: "以太坊钱包地址"
         ),
     ]
 
@@ -245,32 +245,32 @@ enum PIIRegexScanner {
         // Passwords – capture value only
         Rule(
             pattern: #"(?:Password|Passwd|Pass|PIN)\s*[:：]\s*(\S+)"#,
-            detail: "Password or PIN",
+            detail: "密码或 PIN",
             captureGroup: 1
         ),
         // API keys / tokens – capture value only
         Rule(
             pattern: #"(?:API[_\s]?Key|API[_\s]?Token|Secret[_\s]?Key|Access[_\s]?Token|Auth[_\s]?Token)\s*[:：=]\s*(\S+)"#,
-            detail: "API key or token",
+            detail: "API 密钥或令牌",
             captureGroup: 1
         ),
         // Bearer tokens – capture token value only (strips "Bearer " prefix)
         Rule(
             pattern: #"Bearer\s+([A-Za-z0-9\-._~+/]+=*)"#,
-            detail: "Bearer token",
+            detail: "Bearer 令牌",
             options: [],
             captureGroup: 1
         ),
         // AWS keys
         Rule(
             pattern: #"(?:AKIA|ASIA)[A-Z0-9]{16}"#,
-            detail: "AWS access key",
+            detail: "AWS 访问密钥",
             options: []
         ),
         // Generic secret patterns
         Rule(
             pattern: #"(?:sk|pk)[-_](?:live|test)[-_][A-Za-z0-9]{20,}"#,
-            detail: "API secret key",
+            detail: "API 密钥",
             options: []
         ),
     ]
@@ -281,49 +281,49 @@ enum PIIRegexScanner {
         // Insurance/Member ID – capture value only
         Rule(
             pattern: #"(?:Insurance|Member|Policy|Subscriber)\s*(?:ID|Number|No\.?|#)\s*[:：]?\s*([A-Z0-9\-]{5,20})"#,
-            detail: "Insurance/member ID",
+            detail: "保险/会员 ID",
             captureGroup: 1
         ),
         // Medical Record Number – capture value only
         Rule(
             pattern: #"(?:MRN|Medical\s*Record|Patient\s*ID|Chart)\s*(?:Number|No\.?|#)?\s*[:：]?\s*([A-Z0-9\-]{4,15})"#,
-            detail: "Medical record number",
+            detail: "病历号",
             captureGroup: 1
         ),
         // NPI – capture value only
         Rule(
             pattern: #"(?:NPI)\s*[:：]?\s*(\d{10})"#,
-            detail: "National Provider Identifier (NPI)",
+            detail: "国家提供者标识符（NPI）",
             captureGroup: 1
         ),
         // DEA number – capture value only
         Rule(
             pattern: #"(?:DEA)\s*(?:Number|No\.?|#)?\s*[:：]?\s*([A-Z]{2}\d{7})"#,
-            detail: "DEA number",
+            detail: "DEA 编号",
             captureGroup: 1
         ),
         // ICD codes
         Rule(
             pattern: #"\b[A-Z]\d{2}(?:\.\d{1,4})?\b"#,
-            detail: "ICD diagnosis code",
+            detail: "ICD 诊断代码",
             options: []
         ),
         // Prescription/medication – capture drug + dosage only
         Rule(
             pattern: #"(?:prescribed|taking|medication|Rx)\s*[:：]?\s*([A-Z][a-z]+\s+\d+\s*(?:mg|mcg|ml|units?))"#,
-            detail: "Prescription/medication",
+            detail: "处方/药物",
             captureGroup: 1
         ),
         // NDC – capture value only
         Rule(
             pattern: #"(?:NDC)\s*[:：]?\s*(\d{4,5}-\d{3,4}-\d{1,2})"#,
-            detail: "National Drug Code (NDC)",
+            detail: "国家药品代码（NDC）",
             captureGroup: 1
         ),
         // Group number – capture value only
         Rule(
             pattern: #"(?:Group)\s*(?:Number|No\.?|#)\s*[:：]?\s*([A-Z0-9\-]{3,15})"#,
-            detail: "Insurance group number",
+            detail: "保险团体编号",
             captureGroup: 1
         ),
     ]
@@ -334,19 +334,19 @@ enum PIIRegexScanner {
         // Employee ID – capture value only
         Rule(
             pattern: #"(?:Employee|Staff|Worker|Personnel)\s*(?:ID|Number|No\.?|#)\s*[:：]?\s*([A-Z0-9\-]{3,15})"#,
-            detail: "Employee ID",
+            detail: "员工 ID",
             captureGroup: 1
         ),
         // Student ID – capture value only
         Rule(
             pattern: #"(?:Student)\s*(?:ID|Number|No\.?|#)\s*[:：]?\s*([A-Z0-9\-]{4,15})"#,
-            detail: "Student ID",
+            detail: "学生 ID",
             captureGroup: 1
         ),
         // Salary/compensation – capture value only
         Rule(
             pattern: #"(?:Salary|Compensation|Base\s*Pay|Annual\s*Pay|Wage)\s*[:：]?\s*(\$[\d,]+(?:\.\d{2})?)"#,
-            detail: "Salary/compensation",
+            detail: "薪资/报酬",
             captureGroup: 1
         ),
     ]
@@ -357,7 +357,7 @@ enum PIIRegexScanner {
         // Biometric identifiers – capture value only
         Rule(
             pattern: #"(?:fingerprint|biometric|retina|iris|voiceprint|face\s*ID)\s*(?:ID|hash|data|scan|template)\s*[:：]?\s*(\S+)"#,
-            detail: "Biometric identifier",
+            detail: "生物识别标识",
             captureGroup: 1
         ),
     ]
@@ -369,28 +369,28 @@ enum PIIRegexScanner {
         Rule(
             // swiftlint:disable:next line_length
             pattern: #"\b(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\.(?:25[0-5]|2[0-4]\d|[01]?\d\d?)\b"#,
-            detail: "IPv4 address"
+            detail: "IPv4 地址"
         ),
         // IPv6 (simplified)
         Rule(
             pattern: #"\b(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}\b"#,
-            detail: "IPv6 address"
+            detail: "IPv6 地址"
         ),
         // MAC address
         Rule(
             pattern: #"\b(?:[0-9A-Fa-f]{2}[:\-]){5}[0-9A-Fa-f]{2}\b"#,
-            detail: "MAC address"
+            detail: "MAC 地址"
         ),
         // GPS coordinates – capture value only
         Rule(
             pattern: #"(?:GPS|Coordinates?|Lat(?:itude)?|Lon(?:gitude)?)\s*[:：]?\s*(-?\d{1,3}\.\d{4,})"#,
-            detail: "GPS coordinates",
+            detail: "GPS 坐标",
             captureGroup: 1
         ),
         // Device IDs – capture value only
         Rule(
             pattern: #"(?:IMEI|UDID|Device\s*ID|Serial\s*Number|Serial\s*No)\s*[:：]?\s*([A-Z0-9\-]{10,20})"#,
-            detail: "Device identifier",
+            detail: "设备标识",
             captureGroup: 1
         ),
     ]
@@ -401,19 +401,19 @@ enum PIIRegexScanner {
         // Session IDs – capture value only
         Rule(
             pattern: #"(?:Session|Token)\s*(?:ID)?\s*[:：=]\s*([A-Za-z0-9\-]{16,})"#,
-            detail: "Session ID",
+            detail: "会话 ID",
             captureGroup: 1
         ),
         // Cookies – capture value only
         Rule(
             pattern: #"(?:Cookie|Set-Cookie)\s*[:：=]\s*(\S+)"#,
-            detail: "Cookie value",
+            detail: "Cookie 值",
             captureGroup: 1
         ),
         // UUIDs (standalone, not in code context)
         Rule(
             pattern: #"\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b"#,
-            detail: "UUID identifier"
+            detail: "UUID 标识"
         ),
     ]
 

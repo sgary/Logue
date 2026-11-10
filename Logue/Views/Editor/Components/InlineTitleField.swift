@@ -42,9 +42,9 @@ struct InlineTitleField: View {
                 titleDraft = document.title
                 editing = true
             }
-            .help("Click to rename")
-            .accessibilityLabel("Document title: \(document.title)")
-            .accessibilityHint("Activate to rename")
+            .help("点击重命名")
+            .accessibilityLabel("文档标题：\(document.title)")
+            .accessibilityHint("激活以重命名")
             .accessibilityAddTraits(.isButton)
         }
     }

@@ -175,7 +175,7 @@ final class SummaryNarrationService: NSObject {
 
         // Overview summary
         if let summary = meeting.summary, !summary.isEmpty {
-            result.append(NarrationSection(label: "Summary", text: summary, sectionIndex: sectionIdx))
+            result.append(NarrationSection(label: "摘要", text: summary, sectionIndex: sectionIdx))
             sectionIdx += 1
         }
 
@@ -183,7 +183,7 @@ final class SummaryNarrationService: NSObject {
 
         // Key Decisions
         if !minutes.keyDecisions.isEmpty {
-            result.append(NarrationSection(label: "Key Decisions", text: "Key Decisions.", sectionIndex: sectionIdx))
+            result.append(NarrationSection(label: "关键决策", text: "关键决策。", sectionIndex: sectionIdx))
             for decision in minutes.keyDecisions {
                 result.append(NarrationSection(label: "", text: decision, sectionIndex: sectionIdx))
             }
@@ -192,7 +192,7 @@ final class SummaryNarrationService: NSObject {
 
         // Discussion Points
         if !minutes.discussionPoints.isEmpty {
-            result.append(NarrationSection(label: "Discussion Points", text: "Discussion Points.", sectionIndex: sectionIdx))
+            result.append(NarrationSection(label: "讨论要点", text: "讨论要点。", sectionIndex: sectionIdx))
             for point in minutes.discussionPoints {
                 result.append(NarrationSection(label: "", text: point, sectionIndex: sectionIdx))
             }
@@ -201,7 +201,7 @@ final class SummaryNarrationService: NSObject {
 
         // Action Items
         if !minutes.actionItems.isEmpty {
-            result.append(NarrationSection(label: "Action Items", text: "Action Items.", sectionIndex: sectionIdx))
+            result.append(NarrationSection(label: "待办事项", text: "待办事项。", sectionIndex: sectionIdx))
             for (i, item) in minutes.actionItems.enumerated() {
                 result.append(NarrationSection(label: "", text: "\(i + 1). \(item)", sectionIndex: sectionIdx))
             }
@@ -210,7 +210,7 @@ final class SummaryNarrationService: NSObject {
 
         // Follow-ups
         if !minutes.followUps.isEmpty {
-            result.append(NarrationSection(label: "Follow-ups", text: "Follow-ups.", sectionIndex: sectionIdx))
+            result.append(NarrationSection(label: "后续事项", text: "后续事项。", sectionIndex: sectionIdx))
             for followUp in minutes.followUps {
                 result.append(NarrationSection(label: "", text: followUp, sectionIndex: sectionIdx))
             }
@@ -219,7 +219,7 @@ final class SummaryNarrationService: NSObject {
 
         // Attendees
         if !minutes.attendeeSummary.isEmpty {
-            result.append(NarrationSection(label: "Attendees", text: "Attendee Summary.", sectionIndex: sectionIdx))
+            result.append(NarrationSection(label: "参会者", text: "参会者摘要。", sectionIndex: sectionIdx))
             for attendee in minutes.attendeeSummary {
                 let points = attendee.keyPoints.joined(separator: ". ")
                 let text = "\(attendee.name). \(points)"

@@ -154,7 +154,7 @@ enum MarkdownImport {
         let resolved = sanitisedTitle(title ?? fallback, fallback: fallback, purpose: purpose)
 
         return ImportedDocument(
-            title: resolved.isEmpty ? "Imported Note" : resolved,
+            title: resolved.isEmpty ? "导入的笔记" : resolved,
             body: body,
             tags: tags,
             modifiedAt: modifiedAt,

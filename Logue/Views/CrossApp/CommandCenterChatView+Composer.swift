@@ -34,7 +34,7 @@ extension CommandCenterChatView {
             )
 
             // Input field
-            TextField("What can I help you with?", text: $inputText, axis: .vertical)
+            TextField("有什么可以帮你？", text: $inputText, axis: .vertical)
                 .font(.body)
                 .foregroundStyle(.white)
                 .textFieldStyle(.plain)
@@ -65,7 +65,7 @@ extension CommandCenterChatView {
             }
             .buttonStyle(.plain)
             .disabled(isGenerating)
-            .help(voiceManager.isRecording ? "Stop voice input" : "Voice input")
+            .help(voiceManager.isRecording ? "停止语音输入" : "语音输入")
 
             // Send / Stop
             if isGenerating {
@@ -160,7 +160,7 @@ extension CommandCenterChatView {
                             .font(.system(size: 8, weight: .bold))
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Remove \(attachment.displayName)")
+                    .accessibilityLabel("移除 \(attachment.displayName)")
                 }
                 .foregroundStyle(.white.opacity(0.8))
                 .padding(.horizontal, 8)

@@ -26,7 +26,7 @@ struct TaskRowView: View {
                     .foregroundStyle(isDone ? Color.accentColor : .secondary)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(isDone ? "Mark as not done" : "Mark as done")
+            .accessibilityLabel(isDone ? "标记为未完成" : "标记为已完成")
 
             VStack(alignment: .leading, spacing: 4) {
                 title
@@ -66,7 +66,7 @@ struct TaskRowView: View {
     @ViewBuilder
     private var title: some View {
         if isRenaming {
-            TextField("Title", text: $titleDraft)
+            TextField("标题", text: $titleDraft)
                 .textFieldStyle(.plain)
                 .focused($isTitleFocused)
                 .onSubmit(commitRename)
@@ -83,7 +83,7 @@ struct TaskRowView: View {
                 .strikethrough(isDone)
                 .foregroundStyle(isDone ? .secondary : .primary)
                 .onTapGesture(count: 2, perform: beginRename)
-                .help("Double-click to rename")
+                .help("双击重命名")
         }
     }
 
@@ -117,7 +117,7 @@ struct TaskRowView: View {
                 }
                 .buttonStyle(.plain)
                 .foregroundStyle(.secondary)
-                .help("Open the meeting this came from")
+                .help("打开此任务的来源会议")
             }
         }
         .font(.caption)

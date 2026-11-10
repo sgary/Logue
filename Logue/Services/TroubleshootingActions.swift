@@ -21,11 +21,11 @@ enum TroubleshootingActions {
 
     static func clearCacheAndQuit() {
         let alert = NSAlert()
-        alert.messageText = "Clear Cache and Quit?"
-        alert.informativeText = "Temporary files and cached data will be cleared. Your documents, meetings, and models will not be affected."
+        alert.messageText = "清除缓存并退出？"
+        alert.informativeText = "将清除临时文件和缓存数据。你的文档、会议和模型不会受到影响。"
         alert.alertStyle = .warning
-        alert.addButton(withTitle: "Clear and Quit")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: "清除并退出")
+        alert.addButton(withTitle: "取消")
 
         guard alert.runModal() == .alertFirstButtonReturn else { return }
         clearCache()
@@ -36,12 +36,12 @@ enum TroubleshootingActions {
 
     static func clearCacheAndRestart() {
         let alert = NSAlert()
-        alert.messageText = "Clear Cache and Restart?"
-        alert.informativeText = "Temporary files and cached data will be cleared. " +
-            "Your documents, meetings, and models will not be affected. The app will relaunch automatically."
+        alert.messageText = "清除缓存并重启？"
+        alert.informativeText = "将清除临时文件和缓存数据。" +
+            "你的文档、会议和模型不会受到影响。应用将自动重新启动。"
         alert.alertStyle = .warning
-        alert.addButton(withTitle: "Clear and Restart")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: "清除并重启")
+        alert.addButton(withTitle: "取消")
 
         guard alert.runModal() == .alertFirstButtonReturn else { return }
         clearCache()
@@ -52,25 +52,25 @@ enum TroubleshootingActions {
 
     static func resetApplicationData() {
         let alert = NSAlert()
-        alert.messageText = "Reset All Application Data?"
+        alert.messageText = "重置所有应用数据？"
         alert.informativeText = """
-        This will permanently delete all your documents, meetings, spaces, \
-        downloaded AI models, and cached data. The app will restart after reset.
+        这将永久删除你的所有文档、会议、空间、\
+        已下载的 AI 模型和缓存数据。重置后应用将重新启动。
 
-        This action cannot be undone.
+        此操作无法撤销。
 
-        Type "clear everything" below to enable the reset button:
+        请在下方输入“清除所有内容”以启用重置按钮：
         """
         alert.alertStyle = .critical
-        alert.addButton(withTitle: "Reset Everything")
-        alert.addButton(withTitle: "Cancel")
+        alert.addButton(withTitle: "全部重置")
+        alert.addButton(withTitle: "取消")
 
         guard let destructiveButton = alert.buttons.first else { return }
         destructiveButton.hasDestructiveAction = true
         destructiveButton.isEnabled = false
 
         let textField = NSTextField(frame: NSRect(x: 0, y: 0, width: 290, height: 22))
-        textField.placeholderString = "Type: clear everything"
+        textField.placeholderString = "输入：清除所有内容"
         alert.accessoryView = textField
 
         let observer = ResetConfirmationObserver(button: destructiveButton, textField: textField)
@@ -161,6 +161,6 @@ private final class ResetConfirmationObserver: NSObject {
 
     @objc
     func textDidChange(_ notification: Notification) {
-        button.isEnabled = textField.stringValue == "clear everything"
+        button.isEnabled = textField.stringValue == "清除所有内容"
     }
 }

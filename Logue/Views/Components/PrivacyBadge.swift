@@ -51,7 +51,7 @@ struct PrivacyBadge: View {
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Privacy: \(text)")
+        .accessibilityLabel("隐私：\(text)")
     }
 }
 

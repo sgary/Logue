@@ -13,7 +13,7 @@ struct EditTemplateSheet: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Edit Template")
+                Text("编辑模板")
                     .font(.headline)
                 Spacer()
                 Button { dismiss() } label: {
@@ -27,11 +27,11 @@ struct EditTemplateSheet: View {
             Divider()
 
             Form {
-                TextField("Name", text: $editName)
-                TextField("Description", text: $editDescription)
+                TextField("名称", text: $editName)
+                TextField("描述", text: $editDescription)
 
                 VStack(alignment: .leading, spacing: AppThemeConstants.paddingSmall) {
-                    Text("Body")
+                    Text("正文")
                         .font(.subheadline)
                         .foregroundStyle(AppThemeConstants.mutedText)
                     TextEditor(text: $editBody)
@@ -51,10 +51,10 @@ struct EditTemplateSheet: View {
             Divider()
 
             HStack {
-                Button("Cancel") { dismiss() }
+                Button("取消") { dismiss() }
                     .keyboardShortcut(.cancelAction)
                 Spacer()
-                Button("Save") {
+                Button("保存") {
                     var updated = template
                     updated.name = editName
                     updated.description = editDescription

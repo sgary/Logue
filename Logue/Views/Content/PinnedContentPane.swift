@@ -38,9 +38,9 @@ struct PinnedContentPane: View {
                 ContentLoadingView()
             } else if allItems.isEmpty {
                 ContentUnavailableView {
-                    Label("No Pinned Items", systemImage: "pin")
+                    Label("没有已置顶项目", systemImage: "pin")
                 } description: {
-                    Text("Items you pin will appear here for quick access.")
+                    Text("你置顶的项目会显示在这里，方便快速访问。")
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if viewMode == .grid {
@@ -50,8 +50,8 @@ struct PinnedContentPane: View {
             }
         }
         .background(AppThemeConstants.contentBackground)
-        .navigationTitle("Pinned")
-        .navigationSubtitle("\(allItems.count) item\(allItems.count == 1 ? "" : "s")")
+        .navigationTitle("已置顶")
+        .navigationSubtitle("\(allItems.count) 个项目")
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 viewModeMenu
@@ -65,8 +65,8 @@ struct PinnedContentPane: View {
                 } label: {
                     Image(systemName: viewMode == .list ? "square.grid.2x2" : "list.bullet")
                 }
-                .help(viewMode == .list ? "Grid View" : "List View")
-                .accessibilityLabel(viewMode == .list ? "Switch to grid view" : "Switch to list view")
+                .help(viewMode == .list ? "网格视图" : "列表视图")
+                .accessibilityLabel(viewMode == .list ? "切换到网格视图" : "切换到列表视图")
             }
         }
     }
@@ -75,14 +75,14 @@ struct PinnedContentPane: View {
 
     private var viewModeMenu: some View {
         Menu {
-            Section("View") {
+            Section("视图") {
                 Button {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         viewModeRaw = ContentViewMode.list.rawValue
                     }
                 } label: {
                     HStack {
-                        Label("List", systemImage: "list.bullet")
+                        Label("列表", systemImage: "list.bullet")
                         if viewMode == .list {
                             Spacer(); Image(systemName: "checkmark")
                         }
@@ -94,7 +94,7 @@ struct PinnedContentPane: View {
                     }
                 } label: {
                     HStack {
-                        Label("Grid", systemImage: "square.grid.2x2")
+                        Label("网格", systemImage: "square.grid.2x2")
                         if viewMode == .grid {
                             Spacer(); Image(systemName: "checkmark")
                         }
@@ -104,7 +104,7 @@ struct PinnedContentPane: View {
         } label: {
             Image(systemName: "ellipsis.circle")
         }
-        .help("Options")
+        .help("选项")
     }
 
     // MARK: - List
@@ -175,7 +175,7 @@ struct PinnedContentPane: View {
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
 
-                Text(doc.snippet.isEmpty ? "Empty document" : doc.snippet)
+                Text(doc.snippet.isEmpty ? "空文档" : doc.snippet)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(snippetLines)
@@ -199,18 +199,18 @@ struct PinnedContentPane: View {
             Button {
                 documentStore.selectedDocumentID = doc.id
             } label: {
-                Label("Open", systemImage: "doc.text")
+                Label("打开", systemImage: "doc.text")
             }
             Button {
                 documentStore.togglePin(id: doc.id)
             } label: {
-                Label("Unpin", systemImage: "pin.slash")
+                Label("取消置顶", systemImage: "pin.slash")
             }
             Divider()
             Button(role: .destructive) {
                 documentStore.deleteDocument(id: doc.id)
             } label: {
-                Label("Move to Trash", systemImage: "trash")
+                Label("移到废纸篓", systemImage: "trash")
             }
         }
     }
@@ -275,18 +275,18 @@ struct PinnedContentPane: View {
         Button {
             meetingStore.selectedMeetingID = meeting.id
         } label: {
-            Label("Open", systemImage: "waveform")
+            Label("打开", systemImage: "waveform")
         }
         Button {
             meetingStore.togglePin(id: meeting.id)
         } label: {
-            Label("Unpin", systemImage: "pin.slash")
+            Label("取消置顶", systemImage: "pin.slash")
         }
         Divider()
         Button(role: .destructive) {
             meetingStore.trashMeeting(id: meeting.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 
@@ -312,7 +312,7 @@ struct PinnedContentPane: View {
                             .foregroundStyle(AppThemeConstants.pinnedColor)
                     }
                     HStack(spacing: 8) {
-                        Text(doc.snippet.isEmpty ? "Empty document" : doc.snippet)
+                        Text(doc.snippet.isEmpty ? "空文档" : doc.snippet)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
@@ -334,18 +334,18 @@ struct PinnedContentPane: View {
             Button {
                 documentStore.selectedDocumentID = doc.id
             } label: {
-                Label("Open", systemImage: "doc.text")
+                Label("打开", systemImage: "doc.text")
             }
             Button {
                 documentStore.togglePin(id: doc.id)
             } label: {
-                Label("Unpin", systemImage: "pin.slash")
+                Label("取消置顶", systemImage: "pin.slash")
             }
             Divider()
             Button(role: .destructive) {
                 documentStore.deleteDocument(id: doc.id)
             } label: {
-                Label("Move to Trash", systemImage: "trash")
+                Label("移到废纸篓", systemImage: "trash")
             }
         }
     }
@@ -394,18 +394,18 @@ struct PinnedContentPane: View {
             Button {
                 meetingStore.selectedMeetingID = meeting.id
             } label: {
-                Label("Open", systemImage: "waveform")
+                Label("打开", systemImage: "waveform")
             }
             Button {
                 meetingStore.togglePin(id: meeting.id)
             } label: {
-                Label("Unpin", systemImage: "pin.slash")
+                Label("取消置顶", systemImage: "pin.slash")
             }
             Divider()
             Button(role: .destructive) {
                 meetingStore.trashMeeting(id: meeting.id)
             } label: {
-                Label("Move to Trash", systemImage: "trash")
+                Label("移到废纸篓", systemImage: "trash")
             }
         }
     }

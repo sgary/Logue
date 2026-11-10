@@ -20,7 +20,7 @@ struct MeetingTimeTrendCard: View {
             VStack(alignment: .leading, spacing: 12) {
                 CardSectionHeader(
                     icon: "clock.arrow.trianglehead.counterclockwise.rotate.90",
-                    title: "Meeting Time"
+                    title: "会议时长"
                 )
 
                 VStack(alignment: .leading, spacing: 4) {
@@ -39,7 +39,7 @@ struct MeetingTimeTrendCard: View {
                                 .foregroundStyle(deltaColor)
                         }
 
-                        Text("vs \(trend.lastWeekFormatted) last week")
+                        Text("对比上周 \(trend.lastWeekFormatted)")
                             .font(.callout)
                             .foregroundStyle(.secondary)
                     }

@@ -119,7 +119,7 @@ extension AgentChatView {
             }
             .overlay(alignment: .top) {
                 if isDropTargeted {
-                    Text("Drop files to attach")
+                    Text("拖入文件以添加附件")
                         .font(.caption.weight(.medium))
                         .foregroundStyle(AppThemeConstants.brandPrimary)
                         .padding(.top, 6)
@@ -223,7 +223,7 @@ extension AgentChatView {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help(dictation.isRecording ? "Stop dictation" : "Dictate")
+            .help(dictation.isRecording ? "停止语音输入" : "语音输入")
             .disabled(isProcessing || isBusy)
         }
 
@@ -240,7 +240,7 @@ extension AgentChatView {
                         .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .help("Stop processing")
+                .help("停止处理")
             } else {
                 Button {
                     guard canSend else { return }
@@ -254,7 +254,7 @@ extension AgentChatView {
                 }
                 .buttonStyle(.plain)
                 .disabled(!canSend)
-                .help(isDeepResearch ? "Send · Deep Research" : "Send message")
+                .help(isDeepResearch ? "发送 · 深度研究" : "发送消息")
             }
         }
 

@@ -44,12 +44,12 @@ enum LLMClientError: Error, LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .invalidURL: "Invalid API endpoint URL"
-        case .invalidResponse: "Invalid response from API"
-        case .emptyResponse: "Empty response from API"
-        case let .httpError(code): "HTTP error: \(code)"
-        case let .apiError(message): "API error: \(message)"
-        case .signingFailed: "Request signing failed"
+        case .invalidURL: "API 端点 URL 无效"
+        case .invalidResponse: "API 响应无效"
+        case .emptyResponse: "API 返回了空响应"
+        case let .httpError(code): "HTTP 错误：\(code)"
+        case let .apiError(message): "API 错误：\(message)"
+        case .signingFailed: "请求签名失败"
         }
     }
 }

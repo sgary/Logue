@@ -3,8 +3,8 @@ import SwiftUI
 // MARK: - ReviewTab
 
 enum ReviewTab: String, CaseIterable {
-    case score = "Score"
-    case reactions = "Reactions"
+    case score = "评分"
+    case reactions = "反响"
 
     var icon: String {
         switch self {
@@ -28,6 +28,18 @@ enum RubricCategory: String, CaseIterable, Identifiable, Codable {
         rawValue
     }
 
+    /// Localized category name for the review panel.
+    var displayName: String {
+        switch self {
+        case .thesis: "论点"
+        case .evidence: "论据"
+        case .organization: "结构"
+        case .style: "风格"
+        case .grammar: "语法"
+        case .clarity: "清晰度"
+        }
+    }
+
     var icon: String {
         switch self {
         case .thesis: "lightbulb.fill"
@@ -41,12 +53,12 @@ enum RubricCategory: String, CaseIterable, Identifiable, Codable {
 
     var description: String {
         switch self {
-        case .thesis: "Central argument strength and clarity"
-        case .evidence: "Quality and relevance of supporting details"
-        case .organization: "Structure, flow, and coherence"
-        case .style: "Writing voice, tone, and engagement"
-        case .grammar: "Correctness and technical accuracy"
-        case .clarity: "Readability and comprehension"
+        case .thesis: "中心论点的力度与清晰度"
+        case .evidence: "支撑细节的质量与相关性"
+        case .organization: "结构、行文与连贯性"
+        case .style: "写作语气、语调与感染力"
+        case .grammar: "正确性与技术准确性"
+        case .clarity: "可读性与理解难度"
         }
     }
 
@@ -113,6 +125,18 @@ enum EmotionType: String, CaseIterable, Identifiable, Codable {
 
     var id: String {
         rawValue
+    }
+
+    /// Localized emotion name shown on reaction cards.
+    var displayName: String {
+        switch self {
+        case .excited: "兴奋"
+        case .confused: "困惑"
+        case .skeptical: "怀疑"
+        case .engaged: "投入"
+        case .bored: "无聊"
+        case .inspired: "受启发"
+        }
     }
 
     var icon: String {

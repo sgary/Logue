@@ -62,7 +62,7 @@ final class InlineAssistantController {
         // from other apps. Prompt on first use; if denied, surface a recoverable toast.
         if !AccessibilityService.shared.checkAccessibilityPermission(prompt: true) {
             ToastCenter.shared.show(
-                "Grant Accessibility to use ⌘⌃I — System Settings → Privacy",
+                "请授予辅助功能权限以使用 ⌘⌃I：系统设置 → 隐私与安全性",
                 kind: .warning
             )
             logger.info("Inline assistant blocked: Accessibility not granted")
@@ -83,7 +83,7 @@ final class InlineAssistantController {
         // Pull selection (AX-first, clipboard fallback).
         let text = AccessibilityService.shared.getSelectedText() ?? ""
         guard !text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-            ToastCenter.shared.show("Select some text first", kind: .info)
+            ToastCenter.shared.show("请先选中文本", kind: .info)
             return
         }
         selectedText = text
@@ -119,6 +119,19 @@ final class InlineAssistantController {
 
         var id: String {
             rawValue
+        }
+
+        var displayName: String {
+            switch self {
+            case .answerQuestion: "回答问题"
+            case .simplify: "简化"
+            case .expand: "扩写"
+            case .fixGrammar: "修正语法"
+            case .makeFormal: "更正式"
+            case .makeCasual: "更随性"
+            case .translate: "翻译"
+            case .summarize: "总结"
+            }
         }
 
         /// Phase G: when true, the panel keeps its result visible so the
@@ -206,7 +219,7 @@ final class InlineAssistantController {
                 ToastCenter.shared.show(UICopy.Toast.saved)
             } catch {
                 logger.error("Inline assistant failed: \(error.localizedDescription, privacy: .public)")
-                ToastCenter.shared.show("Couldn't rewrite", kind: .warning)
+                ToastCenter.shared.show("无法改写", kind: .warning)
             }
             isProcessing = false
         }
@@ -378,10 +391,10 @@ struct InlineAssistantPanelView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 4) {
                 Image(systemName: "sparkles").foregroundStyle(Color.accentColor)
-                Text("Suggestion")
+                Text("建议")
                     .font(.callout.weight(.semibold))
                 Spacer()
-                Text("Tab · word    ⇧Tab · all")
+                Text("Tab · 逐词    ⇧Tab · 全部")
                     .font(.caption2.monospaced())
                     .foregroundStyle(.secondary)
             }
@@ -402,7 +415,7 @@ struct InlineAssistantPanelView: View {
                 Button {
                     controller.insertNextWord()
                 } label: {
-                    Label("Insert next word", systemImage: "arrow.right.to.line")
+                    Label("插入下一个词", systemImage: "arrow.right.to.line")
                         .font(.caption)
                 }
                 .keyboardShortcut(.tab, modifiers: [])
@@ -411,14 +424,14 @@ struct InlineAssistantPanelView: View {
                 Button {
                     controller.insertAllRemaining()
                 } label: {
-                    Label("Insert all", systemImage: "arrow.right.doc.on.clipboard")
+                    Label("全部插入", systemImage: "arrow.right.doc.on.clipboard")
                         .font(.caption)
                 }
                 .keyboardShortcut(.tab, modifiers: .shift)
                 .buttonStyle(.bordered)
                 .controlSize(.small)
                 Spacer()
-                Button("Discard") {
+                Button("丢弃") {
                     controller.discardSuggestion()
                 }
                 .controlSize(.small)
@@ -452,7 +465,7 @@ struct InlineAssistantPanelView: View {
                     HStack(spacing: 6) {
                         Image(systemName: action.icon)
                             .font(.caption)
-                        Text(action.rawValue)
+                        Text(action.displayName)
                             .font(.callout)
                             .lineLimit(1)
                     }
@@ -472,9 +485,9 @@ struct InlineAssistantPanelView: View {
 
     private var customField: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Custom").font(.caption2).foregroundStyle(.secondary)
+            Text("自定义").font(.caption2).foregroundStyle(.secondary)
             HStack(spacing: 4) {
-                TextField("Or type a prompt…", text: $customDraft, onCommit: runCustom)
+                TextField("或输入提示词…", text: $customDraft, onCommit: runCustom)
                     .textFieldStyle(.roundedBorder)
                     .focused($customFocused)
                     .onSubmit(runCustom)

@@ -11,9 +11,9 @@ extension DocumentWorkspaceView {
                 store.selectedDocumentID = doc.id
             } label: {
                 Image(systemName: "square.and.pencil")
-                    .accessibilityLabel("New Document")
+                    .accessibilityLabel("新建文档")
             }
-            .help("New Document")
+            .help("新建文档")
         }
 
         ToolbarItem(placement: .primaryAction) {
@@ -26,8 +26,8 @@ extension DocumentWorkspaceView {
             } label: {
                 Image(systemName: "rectangle.center.inset.filled")
             }
-            .help("Enter Focus Mode (⇧⌘F)")
-            .accessibilityLabel("Enter Focus Mode")
+            .help("进入专注模式（⇧⌘F）")
+            .accessibilityLabel("进入专注模式")
         }
 
         ToolbarItem(placement: .primaryAction) {
@@ -38,7 +38,7 @@ extension DocumentWorkspaceView {
             } label: {
                 Image(systemName: "sidebar.right")
             }
-            .help(isSidebarCollapsed ? "Show Tools Sidebar" : "Hide Tools Sidebar")
+            .help(isSidebarCollapsed ? "显示工具侧边栏" : "隐藏工具侧边栏")
         }
     }
 
@@ -49,22 +49,22 @@ extension DocumentWorkspaceView {
             Button {
                 focusState.exit()
             } label: {
-                Label("Exit Focus", systemImage: "xmark.circle")
+                Label("退出专注", systemImage: "xmark.circle")
             }
-            .help("Exit Focus Mode (Esc)")
-            .accessibilityLabel("Exit Focus Mode")
+            .help("退出专注模式（Esc）")
+            .accessibilityLabel("退出专注模式")
         }
     }
 
     @ViewBuilder
     func moreMenuItems(doc: WritingDocument) -> some View {
-        Button("Undo") {
+        Button("撤销") {
             NSApp.sendAction(Selector(("undo:")), to: nil, from: nil)
         }
-        Button("Redo") {
+        Button("重做") {
             NSApp.sendAction(Selector(("redo:")), to: nil, from: nil)
         }
-        Toggle("Word Count", isOn: $showWordCount)
+        Toggle("字数统计", isOn: $showWordCount)
         Button {
             var updated = doc
             updated.widthMode = doc.widthMode.toggled
@@ -79,51 +79,51 @@ extension DocumentWorkspaceView {
                 await store.regenerateAITitle(for: doc.id)
             }
         } label: {
-            Label("Generate Title", systemImage: "sparkles")
+            Label("生成标题", systemImage: "sparkles")
         }
         .disabled(doc.body.trimmingCharacters(in: .whitespacesAndNewlines).count < 20 || LLMEngineStatus.shared.isBusy)
         Button {
             renameText = doc.title
             showRenameAlert = true
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         Button {
             showIconPicker = true
         } label: {
-            Label(doc.icon == nil ? "Add Icon" : "Change Icon", systemImage: "face.smiling")
+            Label(doc.icon == nil ? "添加图标" : "更改图标", systemImage: "face.smiling")
         }
         Button {
             showTagPopover = true
         } label: {
-            Label("Add Tag", systemImage: "tag")
+            Label("添加标签", systemImage: "tag")
         }
         Button {
             showSaveAsTemplate = true
         } label: {
-            Label("Save as Template", systemImage: "doc.on.doc")
+            Label("存为模板", systemImage: "doc.on.doc")
         }
         exportMenu(doc: doc)
         Divider()
         Button(role: .destructive) {
             store.deleteDocument(id: doc.id)
         } label: {
-            Label("Delete Document", systemImage: "trash")
+            Label("删除文档", systemImage: "trash")
         }
     }
 
     /// Split out of `moreMenuItems` only to keep that function within the body-length limit.
     private func exportMenu(doc: WritingDocument) -> some View {
-        Menu("Export") {
+        Menu("导出") {
             Button {
                 PDFExportService.export(document: doc)
             } label: {
-                Label("Export as PDF", systemImage: "arrow.down.doc")
+                Label("导出为 PDF", systemImage: "arrow.down.doc")
             }
             Button {
                 exportAsMarkdown(doc: doc)
             } label: {
-                Label("Export as Markdown", systemImage: "doc.plaintext")
+                Label("导出为 Markdown", systemImage: "doc.plaintext")
             }
         }
     }
@@ -132,9 +132,9 @@ extension DocumentWorkspaceView {
         Menu {
             moreMenuItems(doc: doc)
         } label: {
-            Label("More", systemImage: "ellipsis.circle")
+            Label("更多", systemImage: "ellipsis.circle")
         }
-        .help("More options")
+        .help("更多选项")
         .popover(isPresented: $showTagPopover, arrowEdge: .bottom) {
             tagPopoverContent(doc: doc)
         }
@@ -147,12 +147,12 @@ extension DocumentWorkspaceView {
                 showIconPicker = false
             }
         }
-        .alert("Rename Document", isPresented: $showRenameAlert) {
-            TextField("Title", text: $renameText)
-            Button("Rename") {
+        .alert("重命名文档", isPresented: $showRenameAlert) {
+            TextField("标题", text: $renameText)
+            Button("重命名") {
                 store.renameDocument(id: doc.id, newTitle: renameText)
             }
-            Button("Cancel", role: .cancel) {}
+            Button("取消", role: .cancel) {}
         }
     }
 }

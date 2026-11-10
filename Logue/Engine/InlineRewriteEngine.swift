@@ -25,9 +25,9 @@ enum InlineRewriteEngine {
 
         var errorDescription: String? {
             switch self {
-            case .emptyInstruction: "Add an instruction to tell the AI what to change."
-            case .emptySelection: "Select some text first."
-            case let .llmFailed(message): "Rewrite failed: \(message)"
+            case .emptyInstruction: "请添加指令，告诉 AI 要修改什么。"
+            case .emptySelection: "请先选中一些文本。"
+            case let .llmFailed(message): "改写失败：\(message)"
             }
         }
     }
@@ -56,7 +56,7 @@ enum InlineRewriteEngine {
             )
             let cleaned = stripLeadingPreamble(result)
             guard !cleaned.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
-                throw RewriteError.llmFailed("empty response")
+                throw RewriteError.llmFailed("空响应")
             }
             return cleaned
         } catch let error as RewriteError {

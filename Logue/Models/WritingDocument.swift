@@ -13,7 +13,7 @@ struct RewriteResult: Codable, Equatable, Sendable {
 /// A document managed in Logue's library.
 struct WritingDocument: Identifiable, Codable, Sendable {
     var id: UUID = .init()
-    var title: String = "Untitled Document"
+    var title: String = "未命名文档"
     /// Plain text body of the document.
     var body: String = ""
     var goalMode: WritingGoalMode = .casual
@@ -185,9 +185,9 @@ struct WritingDocument: Identifiable, Codable, Sendable {
     var readingTimeLabel: String {
         let minutes = readingTimeMinutes
         if minutes < 1 {
-            return "< 1 min read"
+            return "< 1 分钟阅读"
         }
-        return "\(Int(ceil(minutes))) min read"
+        return "\(Int(ceil(minutes))) 分钟阅读"
     }
 
     /// First 120 characters of body as a preview snippet, excluding markdown table syntax.

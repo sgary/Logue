@@ -40,8 +40,8 @@ enum DocumentWidthMode: String, Codable, CaseIterable, Sendable {
 
     var label: String {
         switch self {
-        case .normal: "Normal width"
-        case .wide: "Wide width"
+        case .normal: "常规宽度"
+        case .wide: "宽屏宽度"
         }
     }
 

@@ -10,12 +10,12 @@ struct TaskTriagePanelView: View {
             header
 
             if service.isRunning {
-                ProgressView("Reviewing your tasks…")
+                ProgressView("正在检查你的任务…")
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if let error = service.lastError {
                 message(error, symbol: "exclamationmark.triangle")
             } else if service.suggestions.isEmpty {
-                message("Nothing to suggest — your list looks in order.", symbol: "checkmark.circle")
+                message("没有可建议的内容，你的列表看起来一切正常。", symbol: "checkmark.circle")
             } else {
                 List(service.suggestions) { suggestion in
                     row(suggestion)
@@ -29,7 +29,7 @@ struct TaskTriagePanelView: View {
 
     private var header: some View {
         VStack(alignment: .leading, spacing: 2) {
-            Text("Triage")
+            Text("分诊")
                 .font(.headline)
             if service.reviewedCount > 0 {
                 Text(reviewedSummary)
@@ -41,9 +41,7 @@ struct TaskTriagePanelView: View {
 
     /// States the count explicitly, so a capped review never reads as a complete one.
     private var reviewedSummary: String {
-        let plural = service.reviewedCount == 1 ? "" : "s"
-        return "Reviewed \(service.reviewedCount) open task\(plural). "
-            + "Nothing changes until you apply it."
+        "已检查 \(service.reviewedCount) 个未完成任务。在你应用之前不会有任何更改。"
     }
 
     @ViewBuilder
@@ -66,13 +64,13 @@ struct TaskTriagePanelView: View {
                     // A duplicate carries no patch: deciding which of two tasks dies is the
                     // user's call, so there is nothing to one-click.
                     if suggestion.patch != nil {
-                        Button("Apply") {
+                        Button("应用") {
                             store.update(TaskTriage.applying(suggestion, to: task))
                             service.dismiss(suggestion)
                         }
                         .buttonStyle(.borderedProminent)
                     }
-                    Button("Dismiss") { service.dismiss(suggestion) }
+                    Button("忽略") { service.dismiss(suggestion) }
                         .buttonStyle(.bordered)
                 }
             }

@@ -75,7 +75,7 @@ extension ModelManager {
             id: UUID().uuidString,
             type: .api,
             displayName: "\(modelName) (\(record.providerType.displayName))",
-            description: "Discovered from \(record.providerType.displayName).",
+            description: "从 \(record.providerType.displayName) 发现。",
             endpoint: record.endpoint,
             apiKey: record.apiKey,
             modelName: modelName,

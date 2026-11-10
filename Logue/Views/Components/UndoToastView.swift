@@ -17,7 +17,7 @@ struct UndoToastView: View {
 
             Spacer()
 
-            Button("Undo") {
+            Button("撤销") {
                 onUndo()
             }
             .buttonStyle(.borderedProminent)
@@ -32,7 +32,7 @@ struct UndoToastView: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Dismiss")
+            .accessibilityLabel("关闭")
         }
         .padding(.horizontal, 16)
         .accessibilityElement(children: .contain)

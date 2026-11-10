@@ -162,27 +162,27 @@ actor AIContentScorer {
 
     private func label(for prob: Float) -> String {
         switch prob {
-        case ..<0.25: "Likely Human"
-        case 0.25 ..< 0.45: "Possibly Human"
-        case 0.45 ..< 0.65: "Uncertain"
-        case 0.65 ..< 0.82: "Possibly AI"
-        default: "Likely AI"
+        case ..<0.25: "很可能由人类撰写"
+        case 0.25 ..< 0.45: "可能由人类撰写"
+        case 0.45 ..< 0.65: "不确定"
+        case 0.65 ..< 0.82: "可能由 AI 生成"
+        default: "很可能由 AI 生成"
         }
     }
 
     private func confidenceNote(sentenceCount: Int) -> String {
         switch sentenceCount {
-        case ..<4: "Low confidence — short text"
-        case 4 ..< 8: "Moderate confidence"
-        default: "Higher confidence"
+        case ..<4: "置信度低——文本较短"
+        case 4 ..< 8: "中等置信度"
+        default: "较高置信度"
         }
     }
 
     private func insufficientResult(text: String) -> DetectorResult {
         DetectorResult(
             overallAIProbability: 0.5,
-            label: "Uncertain",
-            confidence: "Insufficient text — paste at least 2–3 sentences",
+            label: "不确定",
+            confidence: "文本不足——请至少粘贴 2–3 句话",
             sentences: text.isEmpty ? [] : [
                 DetectorSentenceScore(sentence: text, aiProbability: 0.5, foundAIPhrases: []),
             ],

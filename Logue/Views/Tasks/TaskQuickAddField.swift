@@ -35,7 +35,7 @@ struct TaskQuickAddField: View {
                 Image(systemName: "plus.circle.fill")
                     .foregroundStyle(.secondary)
 
-                TextField("Send the deck tomorrow #launch !", text: $text, axis: .vertical)
+                TextField("试试：明天发送演示文稿 #发布 !", text: $text, axis: .vertical)
                     .textFieldStyle(.plain)
                     .lineLimit(1 ... 6)
                     .focused($isFocused)

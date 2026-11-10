@@ -234,4 +234,27 @@ struct TaskTextParserTests {
     func splitDropsBlanks() {
         #expect(TaskTextParser.split("call mom\n\n\nbuy milk") == ["call mom", "buy milk"])
     }
+
+    // MARK: - Chinese input
+
+    @Test("Chinese date words resolve and leave the title")
+    func chineseDates() {
+        let tomorrow = parse("明天发送演示文稿")
+        #expect(day(tomorrow.dueDate) == "2026-08-13")
+        #expect(tomorrow.title == "发送演示文稿")
+
+        let friday = parse("周五提交报告")
+        #expect(day(friday.dueDate) == "2026-08-14")
+        #expect(friday.title == "提交报告")
+
+        #expect(day(parse("3天后跟进").dueDate) == "2026-08-15")
+    }
+
+    @Test("Chinese recurrence words are understood")
+    func chineseRecurrence() {
+        let daily = parse("每天跑步")
+        #expect(daily.recurrence == TaskRecurrence(unit: .day, interval: 1))
+        #expect(daily.title == "跑步")
+        #expect(parse("每周复盘").recurrence == TaskRecurrence(unit: .week, interval: 1))
+    }
 }

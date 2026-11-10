@@ -17,17 +17,17 @@ struct SourcesPanelView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
                     if !attachments.isEmpty {
-                        section("Attachments", systemImage: "paperclip") {
+                        section("附件", systemImage: "paperclip") {
                             attachmentsRows
                         }
                     }
                     if !citedURLs.isEmpty {
-                        section("Recent sources", systemImage: "globe") {
+                        section("最近的来源", systemImage: "globe") {
                             urlRows
                         }
                     }
                     if !referencedItems.isEmpty {
-                        section("Referenced", systemImage: "doc.text") {
+                        section("已引用", systemImage: "doc.text") {
                             referencedRows
                         }
                     }
@@ -50,7 +50,7 @@ struct SourcesPanelView: View {
 
     private var header: some View {
         HStack(spacing: 6) {
-            Text("Sources")
+            Text("来源")
                 .font(.callout.weight(.semibold))
             Spacer()
             Text("\(citedURLs.count + attachments.count + referencedItems.count)")
@@ -160,10 +160,10 @@ struct SourcesPanelView: View {
 
     private var emptyState: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("No sources yet")
+            Text("还没有来源")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(.secondary)
-            Text("Drop a file or ask the agent to search the web.")
+            Text("拖入文件，或让智能体搜索网页。")
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
         }

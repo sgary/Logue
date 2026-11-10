@@ -66,7 +66,7 @@ extension CommandCenterChatView {
 
     @ViewBuilder
     private func markdownContent(_ message: EphemeralChatMessage) -> some View {
-        let displayText = message.content.isEmpty && message.isStreaming ? "..." : message.content
+        let displayText = message.content.isEmpty && message.isStreaming ? "…" : message.content
         StructuredText(markdown: displayText)
             .font(AppThemeConstants.chatMessageFont)
             .textual.structuredTextStyle(.gitHub)
@@ -81,7 +81,7 @@ extension CommandCenterChatView {
                 HStack(spacing: 3) {
                     Image(systemName: copiedMessageID == message.id ? "checkmark" : "doc.on.doc")
                         .font(.caption2.weight(.medium))
-                    Text(copiedMessageID == message.id ? "Copied" : "Copy")
+                    Text(copiedMessageID == message.id ? "已复制" : "复制")
                         .font(.caption2.weight(.medium))
                 }
                 .foregroundStyle(copiedMessageID == message.id ? AppThemeConstants.success : Color.secondary)
@@ -95,7 +95,7 @@ extension CommandCenterChatView {
                 HStack(spacing: 3) {
                     Image(systemName: savedMessageID == message.id ? "checkmark" : "square.and.arrow.down")
                         .font(.caption2.weight(.medium))
-                    Text(savedMessageID == message.id ? "Saved" : "Save")
+                    Text(savedMessageID == message.id ? "已保存" : "保存")
                         .font(.caption2.weight(.medium))
                 }
                 .foregroundStyle(savedMessageID == message.id ? AppThemeConstants.success : Color.secondary)
@@ -111,7 +111,7 @@ extension CommandCenterChatView {
                 HStack(spacing: 3) {
                     Image(systemName: "square.and.arrow.up")
                         .font(.caption2.weight(.medium))
-                    Text("Export")
+                    Text("导出")
                         .font(.caption2.weight(.medium))
                 }
                 .foregroundStyle(Color.secondary)
@@ -120,13 +120,13 @@ extension CommandCenterChatView {
                 .background(Capsule().fill(Color.primary.opacity(0.04)))
             }
             .buttonStyle(.plain)
-            .help("Export as Markdown")
+            .help("导出为 Markdown")
 
             Button { speakMessage(message) } label: {
                 HStack(spacing: 3) {
                     Image(systemName: readAloud.isSpeaking(content: message.content) ? "stop.fill" : "speaker.wave.2")
                         .font(.caption2.weight(.medium))
-                    Text(readAloud.isSpeaking(content: message.content) ? "Stop" : "Speak")
+                    Text(readAloud.isSpeaking(content: message.content) ? "停止" : "朗读")
                         .font(.caption2.weight(.medium))
                 }
                 .foregroundStyle(readAloud.isSpeaking(content: message.content) ? AppThemeConstants.error : Color.secondary)

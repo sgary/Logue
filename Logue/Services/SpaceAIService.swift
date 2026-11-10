@@ -14,7 +14,7 @@ enum SpaceAIService {
     static func summarizeSpace(spaceID: UUID) async throws -> String {
         let context = buildSpaceContext(spaceID: spaceID)
         guard !context.isEmpty else {
-            let empty = "This space has no content to summarize."
+            let empty = "此空间没有可摘要的内容。"
             persistInsight(spaceID: spaceID, key: "summary", content: empty)
             return empty
         }
@@ -67,15 +67,15 @@ enum SpaceAIService {
         }
 
         guard !allActionItems.isEmpty else {
-            let empty = "No action items found in this space."
+            let empty = "此空间中没有待办事项。"
             persistInsight(spaceID: spaceID, key: "actionItems", content: empty)
             return empty
         }
 
         // Build a structured list without needing LLM
-        var result = "## Action Items\n\n"
+        var result = "## 待办事项\n\n"
         for group in allActionItems {
-            result += "### From: \(group.meetingTitle)\n"
+            result += "### 来自：\(group.meetingTitle)\n"
             for item in group.items {
                 result += "- [ ] \(item)\n"
             }
@@ -92,7 +92,7 @@ enum SpaceAIService {
     static func generateStatusUpdate(spaceID: UUID) async throws -> String {
         let context = buildSpaceContext(spaceID: spaceID)
         guard !context.isEmpty else {
-            let empty = "This space has no content to generate a status update from."
+            let empty = "此空间没有可生成状态更新的内容。"
             persistInsight(spaceID: spaceID, key: "statusUpdate", content: empty)
             return empty
         }
@@ -139,12 +139,12 @@ enum SpaceAIService {
         }
 
         guard !decisions.isEmpty else {
-            let empty = "No recorded decisions found in this space."
+            let empty = "此空间中没有记录的决策。"
             persistInsight(spaceID: spaceID, key: "decisions", content: empty)
             return empty
         }
 
-        var result = "## Decisions\n\n"
+        var result = "## 决策\n\n"
         for group in decisions.sorted(by: { $0.date > $1.date }) {
             let dateStr = group.date.formatted(date: .abbreviated, time: .omitted)
             result += "### \(group.meetingTitle) (\(dateStr))\n"

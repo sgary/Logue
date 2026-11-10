@@ -26,7 +26,7 @@ struct QuickComposeView: View {
                 resultView
             case .error:
                 PolishErrorView(
-                    message: polishEngine.errorMessage ?? "Something went wrong.",
+                    message: polishEngine.errorMessage ?? "出了点问题。",
                     onBack: { polishEngine.reset() },
                     onRetry: { startPolish() }
                 )
@@ -57,7 +57,7 @@ struct QuickComposeView: View {
                     .padding(.top, -1)
 
                 if draftText.isEmpty {
-                    Text("Draft your thought, message, or tweet...")
+                    Text("写下你的想法、消息或推文…")
                         .font(.body)
                         .foregroundStyle(.tertiary)
                         .padding(.leading, 5)
@@ -73,7 +73,7 @@ struct QuickComposeView: View {
                     .foregroundStyle(AppThemeConstants.brandPrimary)
                     .padding(.leading, 8)
 
-                Text("\(draftText.count) chars")
+                Text("\(draftText.count) 个字符")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.tertiary)
 
@@ -107,14 +107,14 @@ struct QuickComposeView: View {
                 .buttonStyle(.plain)
                 .frame(width: 28, height: 28)
                 .background(Circle().fill(Color.primary.opacity(AppThemeConstants.opacityLight)))
-                .accessibilityLabel("Back")
+                .accessibilityLabel("返回")
 
                 Spacer()
 
                 Image(systemName: "square.and.pencil")
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(AppThemeConstants.brandPrimary)
-                Text("Result")
+                Text("结果")
                     .font(.headline)
 
                 Spacer()
@@ -187,8 +187,8 @@ struct QuickComposeView: View {
             DocumentStore.shared.updateDocument(updated)
         } else {
             let components = final.components(separatedBy: .newlines)
-            let firstLine = components.first(where: { !$0.trimmingCharacters(in: .whitespaces).isEmpty }) ?? "Quick Note"
-            let title = firstLine.count > 30 ? String(firstLine.prefix(30)) + "..." : firstLine
+            let firstLine = components.first(where: { !$0.trimmingCharacters(in: .whitespaces).isEmpty }) ?? "快速笔记"
+            let title = firstLine.count > 30 ? String(firstLine.prefix(30)) + "…" : firstLine
 
             let doc = DocumentStore.shared.createDocument(title: title)
             var updated = doc

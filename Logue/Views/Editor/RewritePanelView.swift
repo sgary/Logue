@@ -16,6 +16,19 @@ enum RewriteStyle: String, CaseIterable, Identifiable {
         rawValue
     }
 
+    var displayName: String {
+        switch self {
+        case .professional: "专业"
+        case .casual: "随性"
+        case .academic: "学术"
+        case .creative: "创意"
+        case .technical: "技术"
+        case .concise: "简洁"
+        case .persuasive: "说服力"
+        case .natural: "自然"
+        }
+    }
+
     var icon: String {
         switch self {
         case .professional: "briefcase.fill"
@@ -31,14 +44,14 @@ enum RewriteStyle: String, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .professional: "Business-appropriate, polished tone"
-        case .casual: "Friendly, conversational style"
-        case .academic: "Scholarly, formal language"
-        case .creative: "Expressive, engaging narrative"
-        case .technical: "Documentation, code comments, and specs"
-        case .concise: "Clear, brief, to the point"
-        case .persuasive: "Compelling, convincing arguments"
-        case .natural: "Natural, human-like tone — removes AI patterns, adds contractions and varied sentence structure"
+        case .professional: "适合商务场合的专业语气"
+        case .casual: "亲切自然的口语风格"
+        case .academic: "学术化的正式语言"
+        case .creative: "富有表现力的叙事"
+        case .technical: "适用于文档、代码注释和规范说明"
+        case .concise: "清晰简明、直击要点"
+        case .persuasive: "有说服力的论证"
+        case .natural: "自然的真人语气——去除 AI 腔调，增加缩写和多样的句式"
         }
     }
 
@@ -104,14 +117,14 @@ struct RewritePanelView: View {
             errorMessage = nil
         }
         .onDisappear { rewriteTask?.cancel() }
-        .alert("Replace Document Text?", isPresented: $showApplyConfirmation) {
-            Button("Replace", role: .destructive) {
+        .alert("要替换文档正文吗？", isPresented: $showApplyConfirmation) {
+            Button("替换", role: .destructive) {
                 onApply?(rewrittenText)
                 didApply = true
             }
-            Button("Cancel", role: .cancel) {}
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("This will replace your entire document with the rewritten version. You can undo this action.")
+            Text("这将用重写后的版本替换整篇文档。此操作可以撤销。")
         }
     }
 
@@ -126,13 +139,13 @@ struct RewritePanelView: View {
                         Button {
                             selectedStyle = style
                         } label: {
-                            Label(style.rawValue, systemImage: style.icon)
+                            Label(style.displayName, systemImage: style.icon)
                         }
                     }
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: selectedStyle.icon)
-                        Text(selectedStyle.rawValue)
+                        Text(selectedStyle.displayName)
                         Image(systemName: "chevron.up.chevron.down")
                             .font(.caption2)
                             .foregroundStyle(.secondary)
@@ -150,15 +163,15 @@ struct RewritePanelView: View {
                         } else {
                             Image(systemName: "wand.and.stars")
                         }
-                        Text(isRewriting ? "Rewriting..." : "Rewrite")
+                        Text(isRewriting ? "正在重写…" : "重写")
                     }
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(AppThemeConstants.accent)
                 .controlSize(.small)
                 .disabled(isRewriting || document.body.isEmpty || LLMEngineStatus.shared.isBusy)
-                .accessibilityLabel("Rewrite text")
-                .accessibilityHint("Rewrites your text in the selected style")
+                .accessibilityLabel("重写文本")
+                .accessibilityHint("按所选风格重写你的文本")
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
@@ -181,7 +194,7 @@ struct RewritePanelView: View {
         VStack(spacing: 12) {
             ProgressView()
                 .controlSize(.regular)
-            Text("Rewriting your text…")
+            Text("正在重写你的文本…")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -194,9 +207,9 @@ struct RewritePanelView: View {
             Image(systemName: "arrow.clockwise.circle")
                 .font(.largeTitle)
                 .foregroundStyle(.secondary)
-            Text("Select a style and rewrite")
+            Text("选择风格并重写")
                 .font(.subheadline.weight(.medium))
-            Text("Transform your text with AI-powered rewriting")
+            Text("用 AI 重写，轻松改写你的文本")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -210,7 +223,7 @@ struct RewritePanelView: View {
             Image(systemName: "exclamationmark.triangle")
                 .font(.largeTitle)
                 .foregroundStyle(AppThemeConstants.error)
-            Text("Rewrite Failed")
+            Text("重写失败")
                 .font(.subheadline.weight(.medium))
             Text(message)
                 .font(.caption)
@@ -220,7 +233,7 @@ struct RewritePanelView: View {
             Button(action: rewriteText) {
                 HStack(spacing: 4) {
                     Image(systemName: "arrow.clockwise")
-                    Text("Retry")
+                    Text("重试")
                 }
             }
             .buttonStyle(.bordered)
@@ -242,14 +255,14 @@ struct RewritePanelView: View {
                 HStack(spacing: 6) {
                     Image(systemName: selectedStyle.icon)
                         .foregroundStyle(selectedStyle.color)
-                    Text(selectedStyle.rawValue)
+                    Text(selectedStyle.displayName)
                         .font(.caption.weight(.semibold))
                 }
                 Spacer()
                 Button(action: { copyToClipboard(rewrittenText) }, label: {
                     HStack(spacing: 4) {
                         Image(systemName: "doc.on.doc")
-                        Text("Copy")
+                        Text("复制")
                     }
                     .font(.caption)
                 })
@@ -276,39 +289,39 @@ struct RewritePanelView: View {
                     } label: {
                         HStack(spacing: 4) {
                             Image(systemName: "arrow.uturn.backward")
-                            Text("Undo")
+                            Text("撤销")
                         }
                         .font(.caption)
                     }
                     .buttonStyle(.bordered)
                     .tint(AppThemeConstants.warning)
-                    .accessibilityLabel("Undo rewrite")
-                    .accessibilityHint("Restores the original document text")
+                    .accessibilityLabel("撤销重写")
+                    .accessibilityHint("恢复文档的原始文本")
                 } else {
                     Button { showApplyConfirmation = true } label: {
                         HStack(spacing: 4) {
                             Image(systemName: "checkmark.circle")
-                            Text("Apply")
+                            Text("应用")
                         }
                         .font(.caption)
                     }
                     .buttonStyle(.bordered)
                     .tint(AppThemeConstants.success)
                     .disabled(onApply == nil)
-                    .accessibilityLabel("Apply rewrite")
-                    .accessibilityHint("Replaces your document text with the rewritten version")
+                    .accessibilityLabel("应用重写")
+                    .accessibilityHint("用重写后的版本替换文档文本")
                 }
 
                 Button { rewriteText() } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.clockwise")
-                        Text("Try Again")
+                        Text("重试")
                     }
                     .font(.caption)
                 }
                 .buttonStyle(.bordered)
-                .accessibilityLabel("Try again")
-                .accessibilityHint("Generates a new rewrite")
+                .accessibilityLabel("重试")
+                .accessibilityHint("生成新的重写结果")
             }
         }
     }
@@ -342,7 +355,7 @@ struct RewritePanelView: View {
                 cachedRewrittenText = trimmed
                 rewrittenStyle = selectedStyle
                 onResultSave?(RewriteResult(
-                    style: selectedStyle.rawValue,
+                    style: selectedStyle.displayName,
                     originalText: originalText,
                     rewrittenText: trimmed
                 ))
@@ -373,7 +386,7 @@ private struct StyleCard: View {
                     .font(.title3)
                     .foregroundStyle(isSelected ? .white : style.color)
 
-                Text(style.rawValue)
+                Text(style.displayName)
                     .font(.caption.weight(.medium))
                     .foregroundStyle(isSelected ? .white : .primary)
             }
@@ -386,7 +399,7 @@ private struct StyleCard: View {
         }
         .buttonStyle(.plain)
         .help(style.description)
-        .accessibilityLabel("\(style.rawValue) style")
+        .accessibilityLabel("\(style.displayName) 风格")
         .accessibilityHint(style.description)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }

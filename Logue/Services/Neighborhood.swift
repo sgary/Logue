@@ -33,11 +33,11 @@ struct Neighborhood: Sendable {
         }
 
         addGroup(
-            id: "outgoing", title: "Links to",
+            id: "outgoing", title: "链接到",
             symbol: "arrow.up.right", ids: index.outgoing(from: sourceID)
         )
         addGroup(
-            id: "backlinks", title: "Linked from",
+            id: "backlinks", title: "反向链接",
             symbol: "arrow.down.left", ids: index.backlinks(to: sourceID)
         )
 

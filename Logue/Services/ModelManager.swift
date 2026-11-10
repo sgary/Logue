@@ -47,6 +47,8 @@ final class ModelManager {
     /// The model ID that `activationError` belongs to.
     private(set) var activationErrorModelID: String?
     private(set) var downloadError: String?
+    /// The model ID that `downloadError` belongs to.
+    private(set) var downloadErrorModelID: String?
     // Extension-visible: +Download bumps this after download/delete to force SwiftUI re-evaluation.
     private(set) var downloadStateVersion: Int = 0
 
@@ -108,6 +110,10 @@ final class ModelManager {
 
     func setDownloadError(_ error: String?) {
         downloadError = error
+    }
+
+    func setDownloadErrorModelID(_ id: String?) {
+        downloadErrorModelID = id
     }
 
     func setIsFetchingModelInfo(_ value: Bool) {

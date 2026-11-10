@@ -36,8 +36,8 @@ private enum TrashItem: Identifiable {
 
     var typeBadge: String {
         switch self {
-        case .document: "Document"
-        case .meeting: "Meeting"
+        case .document: "文档"
+        case .meeting: "会议"
         }
     }
 
@@ -51,16 +51,16 @@ private enum TrashItem: Identifiable {
     var subtitle: String {
         switch self {
         case let .document(doc):
-            return "\(doc.wordCount) words"
+            return "\(doc.wordCount) 字"
         case let .meeting(note):
             var parts: [String] = []
             if note.duration > 0 {
                 parts.append(note.formattedDuration)
             }
             if !note.segments.isEmpty {
-                parts.append("\(note.segments.count) segments")
+                parts.append("\(note.segments.count) 个片段")
             }
-            return parts.isEmpty ? "Meeting" : parts.joined(separator: " \u{00B7} ")
+            return parts.isEmpty ? "会议" : parts.joined(separator: " \u{00B7} ")
         }
     }
 }
@@ -109,20 +109,20 @@ struct TrashListPane: View {
             }
         }
         .background(AppThemeConstants.contentBackground)
-        .navigationTitle("Trash")
-        .navigationSubtitle("\(allTrashItems.count) item\(allTrashItems.count == 1 ? "" : "s")")
-        .searchable(text: $searchText, placement: .toolbar, prompt: "Search trash")
+        .navigationTitle("废纸篓")
+        .navigationSubtitle("\(allTrashItems.count) 个项目")
+        .searchable(text: $searchText, placement: .toolbar, prompt: "搜索废纸篓")
         .toolbar {
             trashToolbarContent
         }
-        .alert("Empty Trash?", isPresented: $showEmptyConfirmation) {
-            Button("Cancel", role: .cancel) {}
-            Button("Empty Trash", role: .destructive) {
+        .alert("清空废纸篓？", isPresented: $showEmptyConfirmation) {
+            Button("取消", role: .cancel) {}
+            Button("清空废纸篓", role: .destructive) {
                 documentStore.emptyDocumentTrash()
                 meetingStore.emptyMeetingTrash()
             }
         } message: {
-            Text("This will permanently delete all \(allTrashItems.count) item\(allTrashItems.count == 1 ? "" : "s"). This action cannot be undone.")
+            Text("这将永久删除全部 \(allTrashItems.count) 个项目。此操作无法撤销。")
         }
     }
 
@@ -141,18 +141,18 @@ struct TrashListPane: View {
                 } label: {
                     Image(systemName: viewMode == .list ? "square.grid.2x2" : "list.bullet")
                 }
-                .accessibilityLabel(viewMode == .list ? "Switch to Grid View" : "Switch to List View")
-                .accessibilityHint("Toggles between list and grid layout")
-                .help(viewMode == .list ? "Grid View" : "List View")
+                .accessibilityLabel(viewMode == .list ? "切换到网格视图" : "切换到列表视图")
+                .accessibilityHint("在列表和网格布局之间切换")
+                .help(viewMode == .list ? "网格视图" : "列表视图")
 
                 Button(role: .destructive) {
                     showEmptyConfirmation = true
                 } label: {
-                    Label("Empty Trash", systemImage: "trash.slash")
+                    Label("清空废纸篓", systemImage: "trash.slash")
                 }
-                .accessibilityLabel("Empty Trash")
-                .accessibilityHint("Permanently deletes all items in trash")
-                .help("Permanently delete all items in Trash")
+                .accessibilityLabel("清空废纸篓")
+                .accessibilityHint("永久删除废纸篓中的所有项目")
+                .help("永久删除废纸篓中的所有项目")
             }
         }
     }
@@ -199,7 +199,7 @@ struct TrashListPane: View {
                         Text("\u{00B7}")
                             .font(.caption)
                             .foregroundStyle(.tertiary)
-                        Text("Deleted \(trashedAt.formatted(.relative(presentation: .named)))")
+                        Text("删除于 \(trashedAt.formatted(.relative(presentation: .named)))")
                             .font(.caption)
                             .foregroundStyle(.tertiary)
                     }
@@ -218,8 +218,8 @@ struct TrashListPane: View {
             RoundedRectangle(cornerRadius: AppThemeConstants.radiusLarge)
                 .stroke(AppThemeConstants.borderColor, lineWidth: 0.5)
         )
-        .accessibilityLabel("\(item.title), \(item.typeBadge)")
-        .accessibilityHint("Opens this item's restore and delete actions")
+        .accessibilityLabel("\(item.title)，\(item.typeBadge)")
+        .accessibilityHint("打开此项目的还原和删除操作")
         .sidebarRowMenu { trashItemContextMenu(item) }
     }
 
@@ -270,7 +270,7 @@ struct TrashListPane: View {
             Spacer(minLength: 0)
 
             if let trashedAt = item.trashedAt {
-                Text("Deleted \(trashedAt.formatted(.relative(presentation: .named)))")
+                Text("删除于 \(trashedAt.formatted(.relative(presentation: .named)))")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
@@ -285,8 +285,8 @@ struct TrashListPane: View {
             RoundedRectangle(cornerRadius: AppThemeConstants.radiusLarge)
                 .stroke(AppThemeConstants.borderColor, lineWidth: 0.5)
         )
-        .accessibilityLabel("\(item.title), \(item.typeBadge)")
-        .accessibilityHint("Opens this item's restore and delete actions")
+        .accessibilityLabel("\(item.title)，\(item.typeBadge)")
+        .accessibilityHint("打开此项目的还原和删除操作")
         .sidebarRowMenu { trashItemContextMenu(item) }
     }
 
@@ -297,13 +297,13 @@ struct TrashListPane: View {
         Button {
             restoreItem(item)
         } label: {
-            Label("Put Back", systemImage: "arrow.uturn.backward")
+            Label("放回原处", systemImage: "arrow.uturn.backward")
         }
         Divider()
         Button(role: .destructive) {
             permanentlyDeleteItem(item)
         } label: {
-            Label("Delete Permanently", systemImage: "trash")
+            Label("永久删除", systemImage: "trash")
         }
     }
 
@@ -331,18 +331,18 @@ struct TrashListPane: View {
 
     private var emptyState: some View {
         ContentUnavailableView {
-            Label("Trash is Empty", systemImage: "trash")
+            Label("废纸篓是空的", systemImage: "trash")
         } description: {
-            Text("Items you delete will appear here.")
+            Text("你删除的项目会显示在这里。")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     private var searchEmptyState: some View {
         ContentUnavailableView {
-            Label("No Results", systemImage: "magnifyingglass")
+            Label("没有结果", systemImage: "magnifyingglass")
         } description: {
-            Text("No items match '\(searchText)'")
+            Text("没有与“\(searchText)”匹配的项目")
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

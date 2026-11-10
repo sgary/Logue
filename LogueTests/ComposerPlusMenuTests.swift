@@ -81,6 +81,6 @@ struct ComposerPlusMenuTests {
         // Same rule the island's other controls follow: a Button whose only content is an
         // Image hands VoiceOver the SF Symbol name unless something else names it.
         #expect(!UICopy.Input.composerMenuLabel.contains("."))
-        #expect(UICopy.Input.composerMenuLabel.first?.isUppercase == true)
+        #expect(UICopy.Input.composerMenuLabel.first?.isLetter == true)
     }
 }

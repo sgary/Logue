@@ -43,8 +43,8 @@ struct ResizableEdge: View {
                     .fill(AppThemeConstants.separatorColor)
                     .frame(width: 1)
             }
-            .accessibilityLabel("Panel resize handle")
-            .accessibilityHint("Drag left or right to resize the panel")
+            .accessibilityLabel("面板调整大小手柄")
+            .accessibilityHint("左右拖动以调整面板大小")
             .onHover { inside in
                 if inside {
                     NSCursor.resizeLeftRight.push()

@@ -29,8 +29,8 @@ struct TaskFolderStore {
         var errorDescription: String? {
             switch self {
             case let .folderIsASpace(name):
-                "The folder \"\(name)\" is already one of your spaces, so tasks cannot be "
-                    + "stored there. Rename that space or its folder and try again."
+                "文件夹“\(name)”已经是你的空间之一，因此无法在其中存储任务。"
+                    + "请重命名该空间或其文件夹后重试。"
             }
         }
     }

@@ -8,12 +8,12 @@ extension ModelManager {
         setFetchModelError(nil)
 
         guard let repoID = ModelConfiguration.parseMLXRepoID(from: urlString) else {
-            setFetchModelError("Please enter a valid mlx-community HuggingFace URL.")
+            setFetchModelError("请输入有效的 mlx-community HuggingFace 链接。")
             return false
         }
 
         if allModels.contains(where: { $0.hfRepoID == repoID }) {
-            setFetchModelError("This model is already added.")
+            setFetchModelError("此模型已添加。")
             return false
         }
 
@@ -128,12 +128,12 @@ enum CustomMLXError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .invalidURL: "Invalid HuggingFace URL."
-        case .notFound: "Repository not found. Check the URL and try again."
-        case .privateRepo: "This repository is private and cannot be accessed."
-        case .notMLXModel: "This repository doesn't appear to contain an MLX model."
-        case .noChatTemplate: "This model has no chat template — it may be a base model, not an instruct model."
-        case .networkError: "Network error. Please check your internet connection."
+        case .invalidURL: "无效的 HuggingFace 链接。"
+        case .notFound: "未找到仓库。请检查链接后重试。"
+        case .privateRepo: "此仓库为私有仓库，无法访问。"
+        case .notMLXModel: "此仓库似乎不包含 MLX 模型。"
+        case .noChatTemplate: "此模型没有聊天模板，它可能是基础模型，而非指令模型。"
+        case .networkError: "网络错误。请检查你的网络连接。"
         }
     }
 }

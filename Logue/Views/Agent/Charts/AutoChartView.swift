@@ -41,7 +41,7 @@ struct AutoChartView: View {
     private var header: some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Visualize Table")
+                Text("可视化表格")
                     .font(.headline)
                 Text(table.headers.joined(separator: " · "))
                     .font(.caption)
@@ -67,7 +67,7 @@ struct AutoChartView: View {
                     .font(.title3)
             }
             .buttonStyle(.plain)
-            .help("Close")
+            .help("关闭")
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
@@ -100,7 +100,7 @@ struct AutoChartView: View {
             let header = table.headers[col]
             Chart(preparedRows) { row in
                 BarMark(
-                    x: .value("Category", row.label),
+                    x: .value("类别", row.label),
                     y: .value(header, row.values.first ?? 0)
                 )
                 .foregroundStyle(AppThemeConstants.brandPrimary)
@@ -113,11 +113,11 @@ struct AutoChartView: View {
                     ForEach(Array(numericIdx.enumerated()), id: \.offset) { idx, col in
                         if idx < row.values.count {
                             BarMark(
-                                x: .value("Category", row.label),
+                                x: .value("类别", row.label),
                                 y: .value(table.headers[col], row.values[idx])
                             )
-                            .foregroundStyle(by: .value("Series", table.headers[col]))
-                            .position(by: .value("Series", table.headers[col]))
+                            .foregroundStyle(by: .value("系列", table.headers[col]))
+                            .position(by: .value("系列", table.headers[col]))
                         }
                     }
                 }
@@ -139,10 +139,10 @@ struct AutoChartView: View {
             VStack(spacing: 8) {
                 Image(systemName: "exclamationmark.triangle")
                     .foregroundStyle(.secondary)
-                Text("Pie chart needs at least one positive value.")
+                Text("饼图需要至少一个正值。")
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                Text("Try Bar instead.")
+                Text("改用柱状图试试。")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
@@ -155,7 +155,7 @@ struct AutoChartView: View {
                     angularInset: 1.5
                 )
                 .cornerRadius(4)
-                .foregroundStyle(by: .value("Category", row.label))
+                .foregroundStyle(by: .value("类别", row.label))
             }
         }
     }
@@ -170,15 +170,15 @@ struct AutoChartView: View {
                 ForEach(Array(numericIdx.enumerated()), id: \.offset) { idx, col in
                     if idx < row.values.count {
                         LineMark(
-                            x: .value("Category", row.label),
+                            x: .value("类别", row.label),
                             y: .value(table.headers[col], row.values[idx])
                         )
-                        .foregroundStyle(by: .value("Series", table.headers[col]))
+                        .foregroundStyle(by: .value("系列", table.headers[col]))
                         PointMark(
-                            x: .value("Category", row.label),
+                            x: .value("类别", row.label),
                             y: .value(table.headers[col], row.values[idx])
                         )
-                        .foregroundStyle(by: .value("Series", table.headers[col]))
+                        .foregroundStyle(by: .value("系列", table.headers[col]))
                     }
                 }
             }
@@ -203,7 +203,7 @@ struct AutoChartView: View {
                 }
             }
         } else {
-            Text("Scatter requires at least two numeric columns.")
+            Text("散点图需要至少两个数值列。")
                 .foregroundStyle(.secondary)
         }
     }

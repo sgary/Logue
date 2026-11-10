@@ -11,6 +11,14 @@ enum ModelType: String, Codable, CaseIterable, Identifiable {
         rawValue
     }
 
+    /// Localized name for the connection type picker.
+    var displayName: String {
+        switch self {
+        case .mlx: "MLX（设备端）"
+        case .api: "云端 / API"
+        }
+    }
+
     /// Backward compatibility: decode old "OpenAI API" value
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -41,10 +49,10 @@ enum ConnectionStatus: Equatable {
 
     var label: String {
         switch self {
-        case .idle: "Not tested"
-        case .checking: "Checking…"
-        case .connected: "Connected"
-        case let .error(msg): "Error: \(msg)"
+        case .idle: "未测试"
+        case .checking: "检查中…"
+        case .connected: "已连接"
+        case let .error(msg): "错误：\(msg)"
         }
     }
 }
@@ -254,7 +262,7 @@ extension ModelConfiguration {
             id: "mlx-josie-1.1-4b",
             type: .mlx,
             displayName: "JOSIE 1.1 4B",
-            description: "JOSIE 1.1 Instruct (4-bit). Best quality for writing, grammar, and analysis tasks. Recommended.",
+            description: "JOSIE 1.1 Instruct（4-bit）。写作、语法与分析任务的最佳质量。推荐使用。",
             hfRepoID: "mlx-community/JOSIE-1.1-4B-Instruct-4bit",
             sizeGB: 2.5,
             minRAMGB: 6,
@@ -264,7 +272,7 @@ extension ModelConfiguration {
             id: "mlx-qwen3-4b-4bit",
             type: .mlx,
             displayName: "Qwen3 4B Instruct",
-            description: "Qwen's 4B instruct model (4-bit). Great quality at half the size — good for Macs with 8 GB+ RAM.",
+            description: "Qwen 的 4B 指令模型（4-bit）。体积减半，质量依然出色——适合 8 GB 及以上内存的 Mac。",
             hfRepoID: "mlx-community/Qwen3-4B-Instruct-2507-4bit",
             sizeGB: 2.26,
             minRAMGB: 8
@@ -330,7 +338,7 @@ extension ModelConfiguration {
             id: "custom-mlx-\(repoID)",
             type: .mlx,
             displayName: repoName,
-            description: "Custom model from mlx-community.",
+            description: "来自 mlx-community 的自定义模型。",
             hfRepoID: repoID,
             sizeGB: sizeGB,
             minRAMGB: max(4, (sizeGB * 1.5).rounded(.up))

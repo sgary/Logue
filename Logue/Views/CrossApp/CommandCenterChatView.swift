@@ -226,7 +226,7 @@ struct CommandCenterChatView: View {
                     HStack(spacing: 4) {
                         Image(systemName: "arrow.counterclockwise")
                             .font(.caption2.weight(.semibold))
-                        Text("New")
+                        Text("新建")
                             .font(.caption.weight(.semibold))
                     }
                     .foregroundStyle(.secondary)
@@ -245,7 +245,7 @@ struct CommandCenterChatView: View {
                         HStack(spacing: 4) {
                             Image(systemName: "arrow.up.forward")
                                 .font(.caption2.weight(.semibold))
-                            Text("Open in Logue")
+                            Text("在 Logue 中打开")
                                 .font(.caption.weight(.semibold))
                         }
                         .foregroundStyle(.secondary)
@@ -254,7 +254,7 @@ struct CommandCenterChatView: View {
                         .background(Capsule().fill(Color.primary.opacity(0.06)))
                     }
                     .buttonStyle(.plain)
-                    .help("Continue this conversation in the main window")
+                    .help("在主窗口中继续此对话")
                 }
 
                 Button { onDismiss(.closeButton) } label: {
@@ -499,7 +499,7 @@ struct CommandCenterChatView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Dismiss error")
+            .accessibilityLabel("忽略错误")
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
@@ -539,7 +539,7 @@ struct CommandCenterChatView: View {
         if let conversationID {
             return conversationID
         }
-        let conversation = store.createConversation(title: "Command Center", select: false)
+        let conversation = store.createConversation(title: "命令中心", select: false)
         conversationID = conversation.id
         return conversation.id
     }

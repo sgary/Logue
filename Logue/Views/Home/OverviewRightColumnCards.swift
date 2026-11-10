@@ -10,7 +10,7 @@ struct OverviewUpcomingEventsCard: View {
     var body: some View {
         InsightCardShell {
             VStack(alignment: .leading, spacing: 10) {
-                CardSectionHeader(icon: "calendar", title: "Upcoming")
+                CardSectionHeader(icon: "calendar", title: "即将开始")
                 let events = Array(calendarManager.upcomingEvents.prefix(4))
                 ForEach(Array(events.enumerated()), id: \.element.id) { index, event in
                     upcomingEventRow(event)
@@ -26,7 +26,7 @@ struct OverviewUpcomingEventsCard: View {
         HStack(spacing: 10) {
             Group {
                 if event.isHappeningNow {
-                    Text("NOW").font(.caption2.weight(.bold)).foregroundStyle(AppThemeConstants.error)
+                    Text("现在").font(.caption2.weight(.bold)).foregroundStyle(AppThemeConstants.error)
                 } else {
                     Text(event.startDate.formatted(date: .omitted, time: .shortened))
                         .font(.caption2.monospacedDigit()).foregroundStyle(.secondary)
@@ -35,7 +35,7 @@ struct OverviewUpcomingEventsCard: View {
             .frame(width: 50, alignment: .leading)
             VStack(alignment: .leading, spacing: 2) {
                 Text(event.title).font(.caption.weight(.medium)).lineLimit(1)
-                Text("\(event.durationMinutes) min").font(.caption2).foregroundStyle(.tertiary)
+                Text("\(event.durationMinutes) 分钟").font(.caption2).foregroundStyle(.tertiary)
             }
             Spacer()
             // S-N5: Validate URL scheme
@@ -44,20 +44,20 @@ struct OverviewUpcomingEventsCard: View {
                     Image(systemName: "video.fill").font(.caption2).foregroundStyle(AppThemeConstants.success)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Join meeting")
+                .accessibilityLabel("加入会议")
             }
             Button { onStartMeeting(event) } label: {
                 HStack(spacing: 3) {
                     Image(systemName: "record.circle")
                         .font(.caption2)
-                    Text("Record")
+                    Text("录制")
                         .font(.caption2.weight(.medium))
                 }
             }
             .buttonStyle(.bordered)
             .tint(event.isHappeningNow ? AppThemeConstants.error : AppThemeConstants.accent)
             .controlSize(.mini)
-            .accessibilityLabel("Record meeting")
+            .accessibilityLabel("录制会议")
         }
     }
 }
@@ -73,10 +73,10 @@ struct OverviewWeeklyCard: View {
         let trend = insights.meetingTimeTrend
         InsightCardShell {
             VStack(alignment: .leading, spacing: 8) {
-                CardSectionHeader(icon: "calendar.badge.clock", title: "This Week")
+                CardSectionHeader(icon: "calendar.badge.clock", title: "本周")
                 Text("\(weeklyMeetings)")
                     .font(.title2.weight(.bold).monospacedDigit())
-                Text("Meetings")
+                Text("会议")
                     .font(.caption).foregroundStyle(.secondary)
                 HStack(spacing: 3) {
                     if trend.lastWeekSeconds > 0 || trend.thisWeekSeconds > 0 {
@@ -104,10 +104,10 @@ struct OverviewMonthlyCard: View {
         let monthly = insights.monthlyStats
         InsightCardShell {
             VStack(alignment: .leading, spacing: 8) {
-                CardSectionHeader(icon: "calendar", title: "This Month")
+                CardSectionHeader(icon: "calendar", title: "本月")
                 Text("\(monthly.meetingCount)")
                     .font(.title2.weight(.bold).monospacedDigit())
-                Text("Meetings")
+                Text("会议")
                     .font(.caption).foregroundStyle(.secondary)
                 HStack(spacing: 3) {
                     Image(systemName: "clock")
@@ -146,7 +146,7 @@ struct OverviewMeetingTypesCard: View {
         )
         InsightCardShell {
             VStack(alignment: .leading, spacing: 10) {
-                CardSectionHeader(icon: "chart.bar.doc.horizontal", title: "Meeting Types")
+                CardSectionHeader(icon: "chart.bar.doc.horizontal", title: "会议类型")
                 VStack(spacing: 8) {
                     ForEach(MeetingTemplate.allCases) { template in
                         let count = breakdownMap[template]?.count ?? 0

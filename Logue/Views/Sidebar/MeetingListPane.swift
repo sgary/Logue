@@ -12,6 +12,19 @@ enum MeetingSortOrder: String, CaseIterable {
     case longest = "Longest"
     case shortest = "Shortest"
 
+    var displayName: String {
+        switch self {
+        case .modifiedNewest: "最近修改"
+        case .modifiedOldest: "最早修改"
+        case .titleAZ: "标题 A–Z"
+        case .titleZA: "标题 Z–A"
+        case .createdNewest: "最近创建"
+        case .createdOldest: "最早创建"
+        case .longest: "时长最长"
+        case .shortest: "时长最短"
+        }
+    }
+
     var icon: String {
         switch self {
         case .modifiedNewest, .createdNewest: "arrow.down"
@@ -45,6 +58,16 @@ enum MeetingFilterMode: String, CaseIterable {
     case recent = "Recent"
     case archived = "Archived"
     case voiceNotes = "Voice Notes"
+
+    var displayName: String {
+        switch self {
+        case .all: "全部会议"
+        case .pinned: "已置顶"
+        case .recent: "最近"
+        case .archived: "已归档"
+        case .voiceNotes: "语音笔记"
+        }
+    }
 
     var icon: String {
         switch self {
@@ -147,19 +170,19 @@ struct MeetingListPane: View {
 
     var body: some View {
         listView
-            .searchable(text: $searchText, prompt: "Search meetings")
-            .navigationTitle("Meetings")
+            .searchable(text: $searchText, prompt: "搜索会议")
+            .navigationTitle("会议")
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
                         // Filter
-                        Section("Filter") {
+                        Section("筛选") {
                             ForEach(MeetingFilterMode.allCases, id: \.rawValue) { mode in
                                 Button {
                                     filterMode = mode
                                 } label: {
                                     HStack {
-                                        Label(mode.rawValue, systemImage: mode.icon)
+                                        Label(mode.displayName, systemImage: mode.icon)
                                         if filterMode == mode {
                                             Spacer()
                                             Image(systemName: "checkmark")
@@ -170,13 +193,13 @@ struct MeetingListPane: View {
                         }
 
                         // Sort
-                        Section("Sort By") {
+                        Section("排序方式") {
                             ForEach(MeetingSortOrder.allCases, id: \.rawValue) { order in
                                 Button {
                                     sortOrder = order
                                 } label: {
                                     HStack {
-                                        Text(order.rawValue)
+                                        Text(order.displayName)
                                         if sortOrder == order {
                                             Spacer()
                                             Image(systemName: "checkmark")
@@ -194,7 +217,7 @@ struct MeetingListPane: View {
                                     store.togglePin(id: meeting.id)
                                 } label: {
                                     Label(
-                                        meeting.isPinned ? "Unpin" : "Pin",
+                                        meeting.isPinned ? "取消置顶" : "置顶",
                                         systemImage: meeting.isPinned ? "pin.slash" : "pin"
                                     )
                                 }
@@ -202,13 +225,13 @@ struct MeetingListPane: View {
                                     renameText = meeting.title
                                     renamingMeetingID = meeting.id
                                 } label: {
-                                    Label("Rename", systemImage: "pencil")
+                                    Label("重命名", systemImage: "pencil")
                                 }
                                 Button {
                                     store.toggleArchive(id: meeting.id)
                                 } label: {
                                     Label(
-                                        meeting.isArchived ? "Unarchive" : "Archive",
+                                        meeting.isArchived ? "取消归档" : "归档",
                                         systemImage: meeting.isArchived ? "tray.and.arrow.up" : "archivebox"
                                     )
                                 }
@@ -216,16 +239,16 @@ struct MeetingListPane: View {
                                 Button(role: .destructive) {
                                     store.trashMeeting(id: meeting.id)
                                 } label: {
-                                    Label("Move to Trash", systemImage: "trash")
+                                    Label("移到废纸篓", systemImage: "trash")
                                 }
                             }
                         }
                     } label: {
                         Image(systemName: "ellipsis.circle")
                     }
-                    .accessibilityLabel("Filter and Sort Options")
-                    .accessibilityHint("Opens menu to filter, sort, and manage meetings")
-                    .help("Filter, Sort & View Options")
+                    .accessibilityLabel("筛选和排序选项")
+                    .accessibilityHint("打开菜单以筛选、排序和管理会议")
+                    .help("筛选、排序和视图选项")
                 }
             }
             .onChange(of: searchText) { _, newValue in
@@ -270,14 +293,14 @@ struct MeetingListPane: View {
         guard !hasAutoSelected, selectedItem == nil else { return }
         // Before the store has read from disk an existing library looks empty, and the branch
         // below reacts to empty by *creating* a meeting — so launching would leave a stray
-        // "Untitled Meeting" behind. The `activeMeetings.count` change that loading produces
+        // "未命名会议" behind. The `activeMeetings.count` change that loading produces
         // calls this again.
         guard store.isLoaded else { return }
 
         // If no meetings exist, create one
         if store.activeMeetings.isEmpty {
             let newMeeting = store.createMeeting(
-                title: "Untitled Meeting",
+                title: "未命名会议",
                 mode: .inPerson,
                 template: .general
             )
@@ -298,7 +321,7 @@ struct MeetingListPane: View {
     private var tagFilterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 6) {
-                FilterChip(label: "All", isSelected: selectedTagFilter == nil) {
+                FilterChip(label: "全部", isSelected: selectedTagFilter == nil) {
                     selectedTagFilter = nil
                 }
                 ForEach(store.allTags, id: \.self) { tag in
@@ -361,7 +384,7 @@ struct MeetingListPane: View {
                                 HStack(spacing: 4) {
                                     Text(event.startDate.formatted(date: .omitted, time: .shortened))
                                     Text("·")
-                                    Text("\(event.durationMinutes) min")
+                                    Text("\(event.durationMinutes) 分钟")
                                 }
                                 .font(.caption2)
                                 .foregroundStyle(.tertiary)
@@ -375,12 +398,12 @@ struct MeetingListPane: View {
                                 HStack(spacing: 3) {
                                     Image(systemName: "record.circle")
                                         .font(.caption2)
-                                    Text("Record")
+                                    Text("录制")
                                         .font(.caption2.weight(.medium))
                                 }
                             }
-                            .accessibilityLabel("Record \(event.title)")
-                            .accessibilityHint("Starts a new meeting recording for this calendar event")
+                            .accessibilityLabel("录制 \(event.title)")
+                            .accessibilityHint("为此日历事件开始新的会议录制")
                             .buttonStyle(.bordered)
                             .tint(event.isHappeningNow ? AppThemeConstants.error : AppThemeConstants.accent)
                             .controlSize(.mini)
@@ -388,7 +411,7 @@ struct MeetingListPane: View {
                         .padding(.vertical, 2)
                     }
                 } header: {
-                    Label("Upcoming", systemImage: "calendar")
+                    Label("即将开始", systemImage: "calendar")
                 }
             }
 
@@ -401,8 +424,8 @@ struct MeetingListPane: View {
                     } else {
                         MeetingListRow(meeting: meeting, isRevealed: revealedRowID == meeting.id)
                             .tag(ContentListItem.meeting(meeting.id))
-                            .accessibilityLabel("\(meeting.title)\(meeting.isPinned ? ", pinned" : "")")
-                            .accessibilityHint("Opens this meeting")
+                            .accessibilityLabel("\(meeting.title)\(meeting.isPinned ? "，已置顶" : "")")
+                            .accessibilityHint("打开此会议")
                             .sidebarRowMenu(
                                 isSelected: selectedItem == .meeting(meeting.id),
                                 revealed: $revealedRowID.isRevealed(meeting.id)
@@ -413,7 +436,7 @@ struct MeetingListPane: View {
                 }
             } header: {
                 if hasUpcomingEvents {
-                    Text("Meetings")
+                    Text("会议")
                 }
             }
         }
@@ -440,14 +463,14 @@ struct MeetingListPane: View {
 
     private var emptyTitle: String {
         if !searchText.isEmpty {
-            return "No Results"
+            return "没有结果"
         }
         switch filterMode {
-        case .all: return "No Meetings"
-        case .pinned: return "No Pinned Items"
-        case .recent: return "No Recent Meetings"
-        case .archived: return "No Archived Meetings"
-        case .voiceNotes: return "No Voice Notes"
+        case .all: return "没有会议"
+        case .pinned: return "没有已置顶项目"
+        case .recent: return "没有最近的会议"
+        case .archived: return "没有已归档的会议"
+        case .voiceNotes: return "没有语音笔记"
         }
     }
 
@@ -467,7 +490,7 @@ struct MeetingListPane: View {
     // MARK: - Rename
 
     private func renameField(for meeting: MeetingNote) -> some View {
-        TextField("Title", text: $renameText, onCommit: {
+        TextField("标题", text: $renameText, onCommit: {
             store.renameMeeting(id: meeting.id, newTitle: renameText)
             renamingMeetingID = nil
         })
@@ -492,7 +515,7 @@ struct MeetingListPane: View {
             store.togglePin(id: meeting.id)
         } label: {
             Label(
-                meeting.isPinned ? "Unpin" : "Pin",
+                meeting.isPinned ? "取消置顶" : "置顶",
                 systemImage: meeting.isPinned ? "pin.slash" : "pin"
             )
         }
@@ -500,18 +523,18 @@ struct MeetingListPane: View {
             renameText = meeting.title
             renamingMeetingID = meeting.id
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         Button {
             store.toggleArchive(id: meeting.id)
         } label: {
             Label(
-                meeting.isArchived ? "Unarchive" : "Archive",
+                meeting.isArchived ? "取消归档" : "归档",
                 systemImage: meeting.isArchived ? "tray.and.arrow.up" : "archivebox"
             )
         }
         if !spaceStore.topLevelSpaces.isEmpty || meeting.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: meeting.spaceID) { newSpaceID in
                     store.moveMeeting(id: meeting.id, toSpace: newSpaceID)
                 }
@@ -521,7 +544,7 @@ struct MeetingListPane: View {
         Button(role: .destructive) {
             store.trashMeeting(id: meeting.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 }

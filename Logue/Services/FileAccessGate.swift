@@ -85,8 +85,8 @@ final class FileAccessGate {
     @MainActor
     private func promptForFolder(initial: URL) async throws -> URL {
         let panel = NSOpenPanel()
-        panel.message = "Grant Logue access to this folder so the agent can read or write files inside it"
-        panel.prompt = "Grant access"
+        panel.message = "授予 Logue 访问此文件夹的权限，以便智能体读取或写入其中的文件"
+        panel.prompt = "授予权限"
         panel.canChooseFiles = false
         panel.canChooseDirectories = true
         panel.allowsMultipleSelection = false
@@ -134,11 +134,11 @@ final class FileAccessGate {
 
         var errorDescription: String? {
             switch self {
-            case let .notFound(path): "File not found: \(path)"
-            case .userDeclined: "Access denied — user did not grant permission"
-            case let .notDirectory(path): "Not a directory: \(path)"
-            case let .notFile(path): "Not a file: \(path)"
-            case let .writeFailed(detail): "Write failed: \(detail)"
+            case let .notFound(path): "找不到文件：\(path)"
+            case .userDeclined: "访问被拒绝，用户未授予权限"
+            case let .notDirectory(path): "不是文件夹：\(path)"
+            case let .notFile(path): "不是文件：\(path)"
+            case let .writeFailed(detail): "写入失败：\(detail)"
             }
         }
     }

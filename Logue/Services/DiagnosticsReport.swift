@@ -14,13 +14,13 @@ enum DiagnosticsReport {
 
     static func generate() -> String {
         let lines: [String] = [
-            "- App: \(sanitise(BugReportInfo.appVersion)) (\(sanitise(BugReportInfo.buildNumber)))",
-            "- macOS: \(sanitise(BugReportInfo.macOSVersion))",
-            "- Device: \(sanitise(BugReportInfo.deviceModel))",
-            "- Architecture: \(architecture)",
-            "- Physical memory: \(physicalMemoryGB) GB",
-            "- Active model: \(activeModelDescription)",
-            "- External providers: \(externalProviderSummary)",
+            "- 应用：\(sanitise(BugReportInfo.appVersion)) (\(sanitise(BugReportInfo.buildNumber)))",
+            "- macOS：\(sanitise(BugReportInfo.macOSVersion))",
+            "- 设备：\(sanitise(BugReportInfo.deviceModel))",
+            "- 架构：\(architecture)",
+            "- 物理内存：\(physicalMemoryGB) GB",
+            "- 当前模型：\(activeModelDescription)",
+            "- 外部提供商：\(externalProviderSummary)",
         ]
         return lines.joined(separator: "\n")
     }
@@ -36,7 +36,7 @@ enum DiagnosticsReport {
             }
         }
         let trimmed = collapsed.trimmingCharacters(in: .whitespaces)
-        guard !trimmed.isEmpty else { return "unknown" }
+        guard !trimmed.isEmpty else { return "未知" }
         return String(trimmed.prefix(maxValueLength))
     }
 
@@ -48,7 +48,7 @@ enum DiagnosticsReport {
         #elseif arch(x86_64)
         "x86_64"
         #else
-        "unknown"
+        "未知"
         #endif
     }
 
@@ -60,7 +60,7 @@ enum DiagnosticsReport {
 
     /// The active model's identifier only — never an endpoint URL or key.
     private static var activeModelDescription: String {
-        guard let identifier = ModelManager.shared.activeModelID else { return "none" }
+        guard let identifier = ModelManager.shared.activeModelID else { return "无" }
         return sanitise(identifier)
     }
 
@@ -68,6 +68,6 @@ enum DiagnosticsReport {
     /// themselves and never the keys, which live in the Keychain.
     private static var externalProviderSummary: String {
         let count = ModelManager.shared.customModels.filter { $0.type == .api }.count
-        return count == 0 ? "none configured" : "\(count) configured"
+        return count == 0 ? "未配置" : "已配置 \(count) 个"
     }
 }

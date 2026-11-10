@@ -32,65 +32,65 @@ extension DocumentStore {
 
     private static func makeDoc1(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "Q3 Campaign Brief"
+        doc.title = "Q3 营销活动简报"
         doc.goalMode = .business
-        doc.tags = ["marketing", "Q3"]
+        doc.tags = ["市场营销", "Q3"]
         doc.spaceID = SeedSpaceID.clientProjects
         doc.isPinned = true
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 88, correctness: 91, clarity: 85, engagement: 84, delivery: 90)
         doc.body = """
-        # Q3 Campaign Brief — Acme Corp
+        # Q3 营销活动简报 — Acme Corp
 
-        ## Overview
+        ## 概览
 
-        This document outlines the strategic marketing campaign for Acme Corp's Q3 product launch. The campaign spans July through September and targets both existing customers and new market segments in the mid-enterprise space.
+        本文档阐述 Acme Corp 第三季度产品发布的战略营销活动。活动横跨 7 月至 9 月，面向现有客户以及中大型企业市场中的新细分客户。
 
-        ## Objectives
+        ## 目标
 
-        - **Primary:** Drive 2,500 qualified leads for the new Analytics Pro tier by end of Q3
-        - **Secondary:** Increase brand awareness by 30% in the developer tools category
-        - **Tertiary:** Achieve a 4:1 return on ad spend across all paid channels
+        - **主要目标：** 在 Q3 结束前为新的 Analytics Pro 档位带来 2,500 条合格线索
+        - **次要目标：** 将开发者工具品类中的品牌知名度提升 30%
+        - **第三目标：** 所有付费渠道实现 4:1 的广告支出回报率
 
-        ## Target Audience
+        ## 目标受众
 
-        Our primary audience is engineering managers and technical directors at companies with 200–2,000 employees. Secondary audience includes individual developers who influence purchasing decisions within their organizations.
+        我们的主要受众是员工规模 200–2,000 人的公司中的工程经理和技术总监。次要受众包括在其组织内影响采购决策的独立开发者。
 
-        **Key personas:**
-        - *Decision Maker Dana* — VP Engineering, budget authority, cares about ROI and team velocity
-        - *Evaluator Eric* — Senior engineer, hands-on tester, values documentation and API quality
+        **关键人物画像：**
+        - *决策者 Dana* — 工程副总裁，掌握预算，关注 ROI 与团队效率
+        - *评估者 Eric* — 高级工程师，动手测试者，重视文档与 API 质量
 
-        ## Key Messaging
+        ## 核心信息
 
-        The campaign centers on the theme **"Build Faster, Ship Smarter."** Core messages include:
+        活动围绕主题 **“更快构建，更聪明地交付。”** 核心信息包括：
 
-        1. Analytics Pro reduces debugging time by 40% compared to legacy tools
-        2. Seamless integration with existing CI/CD pipelines — setup in under 10 minutes
-        3. Enterprise-grade security with SOC 2 Type II compliance
+        1. 与旧工具相比，Analytics Pro 将调试时间缩短 40%
+        2. 与现有 CI/CD 流水线无缝集成——10 分钟内完成设置
+        3. 企业级安全，符合 SOC 2 Type II
 
-        ## Timeline
+        ## 时间线
 
-        | Phase | Dates | Focus |
+        | 阶段 | 日期 | 重点 |
         |-------|-------|-------|
-        | Pre-launch | Jul 1–14 | Teaser content, influencer seeding |
-        | Launch | Jul 15–31 | Product announcement, press outreach |
-        | Sustain | Aug 1–Sep 15 | Paid media, webinars, case studies |
-        | Close | Sep 16–30 | Retargeting, promotional offers |
+        | 预热期 | 7 月 1–14 日 | 悬念内容、意见领袖种子投放 |
+        | 发布期 | 7 月 15–31 日 | 产品公告、媒体沟通 |
+        | 持续期 | 8 月 1 日–9 月 15 日 | 付费媒体、网络研讨会、案例研究 |
+        | 收尾期 | 9 月 16–30 日 | 再营销、促销优惠 |
 
-        ## Budget Overview
+        ## 预算概览
 
-        Total allocated budget: **$185,000**
+        总预算：**185,000 美元**
 
-        - Paid media (Google, LinkedIn): $78,000 (42%)
-        - Content production: $35,000 (19%)
-        - Events and webinars: $28,000 (15%)
-        - Influencer partnerships: $24,000 (13%)
-        - Contingency: $20,000 (11%)
+        - 付费媒体（Google、LinkedIn）：78,000 美元（42%）
+        - 内容制作：35,000 美元（19%）
+        - 活动与网络研讨会：28,000 美元（15%）
+        - 意见领袖合作：24,000 美元（13%）
+        - 应急储备：20,000 美元（11%）
 
-        ## Success Metrics
+        ## 成功指标
 
-        We will track weekly dashboards covering lead volume, cost per lead, conversion rates at each funnel stage, and pipeline attribution. A mid-campaign review is scheduled for August 8 to assess performance and reallocate spend if needed.
+        我们将每周跟踪仪表盘，涵盖线索量、每条线索成本、各漏斗阶段的转化率以及管道归因。8 月 8 日安排一次活动中期复盘，评估表现并在需要时重新分配预算。
         """
         return doc
     }
@@ -99,39 +99,39 @@ extension DocumentStore {
 
     private static func makeDoc2(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "Weekly Status Update"
+        doc.title = "每周状态更新"
         doc.goalMode = .casual
-        doc.tags = ["status", "weekly"]
+        doc.tags = ["状态", "每周"]
         doc.spaceID = SeedSpaceID.internal
         doc.isPinned = false
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 79, correctness: 83, clarity: 80, engagement: 72, delivery: 78)
         doc.body = """
-        # Weekly Status Update — Mar 10–14
+        # 每周状态更新 — 3 月 10–14 日
 
-        ## Completed
+        ## 已完成
 
-        - Finalized the onboarding flow redesign and handed off to engineering for implementation
-        - Published two blog posts for the Q3 campaign pipeline (both scheduled for next week)
-        - Wrapped up user interviews — 8 sessions completed, synthesis doc shared in #research
-        - Fixed the broken analytics event on the pricing page (was causing a 15% undercount)
+        - 完成新用户引导流程改版，并移交工程团队实现
+        - 为 Q3 营销活动管道发布了两篇博客文章（均安排在下周）
+        - 完成用户访谈——共 8 场，综合文档已分享至 #research
+        - 修复了定价页面上损坏的分析事件（此前导致 15% 的漏计）
 
-        ## In Progress
+        ## 进行中
 
-        - **Dashboard migration:** Moving legacy charts to the new component library. About 60% done, aiming to finish by Wednesday
-        - **API docs rewrite:** Covering the authentication and webhooks sections. First draft out for review
-        - **Hiring:** Phone screens for the senior frontend role — 3 candidates moving to the next round
+        - **仪表盘迁移：** 将旧图表迁移到新组件库。已完成约 60%，目标周三前完成
+        - **API 文档重写：** 覆盖身份验证和 Webhook 章节。初稿已提交评审
+        - **招聘：** 高级前端岗位的电话初筛——3 位候选人进入下一轮
 
-        ## Blockers
+        ## 阻碍
 
-        - Waiting on legal review for the updated Terms of Service before we can ship the data export feature. Followed up on Thursday, expecting a response Monday
-        - The staging environment has been flaky since the infra migration. Filed a ticket with platform team but no ETA yet
+        - 等待法务审阅更新后的服务条款，之后才能上线数据导出功能。周四已跟进，预计周一收到回复
+        - 自基础设施迁移以来，预发环境一直不稳定。已向平台团队提交工单，但尚无预计时间
 
-        ## Notes
+        ## 备注
 
-        - Out of office on Wednesday afternoon for a dentist appointment
-        - Reminder: team retro is Thursday at 2pm, please add topics to the shared board beforehand
+        - 周三下午因牙医预约不在办公室
+        - 提醒：团队回顾会周四下午 2 点，请提前在共享看板上添加议题
         """
         return doc
     }
@@ -140,24 +140,24 @@ extension DocumentStore {
 
     private static func makeDoc3(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "CS 301 — Lecture Notes: Graphs"
+        doc.title = "CS 301 — 课堂笔记：图"
         doc.goalMode = .academic
-        doc.tags = ["lecture", "algorithms"]
+        doc.tags = ["课堂", "算法"]
         doc.spaceID = SeedSpaceID.cs301
         doc.isPinned = false
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 85, correctness: 92, clarity: 82, engagement: 78, delivery: 86)
         doc.body = """
-        # Graph Algorithms — Lecture 12
+        # 图算法 — 第 12 讲
 
-        ## Representations
+        ## 图的表示
 
-        Graphs can be stored as an **adjacency matrix** (O(V²) space, O(1) edge lookup) or an **adjacency list** (O(V + E) space, O(degree) edge lookup). For sparse graphs, adjacency lists are almost always preferred.
+        图可以存储为 **邻接矩阵**（O(V²) 空间，O(1) 边查询）或 **邻接表**（O(V + E) 空间，O(度数) 边查询）。对于稀疏图，几乎总是优先使用邻接表。
 
-        ## Breadth-First Search (BFS)
+        ## 广度优先搜索（BFS）
 
-        BFS explores vertices layer by layer, making it ideal for finding the shortest path in unweighted graphs.
+        BFS 逐层探索顶点，因此非常适合在无权图中寻找最短路径。
 
         ```
         BFS(G, s):
@@ -175,11 +175,11 @@ extension DocumentStore {
                 u.color = BLACK
         ```
 
-        **Complexity:** O(V + E) time, O(V) space for the queue and visited set.
+        **复杂度：** O(V + E) 时间，队列和已访问集合占用 O(V) 空间。
 
-        ## Depth-First Search (DFS)
+        ## 深度优先搜索（DFS）
 
-        DFS explores as deep as possible along each branch before backtracking. It naturally produces a DFS forest and assigns discovery/finish timestamps useful for topological sorting.
+        DFS 沿每条分支尽可能深入，然后回溯。它自然产生 DFS 森林，并记录发现/完成时间戳，可用于拓扑排序。
 
         ```
         DFS(G):
@@ -199,11 +199,11 @@ extension DocumentStore {
             u.color = BLACK, time = time + 1, u.f = time
         ```
 
-        **Complexity:** O(V + E) time, O(V) space (recursion stack in worst case).
+        **复杂度：** O(V + E) 时间，O(V) 空间（最坏情况下的递归栈）。
 
-        ## Shortest Path — Dijkstra's Algorithm
+        ## 最短路径 — Dijkstra 算法
 
-        For graphs with **non-negative edge weights**, Dijkstra's algorithm finds single-source shortest paths using a priority queue.
+        对于 **边权非负** 的图，Dijkstra 算法使用优先队列求解单源最短路径。
 
         ```
         DIJKSTRA(G, w, s):
@@ -217,14 +217,14 @@ extension DocumentStore {
                     RELAX(u, v, w)   // update v.d if u.d + w(u,v) < v.d
         ```
 
-        **Complexity:** O((V + E) log V) with a binary heap, or O(V² + E) with a simple array.
+        **复杂度：** 使用二叉堆为 O((V + E) log V)，使用简单数组为 O(V² + E)。
 
-        ## Key Takeaways
+        ## 关键要点
 
-        - BFS → shortest path in unweighted graphs, level-order traversal
-        - DFS → topological sort, cycle detection, connected components
-        - Dijkstra → shortest path with non-negative weights; fails with negative edges (use Bellman-Ford instead)
-        - All three run in O(V + E) or near-linear time, making them practical for large-scale graph problems
+        - BFS → 无权图中的最短路径、层序遍历
+        - DFS → 拓扑排序、环检测、连通分量
+        - Dijkstra → 非负权重下的最短路径；遇到负边会失效（改用 Bellman-Ford）
+        - 三者均运行在 O(V + E) 或接近线性的时间内，适合大规模图问题
         """
         return doc
     }
@@ -233,40 +233,40 @@ extension DocumentStore {
 
     private static func makeDoc4(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "Business Ethics Case Study"
+        doc.title = "商业伦理案例研究"
         doc.goalMode = .academic
-        doc.tags = ["case-study", "ethics"]
+        doc.tags = ["案例研究", "伦理"]
         doc.spaceID = SeedSpaceID.businessEthics
         doc.isPinned = false
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 83, correctness: 86, clarity: 81, engagement: 80, delivery: 84)
         doc.body = """
-        # Case Study: DataVault Inc. and User Privacy
+        # 案例研究：DataVault Inc. 与用户隐私
 
-        ## Background
+        ## 背景
 
-        DataVault Inc. is a mid-size analytics company that provides behavioral tracking tools to e-commerce platforms. In 2025, an internal audit revealed that DataVault had been collecting granular location data from end users without explicit consent, bundling it into audience profiles sold to third-party advertisers. While their terms of service contained broad data-use language, no specific disclosure about location tracking or third-party sales was provided to users.
+        DataVault Inc. 是一家中型分析公司，为电商平台提供行为追踪工具。2025 年，一次内部审计发现，DataVault 一直在未经明确同意的情况下收集终端用户的精细位置数据，并将其打包进受众画像出售给第三方广告商。尽管其服务条款包含宽泛的数据使用表述，但从未向用户具体披露位置追踪或第三方销售。
 
-        ## Stakeholder Analysis
+        ## 利益相关方分析
 
-        - **End users:** Primary affected party. Location data was collected without informed consent, violating reasonable expectations of privacy. Risk of surveillance, profiling, and identity exposure.
-        - **E-commerce clients:** Integrated DataVault's SDK in good faith. Now face reputational damage and potential regulatory liability for enabling unconsented data collection on their platforms.
-        - **DataVault employees:** Engineers who raised concerns during development were told the feature was "within legal bounds." This created a culture of compliance over ethics.
-        - **Advertisers:** Benefited from enriched audience profiles but may face scrutiny if the data is deemed unlawfully obtained.
-        - **Regulators:** GDPR and CCPA authorities have a mandate to investigate and enforce, with potential fines reaching 4% of annual revenue.
+        - **终端用户：** 主要受影响方。位置数据在未获知情同意的情况下被收集，侵犯了合理的隐私预期。面临监视、画像分析和身份暴露的风险。
+        - **电商客户：** 善意集成 DataVault 的 SDK。如今面临声誉损害，并可能因在其平台上纵容未经同意的数据收集而承担监管责任。
+        - **DataVault 员工：** 开发期间提出疑虑的工程师被告知该功能“在法律允许范围内”。这形成了一种重合规、轻伦理的文化。
+        - **广告商：** 从丰富的受众画像中获益，但若数据被认定非法获取，可能面临审查。
+        - **监管机构：** GDPR 与 CCPA 监管机构有调查和执法的职责，罚款可能高达年收入的 4%。
 
-        ## Ethical Framework Analysis
+        ## 伦理框架分析
 
-        **Utilitarian perspective:** The data collection generated revenue and improved ad relevance, but the aggregate harm to millions of users — loss of privacy, erosion of trust — substantially outweighs these commercial benefits.
+        **功利主义视角：** 数据收集带来了收入和更精准的广告，但对数百万用户的总体伤害——隐私丧失、信任侵蚀——远远超过这些商业利益。
 
-        **Deontological perspective:** Kant's categorical imperative demands that individuals never be treated merely as means to an end. Collecting and selling personal location data without consent treats users as commodities, violating their autonomy and dignity.
+        **义务论视角：** 康德的绝对命令要求绝不将个人仅仅作为实现目的的手段。未经同意收集并出售个人位置数据，等于将用户视为商品，侵犯了他们的自主与尊严。
 
-        **Virtue ethics perspective:** A virtuous company would prioritize transparency and honesty. DataVault's deliberate obfuscation of its practices reflects a character failing at the organizational level — one that undermines trust in the broader tech ecosystem.
+        **美德伦理视角：** 有德性的公司会优先考虑透明与诚实。DataVault 刻意模糊其做法，反映的是组织层面的品格缺陷——这种缺陷侵蚀了整个科技生态的信任。
 
-        ## Recommendation
+        ## 建议
 
-        DataVault should immediately halt third-party location data sales, issue a transparent public disclosure, notify all affected users, and implement a genuine opt-in consent framework. The company should commission an independent privacy audit, establish an ethics review board with external members, and retrain its engineering and product teams on ethical data practices. Proactive cooperation with regulators will mitigate penalties and signal a genuine commitment to reform rather than damage control.
+        DataVault 应立即停止第三方位置数据销售，发布透明的公开披露，通知所有受影响用户，并实施真正的选择加入同意框架。公司应委托独立隐私审计，设立含外部成员的伦理审查委员会，并对工程与产品团队进行合乎伦理的数据实践再培训。主动配合监管机构将减轻处罚，并表明真正致力于改革而非损害控制。
         """
         return doc
     }
@@ -275,67 +275,67 @@ extension DocumentStore {
 
     private static func makeDoc5(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "Travel Itinerary — Japan"
+        doc.title = "旅行行程 — 日本"
         doc.goalMode = .casual
-        doc.tags = ["travel", "planning"]
+        doc.tags = ["旅行", "规划"]
         doc.spaceID = SeedSpaceID.personal
         doc.isPinned = true
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 76, correctness: 78, clarity: 79, engagement: 75, delivery: 73)
         doc.body = """
-        # Japan Trip — 10 Days in April
+        # 日本之旅 — 四月 10 天
 
-        ## Overview
+        ## 概览
 
-        - **Dates:** April 5–15
-        - **Route:** Tokyo (4 nights) → Kyoto (3 nights) → Osaka (2 nights) → Tokyo (1 night, fly out)
-        - **Budget:** ~$3,200 total (flights excluded)
+        - **日期：** 4 月 5–15 日
+        - **路线：** 东京（4 晚）→ 京都（3 晚）→ 大阪（2 晚）→ 东京（1 晚，乘机离开）
+        - **预算：** 总计约 3,200 美元（不含机票）
 
-        ## Tokyo — Days 1–4
+        ## 东京 — 第 1–4 天
 
-        - **Day 1:** Arrive Narita, check into hotel in Shinjuku. Evening walk around Omoide Yokocho for yakitori and beer.
-        - **Day 2:** Tsukiji Outer Market for breakfast. Teamlab Borderless in the morning. Shibuya crossing, Harajuku, and Meiji Shrine in the afternoon. Dinner in Ebisu.
-        - **Day 3:** Day trip to Kamakura — Great Buddha, Hase-dera Temple, Komachi-dori street. Back to Tokyo for dinner in Akihabara.
-        - **Day 4:** Asakusa (Senso-ji Temple), Ueno Park, and the Tokyo National Museum. Evening: Shinjuku Gyoen if cherry blossoms are still blooming. Pack for Kyoto.
+        - **第 1 天：** 抵达成田机场，入住新宿的酒店。傍晚在思出横丁散步，吃烤鸡串、喝啤酒。
+        - **第 2 天：** 筑地场外市场吃早餐。上午去 TeamLab Borderless。下午逛涩谷十字路口、原宿和明治神宫。在惠比寿吃晚餐。
+        - **第 3 天：** 镰仓一日游——大佛、长谷寺、小町通。返回东京，在秋叶原吃晚餐。
+        - **第 4 天：** 浅草（浅草寺）、上野公园和东京国立博物馆。晚上：如果樱花还在开，去新宿御苑。收拾行李准备去京都。
 
-        **Accommodation:** Hotel Gracery Shinjuku — $130/night
+        **住宿：** 新宿格拉斯丽酒店 — 每晚 130 美元
 
-        ## Kyoto — Days 5–7
+        ## 京都 — 第 5–7 天
 
-        - **Day 5:** Shinkansen to Kyoto (2h 15m). Check in near Gion. Fushimi Inari in the late afternoon when crowds thin out.
-        - **Day 6:** Arashiyama bamboo grove early morning. Tenryu-ji Temple. Monkey park. Afternoon: Nishiki Market.
-        - **Day 7:** Kinkaku-ji (Golden Pavilion), Ryoan-ji rock garden, and Nijo Castle. Evening tea ceremony experience in Gion.
+        - **第 5 天：** 乘新干线前往京都（2 小时 15 分）。入住祇园附近。傍晚人流散去时去伏见稻荷。
+        - **第 6 天：** 清晨去岚山竹林。天龙寺。猴子公园。下午：锦市场。
+        - **第 7 天：** 金阁寺（金色阁楼）、龙安寺石庭和二条城。晚上在祇园体验茶道。
 
-        **Accommodation:** Piece Hostel Sanjo — $75/night
+        **住宿：** Piece Hostel Sanjo — 每晚 75 美元
 
-        ## Osaka — Days 8–9
+        ## 大阪 — 第 8–9 天
 
-        - **Day 8:** Train to Osaka (15 min). Osaka Castle in the morning. Dotonbori for street food — takoyaki, okonomiyaki, kushikatsu. Evening: Shinsekai district.
-        - **Day 9:** Day trip to Nara — deer park, Todai-ji Temple. Back to Osaka for a final dinner at a local izakaya.
+        - **第 8 天：** 乘火车去大阪（15 分钟）。上午参观大阪城。去道顿堀吃街头小吃——章鱼烧、大阪烧、炸串。晚上：新世界街区。
+        - **第 9 天：** 奈良一日游——鹿公园、东大寺。返回大阪，在当地居酒屋吃最后一顿晚餐。
 
-        **Accommodation:** Cross Hotel Osaka — $110/night
+        **住宿：** 大阪十字酒店 — 每晚 110 美元
 
-        ## Day 10 — Return
+        ## 第 10 天 — 返程
 
-        Morning shinkansen back to Tokyo. Last-minute shopping in Tokyo Station. Fly out from Narita at 6pm.
+        上午乘新干线回东京。在东京站做最后的采购。下午 6 点从成田机场乘机离开。
 
-        ## Budget Breakdown
+        ## 预算明细
 
-        | Category | Estimate |
+        | 类别 | 预估 |
         |----------|----------|
-        | Accommodation | $1,235 |
-        | JR Pass (14-day) | $380 |
-        | Food | $900 |
-        | Activities & entry fees | $250 |
-        | Misc & souvenirs | $435 |
-        | **Total** | **~$3,200** |
+        | 住宿 | 1,235 美元 |
+        | JR Pass（14 天） | 380 美元 |
+        | 餐饮 | 900 美元 |
+        | 活动与门票 | 250 美元 |
+        | 杂项与纪念品 | 435 美元 |
+        | **总计** | **约 3,200 美元** |
 
-        ## Packing Notes
+        ## 行李备注
 
-        - Comfortable walking shoes (15k+ steps per day expected)
-        - Portable Wi-Fi or eSIM — rent from airport on arrival
-        - Light layers — April weather is mild but rain is possible
+        - 舒适的步行鞋（每天预计步行 1.5 万步以上）
+        - 随身 Wi-Fi 或 eSIM——抵达时在机场租用
+        - 轻薄分层衣物——四月天气温和，但可能下雨
         """
         return doc
     }
@@ -344,52 +344,52 @@ extension DocumentStore {
 
     private static func makeDoc6(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "Meeting Prep — Acme Review"
+        doc.title = "会议准备 — Acme 评审"
         doc.goalMode = .business
-        doc.tags = ["meeting-prep", "acme"]
+        doc.tags = ["会议准备", "Acme"]
         doc.spaceID = SeedSpaceID.clientProjects
         doc.isPinned = false
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 81, correctness: 84, clarity: 82, engagement: 76, delivery: 80)
         doc.body = """
-        # Quarterly Review — Acme Corp
+        # 季度评审 — Acme Corp
 
-        ## Meeting Details
+        ## 会议详情
 
-        - **Date:** March 21, 2026, 2:00–3:30 PM
-        - **Attendees:** Sarah Chen (Acme VP Product), Mike Torres (Acme Eng Lead), our team (Priya, James, me)
-        - **Format:** Video call, slides shared async beforehand
+        - **日期：** 2026 年 3 月 21 日，下午 2:00–3:30
+        - **参会者：** Sarah Chen（Acme 产品副总裁）、Mike Torres（Acme 工程负责人）、我方团队（Priya、James、我）
+        - **形式：** 视频会议，幻灯片提前异步分享
 
-        ## Agenda
+        ## 议程
 
-        1. **Q1 performance review** (20 min) — walk through KPI dashboard, highlight wins and areas for improvement
-        2. **Roadmap update** (15 min) — preview Q2 deliverables, get alignment on priorities
-        3. **Open issues** (15 min) — address the three outstanding bugs and the API rate-limiting request
-        4. **Contract renewal discussion** (20 min) — current agreement expires May 31, propose terms for renewal
-        5. **Q&A and next steps** (20 min)
+        1. **Q1 表现回顾**（20 分钟）——过一遍 KPI 仪表盘，突出亮点与改进空间
+        2. **路线图更新**（15 分钟）——预览 Q2 交付物，就优先级达成一致
+        3. **未决问题**（15 分钟）——处理三个未解决的缺陷和 API 限流请求
+        4. **合同续约讨论**（20 分钟）——当前协议 5 月 31 日到期，提出续约条款
+        5. **问答与下一步**（20 分钟）
 
-        ## KPIs to Present
+        ## 要展示的 KPI
 
-        - **Uptime:** 99.94% (target was 99.9%) — exceeded SLA for 11 of 12 weeks
-        - **API response time:** P95 at 142ms, down from 210ms at the start of the engagement
-        - **Support tickets resolved:** Average resolution time dropped from 18 hours to 6.5 hours
-        - **Feature delivery:** 14 of 16 planned features shipped on time; 2 pushed to Q2 due to scope changes approved by Acme
+        - **正常运行时间：** 99.94%（目标 99.9%）——12 周中有 11 周超出 SLA
+        - **API 响应时间：** P95 为 142ms，较合作初期的 210ms 有所下降
+        - **支持工单解决：** 平均解决时间从 18 小时降至 6.5 小时
+        - **功能交付：** 计划 16 项功能中 14 项按时上线；2 项因 Acme 批准的范围变更推迟到 Q2
 
-        ## Questions to Ask
+        ## 要问的问题
 
-        - How is the team finding the new dashboard? Any gaps in the data they need?
-        - Are there upcoming product launches on Acme's side that would affect our integration timeline?
-        - What does their internal budget cycle look like for the renewal — do they need a proposal by a specific date?
-        - Would they be open to a case study or co-marketing opportunity?
+        - 团队对新仪表盘的反馈如何？数据上还有他们需要的缺口吗？
+        - Acme 那边近期有产品发布会影响我们的集成时间线吗？
+        - 他们内部的预算周期是怎样的——需要在特定日期前提交方案吗？
+        - 他们是否愿意做案例研究或联合营销？
 
-        ## Prep Checklist
+        ## 准备清单
 
-        - [ ] Finalize the slide deck and share by EOD Wednesday
-        - [ ] Pull the latest KPI numbers from the analytics dashboard
-        - [ ] Review the three open bug tickets and have status updates ready
-        - [ ] Draft renewal proposal with two pricing options (annual flat rate vs. usage-based)
-        - [ ] Test screen sharing and video setup 15 minutes before the call
+        - [ ] 定稿幻灯片，周三下班前分享
+        - [ ] 从分析仪表盘拉取最新 KPI 数据
+        - [ ] 审阅三个未解决的缺陷工单，准备好状态更新
+        - [ ] 起草续约方案，包含两种定价选项（年度固定费率 vs. 按用量计费）
+        - [ ] 通话前 15 分钟测试屏幕共享和视频设置
         """
         return doc
     }
@@ -398,184 +398,184 @@ extension DocumentStore {
 
     private static func makeDoc7(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "Client Engagement Agreement"
+        doc.title = "客户委托协议"
         doc.goalMode = .business
-        doc.tags = ["contract", "engagement", "legal"]
+        doc.tags = ["合同", "委托", "法务"]
         doc.spaceID = SeedSpaceID.legal
         doc.isPinned = true
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 90, correctness: 93, clarity: 88, engagement: 86, delivery: 92)
         doc.body = """
-        # Client Engagement Agreement
+        # 客户委托协议
 
-        **Agreement No.:** LEG-2026-0347
-        **Effective Date:** March 15, 2026
-        **Parties:** Logue Legal Partners LLP ("Firm") and Meridian Technologies Inc. ("Client")
+        **协议编号：** LEG-2026-0347
+        **生效日期：** 2026 年 3 月 15 日
+        **双方：** Logue Legal Partners LLP（“律所”）与 Meridian Technologies Inc.（“客户”）
 
         ---
 
-        ## 1. Scope of Engagement
+        ## 1. 委托范围
 
-        The Firm agrees to provide the following legal services to the Client:
+        律所同意向客户提供以下法律服务：
 
-        - **Primary:** Corporate governance advisory for Series C funding round
-        - **Secondary:** Intellectual property review and patent filing coordination
-        - **Tertiary:** Regulatory compliance assessment (SEC, FTC)
+        - **主要：** C 轮融资的公司治理咨询
+        - **次要：** 知识产权审查与专利申请协调
+        - **第三：** 监管合规评估（SEC、FTC）
 
-        > **Note:** This engagement does not cover litigation, tax advisory, or immigration matters unless explicitly amended in writing per Section 8 below.
+        > **备注：** 本委托不包括诉讼、税务咨询或移民事务，除非依据下文第 8 条以书面形式明确修订。
 
-        ### 1.1 Deliverables
+        ### 1.1 交付物
 
-        1. Due diligence report on existing IP portfolio
-           - Patent landscape analysis
-           - Trademark conflict assessment
-           - Trade secret audit
-        2. Corporate restructuring memo for investor-ready governance
-           - Board composition recommendations
-           - Stock option plan review
-           - ~~Shareholder agreement redline~~ *(moved to Phase 2)*
-        3. Regulatory compliance checklist with gap analysis
+        1. 现有知识产权组合的尽职调查报告
+           - 专利格局分析
+           - 商标冲突评估
+           - 商业秘密审计
+        2. 面向投资者治理的公司重组备忘录
+           - 董事会构成建议
+           - 股票期权计划审查
+           - ~~股东协议红线稿~~ *（移至第二阶段）*
+        3. 含差距分析的监管合规检查清单
 
-        ## 2. Fee Schedule
+        ## 2. 费用表
 
-        | Service Category | Rate Type | Rate | Estimated Hours | Cap |
+        | 服务类别 | 计费方式 | 费率 | 预计工时 | 上限 |
         |-----------------|-----------|------|----------------|-----|
-        | Partner consultation | Hourly | $650/hr | 40 | $26,000 |
-        | Associate research | Hourly | $375/hr | 120 | $45,000 |
-        | Patent filing | Flat fee | $8,500/filing | 3 filings | $25,500 |
-        | Regulatory review | Blended | $450/hr | 60 | $27,000 |
-        | **Total estimated** | | | | **$123,500** |
+        | 合伙人咨询 | 按小时 | 650 美元/小时 | 40 | 26,000 美元 |
+        | 律师助理研究 | 按小时 | 375 美元/小时 | 120 | 45,000 美元 |
+        | 专利申请 | 固定费用 | 8,500 美元/件 | 3 件 | 25,500 美元 |
+        | 监管审查 | 混合计费 | 450 美元/小时 | 60 | 27,000 美元 |
+        | **预计总计** | | | | **123,500 美元** |
 
-        > All fees are exclusive of government filing fees, court costs, and third-party expenses, which shall be billed at cost plus 5% administrative overhead.
+        > 所有费用均不含政府申请费、诉讼费和第三方费用，这些费用按成本加 5% 管理费计收。
 
-        ## 3. Payment Terms
+        ## 3. 付款条款
 
-        - [x] Net-30 invoicing on the 1st of each month
-        - [x] 2% early payment discount if paid within 10 days
-        - [ ] Late payments accrue interest at 1.5% per month
-        - [ ] Retainer of $15,000 due upon execution
+        - [x] 每月 1 日开具 Net-30 发票
+        - [x] 10 天内付款享 2% 早付折扣
+        - [ ] 逾期付款按月息 1.5% 计息
+        - [ ] 签署时支付 15,000 美元预付款
 
-        ## 4. Confidentiality
+        ## 4. 保密
 
-        Both parties agree to maintain strict confidentiality of all information exchanged during this engagement. This obligation survives termination of the agreement for a period of **five (5) years**.
+        双方同意对本委托期间交换的所有信息严格保密。该义务在协议终止后继续有效 **五 (5) 年**。
 
         ```
-        CONFIDENTIALITY CLASSIFICATION:
-        Level 1 — Public: Marketing materials, press releases
-        Level 2 — Internal: Financial projections, org charts
-        Level 3 — Restricted: IP filings, trade secrets, source code
-        Level 4 — Privileged: Attorney-client communications
+        保密分级：
+        第 1 级 — 公开：营销材料、新闻稿
+        第 2 级 — 内部：财务预测、组织架构图
+        第 3 级 — 受限：知识产权申请、商业秘密、源代码
+        第 4 级 — 特权：律师与客户之间的沟通
         ```
 
-        ## 5. Termination
+        ## 5. 终止
 
-        Either party may terminate this agreement with **30 days written notice**. Upon termination:
+        任何一方均可提前 **30 天书面通知** 终止本协议。终止时：
 
-        1. All outstanding fees become immediately due
-        2. Work product completed to date shall be delivered to Client
-        3. Confidentiality obligations continue per Section 4
+        1. 所有未付费用立即到期
+        2. 截至终止时已完成的工作成果应交付客户
+        3. 保密义务按第 4 条继续有效
 
         ---
 
-        *This agreement constitutes the entire understanding between the parties and supersedes all prior negotiations, representations, or agreements relating to this subject matter.*
+        *本协议构成双方之间关于本主题的完整理解，并取代此前所有相关谈判、陈述或协议。*
         """
         doc.reviewGrade = OverallGrade(
             averageScore: 88,
             letterGrade: "A-",
-            summary: "Well-structured legal document with clear terms. Fee schedule is transparent. Minor improvements needed in termination clause specificity.",
+            summary: "结构清晰的法律文档，条款明确。费用表透明。终止条款的具体性仍需小幅改进。",
             grades: [
                 Grade(
                     category: .thesis,
                     score: 90,
                     letterGrade: "A",
-                    feedback: "Clear statement of engagement scope and limitations.",
-                    strengths: ["Explicit exclusions listed", "Well-defined deliverables"],
-                    improvements: ["Add timeline for each deliverable"]
+                    feedback: "委托范围与限制陈述清晰。",
+                    strengths: ["明确列出排除事项", "交付物定义清晰"],
+                    improvements: ["为每项交付物添加时间线"]
                 ),
                 Grade(
                     category: .evidence,
                     score: 85,
                     letterGrade: "B+",
-                    feedback: "Fee schedule is detailed with caps. Payment terms could be more specific.",
-                    strengths: ["Itemized fee breakdown", "Rate caps protect client"],
-                    improvements: ["Specify invoice dispute process"]
+                    feedback: "费用表详细并设有上限。付款条款可以更具体。",
+                    strengths: ["逐项费用明细", "费率上限保护客户"],
+                    improvements: ["明确发票争议处理流程"]
                 ),
                 Grade(
                     category: .organization,
                     score: 92,
                     letterGrade: "A",
-                    feedback: "Logical section flow from scope through fees to termination.",
-                    strengths: ["Numbered sections", "Clear hierarchy"],
+                    feedback: "从范围到费用再到终止，章节逻辑流畅。",
+                    strengths: ["章节编号", "层级清晰"],
                     improvements: []
                 ),
                 Grade(
                     category: .style,
                     score: 86,
                     letterGrade: "B+",
-                    feedback: "Professional tone appropriate for legal document.",
-                    strengths: ["Consistent formatting", "Appropriate legal register"],
-                    improvements: ["Simplify some compound sentences"]
+                    feedback: "专业语气适合法律文档。",
+                    strengths: ["格式一致", "法律语域恰当"],
+                    improvements: ["简化部分复合句"]
                 ),
                 Grade(
                     category: .grammar,
                     score: 90,
                     letterGrade: "A",
-                    feedback: "Clean prose with no grammatical errors.",
-                    strengths: ["Error-free text", "Proper punctuation"],
+                    feedback: "行文干净，无语法错误。",
+                    strengths: ["文本无错误", "标点正确"],
                     improvements: []
                 ),
                 Grade(
                     category: .clarity,
                     score: 87,
                     letterGrade: "B+",
-                    feedback: "Most terms are clearly defined. Confidentiality levels are a nice touch.",
-                    strengths: ["Classification system is clear", "Termination steps are numbered"],
-                    improvements: ["Define 'written notice' — email, certified mail, or both?"]
+                    feedback: "多数条款定义清晰。保密分级是很好的加分项。",
+                    strengths: ["分级体系清晰", "终止步骤有编号"],
+                    improvements: ["明确“书面通知”的定义——邮件、挂号信，还是两者皆可？"]
                 ),
             ]
         )
         doc.reviewReactions = [
             SectionReaction(
-                sectionTitle: "Scope of Engagement",
-                sectionText: "The Firm agrees to provide the following legal services...",
+                sectionTitle: "委托范围",
+                sectionText: "律所同意提供以下法律服务……",
                 dominantEmotion: .engaged,
                 emotionScores: [.engaged: 75, .inspired: 15, .bored: 10],
-                explanation: "Clear, well-organized scope sets expectations effectively."
+                explanation: "清晰、有条理的范围陈述有效设定预期。"
             ),
             SectionReaction(
-                sectionTitle: "Fee Schedule",
-                sectionText: "Service Category | Rate Type | Rate...",
+                sectionTitle: "费用表",
+                sectionText: "服务类别 | 计费方式 | 费率……",
                 dominantEmotion: .skeptical,
                 emotionScores: [.skeptical: 45, .engaged: 35, .confused: 20],
-                explanation: "Rates are high; readers may question value. The caps provide some comfort."
+                explanation: "费率偏高，读者可能质疑价值。费用上限提供了一定安心感。"
             ),
             SectionReaction(
-                sectionTitle: "Confidentiality",
-                sectionText: "Both parties agree to maintain strict confidentiality...",
+                sectionTitle: "保密",
+                sectionText: "双方同意对本委托期间交换的所有信息严格保密……",
                 dominantEmotion: .inspired,
                 emotionScores: [.inspired: 50, .engaged: 40, .bored: 10],
-                explanation: "The classification system is a thoughtful addition that goes beyond standard boilerplate."
+                explanation: "分级体系是超出标准模板的用心设计。"
             ),
         ]
         doc.vocabSuggestions = [
             VocabSuggestion(
-                original: "strict confidentiality",
-                suggestion: "absolute confidentiality",
-                explanation: "'Absolute' carries stronger legal weight than 'strict' in confidentiality clauses.",
-                category: "precision"
+                original: "严格保密",
+                suggestion: "绝对保密",
+                explanation: "在保密条款中，“绝对”比“严格”具有更强的法律分量。",
+                category: "精确性"
             ),
             VocabSuggestion(
-                original: "survives termination",
-                suggestion: "survives termination or expiration",
-                explanation: "Standard legal drafting includes both termination and natural expiration.",
-                category: "completeness"
+                original: "在协议终止后继续有效",
+                suggestion: "在协议终止或到期后继续有效",
+                explanation: "标准的法律起草会同时涵盖终止和自然到期。",
+                category: "完整性"
             ),
             VocabSuggestion(
-                original: "immediately due",
-                suggestion: "immediately due and payable",
-                explanation: "'Due and payable' is the standard legal phrase for accelerated payment obligations.",
-                category: "legal convention"
+                original: "立即到期",
+                suggestion: "立即到期并应付款",
+                explanation: "“到期并应付款”是加速付款义务的标准法律表述。",
+                category: "法律惯例"
             ),
         ]
         return doc
@@ -585,129 +585,129 @@ extension DocumentStore {
 
     private static func makeDoc8(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "Regulatory Compliance Checklist"
+        doc.title = "监管合规检查清单"
         doc.goalMode = .technical
-        doc.tags = ["compliance", "GDPR", "CCPA", "checklist"]
+        doc.tags = ["合规", "GDPR", "CCPA", "清单"]
         doc.spaceID = SeedSpaceID.legal
         doc.isPinned = false
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 84, correctness: 89, clarity: 83, engagement: 78, delivery: 85)
         doc.body = """
-        # Regulatory Compliance Checklist — Data Privacy
+        # 监管合规检查清单 — 数据隐私
 
-        **Last Updated:** March 2026
-        **Applicable Regulations:** GDPR (EU), CCPA/CPRA (California), PIPEDA (Canada)
-        **Compliance Officer:** Rebecca Torres, JD
+        **最后更新：** 2026 年 3 月
+        **适用法规：** GDPR（欧盟）、CCPA/CPRA（加州）、PIPEDA（加拿大）
+        **合规负责人：** Rebecca Torres，法学博士
 
-        ## GDPR Compliance
+        ## GDPR 合规
 
-        ### Lawful Basis for Processing
+        ### 处理的合法依据
 
-        - [x] Documented lawful basis for each processing activity
-        - [x] Consent mechanism meets GDPR requirements (freely given, specific, informed, unambiguous)
-        - [ ] Legitimate interest assessments completed for non-consent processing
-        - [x] Data processing agreements signed with all processors
+        - [x] 为每项处理活动记录合法依据
+        - [x] 同意机制满足 GDPR 要求（自由给出、具体、知情、明确）
+        - [ ] 完成非同意处理的正当利益评估
+        - [x] 与所有处理者签署数据处理协议
 
-        > **GDPR Article 6(1):** Processing shall be lawful only if and to the extent that at least one of the following applies: (a) consent, (b) contract performance, (c) legal obligation, (d) vital interests, (e) public task, (f) legitimate interests.
+        > **GDPR 第 6(1) 条：** 仅在至少满足以下一项的情况下，处理才是合法的：(a) 同意，(b) 合同履行，(c) 法律义务，(d) 重大利益，(e) 公共任务，(f) 正当利益。
 
-        ### Data Subject Rights
+        ### 数据主体权利
 
-        | Right | GDPR Article | Implementation Status | Response SLA |
+        | 权利 | GDPR 条款 | 实施状态 | 响应 SLA |
         |-------|-------------|----------------------|-------------|
-        | Access | Art. 15 | **Complete** | 30 days |
-        | Rectification | Art. 16 | **Complete** | 30 days |
-        | Erasure | Art. 17 | **In Progress** | 30 days |
-        | Portability | Art. 20 | **Planned** | 30 days |
-        | Objection | Art. 21 | **Complete** | 30 days |
+        | 访问 | 第 15 条 | **已完成** | 30 天 |
+        | 更正 | 第 16 条 | **已完成** | 30 天 |
+        | 删除 | 第 17 条 | **进行中** | 30 天 |
+        | 可携带 | 第 20 条 | **已计划** | 30 天 |
+        | 反对 | 第 21 条 | **已完成** | 30 天 |
 
-        ### Data Protection Impact Assessment
-
-        ```
-        DPIA Required When:
-        ├── Systematic monitoring of public areas
-        ├── Large-scale processing of sensitive data
-        ├── Automated decision-making with legal effects
-        └── New technology deployment affecting personal data
-
-        DPIA Template Reference: DPIA-TEMPLATE-v3.2
-        Completed DPIAs: 4/7 processing activities
-        Next Review: Q2 2026
-        ```
-
-        ## CCPA/CPRA Compliance
-
-        ### Consumer Rights Implementation
-
-        - [x] "Do Not Sell My Personal Information" link on all customer-facing pages
-        - [x] Privacy policy updated with CCPA-required disclosures
-        - [ ] Sensitive personal information opt-out mechanism
-        - [ ] Annual data inventory refresh for CPRA categories
-        - [x] Service provider agreements updated with CCPA addendum
-
-        ### Data Categories Inventory
+        ### 数据保护影响评估
 
         ```
-        Category A — Identifiers: name, email, IP address, account ID
-        Category B — Personal Records: billing address, phone number
-        Category C — Protected Classifications: age, gender (voluntary)
-        Category D — Commercial Info: purchase history, preferences
-        Category F — Internet Activity: browsing history, search terms
-        Category G — Geolocation: approximate city-level location
+        需要 DPIA 的情形：
+        ├── 对公共区域的系统性监控
+        ├── 大规模处理敏感数据
+        ├── 具有法律效力的自动化决策
+        └── 影响个人数据的新技术部署
+
+        DPIA 模板参考：DPIA-TEMPLATE-v3.2
+        已完成 DPIA：4/7 项处理活动
+        下次审查：2026 年 Q2
         ```
 
-        ## PIPEDA Compliance (Canada)
+        ## CCPA/CPRA 合规
 
-        - [x] Privacy policy available in English and French
-        - [ ] Cross-border data transfer documentation
-        - [x] Breach notification procedures established (72-hour window)
-        - [ ] Annual privacy impact assessment
+        ### 消费者权利实施
 
-        ## Open Items & Risk Register
+        - [x] 所有面向客户的页面提供“请勿出售我的个人信息”链接
+        - [x] 隐私政策已更新，包含 CCPA 要求的披露
+        - [ ] 敏感个人信息选择退出机制
+        - [ ] 按 CPRA 类别年度刷新数据清单
+        - [x] 服务提供商协议已更新 CCPA 附录
 
-        | Item | Regulation | Risk Level | Owner | Due Date |
+        ### 数据类别清单
+
+        ```
+        类别 A — 标识符：姓名、邮箱、IP 地址、账户 ID
+        类别 B — 个人记录：账单地址、电话号码
+        类别 C — 受保护分类：年龄、性别（自愿提供）
+        类别 D — 商业信息：购买历史、偏好
+        类别 F — 互联网活动：浏览历史、搜索词
+        类别 G — 地理位置：城市级大致位置
+        ```
+
+        ## PIPEDA 合规（加拿大）
+
+        - [x] 隐私政策提供英文和法文版本
+        - [ ] 跨境数据传输文档
+        - [x] 已建立泄露通知程序（72 小时窗口）
+        - [ ] 年度隐私影响评估
+
+        ## 未决事项与风险登记
+
+        | 事项 | 法规 | 风险等级 | 负责人 | 截止日期 |
         |------|-----------|-----------|-------|----------|
-        | Erasure API endpoint | GDPR Art. 17 | **High** | Engineering | Apr 15 |
-        | Data portability export | GDPR Art. 20 | **Medium** | Engineering | May 30 |
-        | Sensitive data opt-out | CPRA | **High** | Product | Apr 1 |
-        | Cross-border docs | PIPEDA | **Medium** | Legal | Apr 30 |
-        | Cookie consent refresh | ePrivacy | **Low** | Marketing | Jun 1 |
+        | 删除 API 端点 | GDPR 第 17 条 | **高** | 工程 | 4 月 15 日 |
+        | 数据可携带导出 | GDPR 第 20 条 | **中** | 工程 | 5 月 30 日 |
+        | 敏感数据选择退出 | CPRA | **高** | 产品 | 4 月 1 日 |
+        | 跨境文档 | PIPEDA | **中** | 法务 | 4 月 30 日 |
+        | Cookie 同意刷新 | ePrivacy | **低** | 市场 | 6 月 1 日 |
         """
         doc.factChecks = [
             FactCheck(
-                claim: "GDPR Article 6(1) lists six lawful bases for processing",
+                claim: "GDPR 第 6(1) 条列出六项处理的合法依据",
                 status: .verified,
-                explanation: "Article 6(1)(a)-(f) of the GDPR lists exactly six lawful bases: consent, contract, legal obligation, vital interests, public task, and legitimate interests.",
+                explanation: "GDPR 第 6(1)(a)-(f) 条恰好列出六项合法依据：同意、合同、法律义务、重大利益、公共任务和正当利益。",
                 sources: ["EU General Data Protection Regulation, Article 6(1)"],
                 confidence: 98
             ),
             FactCheck(
-                claim: "GDPR requires 30-day response SLA for data subject requests",
+                claim: "GDPR 要求对数据主体请求在 30 天内响应",
                 status: .verified,
-                explanation: "Article 12(3) states controllers must respond 'without undue delay and in any event within one month of receipt of the request.'",
+                explanation: "第 12(3) 条规定，控制者必须“不得无故拖延，且在任何情况下应在收到请求后一个月内”作出回应。",
                 sources: ["GDPR Article 12(3)"],
                 confidence: 95
             ),
             FactCheck(
-                claim: "PIPEDA requires 72-hour breach notification window",
+                claim: "PIPEDA 要求 72 小时泄露通知窗口",
                 status: .uncertain,
-                explanation: "PIPEDA's breach notification regulations require notification 'as soon as feasible' after determination of a breach. The 72-hour window is a GDPR requirement (Article 33), not PIPEDA.",
+                explanation: "PIPEDA 的泄露通知法规要求在确定泄露后“尽快可行地”通知。72 小时窗口是 GDPR 的要求（第 33 条），而非 PIPEDA。",
                 sources: ["PIPEDA Breach of Security Safeguards Regulations", "GDPR Article 33"],
                 confidence: 40
             ),
             FactCheck(
-                claim: "CCPA requires a 'Do Not Sell My Personal Information' link",
+                claim: "CCPA 要求提供“请勿出售我的个人信息”链接",
                 status: .verified,
-                explanation: "California Civil Code §1798.135(a) requires businesses to provide a clear and conspicuous link titled 'Do Not Sell My Personal Information' on their internet homepage.",
+                explanation: "《加州民法典》§1798.135(a) 要求企业在互联网主页上提供标题为“请勿出售我的个人信息”的清晰醒目链接。",
                 sources: ["California Civil Code §1798.135(a)"],
                 confidence: 97
             ),
         ]
         doc.chatMessages = [
-            ChatMessage(role: .user, content: "Does the erasure endpoint need to handle data stored in backups too?"),
+            ChatMessage(role: .user, content: "删除端点是否也需要处理备份中存储的数据？"),
             ChatMessage(
                 role: .assistant,
-                content: "Under GDPR Article 17, the right to erasure applies to all copies of the data, including backups. However, the ICO guidance notes that if erasure from backups is technically infeasible, you may keep the backup data provided you have measures to ensure the data is not actively processed and is deleted when the backup cycle completes. Document this approach in your DPIA."
+                content: "根据 GDPR 第 17 条，删除权适用于数据的所有副本，包括备份。不过，ICO 指南指出，如果从备份中删除在技术上不可行，你可以保留备份数据，前提是采取措施确保这些数据不会被主动处理，并在备份周期结束时删除。请在 DPIA 中记录这一做法。"
             ),
         ]
         return doc
@@ -717,125 +717,125 @@ extension DocumentStore {
 
     private static func makeDoc9(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "Patient Intake Summary — Maria Santos"
+        doc.title = "患者接诊摘要 — Maria Santos"
         doc.goalMode = .business
-        doc.tags = ["patient", "intake", "confidential"]
+        doc.tags = ["患者", "接诊", "机密"]
         doc.spaceID = SeedSpaceID.healthcare
         doc.isPinned = true
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 82, correctness: 88, clarity: 80, engagement: 74, delivery: 84)
         doc.body = """
-        # Patient Intake Summary
+        # 患者接诊摘要
 
-        **Date of Visit:** March 20, 2026
-        **Provider:** Dr. Angela Chen, MD — Internal Medicine
-        **Facility:** Bayside Medical Center, Suite 204
+        **就诊日期：** 2026 年 3 月 20 日
+        **接诊医生：** Angela Chen 医生，医学博士 — 内科
+        **机构：** Bayside Medical Center，204 室
 
         ---
 
-        ## Demographics
+        ## 人口统计信息
 
-        | Field | Details |
+        | 字段 | 详情 |
         |-------|---------|
-        | **Full Name** | Maria Elena Santos |
-        | **Date of Birth** | July 14, 1983 |
-        | **Age** | 42 |
-        | **Sex** | Female |
+        | **全名** | Maria Elena Santos |
+        | **出生日期** | 1983 年 7 月 14 日 |
+        | **年龄** | 42 |
+        | **性别** | 女 |
         | **SSN** | 478-22-9163 |
         | **MRN** | BMC-2026-081447 |
-        | **Address** | 2847 Lakeshore Drive, Apt 6B, San Mateo, CA 94401 |
-        | **Phone** | (650) 555-0193 |
-        | **Email** | maria.santos83@example.com |
-        | **Emergency Contact** | Carlos Santos (spouse) — (650) 555-0247 |
+        | **地址** | 2847 Lakeshore Drive, Apt 6B, San Mateo, CA 94401 |
+        | **电话** | (650) 555-0193 |
+        | **邮箱** | maria.santos83@example.com |
+        | **紧急联系人** | Carlos Santos（配偶）— (650) 555-0247 |
 
-        ## Insurance Information
+        ## 保险信息
 
-        | Field | Details |
+        | 字段 | 详情 |
         |-------|---------|
-        | **Primary Insurance** | Blue Shield of California |
-        | **Policy Number** | BSC-4478291-A |
-        | **Group Number** | GRP-887421 |
-        | **Subscriber** | Maria Elena Santos |
-        | **Secondary Insurance** | None |
-        | **Copay** | $35 |
+        | **主保险** | Blue Shield of California |
+        | **保单号** | BSC-4478291-A |
+        | **团体号** | GRP-887421 |
+        | **投保人** | Maria Elena Santos |
+        | **补充保险** | 无 |
+        | **自付额** | 35 美元 |
 
-        ## Chief Complaint
+        ## 主诉
 
-        Patient presents with persistent fatigue and intermittent joint pain in both hands for the past 6 weeks. Reports morning stiffness lasting approximately 45 minutes daily. No recent trauma or injury.
+        患者主诉持续疲劳及双手间歇性关节疼痛 6 周。报告每日晨僵持续约 45 分钟。近期无外伤或损伤。
 
-        ## Medical History
+        ## 病史
 
-        ### Current Medications
+        ### 当前用药
 
-        | Medication | Dosage | Frequency | Prescriber |
+        | 药物 | 剂量 | 频次 | 开具者 |
         |-----------|--------|-----------|-----------|
-        | Levothyroxine | 75 mcg | Daily, AM | Dr. Chen |
-        | Vitamin D3 | 2000 IU | Daily | OTC |
-        | Ibuprofen | 400 mg | PRN | OTC |
+        | 左甲状腺素 | 75 mcg | 每日早晨 | Chen 医生 |
+        | 维生素 D3 | 2000 IU | 每日 | 非处方 |
+        | 布洛芬 | 400 mg | 按需 | 非处方 |
 
-        ### Past Medical History
+        ### 既往病史
 
-        - Hypothyroidism (diagnosed 2019)
-        - Seasonal allergies
-        - Appendectomy (2005)
-        - ~~Gestational diabetes (2014)~~ — resolved postpartum
+        - 甲状腺功能减退（2019 年确诊）
+        - 季节性过敏
+        - 阑尾切除术（2005 年）
+        - ~~妊娠期糖尿病（2014 年）~~ — 产后缓解
 
-        ### Family History
+        ### 家族史
 
-        - **Mother:** Rheumatoid arthritis, Type 2 diabetes
-        - **Father:** Hypertension, coronary artery disease
-        - **Sister:** Lupus (SLE)
+        - **母亲：** 类风湿关节炎、2 型糖尿病
+        - **父亲：** 高血压、冠状动脉疾病
+        - **姐妹：** 狼疮（SLE）
 
-        ## Vitals
+        ## 生命体征
 
-        | Measurement | Value | Normal Range |
+        | 测量项 | 数值 | 正常范围 |
         |------------|-------|-------------|
-        | Blood Pressure | 128/82 mmHg | <120/80 |
-        | Heart Rate | 76 bpm | 60–100 |
-        | Temperature | 98.4°F | 97.8–99.1 |
-        | Weight | 148 lbs | — |
+        | 血压 | 128/82 mmHg | <120/80 |
+        | 心率 | 76 bpm | 60–100 |
+        | 体温 | 98.4°F | 97.8–99.1 |
+        | 体重 | 148 lbs | — |
         | BMI | 25.3 | 18.5–24.9 |
         | SpO2 | 98% | 95–100% |
 
-        ## Assessment & Plan
+        ## 评估与计划
 
-        1. **Fatigue with joint pain** — differential includes early rheumatoid arthritis, lupus, or thyroid under-replacement
-           - Order: CBC, CMP, ESR, CRP, ANA, RF, anti-CCP, TSH
-           - Referral to rheumatology if ANA or RF positive
-        2. **Hypothyroidism** — TSH last checked 8 months ago
-           - Recheck TSH and free T4 with above labs
-           - May need levothyroxine dose adjustment
-        3. **Elevated BMI** — borderline overweight
-           - Dietary counseling provided
-           - Follow up in 4 weeks with lab results
+        1. **疲劳伴关节疼痛** — 鉴别诊断包括早期类风湿关节炎、狼疮或甲状腺替代不足
+           - 检查：CBC、CMP、ESR、CRP、ANA、RF、抗 CCP、TSH
+           - 若 ANA 或 RF 阳性，转诊风湿科
+        2. **甲状腺功能减退** — 上次检查 TSH 为 8 个月前
+           - 随上述化验复查 TSH 和游离 T4
+           - 可能需要调整左甲状腺素剂量
+        3. **BMI 偏高** — 超重边缘
+           - 已提供饮食咨询
+           - 4 周后带化验结果复诊
 
-        > **HIPAA Notice:** This document contains Protected Health Information (PHI). Unauthorized disclosure is prohibited under 45 CFR Parts 160 and 164.
+        > **HIPAA 提示：** 本文档包含受保护健康信息（PHI）。根据 45 CFR 第 160 和 164 部分，未经授权披露是被禁止的。
 
         ---
 
-        *Next appointment: April 17, 2026 at 10:30 AM — Dr. Chen*
-        *Patient portal: bayside-medical.com/portal — Username: msantos2026*
+        *下次预约：2026 年 4 月 17 日上午 10:30 — Chen 医生*
+        *患者门户：bayside-medical.com/portal — 用户名：msantos2026*
         """
         doc.piiFindings = [
             PIIFinding(
                 category: .identity,
                 text: "Maria Elena Santos",
-                detail: "Full patient name appears multiple times in demographics and insurance sections"
+                detail: "完整患者姓名在人口统计和保险部分多次出现"
             ),
-            PIIFinding(category: .identity, text: "July 14, 1983", detail: "Patient date of birth — combined with name enables identity theft"),
-            PIIFinding(category: .governmentIDs, text: "478-22-9163", detail: "Social Security Number — highest-risk PII, enables financial fraud"),
-            PIIFinding(category: .contact, text: "(650) 555-0193", detail: "Patient phone number"),
-            PIIFinding(category: .contact, text: "maria.santos83@example.com", detail: "Patient email address"),
-            PIIFinding(category: .contact, text: "2847 Lakeshore Drive, Apt 6B, San Mateo, CA 94401", detail: "Full home address"),
-            PIIFinding(category: .health, text: "BSC-4478291-A", detail: "Health insurance policy number — can be used for insurance fraud"),
-            PIIFinding(category: .health, text: "BMC-2026-081447", detail: "Medical Record Number — links to full patient medical history"),
-            PIIFinding(category: .identity, text: "Carlos Santos", detail: "Emergency contact name — reveals family relationship"),
-            PIIFinding(category: .contact, text: "(650) 555-0247", detail: "Emergency contact phone number"),
+            PIIFinding(category: .identity, text: "July 14, 1983", detail: "患者出生日期——与姓名结合可导致身份盗用"),
+            PIIFinding(category: .governmentIDs, text: "478-22-9163", detail: "社会安全号码——风险最高的 PII，可用于金融欺诈"),
+            PIIFinding(category: .contact, text: "(650) 555-0193", detail: "患者电话号码"),
+            PIIFinding(category: .contact, text: "maria.santos83@example.com", detail: "患者邮箱地址"),
+            PIIFinding(category: .contact, text: "2847 Lakeshore Drive, Apt 6B, San Mateo, CA 94401", detail: "完整家庭住址"),
+            PIIFinding(category: .health, text: "BSC-4478291-A", detail: "健康保险保单号——可用于保险欺诈"),
+            PIIFinding(category: .health, text: "BMC-2026-081447", detail: "病历号——可关联到完整患者病史"),
+            PIIFinding(category: .identity, text: "Carlos Santos", detail: "紧急联系人姓名——透露家庭关系"),
+            PIIFinding(category: .contact, text: "(650) 555-0247", detail: "紧急联系人电话号码"),
             PIIFinding(
                 category: .credentials,
                 text: "msantos2026",
-                detail: "Patient portal username — could enable unauthorized medical record access"
+                detail: "患者门户用户名——可能导致未经授权的病历访问"
             ),
         ]
         return doc
@@ -845,68 +845,68 @@ extension DocumentStore {
 
     private static func makeDoc10(date: Date) -> WritingDocument {
         var doc = WritingDocument()
-        doc.title = "Clinical Research Protocol — Phase II Trial"
+        doc.title = "临床研究方案 — II 期试验"
         doc.goalMode = .academic
-        doc.tags = ["research", "clinical-trial", "protocol"]
+        doc.tags = ["研究", "临床试验", "方案"]
         doc.spaceID = SeedSpaceID.healthcare
         doc.isPinned = false
         doc.createdAt = date
         doc.modifiedAt = date
         doc.score = WritingScore(overall: 87, correctness: 92, clarity: 84, engagement: 80, delivery: 89)
         doc.body = """
-        # Phase II Clinical Trial Protocol
+        # II 期临床试验方案
 
-        **Protocol ID:** BTC-RA-2026-Phase2
-        **Sponsor:** Bayside Therapeutics Corp.
-        **Principal Investigator:** Dr. James Nakamura, MD, PhD
-        **IND Number:** IND-182934
+        **方案编号：** BTC-RA-2026-Phase2
+        **申办方：** Bayside Therapeutics Corp.
+        **主要研究者：** James Nakamura 医生，医学博士、理学博士
+        **IND 编号：** IND-182934
 
         ---
 
-        ## 1. Study Overview
+        ## 1. 研究概览
 
-        > *"The goal of this Phase II trial is to evaluate the efficacy and safety of BTC-4501, a novel JAK1-selective inhibitor, in patients with moderate-to-severe rheumatoid arthritis who have had an inadequate response to methotrexate."*
+        > *“本 II 期试验的目标是评估 BTC-4501——一种新型 JAK1 选择性抑制剂——在对甲氨蝶呤应答不足的中重度类风湿关节炎患者中的疗效与安全性。”*
 
-        ### 1.1 Primary Objective
+        ### 1.1 主要目标
 
-        Determine the proportion of patients achieving ACR20 response at Week 12 compared to placebo.
+        确定第 12 周时达到 ACR20 应答的患者比例，并与安慰剂比较。
 
-        ### 1.2 Secondary Objectives
+        ### 1.2 次要目标
 
-        1. Assess ACR50 and ACR70 response rates at Weeks 12 and 24
-        2. Evaluate change from baseline in DAS28-CRP
-        3. Characterize safety and tolerability profile
-           - Adverse event frequency and severity
-           - Laboratory abnormalities (hepatic, hematologic)
-           - Infection rates
+        1. 评估第 12 周和第 24 周的 ACR50 和 ACR70 应答率
+        2. 评估 DAS28-CRP 相对基线的变化
+        3. 描述安全性与耐受性特征
+           - 不良事件频率与严重程度
+           - 实验室异常（肝脏、血液）
+           - 感染率
 
-        ## 2. Study Design
+        ## 2. 研究设计
 
-        Randomized, double-blind, placebo-controlled, parallel-group study.
+        随机、双盲、安慰剂对照、平行分组研究。
 
-        | Parameter | Details |
+        | 参数 | 详情 |
         |-----------|---------|
-        | **Enrollment target** | 240 patients (80 per arm) |
-        | **Randomization** | 1:1:1 (low dose : high dose : placebo) |
-        | **Treatment duration** | 24 weeks |
-        | **Follow-up** | 4 weeks post-treatment |
-        | **Sites** | 18 centers across US and Canada |
+        | **入组目标** | 240 名患者（每组 80 名） |
+        | **随机化** | 1:1:1（低剂量 : 高剂量 : 安慰剂） |
+        | **治疗时长** | 24 周 |
+        | **随访** | 治疗后 4 周 |
+        | **中心** | 美国及加拿大 18 个中心 |
 
-        ### 2.1 Dosing Schedule
+        ### 2.1 给药方案
 
-        | Arm | Drug | Dose | Route | Frequency |
+        | 组别 | 药物 | 剂量 | 给药途径 | 频次 |
         |-----|------|------|-------|-----------|
-        | A | BTC-4501 | 5 mg | Oral | Once daily |
-        | B | BTC-4501 | 15 mg | Oral | Once daily |
-        | C | Placebo | — | Oral | Once daily |
+        | A | BTC-4501 | 5 mg | 口服 | 每日一次 |
+        | B | BTC-4501 | 15 mg | 口服 | 每日一次 |
+        | C | 安慰剂 | — | 口服 | 每日一次 |
 
-        > **21 CFR 312.23(a)(6):** The protocol must include a description of the dosage form, route of administration, and duration of treatment.
+        > **21 CFR 312.23(a)(6)：** 方案必须包含剂型、给药途径和治疗时长的描述。
 
-        ## 3. Statistical Analysis Plan
+        ## 3. 统计分析计划
 
-        ### 3.1 Sample Size Justification
+        ### 3.1 样本量论证
 
-        Assuming ACR20 response rates of 55% (treatment) vs 30% (placebo), with α = 0.05 (two-sided) and 90% power:
+        假设 ACR20 应答率为 55%（治疗组）对 30%（安慰剂组），α = 0.05（双侧）、把握度 90%：
 
         ```
         n = (Z_α/2 + Z_β)² × (p₁(1-p₁) + p₂(1-p₂)) / (p₁ - p₂)²
@@ -916,7 +916,7 @@ extension DocumentStore {
         n ≈ 77 per arm → 80 per arm (accounting for ~5% dropout)
         ```
 
-        ### 3.2 Primary Endpoint Analysis
+        ### 3.2 主要终点分析
 
         ```python
         # Primary analysis — logistic regression
@@ -935,45 +935,45 @@ extension DocumentStore {
         # Sensitivity: tipping point analysis
         ```
 
-        ### 3.3 Endpoints Summary
+        ### 3.3 终点汇总
 
-        | Endpoint | Measure | Timepoint | Analysis Method |
+        | 终点 | 指标 | 时间点 | 分析方法 |
         |----------|---------|-----------|----------------|
-        | **Primary** | ACR20 response | Week 12 | CMH test, stratified |
-        | Secondary | ACR50/70 response | Week 12, 24 | Logistic regression |
-        | Secondary | DAS28-CRP change | Week 12, 24 | MMRM |
-        | Safety | AE incidence | Ongoing | Descriptive statistics |
-        | Exploratory | ~~HAQ-DI change~~ | ~~Week 24~~ | *Amended: removed per DSMB recommendation* |
+        | **主要** | ACR20 应答 | 第 12 周 | CMH 检验，分层 |
+        | 次要 | ACR50/70 应答 | 第 12、24 周 | 逻辑回归 |
+        | 次要 | DAS28-CRP 变化 | 第 12、24 周 | MMRM |
+        | 安全性 | AE 发生率 | 持续 | 描述性统计 |
+        | 探索性 | ~~HAQ-DI 变化~~ | ~~第 24 周~~ | *已修订：根据 DSMB 建议移除* |
 
-        ## 4. Inclusion / Exclusion Criteria
+        ## 4. 入选 / 排除标准
 
-        ### 4.1 Inclusion
+        ### 4.1 入选标准
 
-        - Adults aged 18–75 with RA diagnosis per 2010 ACR/EULAR criteria
-        - Active disease: DAS28-CRP ≥ 3.2 at screening
-        - Inadequate response to methotrexate (≥ 15 mg/week for ≥ 12 weeks)
-        - Stable methotrexate dose for ≥ 4 weeks prior to randomization
+        - 18–75 岁成人，依据 2010 ACR/EULAR 标准确诊 RA
+        - 活动性疾病：筛查时 DAS28-CRP ≥ 3.2
+        - 对甲氨蝶呤应答不足（≥ 15 mg/周，持续 ≥ 12 周）
+        - 随机化前甲氨蝶呤剂量稳定 ≥ 4 周
 
-        ### 4.2 Exclusion
+        ### 4.2 排除标准
 
-        - Prior use of any JAK inhibitor
-        - Active or latent tuberculosis
-        - History of malignancy within 5 years (except non-melanoma skin cancer)
-        - ~~eGFR < 40 mL/min~~ → *Amended to eGFR < 30 mL/min per Protocol Amendment 2*
-        - Pregnancy or breastfeeding
+        - 既往使用任何 JAK 抑制剂
+        - 活动性或潜伏性结核
+        - 5 年内恶性肿瘤史（非黑色素瘤皮肤癌除外）
+        - ~~eGFR < 40 mL/min~~ → *根据方案修订 2 改为 eGFR < 30 mL/min*
+        - 妊娠或哺乳
 
-        ## 5. Regulatory References
+        ## 5. 监管参考
 
-        > **ICH E6(R2) §4.5.1:** *"The investigator should ensure that the clinical trial is conducted in compliance with the protocol."*
+        > **ICH E6(R2) §4.5.1：** *“研究者应确保临床试验按照方案开展。”*
 
-        > **Declaration of Helsinki (2013) §25:** *"The design and performance of each research study involving human subjects must be clearly described and justified in a research protocol."*
+        > **《赫尔辛基宣言》（2013）§25：** *“每项涉及人类受试者的研究，其设计与实施必须在研究方案中清晰描述并说明理由。”*
         """
-        doc.aiDetectionResult = "AI Likelihood: 12% — This document appears to be primarily human-authored. The technical specificity of the protocol design, regulatory citations, and statistical formulas are consistent with expert scientific writing. Minor AI-like patterns detected in the overview section phrasing."
-        doc.plagiarismResult = "Similarity Score: 8% — Low risk. Matched content limited to standard regulatory citations (ICH E6, Declaration of Helsinki) and conventional clinical trial terminology. No substantial overlap with published protocols in the reference database."
+        doc.aiDetectionResult = "AI 可能性：12% — 本文档似乎主要由人类撰写。方案设计的技术具体性、监管引用和统计公式与专家科学写作一致。概览部分的措辞中检测到少量类似 AI 的模式。"
+        doc.plagiarismResult = "相似度：8% — 低风险。匹配内容仅限于标准监管引用（ICH E6、《赫尔辛基宣言》）和常规临床试验术语。与参考数据库中的已发表方案无实质性重叠。"
         doc.rewriteResult = RewriteResult(
-            style: "Plain Language Summary",
-            originalText: "Determine the proportion of patients achieving ACR20 response at Week 12 compared to placebo.",
-            rewrittenText: "Find out how many patients show meaningful improvement in their rheumatoid arthritis symptoms after 12 weeks of treatment with BTC-4501 compared to patients who received a sugar pill."
+            style: "通俗语言摘要",
+            originalText: "确定第 12 周时达到 ACR20 应答的患者比例，并与安慰剂比较。",
+            rewrittenText: "了解与服用糖丸的患者相比，接受 BTC-4501 治疗 12 周后，有多少患者的类风湿关节炎症状出现有意义的改善。"
         )
         return doc
     }

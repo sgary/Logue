@@ -59,7 +59,7 @@ struct FilterChip: View {
         }
         .buttonStyle(.plain)
         .accessibilityAddTraits(isSelected ? .isSelected : [])
-        .accessibilityHint(style == .removable ? "Double tap to remove" : "Double tap to select")
+        .accessibilityHint(style == .removable ? "双击以移除" : "双击以选择")
     }
 
     private var resolvedTint: Color {

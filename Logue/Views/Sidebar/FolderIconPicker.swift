@@ -25,11 +25,11 @@ struct SpaceIconPicker: View {
                 Image(systemName: "magnifyingglass")
                     .foregroundStyle(.secondary)
                     .font(.caption)
-                TextField("Search icons…", text: $searchText)
+                TextField("搜索图标…", text: $searchText)
                     .textFieldStyle(.plain)
                     .font(.callout)
-                    .accessibilityLabel("Search icons")
-                    .accessibilityHint("Type to filter available space icons")
+                    .accessibilityLabel("搜索图标")
+                    .accessibilityHint("输入以筛选可用的空间图标")
             }
             .padding(8)
             .background(Color.primary.opacity(AppThemeConstants.opacityLight), in: RoundedRectangle(cornerRadius: 6))
@@ -49,7 +49,7 @@ struct SpaceIconPicker: View {
                         HStack(spacing: 6) {
                             Image(systemName: "folder")
                                 .frame(width: 20)
-                            Text("Default (folder)")
+                            Text("默认（文件夹）")
                                 .font(.caption)
                             Spacer()
                             if currentIcon == nil {
@@ -63,8 +63,8 @@ struct SpaceIconPicker: View {
                         .contentShape(Rectangle())
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Default space icon")
-                    .accessibilityHint("Resets space icon to the default")
+                    .accessibilityLabel("默认空间图标")
+                    .accessibilityHint("将空间图标重置为默认")
                     .accessibilityAddTraits(currentIcon == nil ? .isSelected : [])
 
                     Divider().padding(.horizontal, 12)
@@ -96,7 +96,7 @@ struct SpaceIconPicker: View {
                                     }
                                     .buttonStyle(.plain)
                                     .accessibilityLabel(icon)
-                                    .accessibilityHint("Sets space icon to \(icon)")
+                                    .accessibilityHint("将空间图标设为 \(icon)")
                                     .accessibilityAddTraits(currentIcon == icon ? .isSelected : [])
                                     .help(icon)
                                 }
@@ -114,49 +114,49 @@ struct SpaceIconPicker: View {
     // MARK: - Icon Library
 
     static let iconGroups: [(String, [String])] = [
-        ("General", [
+        ("通用", [
             "folder", "folder.fill", "tray", "tray.full", "archivebox",
             "doc", "doc.text", "note.text", "list.bullet", "bookmark",
             "tag", "flag", "star", "heart", "bell",
             "pin", "paperclip", "link",
         ]),
-        ("Business", [
+        ("商务", [
             "building.2", "building.columns", "banknote", "creditcard",
             "chart.bar", "chart.line.uptrend.xyaxis", "chart.pie",
             "briefcase", "case", "dollarsign.circle",
             "percent", "cart", "bag", "storefront",
         ]),
-        ("People", [
+        ("人物", [
             "person", "person.2", "person.3", "person.badge.plus",
             "person.crop.circle", "figure.stand",
             "graduationcap", "brain.head.profile",
         ]),
-        ("Technology", [
+        ("技术", [
             "terminal", "chevron.left.forwardslash.chevron.right", "server.rack",
             "cpu", "memorychip", "antenna.radiowaves.left.and.right",
             "wifi", "globe", "network", "icloud",
             "desktopcomputer", "laptopcomputer", "iphone",
         ]),
-        ("Communication", [
+        ("沟通", [
             "envelope", "phone", "message", "bubble.left.and.bubble.right",
             "video", "mic", "waveform", "speaker.wave.2",
         ]),
-        ("Security & Legal", [
+        ("安全与法律", [
             "lock", "lock.shield", "key", "shield.checkered",
             "hand.raised", "eye.slash", "faceid",
             "exclamationmark.triangle", "checkmark.shield",
         ]),
-        ("Healthcare", [
+        ("医疗", [
             "cross.case", "heart.text.square", "stethoscope",
             "pills", "syringe", "bandage",
             "waveform.path.ecg", "brain",
         ]),
-        ("Creative", [
+        ("创意", [
             "paintbrush", "pencil", "scribble", "photo",
             "camera", "film", "music.note", "theatermasks",
             "lightbulb", "sparkles", "wand.and.stars",
         ]),
-        ("Organization", [
+        ("组织", [
             "calendar", "clock", "hourglass",
             "map", "location", "mappin.and.ellipse",
             "scope", "target", "flag.checkered",

@@ -21,6 +21,6 @@ struct StatItem: View {
         }
         .frame(maxWidth: .infinity)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(label): \(value)")
+        .accessibilityLabel("\(label)：\(value)")
     }
 }

@@ -11,7 +11,7 @@ struct DocumentType: Equatable, Codable, Identifiable, Sendable {
     static let maxNameLength = 40
 
     /// Group label for documents without a type.
-    static let untypedGroupName = "Untyped"
+    static let untypedGroupName = "未分类"
 
     var id = UUID()
     var name: String
@@ -101,7 +101,7 @@ struct DocumentType: Equatable, Codable, Identifiable, Sendable {
             }
         }
         let trimmed = collapsed.trimmingCharacters(in: .whitespaces)
-        guard !trimmed.isEmpty else { return "Untitled Type" }
+        guard !trimmed.isEmpty else { return "未命名类型" }
         return String(trimmed.prefix(maxNameLength))
     }
 }

@@ -19,6 +19,22 @@ enum TemplateCategory: String, Codable, CaseIterable, Sendable, Identifiable {
         rawValue
     }
 
+    /// Localized category name for the template gallery.
+    var displayName: String {
+        switch self {
+        case .meetingNotes: "会议笔记"
+        case .projectManagement: "项目管理"
+        case .business: "商务"
+        case .marketing: "市场营销"
+        case .engineering: "工程"
+        case .hr: "人事与团队"
+        case .finance: "财务"
+        case .academic: "学术"
+        case .personal: "个人"
+        case .communication: "沟通"
+        }
+    }
+
     var icon: String {
         switch self {
         case .meetingNotes: "note.text"

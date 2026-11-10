@@ -27,13 +27,13 @@ struct JumpToLatestPill: View {
         }
         .buttonStyle(.plain)
         .keyboardShortcut(.downArrow, modifiers: [.command])
-        .accessibilityLabel("Jump to latest message")
+        .accessibilityLabel("跳到最新消息")
     }
 
     private var label: String {
         if unreadCount > 0 {
-            return "\(unreadCount) new"
+            return "\(unreadCount) 条新消息"
         }
-        return "Jump to latest"
+        return "跳到最新"
     }
 }

@@ -77,11 +77,10 @@ enum WhatsNewCatalog {
         static let meetings = WhatsNewFeature(
             id: "meeting-transcription",
             symbol: "waveform",
-            title: "Meetings transcribe themselves",
+            title: "会议自动转写",
             detail: """
-            Logue hears both your microphone and the meeting audio, so it works in any \
-            call without a bot joining the room. Transcription runs on your Mac as \
-            people speak, and it tells who said what.
+            Logue 同时收听你的麦克风和会议音频，因此适用于任何通话，无需机器人加入房间。\
+            转写会在你说话的同时于这台 Mac 上运行，并区分是谁说了什么。
             """,
             screenshot: "whatsnew-transcription"
         )
@@ -89,11 +88,10 @@ enum WhatsNewCatalog {
         static let smartMinutes = WhatsNewFeature(
             id: "smart-minutes",
             symbol: "list.bullet.clipboard",
-            title: "Minutes and action items, written for you",
+            title: "会议纪要与待办事项，自动为你写好",
             detail: """
-            Every recording turns into a summary with the decisions and the follow-ups \
-            pulled out. Action items collect in one place so nothing agreed in a meeting \
-            quietly disappears after it.
+            每段录音都会变成一份摘要，并提炼出关键决策和后续事项。\
+            待办事项集中在一个地方，会议中商定的事情不会在会后悄悄消失。
             """,
             screenshot: "whatsnew-smart-minutes"
         )
@@ -101,11 +99,10 @@ enum WhatsNewCatalog {
         static let writingEditor = WhatsNewFeature(
             id: "writing-editor",
             symbol: "square.and.pencil",
-            title: "An editor that helps you write",
+            title: "会帮你写作的编辑器",
             detail: """
-            Rewrite a sentence, fix the grammar, change the tone, or check a claim — \
-            without leaving the document. Tables, diagrams and equations render inline, \
-            and anything you write can be exported as PDF or slides.
+            改写句子、修正语法、调整语气或核查说法——都不用离开文档。\
+            表格、图表和公式可就地渲染，写好的内容还能导出为 PDF 或幻灯片。
             """,
             screenshot: "whatsnew-writing-editor"
         )
@@ -113,11 +110,10 @@ enum WhatsNewCatalog {
         static let askLogue = WhatsNewFeature(
             id: "ask-logue",
             symbol: "sparkles",
-            title: "Ask Logue about your own work",
+            title: "向 Logue 询问你的工作内容",
             detail: """
-            A chat that can actually reach your meetings, documents, calendar and \
-            reminders, and take multiple steps to answer. It asks before it does \
-            anything you would want to be asked about.
+            这个聊天能真正访问你的会议、文档、日历和提醒事项，并能分多步作答。\
+            在做出任何你希望被事先询问的操作前，它都会先征求你的同意。
             """,
             // Where it lives before what it does: the menu bar item is the part nobody
             // finds on their own.
@@ -138,11 +134,10 @@ enum WhatsNewCatalog {
         static let recapCapture = WhatsNewFeature(
             id: "recap-capture",
             symbol: "waveform",
-            title: "Everything you already had",
+            title: "你早已熟悉的一切",
             detail: """
-            Meetings that transcribe themselves from both sides of the call, Smart Minutes \
-            and action items written from the transcript, and a real editor for the notes \
-            that come out of it.
+            会议会从通话双方自动转写，智能纪要和待办事项根据转写生成，\
+            还有一款真正好用的编辑器来处理产出的笔记。
             """,
             screenshot: "whatsnew-transcription"
         )
@@ -150,11 +145,11 @@ enum WhatsNewCatalog {
         static let recapPrivacy = WhatsNewFeature(
             id: "recap-privacy",
             symbol: "lock.shield",
-            title: "…and it never left your Mac",
+            title: "…而且它从未离开你的 Mac",
             detail: """
-            Transcription, summaries and search all run on this machine, on your own \
-            models. Spaces and wiki-links keep the notes findable. Nothing is uploaded \
-            unless you turn on a feature that says so.
+            转写、摘要和搜索都在这台机器上、使用你自己的模型运行。\
+            空间和 Wiki 链接让笔记始终可查。除非你主动开启会明确提示的功能，\
+            否则不会上传任何内容。
             """,
             screenshot: "whatsnew-privacy"
         )
@@ -162,12 +157,11 @@ enum WhatsNewCatalog {
         static let chromeExtension = WhatsNewFeature(
             id: "chrome-extension",
             symbol: "puzzlepiece.extension.fill",
-            title: "Bring the browser in too",
+            title: "把浏览器也带进来",
             detail: """
-            The Logue extension puts the same chat and writing tools in any tab — ask \
-            about the page you are on, and the answer comes from the model on this Mac \
-            rather than from someone's server. Install it, take it for a spin, and tell \
-            us how it goes: a review helps other people find it.
+            Logue 扩展把同样的聊天和写作工具带到任意标签页——你可以询问当前页面，\
+            答案来自这台 Mac 上的模型，而不是别人的服务器。安装后试一试，\
+            再告诉我们体验如何：一条评价能帮助更多人发现它。
             """,
             screenshot: "whatsnew-chrome-extension",
             link: WhatsNewLink(label: UICopy.WhatsNew.chromeExtensionLink, url: chromeStore)
@@ -176,53 +170,52 @@ enum WhatsNewCatalog {
         static let tasks = WhatsNewFeature(
             id: "tasks-and-triage",
             symbol: "checklist",
-            title: "Tasks, and a way to triage them",
+            title: "任务，以及整理它们的方法",
             detail: """
-            Every action item Logue finds in a meeting lands somewhere you can actually \
-            work: one list, with due dates, priorities and tags. Type "Send the deck \
-            tomorrow #launch !" and it files itself.
+            Logue 在会议中发现的每个待办事项都会落到真正能处理的地方：\
+            一个列表，带截止日期、优先级和标签。输入“明天发送演示文稿 #launch !”，\
+            它就会自动归档。
             """
         )
 
         static let homeSurface = WhatsNewFeature(
             id: "home-agent-surface",
             symbol: "house",
-            title: "One place to start",
+            title: "一个统一的起点",
             detail: """
-            Home and Ask Logue were two screens doing one job. They are now a single \
-            landing surface: your day, what to pick back up, and a prompt bar that turns \
-            into the conversation without going anywhere else.
+            首页和 Ask Logue 原本是两个界面做同一件事。现在它们合并为一个统一的落脚点：\
+            你的一天、需要继续处理的内容，以及一个能直接进入对话、无需跳转的输入栏。
             """
         )
 
         static let recordingResilience = WhatsNewFeature(
             id: "recording-resilience",
             symbol: "shield.lefthalf.filled",
-            title: "A recording that survives the worst",
+            title: "经得起意外的录音",
             detail: """
-            Unplug the headset mid-call, mute for ten minutes, or quit the app outright — \
-            the recording keeps its place and the transcript comes back when Logue \
-            reopens, instead of ending where the trouble started.
+            通话中拔掉耳机、静音十分钟，甚至直接退出应用——\
+            录音都会保留进度，重新打开 Logue 时转写会恢复，\
+            而不是在出问题的地方中断。
             """
         )
 
         static let crossApp = WhatsNewFeature(
             id: "cross-app",
             symbol: "command",
-            title: "Logue works in every other app too",
+            title: "Logue 在其他应用里也能用",
             detail: """
-            Press ⌘⌃I to rewrite whatever you have selected, anywhere in macOS, or \
-            ⌥Space to ask a question without switching windows.
+            在 macOS 的任意位置按 ⌘⌃I 改写选中的内容，\
+            或按 ⌥Space 直接提问，无需切换窗口。
             """
         )
 
         static let spacesAndSearch = WhatsNewFeature(
             id: "spaces-and-search",
             symbol: "square.grid.2x2",
-            title: "Spaces, and a search that understands you",
+            title: "空间，以及懂你的搜索",
             detail: """
-            Organise work into nested spaces, jump anywhere with ⌘K, and find things by \
-            what you meant rather than the exact words you used.
+            把工作整理进可嵌套的空间，用 ⌘K 跳到任意位置，\
+            并按你的意图而不是原话找到内容。
             """,
             screenshot: "whatsnew-spaces"
         )
@@ -230,11 +223,11 @@ enum WhatsNewCatalog {
         static let privacy = WhatsNewFeature(
             id: "on-device-privacy",
             symbol: "lock.shield.fill",
-            title: "None of it leaves your Mac",
+            title: "任何内容都不会离开你的 Mac",
             detail: """
-            Models run on your own hardware and your notes are encrypted on disk. Logue \
-            can also flag personal information before you share something. Web search and \
-            outside AI providers exist, are off, and stay off until you turn them on.
+            模型在你自己的硬件上运行，笔记在磁盘上加密。Logue 还能在你分享内容前\
+            标记个人信息。网页搜索和外部 AI 提供商确实存在，但默认关闭，\
+            除非你主动开启，否则一直保持关闭。
             """,
             screenshot: "whatsnew-privacy"
         )
@@ -242,32 +235,32 @@ enum WhatsNewCatalog {
         static let externalProviders = WhatsNewFeature(
             id: "external-providers",
             symbol: "cpu",
-            title: "Bring your own model",
+            title: "使用你自己的模型",
             detail: """
-            Point Logue at OpenAI, Anthropic, OpenRouter, Ollama or LM Studio when you \
-            want a bigger model than your Mac can hold. Your key stays in the Keychain.
+            当你想要比 Mac 能承载的更大的模型时，可以让 Logue 连接 OpenAI、Anthropic、\
+            OpenRouter、Ollama 或 LM Studio。你的密钥保存在钥匙串中。
             """
         )
 
         static let markdownStorage = WhatsNewFeature(
             id: "markdown-storage",
             symbol: "doc.plaintext",
-            title: "Keep your documents as plain markdown",
+            title: "把文档保存为纯 Markdown",
             detail: """
-            Store documents as ordinary .md files in ~/Logue and edit them in any editor, \
-            track them in git, or point another tool at them. The folder is the storage, \
-            not a copy — edits, renames and moves flow both ways. Off by default, and \
-            Logue explains what encryption you give up before you turn it on.
+            把文档以普通 .md 文件保存到 ~/Logue，可用任意编辑器修改、用 git 跟踪，\
+            或交给其他工具处理。这个文件夹就是存储位置，而不是副本——\
+            编辑、重命名和移动都会双向同步。该功能默认关闭，\
+            开启前 Logue 会说明你将放弃哪些加密保护。
             """
         )
 
         static let wikiLinks = WhatsNewFeature(
             id: "wiki-links",
             symbol: "link",
-            title: "Link documents with [[double brackets]]",
+            title: "用 [[双方括号]] 链接文档",
             detail: """
-            Type [[ to link another document. Links show the target's real name, survive \
-            renames, and every document lists what points back to it.
+            输入 [[ 即可链接另一篇文档。链接显示目标的真实名称，重命名后依然有效，\
+            每篇文档也会列出所有指向它的链接。
             """,
             screenshot: "whatsnew-wikilinks"
         )
@@ -275,30 +268,30 @@ enum WhatsNewCatalog {
         static let properties = WhatsNewFeature(
             id: "properties-relationships",
             symbol: "tablecells",
-            title: "Properties and relationships",
+            title: "属性与关联",
             detail: """
-            Give documents typed fields — text, number, date, select, checkbox — and named \
-            links to one another, all editable from a side panel.
+            为文档添加带类型的字段——文本、数字、日期、选择、复选框——\
+            以及指向彼此的具名链接，全部可以从侧边面板编辑。
             """
         )
 
         static let whatsNew = WhatsNewFeature(
             id: "whats-new",
             symbol: "gift",
-            title: "Logue now tells you what changed",
+            title: "Logue 现在会告诉你有什么变化",
             detail: """
-            After an update, Logue shows what that release added — and only the versions \
-            you have not already seen. You can reopen this any time from Help → What's New.
+            更新后，Logue 会展示该版本新增的内容——且只显示你尚未看过的版本。\
+            你可以随时从“帮助”>“Logue 新功能”重新打开。
             """
         )
 
         static let savedViews = WhatsNewFeature(
             id: "saved-views-inbox",
             symbol: "tray.full",
-            title: "Saved views and an inbox",
+            title: "已保存的视图与收件箱",
             detail: """
-            Save any filter as a sidebar entry, and clear unfiled documents from the inbox \
-            with keyboard-driven bulk actions.
+            把任意筛选条件保存为侧边栏条目，并用键盘驱动的批量操作\
+            清空收件箱中未归档的文档。
             """
         )
     }

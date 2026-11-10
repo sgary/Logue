@@ -53,19 +53,19 @@ struct InlineSuggestionPopoverView: View {
             // ── Action buttons ──────────────────────────────────────────────
             HStack(spacing: 8) {
                 if suggestion.replacement != suggestion.original {
-                    Button("Accept") { onAccept() }
+                    Button("接受") { onAccept() }
                         .buttonStyle(.borderedProminent)
                         .tint(AppThemeConstants.accent)
                         .controlSize(.small)
-                        .accessibilityLabel("Accept suggestion")
-                        .accessibilityHint("Applies the suggested replacement to your text")
+                        .accessibilityLabel("接受建议")
+                        .accessibilityHint("将建议的替换内容应用到文本")
                 }
-                Button("Dismiss") { onDismiss() }
+                Button("忽略") { onDismiss() }
                     .buttonStyle(.plain)
                     .foregroundStyle(.secondary)
                     .controlSize(.small)
-                    .accessibilityLabel("Dismiss suggestion")
-                    .accessibilityHint("Closes this suggestion without applying it")
+                    .accessibilityLabel("忽略建议")
+                    .accessibilityHint("关闭此建议且不应用")
                 Spacer()
             }
         }

@@ -676,15 +676,15 @@ enum LLMError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .notLoaded:
-            "No model is loaded. Please download and activate a model in Settings."
+            "尚未加载模型。请在设置中下载并启用一个模型。"
         case .modelNotDownloaded:
-            "Model has not been downloaded yet."
+            "模型尚未下载。"
         case .prewarmTimeout:
-            "Model took too long to load. Please try again or choose a smaller model."
+            "模型加载时间过长。请重试或选择更小的模型。"
         case .emptyResponse:
-            "The model returned an empty response."
+            "模型返回了空响应。"
         case .queueFull:
-            "The inference engine is busy. Please wait a moment and try again."
+            "推理引擎正忙，请稍后重试。"
         }
     }
 }

@@ -28,7 +28,7 @@ final class SpaceAIGenerationTracker {
             do {
                 _ = try await action(spaceID)
             } catch {
-                errors[key] = "Failed to generate: \(error.localizedDescription)"
+                errors[key] = "生成失败：\(error.localizedDescription)"
             }
         }
     }
@@ -119,7 +119,7 @@ struct SpaceAIPopover: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Close")
+            .accessibilityLabel("关闭")
         }
         .padding()
     }
@@ -142,7 +142,7 @@ struct SpaceAIPopover: View {
             Image(systemName: icon)
                 .font(.largeTitle)
                 .foregroundStyle(.quaternary)
-            Text("No \(title.lowercased()) generated yet")
+            Text("尚未生成\(title.lowercased())")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
 
@@ -156,7 +156,7 @@ struct SpaceAIPopover: View {
             Button {
                 tracker.run(key: insightKey, spaceID: spaceID, action: action)
             } label: {
-                Label("Generate", systemImage: "sparkles")
+                Label("生成", systemImage: "sparkles")
             }
             .buttonStyle(.borderedProminent)
             .tint(AppThemeConstants.accent)
@@ -171,7 +171,7 @@ struct SpaceAIPopover: View {
         VStack(spacing: 12) {
             ProgressView()
                 .controlSize(.regular)
-            Text("Generating \(title.lowercased())…")
+            Text("正在生成\(title.lowercased())…")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }
@@ -190,7 +190,7 @@ struct SpaceAIPopover: View {
             }
 
             HStack(spacing: 8) {
-                Text("Generated \(insight.generatedAt.formatted(.relative(presentation: .named)))")
+                Text("生成于 \(insight.generatedAt.formatted(.relative(presentation: .named)))")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
 
@@ -198,12 +198,12 @@ struct SpaceAIPopover: View {
                     HStack(spacing: 4) {
                         ProgressView()
                             .controlSize(.mini)
-                        Text("Updating…")
+                        Text("更新中…")
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
                 } else if isStale {
-                    Text("· Content has changed")
+                    Text("· 内容已变更")
                         .font(.caption2)
                         .foregroundStyle(.orange)
                 }
@@ -229,7 +229,7 @@ struct SpaceAIPopover: View {
             Button {
                 tracker.run(key: insightKey, spaceID: spaceID, action: action)
             } label: {
-                Label("Regenerate", systemImage: "arrow.clockwise")
+                Label("重新生成", systemImage: "arrow.clockwise")
             }
             .buttonStyle(.bordered)
             .controlSize(.small)
@@ -243,7 +243,7 @@ struct SpaceAIPopover: View {
                     NSPasteboard.general.setString(content, forType: .string)
                 }
             } label: {
-                Label("Copy", systemImage: "doc.on.doc")
+                Label("复制", systemImage: "doc.on.doc")
             }
             .buttonStyle(.bordered)
             .controlSize(.small)
@@ -258,7 +258,7 @@ struct SpaceAIPopover: View {
                     onDismiss()
                 }
             } label: {
-                Label("Save as Document", systemImage: "square.and.arrow.down.on.square")
+                Label("保存为文档", systemImage: "square.and.arrow.down.on.square")
             }
             .buttonStyle(.borderedProminent)
             .tint(AppThemeConstants.accent)

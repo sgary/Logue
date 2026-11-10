@@ -132,8 +132,8 @@ struct TableBlockEditView: View {
         .padding(.horizontal, cellPaddingH)
         .padding(.vertical, cellPaddingV)
         .frame(minWidth: 100, maxWidth: .infinity, alignment: .leading)
-        .accessibilityLabel("Row \(row + 1), column \(col + 1)")
-        .accessibilityHint(isEditing ? "Editing" : "Double tap to edit")
+        .accessibilityLabel("第 \(row + 1) 行，第 \(col + 1) 列")
+        .accessibilityHint(isEditing ? "正在编辑" : "双击以编辑")
     }
 
     // MARK: - Add Row Button
@@ -145,7 +145,7 @@ struct TableBlockEditView: View {
             HStack(spacing: 4) {
                 Image(systemName: "plus")
                     .font(.caption2)
-                Text("Row")
+                Text("行")
                     .font(.caption)
             }
             .foregroundStyle(.tertiary)
@@ -154,7 +154,7 @@ struct TableBlockEditView: View {
         }
         .buttonStyle(.plain)
         .padding(.top, 4)
-        .help("Add row")
+        .help("添加行")
     }
 
     // MARK: - Add Column Button
@@ -170,22 +170,22 @@ struct TableBlockEditView: View {
         }
         .buttonStyle(.plain)
         .padding(.leading, 4)
-        .help("Add column")
+        .help("添加列")
     }
 
     // MARK: - Context Menu
 
     @ViewBuilder
     private var tableContextMenu: some View {
-        Button("Add Row") { addRow() }
-        Button("Add Column") { addColumn() }
+        Button("添加行") { addRow() }
+        Button("添加列") { addColumn() }
 
         if data.rows.count > 1 {
             Divider()
-            Button("Delete Last Row", role: .destructive) { deleteLastRow() }
+            Button("删除最后一行", role: .destructive) { deleteLastRow() }
         }
         if data.columns > 1 {
-            Button("Delete Last Column", role: .destructive) { deleteLastColumn() }
+            Button("删除最后一列", role: .destructive) { deleteLastColumn() }
         }
     }
 

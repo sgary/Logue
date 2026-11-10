@@ -51,11 +51,11 @@ final class ReminderManager {
         }
 
         let content = UNMutableNotificationContent()
-        content.title = "Action Item Reminder"
+        content.title = "待办事项提醒"
         content.subtitle = meetingTitle
         content.body = item.title
         if let assignee = item.assignee {
-            content.body += " (Assigned to: \(assignee))"
+            content.body += "（负责人：\(assignee)）"
         }
         content.sound = .default
         content.categoryIdentifier = "ACTION_ITEM_REMINDER"
@@ -111,13 +111,13 @@ final class ReminderManager {
     func registerCategories() {
         let completeAction = UNNotificationAction(
             identifier: "MARK_COMPLETE",
-            title: "Mark Complete",
+            title: "完成",
             options: []
         )
 
         let snoozeAction = UNNotificationAction(
             identifier: "SNOOZE_1H",
-            title: "Snooze 1 Hour",
+            title: "稍后提醒 1 小时",
             options: []
         )
 

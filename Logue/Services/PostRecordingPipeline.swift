@@ -123,7 +123,7 @@ final class PostRecordingPipeline {
         guard !markdown.isEmpty else { return }
 
         let doc = DocumentStore.shared.createDocument(
-            title: "\(meeting.title) — Notes",
+            title: "\(meeting.title) — 笔记",
             body: markdown,
             inSpace: spaceID,
             select: false

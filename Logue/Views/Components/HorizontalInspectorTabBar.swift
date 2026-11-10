@@ -78,8 +78,8 @@ struct HorizontalInspectorTabBar<Tool: ToolbarTool>: View {
                         .foregroundStyle(selectedGroup == group ? AppThemeConstants.accent : .secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("\(group) tools")
-                .accessibilityHint("Shows tools in the \(group) group")
+                .accessibilityLabel("\(group) 工具")
+                .accessibilityHint("显示“\(group)”分组中的工具")
                 .accessibilityAddTraits(selectedGroup == group ? .isSelected : [])
             }
         }
@@ -101,7 +101,7 @@ struct HorizontalInspectorTabBar<Tool: ToolbarTool>: View {
                 ForEach(section.tools) { tool in
                     InspectorTabButton(
                         icon: tool.icon,
-                        label: tool.rawValue,
+                        label: tool.displayName,
                         isActive: activeTool == tool,
                         isEnabled: tool.isImplemented
                     ) {
@@ -121,7 +121,7 @@ struct HorizontalInspectorTabBar<Tool: ToolbarTool>: View {
             ForEach(tools) { tool in
                 InspectorTabButton(
                     icon: tool.icon,
-                    label: tool.rawValue,
+                    label: tool.displayName,
                     isActive: activeTool == tool,
                     isEnabled: tool.isImplemented
                 ) {
@@ -181,7 +181,7 @@ private struct InspectorTabButton: View {
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
         .accessibilityLabel(label)
-        .accessibilityHint("Switches to the \(label) inspector panel")
+        .accessibilityHint("切换到 \(label) 检查器面板")
         .accessibilityAddTraits(isActive ? .isSelected : [])
         .help(label)
         .disabled(!isEnabled)

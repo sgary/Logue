@@ -28,7 +28,7 @@ actor CommunityDetector {
         let entities = await VectorStore.shared.allGraphEntities()
         let relationships = await VectorStore.shared.allGraphRelationships()
         guard !entities.isEmpty else {
-            return "No entities yet — index a meeting or document first."
+            return "还没有实体，请先索引一场会议或一份文档。"
         }
 
         let clusters = connectedComponents(entities: entities, relationships: relationships)
@@ -51,7 +51,7 @@ actor CommunityDetector {
             }
         }
 
-        return "\(built) communities built from \(entities.count) entities"
+        return "已从 \(entities.count) 个实体构建 \(built) 个社区"
     }
 
     // MARK: - Union-Find

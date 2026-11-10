@@ -44,7 +44,7 @@ extension OnboardingView {
             // Action area
             if modelManager.activeModelID != nil {
                 // Complete — auto-advance only once (not when navigating back)
-                Label("AI Model Ready", systemImage: "checkmark.circle.fill")
+                Label("AI 模型已就绪", systemImage: "checkmark.circle.fill")
                     .font(.callout.weight(.medium))
                     .foregroundStyle(AppThemeConstants.success)
                     .task {
@@ -77,46 +77,46 @@ extension OnboardingView {
             } else if hasModelError {
                 // Error — retry button
                 VStack(spacing: 12) {
-                    Text(modelManager.downloadError ?? modelManager.activationError ?? "Unknown error")
+                    Text(modelManager.downloadError ?? modelManager.activationError ?? "未知错误")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: 300)
 
-                    Button("Try Again") {
+                    Button("重试") {
                         modelManager.downloadAndActivate(ModelConfiguration.onboardingModel, autoActivate: true)
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.large)
                     .disabled(isModelBusy)
-                    .accessibilityLabel("Try downloading again")
-                    .accessibilityHint("Retries the AI model download")
+                    .accessibilityLabel("重试下载")
+                    .accessibilityHint("重新尝试下载 AI 模型")
                 }
             } else {
                 // Ready to download
                 VStack(spacing: 12) {
                     if let size = ModelConfiguration.onboardingModel.sizeGB {
-                        Text("~\(String(format: "%.1f", size)) GB download")
+                        Text("下载约 \(String(format: "%.1f", size)) GB")
                             .font(.callout)
                             .foregroundStyle(.tertiary)
                     }
 
-                    Button("Download") {
+                    Button("下载") {
                         modelManager.downloadAndActivate(ModelConfiguration.onboardingModel, autoActivate: true)
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.large)
                     .disabled(isModelBusy)
-                    .accessibilityLabel("Download AI model")
-                    .accessibilityHint("Downloads the AI model required for writing suggestions and meeting summaries")
+                    .accessibilityLabel("下载 AI 模型")
+                    .accessibilityHint("下载写作建议和会议摘要所需的 AI 模型")
                 }
             }
 
             Spacer()
 
-            PrivacyBadge("Models run locally via Apple Silicon ML acceleration.")
+            PrivacyBadge("模型通过 Apple Silicon 机器学习加速在本地运行。")
                 .padding(.bottom, 8)
         }
         .padding(AppThemeConstants.paddingXLarge)
@@ -158,30 +158,29 @@ extension OnboardingView {
 
     var modelPageTitle: String {
         if modelManager.activeModelID != nil {
-            "AI Model Ready"
+            "AI 模型已就绪"
         } else if modelManager.isActivating {
-            "Setting Up AI Model…"
+            "正在设置 AI 模型…"
         } else if modelManager.downloadingID != nil {
-            "Downloading AI Model…"
+            "正在下载 AI 模型…"
         } else if hasModelError {
-            "Download Failed"
+            "下载失败"
         } else {
-            "Download AI Model"
+            "下载 AI 模型"
         }
     }
 
     var modelPageSubtitle: String {
         if modelManager.activeModelID != nil {
-            "Everything is set up for AI-powered features."
+            "AI 功能已全部就绪。"
         } else if modelManager.isActivating {
-            "Preparing the model for first use."
+            "正在准备模型，以供首次使用。"
         } else if modelManager.downloadingID != nil {
-            "This may take a few minutes depending on your connection."
+            "根据网络情况，这可能需要几分钟。"
         } else if hasModelError {
-            "Something went wrong. Please check your connection and try again."
+            "出了点问题。请检查网络连接后重试。"
         } else {
-            "Logue needs a small AI model to power writing suggestions, " +
-                "meeting summaries, and chat. This is a one-time download."
+            "Logue 需要一个小型 AI 模型来支持写作建议、会议摘要和聊天。这是一次性下载。"
         }
     }
 }

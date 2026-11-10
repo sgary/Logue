@@ -29,9 +29,9 @@ struct MeetingSpeakersPanelView: View {
             } else if speakerStats.isEmpty {
                 EmptyStateView(
                     icon: "person.2",
-                    title: "No speakers detected",
-                    description: "Speaker labels are assigned during transcription based on audio patterns.",
-                    actionLabel: canStartMeeting ? "Start Meeting" : nil,
+                    title: "未检测到发言人",
+                    description: "转写过程中会根据音频特征分配发言人标签。",
+                    actionLabel: canStartMeeting ? "开始会议" : nil,
                     action: canStartMeeting ? {
                         Task { await recorder.startRecording(for: meeting) }
                     } : nil
@@ -60,7 +60,7 @@ struct MeetingSpeakersPanelView: View {
                             .listRowSeparator(.visible)
                         }
                     } header: {
-                        Text("\(speakerStats.count) speakers")
+                        Text("\(speakerStats.count) 位发言人")
                     }
                 }
                 .listStyle(.inset)
@@ -78,11 +78,11 @@ struct MeetingSpeakersPanelView: View {
                 .scaleEffect(0.9)
 
             VStack(spacing: 4) {
-                Text("Identifying speakers...")
+                Text("正在识别发言人…")
                     .font(.callout.weight(.medium))
                     .foregroundStyle(.primary)
 
-                Text("Analyzing audio patterns to detect speakers")
+                Text("正在分析音频特征以识别发言人")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -106,7 +106,7 @@ struct MeetingSpeakersPanelView: View {
         let totalDuration = meeting.segments.reduce(0.0) { $0 + $1.duration }
 
         for segment in meeting.segments {
-            let speaker = segment.speakerLabel ?? "Unknown"
+            let speaker = segment.speakerLabel ?? "未知发言人"
             let existing = stats[speaker, default: (count: 0, duration: 0)]
             stats[speaker] = (count: existing.count + 1, duration: existing.duration + segment.duration)
         }
@@ -162,7 +162,7 @@ private struct SpeakerRow: View {
                     .accessibilityHidden(true)
 
                 if isEditing {
-                    TextField("Speaker name", text: $newName, onCommit: onCommitEdit)
+                    TextField("发言人名称", text: $newName, onCommit: onCommitEdit)
                         .textFieldStyle(.roundedBorder)
                         .font(.callout)
                         .focused($isFieldFocused)
@@ -176,12 +176,12 @@ private struct SpeakerRow: View {
                             }
                         }
 
-                    Button("Done", action: onCommitEdit)
+                    Button("完成", action: onCommitEdit)
                         .font(.caption)
                         .buttonStyle(.bordered)
                         .controlSize(.mini)
 
-                    Button("Cancel", action: onCancelEdit)
+                    Button("取消", action: onCancelEdit)
                         .font(.caption)
                         .buttonStyle(.plain)
                         .foregroundStyle(.secondary)
@@ -189,14 +189,14 @@ private struct SpeakerRow: View {
                     Text(stat.name)
                         .font(.callout.weight(.medium))
                         .onTapGesture(count: 2, perform: onStartEdit)
-                        .help("Double-click to rename")
-                        .accessibilityLabel("Speaker \(stat.name)")
-                        .accessibilityHint("Double-tap to rename")
+                        .help("双击重命名")
+                        .accessibilityLabel("发言人 \(stat.name)")
+                        .accessibilityHint("双击以重命名")
                         .contextMenu {
                             Button {
                                 onStartEdit()
                             } label: {
-                                Label("Rename Speaker", systemImage: "pencil")
+                                Label("重命名发言人", systemImage: "pencil")
                             }
                         }
 
@@ -213,7 +213,7 @@ private struct SpeakerRow: View {
                 .tint(color ?? AppThemeConstants.accent)
 
             HStack(spacing: 12) {
-                Label("\(stat.segmentCount) segments", systemImage: "text.bubble")
+                Label("\(stat.segmentCount) 条转写", systemImage: "text.bubble")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
                 Label(TranscriptSegment.formatTime(stat.totalDuration), systemImage: "clock")

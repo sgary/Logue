@@ -80,14 +80,14 @@ struct DailyDigestCard: View {
                 .foregroundStyle(AppThemeConstants.warning)
 
             VStack(alignment: .leading, spacing: 2) {
-                Text("Daily Digest")
+                Text("每日摘要")
                     .font(.subheadline.weight(.semibold))
                 if meetings.isEmpty {
-                    Text("Latest digest")
+                    Text("最新摘要")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 } else {
-                    Text("\(meetings.count) meeting\(meetings.count == 1 ? "" : "s") today")
+                    Text("今天 \(meetings.count) 场会议")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -112,7 +112,7 @@ struct DailyDigestCard: View {
                     isCollapsed.toggle()
                 }
             }
-            .accessibilityLabel(isCollapsed ? "Expand daily digest" : "Collapse daily digest")
+            .accessibilityLabel(isCollapsed ? "展开每日摘要" : "收起每日摘要")
         }
         .padding(AppThemeConstants.paddingLarge)
     }
@@ -129,7 +129,7 @@ struct DailyDigestCard: View {
             // Key Highlights
             if !digest.keyHighlights.isEmpty {
                 VStack(alignment: .leading, spacing: 6) {
-                    Label("Key Highlights", systemImage: "star.fill")
+                    Label("关键亮点", systemImage: "star.fill")
                         .font(.callout.weight(.semibold))
                         .foregroundStyle(AppThemeConstants.warning)
 
@@ -150,7 +150,7 @@ struct DailyDigestCard: View {
             // Pending Actions
             if !digest.pendingActions.isEmpty {
                 VStack(alignment: .leading, spacing: 6) {
-                    Label("Needs Attention", systemImage: "exclamationmark.circle.fill")
+                    Label("需要关注", systemImage: "exclamationmark.circle.fill")
                         .font(.callout.weight(.semibold))
                         .foregroundStyle(AppThemeConstants.error)
 
@@ -174,7 +174,7 @@ struct DailyDigestCard: View {
                     Image(systemName: "arrow.right.circle.fill")
                         .font(.caption)
                         .foregroundStyle(AppThemeConstants.accent)
-                    Text("Tomorrow: \(focus)")
+                    Text("明天：\(focus)")
                         .font(.callout)
                         .foregroundStyle(.secondary)
                 }
@@ -195,7 +195,7 @@ struct DailyDigestCard: View {
         HStack(spacing: 10) {
             ProgressView()
                 .scaleEffect(0.7)
-            Text("Generating your daily digest...")
+            Text("正在生成每日摘要…")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -210,7 +210,7 @@ struct DailyDigestCard: View {
             HStack(spacing: 8) {
                 ProgressView()
                     .scaleEffect(0.7)
-                Text("Updating digest...")
+                Text("正在更新摘要…")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -228,7 +228,7 @@ struct DailyDigestCard: View {
                 HStack(spacing: 6) {
                     Image(systemName: "sparkles")
                         .font(.caption)
-                    Text("Generate Digest")
+                    Text("生成摘要")
                         .font(.callout.weight(.medium))
                 }
             }
@@ -236,8 +236,8 @@ struct DailyDigestCard: View {
             .tint(AppThemeConstants.accent)
             .controlSize(.small)
             .disabled(LLMEngineStatus.shared.isBusy)
-            .accessibilityLabel("Generate daily digest")
-            .accessibilityHint("Uses AI to summarize today's meetings into a digest")
+            .accessibilityLabel("生成每日摘要")
+            .accessibilityHint("使用 AI 将今天的会议总结为摘要")
         }
         .frame(maxWidth: .infinity)
         .padding(16)
@@ -258,7 +258,7 @@ struct DailyDigestCard: View {
             store.saveDigestCache()
             digestError = nil
         } else {
-            digestError = "Digest generation failed. Tap to retry."
+            digestError = "摘要生成失败。点按重试。"
         }
         isGenerating = false
     }

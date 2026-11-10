@@ -46,7 +46,7 @@ struct SemanticSearchMeetingsTool: AgentTool {
 
         var output = "Found \(hits.count) semantically-related meeting snippet(s) for \"\(query)\":\n"
         for (idx, hit) in hits.enumerated() {
-            let title = hit.metadata?["title"] ?? "Untitled meeting"
+            let title = hit.metadata?["title"] ?? "未命名会议"
             let date = hit.metadata?["date"].flatMap { Self.formatISODate($0) } ?? "unknown date"
             output += "\n\(idx + 1). [Meeting \"\(title)\", \(date)]"
             output += "\n   ID: \(hit.itemID)"
@@ -105,7 +105,7 @@ struct SemanticSearchDocumentsTool: AgentTool {
 
         var output = "Found \(hits.count) semantically-related document snippet(s) for \"\(query)\":\n"
         for (idx, hit) in hits.enumerated() {
-            let title = hit.metadata?["title"] ?? "Untitled document"
+            let title = hit.metadata?["title"] ?? "未命名文档"
             output += "\n\(idx + 1). [Document \"\(title)\"]"
             output += "\n   ID: \(hit.itemID)"
             output += "\n   Score: \(String(format: "%.2f", hit.score))"

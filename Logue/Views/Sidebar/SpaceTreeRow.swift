@@ -33,7 +33,7 @@ struct SpaceTreeRow: View {
     // MARK: - Rename Field
 
     private var renameField: some View {
-        TextField("Space name", text: $renameSpaceText, onCommit: {
+        TextField("空间名称", text: $renameSpaceText, onCommit: {
             spaceStore.renameSpace(id: space.id, newName: renameSpaceText)
             isFieldFocused = false
             renamingSpaceID = nil
@@ -104,7 +104,7 @@ struct SpaceTreeRow: View {
             .sidebarRowMenu(isSelected: selection == .space(space.id), revealed: $isHovered) {
                 spaceContextMenu
             }
-            .accessibilityLabel("\(space.name) space, \(totalCount) items")
+            .accessibilityLabel("\(space.name) 空间，\(totalCount) 个项目")
             .popover(isPresented: Binding(
                 get: { iconPickerSpaceID == space.id },
                 set: {
@@ -194,7 +194,7 @@ struct SpaceTreeRow: View {
     /// The inline field a document or meeting row turns into while it is being renamed. One field
     /// serves both, the same way one `renamingChildID` does.
     private func childRenameField(commit: @escaping () -> Void) -> some View {
-        TextField("Name", text: $childRenameText, onCommit: {
+        TextField("名称", text: $childRenameText, onCommit: {
             commit()
             renamingChildID = nil
         })
@@ -225,23 +225,23 @@ struct SpaceTreeRow: View {
         Button {
             selection = .document(doc.id)
         } label: {
-            Label("Open", systemImage: "doc.text")
+            Label("打开", systemImage: "doc.text")
         }
         Button {
             documentStore.togglePin(id: doc.id)
         } label: {
             Label(
-                doc.isPinned ? "Unpin" : "Pin",
+                doc.isPinned ? "取消置顶" : "置顶",
                 systemImage: doc.isPinned ? "pin.slash" : "pin"
             )
         }
         Button {
             beginRenamingChild(id: doc.id, currentTitle: doc.title)
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         if !spaceStore.topLevelSpaces.isEmpty || doc.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: doc.spaceID) { newSpaceID in
                     documentStore.moveDocument(id: doc.id, toSpace: newSpaceID)
                 }
@@ -250,13 +250,13 @@ struct SpaceTreeRow: View {
         Button {
             PDFExportService.export(document: doc)
         } label: {
-            Label("Export as PDF", systemImage: "arrow.down.doc")
+            Label("导出为 PDF", systemImage: "arrow.down.doc")
         }
         Divider()
         Button(role: .destructive) {
             documentStore.deleteDocument(id: doc.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 
@@ -266,31 +266,31 @@ struct SpaceTreeRow: View {
         Button {
             selection = .meeting(meeting.id)
         } label: {
-            Label("Open", systemImage: meeting.recordingMode.iconName)
+            Label("打开", systemImage: meeting.recordingMode.iconName)
         }
         Button {
             meetingStore.togglePin(id: meeting.id)
         } label: {
             Label(
-                meeting.isPinned ? "Unpin" : "Pin",
+                meeting.isPinned ? "取消置顶" : "置顶",
                 systemImage: meeting.isPinned ? "pin.slash" : "pin"
             )
         }
         Button {
             beginRenamingChild(id: meeting.id, currentTitle: meeting.title)
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         Button {
             meetingStore.toggleArchive(id: meeting.id)
         } label: {
             Label(
-                meeting.isArchived ? "Unarchive" : "Archive",
+                meeting.isArchived ? "取消归档" : "归档",
                 systemImage: meeting.isArchived ? "tray.and.arrow.up" : "archivebox"
             )
         }
         if !spaceStore.topLevelSpaces.isEmpty || meeting.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: meeting.spaceID) { newSpaceID in
                     meetingStore.moveMeeting(id: meeting.id, toSpace: newSpaceID)
                 }
@@ -300,7 +300,7 @@ struct SpaceTreeRow: View {
         Button(role: .destructive) {
             meetingStore.trashMeeting(id: meeting.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 
@@ -311,13 +311,13 @@ struct SpaceTreeRow: View {
         Button {
             iconPickerSpaceID = space.id
         } label: {
-            Label("Change Icon", systemImage: "star.square.on.square")
+            Label("更改图标", systemImage: "star.square.on.square")
         }
         Button {
             renameSpaceText = space.name
             renamingSpaceID = space.id
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
 
         Divider()
@@ -328,18 +328,18 @@ struct SpaceTreeRow: View {
             if !space.isExpanded {
                 spaceStore.toggleExpanded(id: space.id)
             }
-            if let child = spaceStore.createSpace(name: "New Space", parentID: space.id) {
+            if let child = spaceStore.createSpace(name: "新建空间", parentID: space.id) {
                 selection = .space(child.id)
                 renameSpaceText = ""
                 renamingSpaceID = child.id
             }
         } label: {
-            Label("New Sub-Space", systemImage: "folder.badge.plus")
+            Label("新建子空间", systemImage: "folder.badge.plus")
         }
         Button {
             presentImportPanel()
         } label: {
-            Label("Import Files…", systemImage: "square.and.arrow.down")
+            Label("导入文件…", systemImage: "square.and.arrow.down")
         }
 
         Divider()
@@ -350,7 +350,7 @@ struct SpaceTreeRow: View {
             }
             spaceStore.deleteSpace(id: space.id)
         } label: {
-            Label("Delete Space", systemImage: "trash")
+            Label("删除空间", systemImage: "trash")
         }
     }
 
@@ -372,10 +372,10 @@ struct SpaceTreeRow: View {
         // gone. Choosing the vault itself now imports it whole, subfolders becoming sub-spaces.
         panel.canChooseDirectories = true
         panel.canChooseFiles = true
-        panel.title = "Import into \(String(space.name.prefix(60)))"
+        panel.title = "导入到 \(String(space.name.prefix(60)))"
         panel.message = """
-        Choose markdown or text files, or a folder to import a whole vault — \
-        its subfolders become spaces.
+        选择 Markdown 或文本文件，或选择一个文件夹以导入整个仓库 — \
+        其子文件夹将变为空间。
         """
 
         // The panel outlives this call, so read `space.id` now rather than through
@@ -393,8 +393,8 @@ struct SpaceTreeRow: View {
             // with no sidebar row, reachable only through All Documents.
             guard spaces.space(for: spaceID) != nil else {
                 presentAlert(
-                    title: "Nothing was imported",
-                    message: "The space these files were headed for no longer exists."
+                    title: "未导入任何内容",
+                    message: "这些文件原本要导入的空间已不存在。"
                 )
                 return
             }
@@ -422,7 +422,7 @@ struct SpaceTreeRow: View {
                 // the documents actually landed — `importFiles` makes the same re-check
                 // and files at the top level if the space went away mid-read.
                 let summary = outcome
-                let name = spaces.space(for: spaceID).map { String($0.name.prefix(60)) } ?? "Documents"
+                let name = spaces.space(for: spaceID).map { String($0.name.prefix(60)) } ?? "文档"
                 DispatchQueue.main.async { reportOutcome(summary, destination: name) }
             }
         }
@@ -436,23 +436,23 @@ struct SpaceTreeRow: View {
     /// so counting them by reason says the useful thing in one line each.
     private func reportOutcome(_ outcome: DocumentStore.ImportOutcome, destination: String) {
         guard !outcome.wasCancelled else {
-            presentAlert(title: "Import cancelled", message: "Nothing was imported.")
+            presentAlert(title: "导入已取消", message: "未导入任何内容。")
             return
         }
 
         let title = outcome.imported > 0
-            ? "Imported \(outcome.imported) \(outcome.imported == 1 ? "document" : "documents") into \(destination)"
-            : "Nothing was imported"
+            ? "已将 \(outcome.imported) 个文档导入到 \(destination)"
+            : "未导入任何内容"
 
         var lines: [String] = []
         if let stoppedEarly = outcome.stoppedEarly {
             // Said first, because everything below it describes a partial read. Reporting a
             // truncated walk as though it were the whole folder is the worst version of this.
-            lines.append("That folder holds \(stoppedEarly), so only part of it was read.")
+            lines.append("该文件夹\(stoppedEarly)，因此只读取了其中一部分。")
             lines.append("")
         }
         if !outcome.skipped.isEmpty {
-            lines.append("Skipped \(outcome.skipped.count):")
+            lines.append("已跳过 \(outcome.skipped.count) 个：")
             let byReason = Dictionary(grouping: outcome.skipped, by: \.reason)
             for reason in byReason.keys.sorted() {
                 guard let files = byReason[reason], let first = files.first else { continue }
@@ -464,7 +464,7 @@ struct SpaceTreeRow: View {
                 } else if files.count <= Self.namedSkipLimit {
                     lines.append("  \(files.map(\.file).joined(separator: ", ")) — \(reason)")
                 } else {
-                    lines.append("  \(files.count) files — \(reason)")
+                    lines.append("  \(files.count) 个文件 — \(reason)")
                 }
             }
         }

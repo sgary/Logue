@@ -42,13 +42,13 @@ final class VoicePushToTalkManager {
 
         // Don't conflict with an active meeting recording
         if RecordingSessionManager.shared.isRecording {
-            errorMessage = "Microphone is in use by an active recording."
+            errorMessage = "麦克风正被一个进行中的录音使用。"
             logger.warning("Push-to-talk blocked — meeting recording active")
             return
         }
 
         guard let speechRecognizer, speechRecognizer.isAvailable else {
-            errorMessage = "Speech recognition is not available."
+            errorMessage = "语音识别不可用。"
             logger.warning("Speech recognizer unavailable")
             return
         }
@@ -97,7 +97,7 @@ final class VoicePushToTalkManager {
         } catch {
             inputNode.removeTap(onBus: 0)
             logger.error("Failed to start audio engine: \(error.localizedDescription, privacy: .public)")
-            errorMessage = "Failed to start microphone."
+            errorMessage = "无法启动麦克风。"
             cleanup()
         }
     }

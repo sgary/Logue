@@ -67,8 +67,8 @@ struct HomeAskPromptsTests {
         let fresh = HomeAskPrompts.meeting(title: "Q3 Review", isSummarized: false)
         let done = HomeAskPrompts.meeting(title: "Q3 Review", isSummarized: true)
         #expect(fresh != done)
-        #expect(fresh.contains("Summarize"))
-        #expect(done.contains("decisions"))
+        #expect(fresh.contains("总结会议"))
+        #expect(done.contains("决策"))
         #expect(fresh.contains("Q3 Review"))
         #expect(done.contains("Q3 Review"))
     }
@@ -89,15 +89,15 @@ struct HomeAskPromptsTests {
 
     @Test("Each object type gets its own verb")
     func eachTypeHasItsOwnVerb() {
-        #expect(HomeAskPrompts.document(title: "Memo").contains("continue writing"))
-        #expect(HomeAskPrompts.actionItem(title: "Send pricing").contains("What do I need to do"))
-        #expect(HomeAskPrompts.calendarEvent(title: "Design sync").contains("Prepare me for"))
+        #expect(HomeAskPrompts.document(title: "Memo").contains("继续写"))
+        #expect(HomeAskPrompts.actionItem(title: "Send pricing").contains("需要我做什么"))
+        #expect(HomeAskPrompts.calendarEvent(title: "Design sync").contains("做准备"))
     }
 
     @Test("A blank title of each kind names its kind")
     func blankTitlesNameTheirKind() {
-        #expect(HomeAskPrompts.meeting(title: "", isSummarized: false).contains("Untitled meeting"))
-        #expect(HomeAskPrompts.document(title: "").contains("Untitled document"))
+        #expect(HomeAskPrompts.meeting(title: "", isSummarized: false).contains("未命名会议"))
+        #expect(HomeAskPrompts.document(title: "").contains("未命名文档"))
     }
 
     @Test("An apostrophe in a title survives, because it delimits nothing")

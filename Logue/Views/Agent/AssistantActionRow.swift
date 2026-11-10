@@ -35,7 +35,7 @@ struct AssistantActionRow: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help("Copy response")
+            .help("复制回复")
 
             Button {
                 MessageActions.saveAsNote(content)
@@ -58,7 +58,7 @@ struct AssistantActionRow: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help("Save response as a note")
+            .help("将回复保存为笔记")
 
             Button {
                 MessageActions.exportMarkdown(content)
@@ -70,7 +70,7 @@ struct AssistantActionRow: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help("Export response as Markdown")
+            .help("将回复导出为 Markdown")
 
             Button {
                 if readAloud.isSpeaking(content: content) {
@@ -86,7 +86,7 @@ struct AssistantActionRow: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help(readAloud.isSpeaking(content: content) ? "Stop reading" : "Read aloud")
+            .help(readAloud.isSpeaking(content: content) ? "停止朗读" : "朗读")
 
             if detectedTable != nil {
                 Button {
@@ -94,7 +94,7 @@ struct AssistantActionRow: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "chart.bar")
-                        Text("Visualize")
+                        Text("可视化")
                     }
                     .font(.system(size: 11))
                     .foregroundStyle(AppThemeConstants.brandPrimary)
@@ -103,7 +103,7 @@ struct AssistantActionRow: View {
                     .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
-                .help("Render the table as a chart")
+                .help("将表格渲染为图表")
             }
         }
         .padding(.leading, 10)

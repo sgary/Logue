@@ -16,7 +16,7 @@ struct StopGeneratingPill: View {
             HStack(spacing: 6) {
                 Image(systemName: "stop.fill")
                     .font(.system(size: 9, weight: .bold))
-                Text("Stop generating")
+                Text("停止生成")
                     .font(.system(size: 11, weight: .medium))
                 Text("⎋")
                     .font(.system(size: 10, weight: .medium).monospaced())
@@ -35,6 +35,6 @@ struct StopGeneratingPill: View {
         }
         .buttonStyle(.plain)
         .keyboardShortcut(.escape, modifiers: [])
-        .accessibilityLabel("Stop generating response")
+        .accessibilityLabel("停止生成回复")
     }
 }

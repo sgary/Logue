@@ -74,7 +74,7 @@ final class CalendarManager {
         upcomingEvents = ekEvents.map { event in
             CalendarEvent(
                 id: event.eventIdentifier,
-                title: event.title ?? "Untitled",
+                title: event.title ?? "未命名",
                 startDate: event.startDate,
                 endDate: event.endDate,
                 location: event.location,
@@ -104,7 +104,7 @@ final class CalendarManager {
             .map { event in
                 CalendarEvent(
                     id: event.eventIdentifier,
-                    title: event.title ?? "Untitled",
+                    title: event.title ?? "未命名",
                     startDate: event.startDate,
                     endDate: event.endDate,
                     location: event.location,

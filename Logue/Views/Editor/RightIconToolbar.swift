@@ -20,6 +20,19 @@ enum EditorTool: String, CaseIterable, Identifiable, ToolbarTool {
         rawValue
     }
 
+    var displayName: String {
+        switch self {
+        case .aiChat: "AI 助手"
+        case .proofreader: "校对"
+        case .review: "审阅"
+        case .rewrite: "重写"
+        case .vocabularyEnhancement: "词汇增强"
+        case .verify: "校验"
+        case .links: "链接"
+        case .properties: "属性"
+        }
+    }
+
     var icon: String {
         switch self {
         case .aiChat: "sparkles.rectangle.stack"
@@ -36,16 +49,16 @@ enum EditorTool: String, CaseIterable, Identifiable, ToolbarTool {
     var toolGroup: String {
         switch self {
         case .aiChat, .proofreader, .review:
-            "Write"
+            "写作"
         case .rewrite, .vocabularyEnhancement, .verify:
-            "Refine"
+            "润色"
         case .links, .properties:
-            "Connect"
+            "关联"
         }
     }
 
     static var groupOrder: [String] {
-        ["Write", "Refine", "Connect"]
+        ["写作", "润色", "关联"]
     }
 
     var preferredPanelWidth: CGFloat {

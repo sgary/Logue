@@ -26,7 +26,13 @@ enum CalloutKind: String, CaseIterable, Codable, Sendable {
 
     /// Title shown when the callout has no title of its own. Matches GitHub's rendering.
     var defaultTitle: String {
-        rawValue.capitalized
+        switch self {
+        case .note: "注意"
+        case .tip: "提示"
+        case .important: "重要"
+        case .warning: "警告"
+        case .caution: "小心"
+        }
     }
 
     var symbolName: String {

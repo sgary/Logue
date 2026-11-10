@@ -36,7 +36,7 @@ struct QuickPromptChip: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(label)
-        .accessibilityHint("Sends this prompt to the AI assistant")
+        .accessibilityHint("将此提示发送给 AI 助手")
         .onHover { hovering in
             withAnimation(.easeInOut(duration: 0.15)) { isHovered = hovering }
         }

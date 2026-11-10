@@ -83,7 +83,7 @@ struct VerifyPanelView: View {
                 } label: {
                     HStack(spacing: 4) {
                         ProgressView().controlSize(.mini)
-                        Text("Cancel")
+                        Text("取消")
                     }
                 }
                 .buttonStyle(.bordered)
@@ -92,7 +92,7 @@ struct VerifyPanelView: View {
                 Button(action: verifyAll) {
                     HStack(spacing: 4) {
                         Image(systemName: "shield.lefthalf.filled")
-                        Text("Verify")
+                        Text("校验")
                     }
                 }
                 .buttonStyle(.borderedProminent)
@@ -166,16 +166,16 @@ private extension VerifyPanelView {
                 if let error = aiDetectionError {
                     errorView(error)
                 } else if isVerifying, aiDetectionResult == nil {
-                    loadingView("Analyzing for AI patterns…")
+                    loadingView("正在分析 AI 生成特征…")
                 } else if let result = aiDetectionResult {
                     DetectorResultBody(result: result)
                         .padding(AppThemeConstants.paddingLarge)
                 } else {
                     emptyView(
                         icon: "waveform.badge.magnifyingglass",
-                        title: "No analysis yet",
-                        subtitle: "Press Verify to estimate how AI-authored this document looks. " +
-                            "Heuristic only — phrase density, burstiness, vocabulary diversity."
+                        title: "还没有分析",
+                        subtitle: "点击“校验”来估算本文档的 AI 生成程度。" +
+                            "仅基于启发式判断——短语密度、突发性和词汇多样性。"
                     )
                 }
             }
@@ -224,9 +224,9 @@ private extension VerifyPanelView {
             if let error = factsError {
                 errorView(error)
             } else if isVerifying, factChecks.isEmpty {
-                loadingView("Checking facts…")
+                loadingView("正在核查事实…")
             } else if factChecks.isEmpty {
-                emptyView(icon: "scalemass", title: "No fact checks yet", subtitle: "Verify factual claims in your writing")
+                emptyView(icon: "scalemass", title: "还没有事实核查", subtitle: "核查文中的事实性陈述")
             } else {
                 ScrollView {
                     VStack(spacing: 0) {
@@ -305,11 +305,11 @@ private extension VerifyPanelView {
     var categoryToggles: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("Categories")
+                Text("类别")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Spacer()
-                Button(enabledCategories.count == PIICategory.allCases.count ? "Deselect all" : "Select all") {
+                Button(enabledCategories.count == PIICategory.allCases.count ? "取消全选" : "全选") {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         if enabledCategories.count == PIICategory.allCases.count {
                             enabledCategories.removeAll()
@@ -349,14 +349,14 @@ private extension VerifyPanelView {
         if isVerifying {
             VStack(spacing: 12) {
                 ProgressView().controlSize(.regular)
-                Text("Analyzing document for personal data…").font(.caption).foregroundStyle(.secondary)
+                Text("正在分析文档中的个人数据…").font(.caption).foregroundStyle(.secondary)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 40)
         } else if let error = privacyError {
             VStack(spacing: 10) {
                 Image(systemName: "exclamationmark.triangle.fill").font(.largeTitle).foregroundStyle(AppThemeConstants.warning)
-                Text("Scan failed").font(.subheadline.weight(.medium))
+                Text("扫描失败").font(.subheadline.weight(.medium))
                 Text(error).font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
@@ -368,8 +368,8 @@ private extension VerifyPanelView {
                     Circle().fill(AppThemeConstants.brandPrimary.opacity(0.12)).frame(width: 56, height: 56)
                     Image(systemName: "checkmark.shield.fill").font(.title2).foregroundStyle(AppThemeConstants.brandPrimary)
                 }
-                Text("No PII detected").font(.subheadline.weight(.medium))
-                Text("Your document appears safe to share.").font(.caption).foregroundStyle(.secondary)
+                Text("未检测到个人身份信息").font(.subheadline.weight(.medium))
+                Text("文档看起来可以安全分享。").font(.caption).foregroundStyle(.secondary)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 40)
@@ -379,8 +379,8 @@ private extension VerifyPanelView {
                     Circle().fill(AppThemeConstants.brandPrimary.opacity(0.12)).frame(width: 56, height: 56)
                     Image(systemName: "eye.slash").font(.title2).foregroundStyle(AppThemeConstants.brandPrimary)
                 }
-                Text("Scan for personal data").font(.subheadline.weight(.medium))
-                Text("Select categories above and press Verify Content.").font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                Text("扫描个人数据").font(.subheadline.weight(.medium))
+                Text("在上方选择类别，然后点击“校验”。").font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center)
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 40)
@@ -398,7 +398,7 @@ private extension VerifyPanelView {
 
     var summaryBar: some View {
         HStack(spacing: 12) {
-            Label("\(filteredFindings.count) found", systemImage: "exclamationmark.triangle.fill")
+            Label("发现 \(filteredFindings.count) 项", systemImage: "exclamationmark.triangle.fill")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(highestRisk.color)
             Spacer()
@@ -435,7 +435,7 @@ private extension VerifyPanelView {
                 let response = try await LLMEngine.shared.chat(prompt: prompt)
                 let parsed = self.parseFactChecks(response)
                 guard !parsed.isEmpty else {
-                    throw NSError(domain: "VerifyPanel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse fact check results."])
+                    throw NSError(domain: "VerifyPanel", code: 0, userInfo: [NSLocalizedDescriptionKey: "无法解析事实核查结果。"])
                 }
                 return parsed
             }
@@ -642,12 +642,12 @@ private extension VerifyPanelView {
     func errorView(_ message: String) -> some View {
         VStack(spacing: 10) {
             Image(systemName: "exclamationmark.triangle").font(.largeTitle).foregroundStyle(AppThemeConstants.error)
-            Text("Analysis Failed").font(.subheadline.weight(.medium))
+            Text("分析失败").font(.subheadline.weight(.medium))
             Text(message).font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center).padding(.horizontal, 20)
             Button(action: verifyAll) {
                 HStack(spacing: 4) {
                     Image(systemName: "arrow.clockwise")
-                    Text("Retry")
+                    Text("重试")
                 }
             }
             .buttonStyle(.bordered)
@@ -659,7 +659,7 @@ private extension VerifyPanelView {
     }
 
     func riskBadge(for risk: PIIRisk) -> some View {
-        Text(risk.rawValue)
+        Text(risk.displayName)
             .font(.system(size: 9, weight: .bold))
             .padding(.horizontal, 5)
             .padding(.vertical, 2)
@@ -670,7 +670,7 @@ private extension VerifyPanelView {
     func riskCountBadge(count: Int, risk: PIIRisk) -> some View {
         HStack(spacing: 3) {
             Text("\(count)").font(.caption2.weight(.bold))
-            Text(risk.rawValue).font(.caption2)
+            Text(risk.displayName).font(.caption2)
         }
         .foregroundStyle(risk.badgeColor)
     }

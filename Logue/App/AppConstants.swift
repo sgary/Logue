@@ -242,8 +242,8 @@ enum AppConstants {
     }
 
     // A-N13: Default title strings
-    static let defaultDocumentTitle = "Untitled Document"
-    static let defaultMeetingTitle = "Untitled Meeting"
+    static let defaultDocumentTitle = "未命名文档"
+    static let defaultMeetingTitle = "未命名会议"
 
     // MARK: - Centralized Delays
 

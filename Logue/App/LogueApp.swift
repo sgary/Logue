@@ -52,38 +52,38 @@ struct LogueApp: App {
         .defaultSize(width: 1280, height: 800)
         .commands {
             CommandGroup(replacing: .newItem) {
-                Button("New Document") {
+                Button("新建文档") {
                     DocumentStore.shared.createDocument()
                 }
                 .keyboardShortcut("n", modifiers: .command)
 
-                Button("New Meeting") {
+                Button("新建会议") {
                     MeetingStore.shared.createMeeting()
                 }
                 .keyboardShortcut("n", modifiers: [.command, .shift])
 
                 Divider()
 
-                Button("New Chat") {
+                Button("新建聊天") {
                     NotificationCenter.default.post(name: .chatNewConversation, object: nil)
                 }
                 .keyboardShortcut("l", modifiers: .command)
 
-                Button("Focus Chat Input") {
+                Button("聚焦聊天输入框") {
                     NotificationCenter.default.post(name: .chatFocusInput, object: nil)
                 }
                 .keyboardShortcut("l", modifiers: [.command, .shift])
             }
 
             CommandGroup(after: .newItem) {
-                Button("Quick Open…") {
+                Button("快速打开…") {
                     NotificationCenter.default.post(name: .openQuickOpenPalette, object: nil)
                 }
                 .keyboardShortcut("p", modifiers: .command)
             }
 
             CommandGroup(after: .importExport) {
-                Button("Export Meeting…") {
+                Button("导出会议…") {
                     NotificationCenter.default.post(name: .openMeetingExportPanel, object: nil)
                 }
                 .keyboardShortcut("e", modifiers: .command)
@@ -92,12 +92,12 @@ struct LogueApp: App {
             CommandGroup(after: .appSettings) {
                 Button(
                     action: { HelpMenuActions.checkForUpdates() },
-                    label: { Label("Check for Updates…", systemImage: "arrow.triangle.2.circlepath") }
+                    label: { Label("检查更新…", systemImage: "arrow.triangle.2.circlepath") }
                 )
             }
 
             CommandGroup(after: .pasteboard) {
-                Button("Paste Without Formatting") {
+                Button("粘贴为纯文本") {
                     NSApp.sendAction(#selector(NSTextView.pasteAsPlainText(_:)), to: nil, from: nil)
                 }
                 .keyboardShortcut("v", modifiers: [.command, .shift])
@@ -110,11 +110,11 @@ struct LogueApp: App {
                 // the same physical position — is bound in `MainWindowView` instead. Not as
                 // a second menu item, because SwiftUI allows one shortcut per button and a
                 // second button would list "Zoom In" twice in the View menu.
-                Button("Zoom In") { EditorZoom.mutatePersisted { $0.zoomIn() } }
+                Button("放大") { EditorZoom.mutatePersisted { $0.zoomIn() } }
                     .keyboardShortcut("+", modifiers: .command)
-                Button("Zoom Out") { EditorZoom.mutatePersisted { $0.zoomOut() } }
+                Button("缩小") { EditorZoom.mutatePersisted { $0.zoomOut() } }
                     .keyboardShortcut("-", modifiers: .command)
-                Button("Actual Size") { EditorZoom.mutatePersisted { $0.reset() } }
+                Button("实际大小") { EditorZoom.mutatePersisted { $0.reset() } }
                     .keyboardShortcut("0", modifiers: .command)
 
                 Divider()
@@ -139,34 +139,34 @@ struct LogueApp: App {
 
                 Divider()
 
-                Button("Documentation") { HelpMenuActions.openDocumentation() }
-                Button("Keyboard Shortcuts") { HelpMenuActions.openKeyboardShortcuts() }
+                Button("使用文档") { HelpMenuActions.openDocumentation() }
+                Button("键盘快捷键") { HelpMenuActions.openKeyboardShortcuts() }
                 Button(UICopy.WhatsNew.chromeExtensionMenuItem) {
                     HelpMenuActions.openChromeExtension()
                 }
 
                 Divider()
 
-                Button("Report Bug / Issue") { HelpMenuActions.reportBug() }
-                Button("Contact Support") { HelpMenuActions.contactSupport() }
-                Menu("Troubleshooting") {
-                    Button("See Resource Usage") { HelpMenuActions.openResourceUsage() }
-                    Menu("Clear Cache") {
-                        Button("Clear Cache and Quit") { TroubleshootingActions.clearCacheAndQuit() }
-                        Button("Clear Cache and Restart") { TroubleshootingActions.clearCacheAndRestart() }
+                Button("报告问题") { HelpMenuActions.reportBug() }
+                Button("联系支持") { HelpMenuActions.contactSupport() }
+                Menu("故障排查") {
+                    Button("查看资源占用") { HelpMenuActions.openResourceUsage() }
+                    Menu("清除缓存") {
+                        Button("清除缓存并退出") { TroubleshootingActions.clearCacheAndQuit() }
+                        Button("清除缓存并重新启动") { TroubleshootingActions.clearCacheAndRestart() }
                     }
-                    Button("Reset Application Data") { TroubleshootingActions.resetApplicationData() }
+                    Button("重置应用数据") { TroubleshootingActions.resetApplicationData() }
                 }
 
                 Divider()
 
-                Button("Privacy Policy") { HelpMenuActions.openPrivacyPolicy() }
-                Button("Terms of Service") { HelpMenuActions.openTermsOfService() }
+                Button("隐私政策") { HelpMenuActions.openPrivacyPolicy() }
+                Button("服务条款") { HelpMenuActions.openTermsOfService() }
 
                 Divider()
 
-                Button("Join Us on LinkedIn") { HelpMenuActions.joinLinkedIn() }
-                Button("About Us") { HelpMenuActions.openAboutUs() }
+                Button("在 LinkedIn 上关注我们") { HelpMenuActions.joinLinkedIn() }
+                Button("关于我们") { HelpMenuActions.openAboutUs() }
             }
         }
 

@@ -57,7 +57,7 @@ final class AgentDictationService {
         currentTranscript = ""
 
         guard recognizer?.isAvailable == true else {
-            lastError = "Speech recognition is unavailable on this device."
+            lastError = "此设备不支持语音识别。"
             return false
         }
 
@@ -65,7 +65,7 @@ final class AgentDictationService {
         // can suspend between resume and use.
         let speechStatus = await Self.requestSpeechAuthorization()
         guard speechStatus == .authorized else {
-            lastError = "Speech recognition permission was not granted."
+            lastError = "未获得语音识别权限。"
             return false
         }
         guard !isRecording else { return true }
@@ -75,7 +75,7 @@ final class AgentDictationService {
             isRecording = true
             return true
         } catch {
-            lastError = "Could not start dictation: \(error.localizedDescription)"
+            lastError = "无法启动语音输入：\(error.localizedDescription)"
             logger.error("Dictation start failed: \(error.localizedDescription, privacy: .public)")
             tearDown()
             return false

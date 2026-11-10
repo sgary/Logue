@@ -93,8 +93,8 @@ struct SidebarRowMenu<MenuContent: View>: ViewModifier {
         .opacity(isRevealed ? 1 : 0)
         .allowsHitTesting(isRevealed)
         .animation(.easeInOut(duration: AppThemeConstants.hoverDuration), value: isRevealed)
-        .accessibilityLabel("More actions")
-        .accessibilityHint("Opens the same actions as Control-clicking this row")
+        .accessibilityLabel("更多操作")
+        .accessibilityHint("打开与此行按住 Control 键点按相同的操作")
     }
 
     /// The row's own hover highlight: the accent the selected row is painted in, at the lighter

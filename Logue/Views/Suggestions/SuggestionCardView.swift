@@ -27,7 +27,7 @@ struct SuggestionCardView: View {
                 }
                 .buttonStyle(.plain)
                 .opacity(isHovered ? 1 : 0.4)
-                .help("Dismiss")
+                .help("忽略")
             }
 
             // ── Replacement preview (strikethrough → arrow → replacement) ──
@@ -58,12 +58,12 @@ struct SuggestionCardView: View {
             // ── Action buttons ────────────────────────────────────────
             HStack(spacing: 8) {
                 if suggestion.replacement != suggestion.original {
-                    Button("Accept") { onAccept() }
+                    Button("接受") { onAccept() }
                         .buttonStyle(.borderedProminent)
                         .tint(AppThemeConstants.accent)
                         .controlSize(.small)
                 }
-                Button("Dismiss") { onDismiss() }
+                Button("忽略") { onDismiss() }
                     .buttonStyle(.plain)
                     .foregroundStyle(.secondary)
                     .controlSize(.small)
@@ -95,7 +95,7 @@ struct SuggestionCardView: View {
         .onHover { isHovered = $0 }
         .animation(.easeInOut(duration: 0.15), value: isHovered)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Suggestion: replace \(suggestion.original) with \(suggestion.replacement)")
+        .accessibilityLabel("建议：将\(suggestion.original)替换为\(suggestion.replacement)")
         .accessibilityHint(suggestion.explanation)
     }
 }

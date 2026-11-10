@@ -10,11 +10,11 @@ enum SpeakerShortLabel {
         let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return "" }
 
-        // "Speaker 3" — the automatic naming — collapses to S3, which is what makes a column of
-        // these readable at a glance.
+        // "Speaker 3" / "发言人 3" — automatic naming — collapses to S3, which is what
+        // makes a column of these readable at a glance.
         let words = trimmed.split(separator: " ")
         if words.count == 2,
-           words[0].lowercased() == "speaker",
+           words[0].lowercased() == "speaker" || words[0] == "发言人",
            words[1].allSatisfy(\.isNumber)
         {
             return "S\(words[1])"

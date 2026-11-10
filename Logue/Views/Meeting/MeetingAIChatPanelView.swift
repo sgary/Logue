@@ -32,9 +32,9 @@ struct MeetingAIChatPanelView: View {
             {
                 EmptyStateView(
                     icon: "sparkles",
-                    title: "Record a meeting first",
-                    description: "Once you have a transcript, you can ask questions about what was discussed.",
-                    actionLabel: "Start Meeting",
+                    title: "请先录制会议",
+                    description: "获得转写文本后，你可以就讨论内容提问。",
+                    actionLabel: "开始会议",
                     action: {
                         Task { await recorder.startRecording(for: meeting) }
                     }
@@ -65,8 +65,8 @@ struct MeetingAIChatPanelView: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
-            .help("Clear chat")
-            .accessibilityLabel("Clear chat")
+            .help("清空聊天")
+            .accessibilityLabel("清空聊天")
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 6)
@@ -88,9 +88,9 @@ struct MeetingAIChatPanelView: View {
             }
 
             VStack(spacing: 4) {
-                Text("Ask about this meeting")
+                Text("询问这场会议")
                     .font(.headline)
-                Text("Ask questions about what was discussed.")
+                Text("就讨论的内容提问。")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -98,22 +98,22 @@ struct MeetingAIChatPanelView: View {
             .padding(.horizontal, 12)
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("Ideas for you")
+                Text("试试这些问题")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
 
                 FlowLayout(spacing: 6) {
-                    QuickPromptChip(label: "Key decisions", icon: "checkmark.seal") {
-                        sendMessage("What were the key decisions?")
+                    QuickPromptChip(label: "关键决策", icon: "checkmark.seal") {
+                        sendMessage("这次会议做出了哪些关键决策？")
                     }
-                    QuickPromptChip(label: "Action items", icon: "checklist") {
-                        sendMessage("List all action items")
+                    QuickPromptChip(label: "待办事项", icon: "checklist") {
+                        sendMessage("列出所有待办事项")
                     }
-                    QuickPromptChip(label: "Summarize", icon: "text.justify.left") {
-                        sendMessage("Summarize this meeting in 3 bullet points")
+                    QuickPromptChip(label: "总结", icon: "text.justify.left") {
+                        sendMessage("用 3 个要点总结这次会议")
                     }
-                    QuickPromptChip(label: "Follow-ups", icon: "arrow.uturn.forward") {
-                        sendMessage("What topics need follow-up from this meeting?")
+                    QuickPromptChip(label: "后续跟进", icon: "arrow.uturn.forward") {
+                        sendMessage("这次会议有哪些话题需要后续跟进？")
                     }
                 }
             }
@@ -194,8 +194,8 @@ struct MeetingAIChatPanelView: View {
                         .foregroundStyle(voiceManager.isRecording ? AppThemeConstants.error : .secondary)
                 }
                 .buttonStyle(.plain)
-                .help(voiceManager.isRecording ? "Stop voice input" : "Voice input")
-                .accessibilityLabel(voiceManager.isRecording ? "Stop voice input" : "Start voice input")
+                .help(voiceManager.isRecording ? "停止语音输入" : "语音输入")
+                .accessibilityLabel(voiceManager.isRecording ? "停止语音输入" : "开始语音输入")
 
                 if isTyping {
                     Button(action: stopGeneration) {
@@ -204,8 +204,8 @@ struct MeetingAIChatPanelView: View {
                             .foregroundStyle(AppThemeConstants.accent)
                     }
                     .buttonStyle(.plain)
-                    .help("Stop generating")
-                    .accessibilityLabel("Stop generating")
+                    .help("停止生成")
+                    .accessibilityLabel("停止生成")
                 } else {
                     Button(action: submit) {
                         Image(systemName: "arrow.up.circle.fill")
@@ -217,8 +217,8 @@ struct MeetingAIChatPanelView: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || LLMEngineStatus.shared.isBusy)
-                    .help("Send message")
-                    .accessibilityLabel("Send message")
+                    .help("发送消息")
+                    .accessibilityLabel("发送消息")
                 }
             }
             .padding(.horizontal, 12)
@@ -326,7 +326,7 @@ struct MeetingAIChatPanelView: View {
                     let errorText: String = if let engineErr = error as? LLMError {
                         engineErr.localizedDescription
                     } else {
-                        "Something went wrong: \(error.localizedDescription)"
+                        "出了点问题：\(error.localizedDescription)"
                     }
                     messages[idx].content = errorText
                 }
@@ -419,7 +419,7 @@ private struct MeetingChatBubble: View {
                     }
                     .buttonStyle(.plain)
                     .animation(.easeInOut(duration: 0.2), value: copiedFeedback)
-                    .help(copiedFeedback ? "Copied!" : "Copy to clipboard")
+                    .help(copiedFeedback ? "已复制！" : "复制到剪贴板")
                 }
                 .opacity(isHovered || copiedFeedback ? 1 : 0)
             }

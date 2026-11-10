@@ -110,13 +110,13 @@ struct SpaceContentPane: View {
             }
         }
         .background(AppThemeConstants.contentBackground)
-        .navigationTitle(space?.name ?? "Space")
+        .navigationTitle(space?.name ?? "空间")
         .navigationSubtitle(subtitle)
-        .searchable(text: $searchText, placement: .toolbar, prompt: "Search space")
+        .searchable(text: $searchText, placement: .toolbar, prompt: "搜索空间")
         .toolbar {
             spaceToolbarContent
         }
-        .alert("Rename Space", isPresented: Binding(
+        .alert("重命名空间", isPresented: Binding(
             get: { renamingSpaceID != nil },
             set: {
                 if !$0 {
@@ -124,9 +124,9 @@ struct SpaceContentPane: View {
                 }
             }
         )) {
-            TextField("Space name", text: $renameText)
-            Button("Cancel", role: .cancel) { renamingSpaceID = nil }
-            Button("Rename") {
+            TextField("空间名称", text: $renameText)
+            Button("取消", role: .cancel) { renamingSpaceID = nil }
+            Button("重命名") {
                 let trimmed = renameText.trimmingCharacters(in: .whitespacesAndNewlines)
                 if let id = renamingSpaceID, !trimmed.isEmpty {
                     spaceStore.renameSpace(id: id, newName: trimmed)
@@ -134,7 +134,7 @@ struct SpaceContentPane: View {
                 renamingSpaceID = nil
             }
         }
-        .alert("Rename Document", isPresented: Binding(
+        .alert("重命名文档", isPresented: Binding(
             get: { renamingDocID != nil },
             set: {
                 if !$0 {
@@ -142,9 +142,9 @@ struct SpaceContentPane: View {
                 }
             }
         )) {
-            TextField("Title", text: $renameText)
-            Button("Cancel", role: .cancel) { renamingDocID = nil }
-            Button("Rename") {
+            TextField("标题", text: $renameText)
+            Button("取消", role: .cancel) { renamingDocID = nil }
+            Button("重命名") {
                 let trimmed = renameText.trimmingCharacters(in: .whitespacesAndNewlines)
                 if let id = renamingDocID, !trimmed.isEmpty {
                     documentStore.renameDocument(id: id, newTitle: trimmed)
@@ -152,7 +152,7 @@ struct SpaceContentPane: View {
                 renamingDocID = nil
             }
         }
-        .alert("Rename Meeting", isPresented: Binding(
+        .alert("重命名会议", isPresented: Binding(
             get: { renamingMeetingID != nil },
             set: {
                 if !$0 {
@@ -160,9 +160,9 @@ struct SpaceContentPane: View {
                 }
             }
         )) {
-            TextField("Title", text: $renameText)
-            Button("Cancel", role: .cancel) { renamingMeetingID = nil }
-            Button("Rename") {
+            TextField("标题", text: $renameText)
+            Button("取消", role: .cancel) { renamingMeetingID = nil }
+            Button("重命名") {
                 let trimmed = renameText.trimmingCharacters(in: .whitespacesAndNewlines)
                 if let id = renamingMeetingID, !trimmed.isEmpty {
                     meetingStore.renameMeeting(id: id, newTitle: trimmed)
@@ -192,12 +192,12 @@ struct SpaceContentPane: View {
         let mc = meetings.count
         var parts: [String] = []
         if dc > 0 {
-            parts.append("\(dc) doc\(dc == 1 ? "" : "s")")
+            parts.append("\(dc) 个文档")
         }
         if mc > 0 {
-            parts.append("\(mc) meeting\(mc == 1 ? "" : "s")")
+            parts.append("\(mc) 场会议")
         }
-        return parts.joined(separator: ", ")
+        return parts.joined(separator: "，")
     }
 
     // MARK: - Breadcrumb
@@ -242,7 +242,7 @@ struct SpaceContentPane: View {
         }
         ToolbarItemGroup(placement: .primaryAction) {
             aiPopoverButton(
-                "Space Summary",
+                "空间摘要",
                 icon: "text.justify.leading",
                 key: "summary",
                 isPresented: $showSummaryPopover,
@@ -250,7 +250,7 @@ struct SpaceContentPane: View {
             )
 
             aiPopoverButton(
-                "Action Items",
+                "待办事项",
                 icon: "checklist",
                 key: "actionItems",
                 isPresented: $showActionItemsPopover,
@@ -258,7 +258,7 @@ struct SpaceContentPane: View {
             )
 
             aiPopoverButton(
-                "Decisions",
+                "决策",
                 icon: "checkmark.seal",
                 key: "decisions",
                 isPresented: $showDecisionsPopover,
@@ -266,7 +266,7 @@ struct SpaceContentPane: View {
             )
 
             aiPopoverButton(
-                "Status Update",
+                "状态更新",
                 icon: "doc.badge.gearshape",
                 key: "statusUpdate",
                 isPresented: $showStatusUpdatePopover,
@@ -279,14 +279,14 @@ struct SpaceContentPane: View {
 
     private var filterSortMenu: some View {
         Menu {
-            Section("View") {
+            Section("视图") {
                 Button {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         viewModeRaw = ContentViewMode.list.rawValue
                     }
                 } label: {
                     HStack {
-                        Label("List", systemImage: "list.bullet")
+                        Label("列表", systemImage: "list.bullet")
                         if viewMode == .list {
                             Spacer(); Image(systemName: "checkmark")
                         }
@@ -298,14 +298,14 @@ struct SpaceContentPane: View {
                     }
                 } label: {
                     HStack {
-                        Label("Grid", systemImage: "square.grid.2x2")
+                        Label("网格", systemImage: "square.grid.2x2")
                         if viewMode == .grid {
                             Spacer(); Image(systemName: "checkmark")
                         }
                     }
                 }
             }
-            Section("Filter") {
+            Section("筛选") {
                 ForEach(SpaceFilterType.allCases, id: \.self) { type in
                     Button {
                         filterType = type
@@ -320,7 +320,7 @@ struct SpaceContentPane: View {
                     }
                 }
             }
-            Section("Sort By") {
+            Section("排序方式") {
                 ForEach(SpaceSortOrder.allCases, id: \.self) { order in
                     Button {
                         sortOrder = order
@@ -338,7 +338,7 @@ struct SpaceContentPane: View {
         } label: {
             Image(systemName: "ellipsis.circle")
         }
-        .help("Options")
+        .help("选项")
     }
 
     private func aiPopoverButton(
@@ -376,31 +376,31 @@ struct SpaceContentPane: View {
                 let doc = documentStore.createDocument(inSpace: spaceID)
                 documentStore.selectedDocumentID = doc.id
             } label: {
-                Label("New Document", systemImage: "doc.badge.plus")
+                Label("新建文档", systemImage: "doc.badge.plus")
             }
             Button {
                 let meeting = meetingStore.createMeeting(
-                    title: "Meeting \(Date.now.formatted(date: .abbreviated, time: .shortened))",
+                    title: "会议 \(Date.now.formatted(date: .abbreviated, time: .shortened))",
                     inSpace: spaceID
                 )
                 meetingStore.selectedMeetingID = meeting.id
             } label: {
-                Label("New Meeting", systemImage: "waveform.badge.plus")
+                Label("新建会议", systemImage: "waveform.badge.plus")
             }
             Divider()
             Button {
-                if let sub = spaceStore.createSpace(name: "New Space", parentID: spaceID) {
+                if let sub = spaceStore.createSpace(name: "新建空间", parentID: spaceID) {
                     renameText = ""
                     renamingSpaceID = sub.id
                 }
             } label: {
-                Label("New Sub-Space", systemImage: "folder.badge.plus")
+                Label("新建子空间", systemImage: "folder.badge.plus")
             }
         } label: {
             Image(systemName: "plus")
-                .accessibilityLabel("New Item")
+                .accessibilityLabel("新建项目")
         }
-        .help("New item")
+        .help("新建项目")
     }
 
     // MARK: - Content List
@@ -463,21 +463,21 @@ struct SpaceContentPane: View {
 
     private var emptyState: some View {
         ContentUnavailableView {
-            Label("Empty Space", systemImage: "folder")
+            Label("空空间", systemImage: "folder")
         } description: {
-            Text("Add documents, meetings, or sub-spaces to organize your work.")
+            Text("添加文档、会议或子空间来整理你的工作。")
         } actions: {
             HStack(spacing: 12) {
-                Button("New Document") {
+                Button("新建文档") {
                     let doc = documentStore.createDocument(inSpace: spaceID)
                     documentStore.selectedDocumentID = doc.id
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(AppThemeConstants.accent)
 
-                Button("New Meeting") {
+                Button("新建会议") {
                     let meeting = meetingStore.createMeeting(
-                        title: "Meeting \(Date.now.formatted(date: .abbreviated, time: .shortened))",
+                        title: "会议 \(Date.now.formatted(date: .abbreviated, time: .shortened))",
                         inSpace: spaceID
                     )
                     meetingStore.selectedMeetingID = meeting.id

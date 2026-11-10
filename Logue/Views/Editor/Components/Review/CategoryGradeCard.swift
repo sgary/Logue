@@ -13,7 +13,7 @@ struct CategoryGradeCard: View {
                     .foregroundStyle(grade.category.color)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(grade.category.rawValue)
+                    Text(grade.category.displayName)
                         .font(.subheadline.weight(.semibold))
                     Text(grade.letterGrade)
                         .font(.caption.weight(.bold))
@@ -51,7 +51,7 @@ struct CategoryGradeCard: View {
                                 Image(systemName: "checkmark.circle.fill")
                                     .foregroundStyle(AppThemeConstants.success)
                                     .font(.caption)
-                                Text("Strengths")
+                                Text("优点")
                                     .font(.caption.weight(.semibold))
                             }
 
@@ -70,7 +70,7 @@ struct CategoryGradeCard: View {
                                 Image(systemName: "arrow.up.circle.fill")
                                     .foregroundStyle(AppThemeConstants.warning)
                                     .font(.caption)
-                                Text("Areas for Improvement")
+                                Text("待改进之处")
                                     .font(.caption.weight(.semibold))
                             }
 

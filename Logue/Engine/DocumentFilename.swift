@@ -17,7 +17,7 @@ enum DocumentFilename {
     /// for a disambiguating suffix and for filesystems that count differently.
     static let maxFilenameBytes = 180
 
-    private static let fallbackStem = "Untitled"
+    private static let fallbackStem = "未命名"
 
     /// A safe filename for `document`, avoiding any name in `taken`.
     /// A safe filename for `document`, avoiding any name in `taken`.

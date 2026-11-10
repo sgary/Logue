@@ -20,11 +20,11 @@ struct SlashCommandView: View {
     private var groupedFiltered: [(title: String, types: [BlockType])] {
         if !filterText.isEmpty {
             let types = filteredTypes
-            return types.isEmpty ? [] : [("Results", types)]
+            return types.isEmpty ? [] : [("结果", types)]
         }
         return BlockType.groupedByCategory.compactMap { group in
             let types = group.types.filter { filteredTypes.contains($0) }
-            return types.isEmpty ? nil : (group.category.rawValue, types)
+            return types.isEmpty ? nil : (group.category.displayName, types)
         }
     }
 
@@ -32,12 +32,12 @@ struct SlashCommandView: View {
         VStack(alignment: .leading, spacing: 0) {
             // Header
             HStack {
-                Text("Blocks")
+                Text("块")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Spacer()
                 if !filterText.isEmpty {
-                    Text("Filtering: \(filterText)")
+                    Text("筛选：\(filterText)")
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
                 }
@@ -52,7 +52,7 @@ struct SlashCommandView: View {
                     Image(systemName: "magnifyingglass")
                         .font(.title3)
                         .foregroundStyle(.tertiary)
-                    Text("No matching blocks")
+                    Text("没有匹配的块")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }

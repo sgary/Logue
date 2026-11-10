@@ -24,7 +24,7 @@ struct PIICategoryCard: View {
                         )
 
                     VStack(alignment: .leading, spacing: 1) {
-                        Text(category.rawValue)
+                        Text(category.displayName)
                             .font(.subheadline.weight(.semibold))
                         Text(category.examples)
                             .font(.caption2)
@@ -40,7 +40,7 @@ struct PIICategoryCard: View {
                         .padding(.horizontal, 7)
                         .padding(.vertical, 3)
                         .background(category.risk.color.opacity(AppThemeConstants.activeOpacity), in: Capsule())
-                        .accessibilityLabel("\(findings.count) findings")
+                        .accessibilityLabel("\(findings.count) 项发现")
 
                     Image(systemName: "chevron.right")
                         .font(.caption2.weight(.semibold))

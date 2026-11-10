@@ -48,7 +48,7 @@ struct HomeSuggestionsTests {
     func theUnsummarizedMeetingIsNamed() {
         let chips = HomeSuggestions.chips(for: Self.stocked)
         #expect(chips.contains { $0.label.contains("Q3 Review") })
-        #expect(chips.contains { $0.prompt.contains("Summarize the meeting") })
+        #expect(chips.contains { $0.prompt.contains("总结会议") })
     }
 
     @Test("Ordering is fixed, so chips do not shuffle between renders")
@@ -66,7 +66,7 @@ struct HomeSuggestionsTests {
         )
         let chips = HomeSuggestions.chips(for: empty)
         #expect(!chips.isEmpty)
-        #expect(chips.contains { $0.label == "What can you do?" })
+        #expect(chips.contains { $0.label == "你能做什么？" })
     }
 
     @Test("A stocked but quiet workspace still offers something")
@@ -75,7 +75,7 @@ struct HomeSuggestionsTests {
             unsummarizedMeetingTitle: nil, overdueCount: 0, meetingsToday: 0, hasAnyContent: true
         )
         #expect(HomeSuggestions.chips(for: quiet) == [
-            HomeSuggestions.Chip(label: "What can you do?", prompt: "What can you do?"),
+            HomeSuggestions.Chip(label: "你能做什么？", prompt: "你能做什么？"),
         ])
     }
 
@@ -86,7 +86,7 @@ struct HomeSuggestionsTests {
         )
         let chips = HomeSuggestions.chips(for: overdueOnly)
         #expect(chips.count == 1)
-        #expect(chips.first?.label == "What’s overdue?")
+        #expect(chips.first?.label == "哪些任务逾期了？")
     }
 
     @Test("A hostile meeting title is sanitized before it reaches a chip label")

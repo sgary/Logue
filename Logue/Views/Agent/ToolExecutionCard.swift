@@ -129,54 +129,54 @@ struct ToolExecutionCard: View {
             if toolCall.status == .running || toolCall.status == .pending {
                 return runningText
             }
-            return "Failed to \(actionVerb)"
+            return "\(actionVerb)失败"
         }
         return completedSummary(from: result.output)
     }
 
     private var pendingApprovalText: String {
         switch toolCall.toolName {
-        case "update_document": "Agent wants to update a document"
-        case "delete_document": "Agent wants to delete a document"
-        case "rename_space": "Agent wants to rename a space"
-        case "delete_space": "Agent wants to delete a space"
-        case "create_calendar_event": "Agent wants to create a calendar event"
-        default: "Agent wants to run \(toolCall.toolName)"
+        case "update_document": "智能体想要更新文档"
+        case "delete_document": "智能体想要删除文档"
+        case "rename_space": "智能体想要重命名空间"
+        case "delete_space": "智能体想要删除空间"
+        case "create_calendar_event": "智能体想要创建日历事件"
+        default: "智能体想要运行 \(toolCall.toolName)"
         }
     }
 
     private var runningText: String {
         switch toolCall.toolName {
-        case "search_meetings": "Searching meetings..."
-        case "list_meetings": "Loading meetings..."
-        case "get_meeting_details": "Loading meeting details..."
-        case "get_transcript": "Loading transcript..."
-        case "get_action_items": "Loading action items..."
-        case "get_daily_digest": "Generating daily digest..."
-        case "list_documents": "Loading documents..."
-        case "search_documents": "Searching documents..."
-        case "get_document": "Loading document..."
-        case "get_upcoming_events": "Checking calendar..."
-        case "create_document": "Creating document..."
-        case "update_document": "Updating document..."
-        case "delete_document": "Deleting document..."
-        case "move_document": "Moving document..."
-        case "add_document_tag": "Adding tag..."
-        case "create_space": "Creating space..."
-        case "rename_space": "Renaming space..."
-        case "delete_space": "Deleting space..."
-        case "create_calendar_event": "Creating calendar event..."
-        case "summarize_document": "Summarizing document..."
-        case "rephrase_text": "Rephrasing text..."
-        case "check_grammar": "Checking grammar..."
-        case "check_clarity": "Checking clarity..."
-        case "detect_tone": "Detecting tone..."
-        case "fact_check_document": "Fact-checking document..."
-        case "detect_pii": "Scanning for PII..."
-        case "list_templates": "Loading templates..."
-        case "create_document_from_template": "Creating from template..."
-        case "export_document_pdf": "Exporting PDF..."
-        default: "Running \(toolCall.toolName)..."
+        case "search_meetings": "正在搜索会议…"
+        case "list_meetings": "正在加载会议…"
+        case "get_meeting_details": "正在加载会议详情…"
+        case "get_transcript": "正在加载转写文本…"
+        case "get_action_items": "正在加载待办事项…"
+        case "get_daily_digest": "正在生成每日摘要…"
+        case "list_documents": "正在加载文档…"
+        case "search_documents": "正在搜索文档…"
+        case "get_document": "正在加载文档内容…"
+        case "get_upcoming_events": "正在检查日历…"
+        case "create_document": "正在创建文档…"
+        case "update_document": "正在更新文档…"
+        case "delete_document": "正在删除文档…"
+        case "move_document": "正在移动文档…"
+        case "add_document_tag": "正在添加标签…"
+        case "create_space": "正在创建空间…"
+        case "rename_space": "正在重命名空间…"
+        case "delete_space": "正在删除空间…"
+        case "create_calendar_event": "正在创建日历事件…"
+        case "summarize_document": "正在总结文档…"
+        case "rephrase_text": "正在改写文本…"
+        case "check_grammar": "正在检查语法…"
+        case "check_clarity": "正在检查清晰度…"
+        case "detect_tone": "正在检测语气…"
+        case "fact_check_document": "正在核查文档事实…"
+        case "detect_pii": "正在扫描个人身份信息…"
+        case "list_templates": "正在加载模板…"
+        case "create_document_from_template": "正在从模板创建…"
+        case "export_document_pdf": "正在导出 PDF…"
+        default: "正在运行 \(toolCall.toolName)…"
         }
     }
 
@@ -189,49 +189,49 @@ struct ToolExecutionCard: View {
         // Read-only meetings
         case "search_meetings":
             if output.starts(with: "No meetings") {
-                return "No matching meetings found"
+                return "没有找到匹配的会议"
             }
-            return count.map { "Found \($0) matching meeting\($0 == 1 ? "" : "s")" } ?? "Searched meetings"
+            return count.map { "找到 \($0) 场匹配的会议" } ?? "已搜索会议"
         case "list_meetings":
-            return count.map { "Loaded \($0) meeting\($0 == 1 ? "" : "s")" } ?? "Listed meetings"
+            return count.map { "已加载 \($0) 场会议" } ?? "已列出会议"
         case "get_meeting_details":
-            return "Loaded meeting details"
+            return "已加载会议详情"
         case "get_transcript":
-            return "Loaded transcript"
+            return "已加载转写文本"
         case "get_action_items":
             if output.starts(with: "No") {
-                return "No action items found"
+                return "没有找到待办事项"
             }
-            return count.map { "Found \($0) action item\($0 == 1 ? "" : "s")" } ?? "Loaded action items"
+            return count.map { "找到 \($0) 个待办事项" } ?? "已加载待办事项"
         case "get_daily_digest":
             if output.contains("No meetings") {
-                return "No meetings today"
+                return "今天没有会议"
             }
-            return count.map { "Summarized \($0) meeting\($0 == 1 ? "" : "s")" } ?? "Generated daily digest"
+            return count.map { "已总结 \($0) 场会议" } ?? "已生成每日摘要"
         // Read-only documents
         case "list_documents":
             if output.starts(with: "No") {
-                return "No documents found"
+                return "没有找到文档"
             }
-            return count.map { "Loaded \($0) document\($0 == 1 ? "" : "s")" } ?? "Listed documents"
+            return count.map { "已加载 \($0) 个文档" } ?? "已列出文档"
         case "search_documents":
             if output.starts(with: "No documents") {
-                return "No matching documents found"
+                return "没有找到匹配的文档"
             }
-            return count.map { "Found \($0) matching document\($0 == 1 ? "" : "s")" } ?? "Searched documents"
+            return count.map { "找到 \($0) 个匹配的文档" } ?? "已搜索文档"
         case "get_document":
-            return "Loaded document content"
+            return "已加载文档内容"
         // Read-only calendar
         case "get_upcoming_events":
             if output.contains("No upcoming") || output.contains("not enabled") {
-                return "No upcoming events"
+                return "没有即将到来的事件"
             }
-            return count.map { "Found \($0) upcoming event\($0 == 1 ? "" : "s")" } ?? "Checked calendar"
+            return count.map { "找到 \($0) 个即将到来的事件" } ?? "已检查日历"
         // Templates & export
         case "list_templates":
-            return count.map { "Loaded \($0) template\($0 == 1 ? "" : "s")" } ?? "Listed templates"
-        case "create_document_from_template": return "Created document from template"
-        case "export_document_pdf": return "Exported PDF"
+            return count.map { "已加载 \($0) 个模板" } ?? "已列出模板"
+        case "create_document_from_template": return "已从模板创建文档"
+        case "export_document_pdf": return "已导出 PDF"
         default:
             return writeOrAISummary()
         }
@@ -243,25 +243,25 @@ struct ToolExecutionCard: View {
     private func writeOrAISummary() -> String {
         let summaries: [String: String] = [
             // Writes
-            "create_document": "Created document",
-            "update_document": "Updated document",
-            "delete_document": "Moved document to trash",
-            "move_document": "Moved document",
-            "add_document_tag": "Added tag",
-            "create_space": "Created space",
-            "rename_space": "Renamed space",
-            "delete_space": "Deleted space",
-            "create_calendar_event": "Created calendar event",
+            "create_document": "已创建文档",
+            "update_document": "已更新文档",
+            "delete_document": "已将文档移到废纸篓",
+            "move_document": "已移动文档",
+            "add_document_tag": "已添加标签",
+            "create_space": "已创建空间",
+            "rename_space": "已重命名空间",
+            "delete_space": "已删除空间",
+            "create_calendar_event": "已创建日历事件",
             // AI
-            "summarize_document": "Summarized document",
-            "rephrase_text": "Rephrased text",
-            "check_grammar": "Checked grammar",
-            "check_clarity": "Checked clarity",
-            "detect_tone": "Detected tone",
-            "fact_check_document": "Fact-checked document",
-            "detect_pii": "Scanned for PII",
+            "summarize_document": "已总结文档",
+            "rephrase_text": "已改写文本",
+            "check_grammar": "已检查语法",
+            "check_clarity": "已检查清晰度",
+            "detect_tone": "已检测语气",
+            "fact_check_document": "已核查文档事实",
+            "detect_pii": "已扫描个人身份信息",
         ]
-        return summaries[toolCall.toolName] ?? "Executed \(toolCall.toolName)"
+        return summaries[toolCall.toolName] ?? "已执行 \(toolCall.toolName)"
     }
 
     /// Extracts the first number from a string (e.g. "Found 5 meeting(s)" → 5).
@@ -272,12 +272,12 @@ struct ToolExecutionCard: View {
 
     private var actionVerb: String {
         switch toolCall.toolName {
-        case "search_meetings", "search_documents": "search"
-        case "list_meetings", "list_documents": "load list"
-        case "get_action_items": "load action items"
-        case "get_daily_digest": "generate digest"
-        case "get_upcoming_events": "check calendar"
-        default: "execute"
+        case "search_meetings", "search_documents": "搜索"
+        case "list_meetings", "list_documents": "加载列表"
+        case "get_action_items": "加载待办事项"
+        case "get_daily_digest": "生成摘要"
+        case "get_upcoming_events": "检查日历"
+        default: "执行"
         }
     }
 

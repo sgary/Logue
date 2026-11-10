@@ -18,7 +18,7 @@ struct LogoBrandView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(height: height)
-                .accessibilityLabel("Logue logo")
+                .accessibilityLabel("Logue 标志")
                 .accessibilityAddTraits(.isImage)
         }
     }

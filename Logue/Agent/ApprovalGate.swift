@@ -115,7 +115,7 @@ actor ApprovalGate {
             return false
         }
 
-        let reason = "Confirm to allow the agent to run \(toolName)."
+        let reason = "确认允许智能体运行 \(toolName)。"
         return await withCheckedContinuation { [context] cont in
             context.evaluatePolicy(policy, localizedReason: reason) { success, _ in
                 cont.resume(returning: success)

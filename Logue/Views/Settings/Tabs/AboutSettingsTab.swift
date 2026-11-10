@@ -10,7 +10,7 @@ struct CheckForUpdatesView: View {
     }
 
     var body: some View {
-        Button("Check for Updates") {
+        Button("检查更新") {
             checkForUpdatesViewModel.checkForUpdates()
         }
         .buttonStyle(.bordered)
@@ -66,11 +66,11 @@ struct AboutSettingsTab: View {
                 Text("Logue")
                     .font(.title.bold())
 
-                Text("Version \(currentAppVersion)")
+                Text("版本 \(currentAppVersion)")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
-                Text("Private AI meeting & writing assistant.\nAll inference runs locally — no network required.")
+                Text("私密的 AI 会议与写作助手。\n所有推理均在本地运行，无需网络。")
                     .font(.callout)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -88,7 +88,7 @@ struct AboutSettingsTab: View {
                     CheckForUpdatesView(updater: updater)
                         .padding(.top, 8)
                 } else {
-                    Text("Update checking unavailable.")
+                    Text("无法检查更新。")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .padding(.top, 8)

@@ -43,7 +43,7 @@ struct MeetingNote: Identifiable, Codable {
 
     init(
         id: UUID = .init(),
-        title: String = "Untitled Meeting",
+        title: String = "未命名会议",
         createdAt: Date = .now,
         modifiedAt: Date = .now,
         duration: TimeInterval = 0,
@@ -190,7 +190,14 @@ enum MeetingTemplate: String, Codable, CaseIterable, Identifiable {
     }
 
     var label: String {
-        rawValue
+        switch self {
+        case .general: "通用"
+        case .oneOnOne: "一对一"
+        case .standup: "每日站会"
+        case .interview: "面试"
+        case .brainstorm: "头脑风暴"
+        case .presentation: "演示"
+        }
     }
 
     var iconName: String {
@@ -206,12 +213,12 @@ enum MeetingTemplate: String, Codable, CaseIterable, Identifiable {
 
     var description: String {
         switch self {
-        case .general: "General-purpose meeting notes"
-        case .oneOnOne: "Feedback, goals, and follow-ups"
-        case .standup: "Yesterday, today, and blockers per person"
-        case .interview: "Candidate assessment and recommendation"
-        case .brainstorm: "Ideas, themes, and next steps"
-        case .presentation: "Key takeaways and audience questions"
+        case .general: "通用会议笔记"
+        case .oneOnOne: "反馈、目标与后续跟进"
+        case .standup: "每个人的昨天、今天与阻碍"
+        case .interview: "候选人评估与建议"
+        case .brainstorm: "想法、主题与后续步骤"
+        case .presentation: "要点与听众提问"
         }
     }
 }
@@ -225,9 +232,9 @@ enum RecordingMode: String, Codable, CaseIterable {
 
     var label: String {
         switch self {
-        case .inPerson: "In-Person (Mic)"
-        case .onlineMeeting: "Online Meeting (System Audio)"
-        case .voiceNote: "Voice Note"
+        case .inPerson: "现场（麦克风）"
+        case .onlineMeeting: "在线会议（系统音频）"
+        case .voiceNote: "语音笔记"
         }
     }
 
@@ -379,26 +386,26 @@ enum TranscriptionLanguage: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .auto: "Auto-detect"
-        case .english: "English"
-        case .spanish: "Spanish"
-        case .french: "French"
-        case .german: "German"
-        case .italian: "Italian"
-        case .portuguese: "Portuguese"
-        case .dutch: "Dutch"
-        case .japanese: "Japanese"
-        case .chinese: "Chinese"
-        case .korean: "Korean"
-        case .arabic: "Arabic"
-        case .hindi: "Hindi"
-        case .russian: "Russian"
-        case .turkish: "Turkish"
-        case .polish: "Polish"
+        case .auto: "自动检测"
+        case .english: "英语"
+        case .spanish: "西班牙语"
+        case .french: "法语"
+        case .german: "德语"
+        case .italian: "意大利语"
+        case .portuguese: "葡萄牙语"
+        case .dutch: "荷兰语"
+        case .japanese: "日语"
+        case .chinese: "中文"
+        case .korean: "韩语"
+        case .arabic: "阿拉伯语"
+        case .hindi: "印地语"
+        case .russian: "俄语"
+        case .turkish: "土耳其语"
+        case .polish: "波兰语"
         }
     }
 
-    /// Returns the Locale for SpeechTranscriber, or nil for auto-detect (uses system default).
+    /// Returns the Locale for SpeechTranscriber, or nil to follow the user's system languages.
     var locale: Locale? {
         switch self {
         case .auto: nil
@@ -427,8 +434,8 @@ extension MeetingNote {
     /// Builds a Markdown representation of this meeting's Smart Minutes.
     func smartMinutesMarkdown() -> String {
         var content = "# \(title)\n\n"
-        content += "**Date:** \(createdAt.formatted())  \n"
-        content += "**Duration:** \(formattedDuration)\n\n"
+        content += "**日期：** \(createdAt.formatted())  \n"
+        content += "**时长：** \(formattedDuration)\n\n"
 
         if let summary, !summary.isEmpty {
             content += summary + "\n\n"
@@ -441,7 +448,7 @@ extension MeetingNote {
         }
 
         if !topicKeywords.isEmpty {
-            content += "## Topics\n\n"
+            content += "## 主题\n\n"
             content += topicKeywords.joined(separator: ", ") + "\n"
         }
 
@@ -453,10 +460,10 @@ extension SmartMinutes {
     /// Formats the structured minutes as Markdown sections.
     func toMarkdown() -> String {
         var content = ""
-        content += markdownSection("Key Decisions", items: keyDecisions)
-        content += markdownSection("Discussion Points", items: discussionPoints)
-        content += markdownChecklistSection("Action Items", items: actionItems)
-        content += markdownSection("Follow-ups", items: followUps)
+        content += markdownSection("关键决策", items: keyDecisions)
+        content += markdownSection("讨论要点", items: discussionPoints)
+        content += markdownChecklistSection("待办事项", items: actionItems)
+        content += markdownSection("后续跟进", items: followUps)
         content += attendeeMarkdown()
         return content
     }
@@ -481,7 +488,7 @@ extension SmartMinutes {
 
     private func attendeeMarkdown() -> String {
         guard !attendeeSummary.isEmpty else { return "" }
-        var content = "## Attendees\n\n"
+        var content = "## 参会人员\n\n"
         for attendee in attendeeSummary {
             content += "### \(attendee.name)"
             if attendee.speakingTimePercent > 0 {

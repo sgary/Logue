@@ -7,23 +7,23 @@ struct DocumentStatsCard: View {
     var body: some View {
         InsightCardShell {
             VStack(alignment: .leading, spacing: 6) {
-                CardSectionHeader(icon: "doc.text.magnifyingglass", title: "Documents")
+                CardSectionHeader(icon: "doc.text.magnifyingglass", title: "文档")
 
                 // Row 1: Words + Reading Time
                 HStack(spacing: 12) {
-                    inlineStat(icon: "text.word.spacing", value: formattedWordCount, label: "Words", color: AppThemeConstants.accent)
+                    inlineStat(icon: "text.word.spacing", value: formattedWordCount, label: "字数", color: AppThemeConstants.accent)
                     Divider().frame(height: 16)
-                    inlineStat(icon: "clock", value: formattedReadingTime, label: "Read Time", color: AppThemeConstants.success)
+                    inlineStat(icon: "clock", value: formattedReadingTime, label: "阅读时间", color: AppThemeConstants.success)
                     Spacer()
                 }
 
                 // Row 2: Score breakdown
                 HStack(spacing: 12) {
-                    inlineStat(icon: "star", value: scoreValue(stats.avgReadability), label: "Score", color: AppThemeConstants.warning)
+                    inlineStat(icon: "star", value: scoreValue(stats.avgReadability), label: "评分", color: AppThemeConstants.warning)
                     Divider().frame(height: 16)
-                    inlineStat(icon: "checkmark.seal", value: scoreValue(stats.avgCorrectness), label: "Correct", color: AppThemeConstants.success)
+                    inlineStat(icon: "checkmark.seal", value: scoreValue(stats.avgCorrectness), label: "正确性", color: AppThemeConstants.success)
                     Divider().frame(height: 16)
-                    inlineStat(icon: "eye", value: scoreValue(stats.avgClarity), label: "Clarity", color: .cyan)
+                    inlineStat(icon: "eye", value: scoreValue(stats.avgClarity), label: "清晰度", color: .cyan)
                     Spacer()
                 }
             }
@@ -58,8 +58,8 @@ struct DocumentStatsCard: View {
     private var formattedReadingTime: String {
         let mins = stats.totalReadingMinutes
         if mins >= 60 {
-            return "\(mins / 60)h \(mins % 60)m"
+            return "\(mins / 60) 小时 \(mins % 60) 分钟"
         }
-        return "\(mins)m"
+        return "\(mins) 分钟"
     }
 }

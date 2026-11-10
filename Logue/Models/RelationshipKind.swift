@@ -39,9 +39,9 @@ enum RelationshipKind: String, CaseIterable, Codable, Sendable {
 
     var label: String {
         switch self {
-        case .belongsTo: "Belongs to"
-        case .has: "Has"
-        case .relatedTo: "Related to"
+        case .belongsTo: "属于"
+        case .has: "包含"
+        case .relatedTo: "相关"
         }
     }
 

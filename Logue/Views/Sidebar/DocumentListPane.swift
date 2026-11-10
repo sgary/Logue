@@ -10,6 +10,17 @@ enum DocSortOrder: String, CaseIterable {
     case createdNewest = "Newest Created"
     case createdOldest = "Oldest Created"
 
+    var displayName: String {
+        switch self {
+        case .modifiedNewest: "最近修改"
+        case .modifiedOldest: "最早修改"
+        case .titleAZ: "标题 A–Z"
+        case .titleZA: "标题 Z–A"
+        case .createdNewest: "最近创建"
+        case .createdOldest: "最早创建"
+        }
+    }
+
     /// The nearest equivalent a saved view can store.
     ///
     /// `SavedViewSort` has no created-at cases, so those fall back to modified in the same
@@ -53,6 +64,15 @@ enum DocFilterMode: String, CaseIterable {
     case inbox = "Inbox"
     case pinned = "Pinned"
     case recent = "Recent"
+
+    var displayName: String {
+        switch self {
+        case .all: "全部文档"
+        case .inbox: "收件箱"
+        case .pinned: "已置顶"
+        case .recent: "最近"
+        }
+    }
 
     var icon: String {
         switch self {
@@ -137,8 +157,8 @@ struct DocumentListPane: View {
 
     var body: some View {
         listView
-            .searchable(text: $searchText, prompt: "Search documents")
-            .navigationTitle("Documents")
+            .searchable(text: $searchText, prompt: "搜索文档")
+            .navigationTitle("文档")
             .sheet(item: $organisePrompt) { prompt in
                 OrganiseNamingSheet(prompt: prompt) { name in
                     commitOrganisePrompt(prompt, name: name)
@@ -148,7 +168,7 @@ struct DocumentListPane: View {
                 ToolbarItem(placement: .primaryAction) {
                     Menu {
                         // Filter
-                        Section("Filter") {
+                        Section("筛选") {
                             ForEach(DocFilterMode.allCases, id: \.rawValue) { mode in
                                 Button {
                                     filterMode = mode
@@ -156,7 +176,7 @@ struct DocumentListPane: View {
                                     activeTypeName = nil
                                 } label: {
                                     HStack {
-                                        Label(mode.rawValue, systemImage: mode.icon)
+                                        Label(mode.displayName, systemImage: mode.icon)
                                         if filterMode == mode {
                                             Spacer()
                                             Image(systemName: "checkmark")
@@ -166,7 +186,7 @@ struct DocumentListPane: View {
                             }
                         }
 
-                        Section("Views") {
+                        Section("视图") {
                             ForEach(store.savedViews) { view in
                                 Button {
                                     activeSavedViewID = view.id
@@ -187,25 +207,25 @@ struct DocumentListPane: View {
                             Button {
                                 organisePrompt = .newView
                             } label: {
-                                Label("Save Current Filter as View…", systemImage: "plus")
+                                Label("将当前筛选保存为视图…", systemImage: "plus")
                             }
 
                             if let active = store.savedViews.first(where: { $0.id == activeSavedViewID }) {
                                 Button {
                                     organisePrompt = .renameView(active)
                                 } label: {
-                                    Label("Rename This View…", systemImage: "pencil")
+                                    Label("重命名此视图…", systemImage: "pencil")
                                 }
                                 Button(role: .destructive) {
                                     deleteSavedView(active)
                                 } label: {
-                                    Label("Delete This View", systemImage: "trash")
+                                    Label("删除此视图", systemImage: "trash")
                                 }
                             }
                         }
 
                         if !store.documentTypes.isEmpty {
-                            Section("Types") {
+                            Section("类型") {
                                 ForEach(DocumentType.ordered(store.documentTypes)) { type in
                                     Button {
                                         activeTypeName = type.name
@@ -226,25 +246,25 @@ struct DocumentListPane: View {
                                     Button {
                                         organisePrompt = .renameType(active)
                                     } label: {
-                                        Label("Rename This Type…", systemImage: "pencil")
+                                        Label("重命名此类型…", systemImage: "pencil")
                                     }
                                     Button(role: .destructive) {
                                         deleteType(active)
                                     } label: {
-                                        Label("Delete This Type", systemImage: "trash")
+                                        Label("删除此类型", systemImage: "trash")
                                     }
                                 }
                             }
                         }
 
                         // Sort
-                        Section("Sort By") {
+                        Section("排序方式") {
                             ForEach(DocSortOrder.allCases, id: \.rawValue) { order in
                                 Button {
                                     sortOrder = order
                                 } label: {
                                     HStack {
-                                        Text(order.rawValue)
+                                        Text(order.displayName)
                                         if sortOrder == order {
                                             Spacer()
                                             Image(systemName: "checkmark")
@@ -256,9 +276,9 @@ struct DocumentListPane: View {
                     } label: {
                         Image(systemName: "ellipsis.circle")
                     }
-                    .accessibilityLabel("Filter and Sort Options")
-                    .accessibilityHint("Opens menu to filter, sort, and configure document view")
-                    .help("Filter, Sort & View Options")
+                    .accessibilityLabel("筛选和排序选项")
+                    .accessibilityHint("打开菜单以筛选、排序和配置文档视图")
+                    .help("筛选、排序和视图选项")
                 }
             }
             .onAppear {
@@ -320,7 +340,7 @@ struct DocumentListPane: View {
             Image(systemName: "tray")
                 .font(.caption)
                 .foregroundStyle(.secondary)
-            Text("\(store.inboxCount) to organise")
+            Text("\(store.inboxCount) 个待整理")
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Spacer()
@@ -335,39 +355,39 @@ struct DocumentListPane: View {
     private var bulkActionBar: some View {
         VStack(spacing: 6) {
             HStack(spacing: 8) {
-                Text("\(bulkSelection.count) selected")
+                Text("已选择 \(bulkSelection.count) 个")
                     .font(.caption.weight(.medium))
 
                 Spacer()
 
-                Button("Tag") { showingBulkTagField.toggle() }
+                Button("标签") { showingBulkTagField.toggle() }
                     .font(.caption)
 
                 if filterMode == .inbox {
-                    Button("Organise") {
+                    Button("整理") {
                         store.applyBulk(to: bulkSelection) { BulkAction.markingOrganised($0) }
                         bulkSelection.removeAll()
                     }
                     .font(.caption)
                 }
 
-                Button("Trash", role: .destructive) {
+                Button("移到废纸篓", role: .destructive) {
                     store.applyBulk(to: bulkSelection) { BulkAction.trashing($0) }
                     bulkSelection.removeAll()
                 }
                 .font(.caption)
 
-                Button("Clear") { bulkSelection.removeAll() }
+                Button("清除") { bulkSelection.removeAll() }
                     .font(.caption)
             }
 
             if showingBulkTagField {
                 HStack(spacing: 6) {
-                    TextField("Tag name", text: $bulkTagText)
+                    TextField("标签名称", text: $bulkTagText)
                         .textFieldStyle(.roundedBorder)
                         .font(.caption)
                         .onSubmit(applyBulkTag)
-                    Button("Add", action: applyBulkTag)
+                    Button("添加", action: applyBulkTag)
                         .font(.caption)
                         .disabled(bulkTagText.trimmingCharacters(in: .whitespaces).isEmpty)
                 }
@@ -396,8 +416,8 @@ struct DocumentListPane: View {
                 } else {
                     DocumentListRow(document: doc, isRevealed: revealedRowID == doc.id)
                         .tag(ContentListItem.document(doc.id))
-                        .accessibilityLabel("\(doc.title)\(doc.isPinned ? ", pinned" : "")")
-                        .accessibilityHint("Opens this document")
+                        .accessibilityLabel("\(doc.title)\(doc.isPinned ? "，已置顶" : "")")
+                        .accessibilityHint("打开此文档")
                         .sidebarRowMenu(
                             isSelected: selectedItem == .document(doc.id),
                             revealed: $revealedRowID.isRevealed(doc.id)
@@ -415,7 +435,7 @@ struct DocumentListPane: View {
                 ContentLoadingView()
             } else if filteredDocs.isEmpty {
                 ContentUnavailableView(
-                    searchText.isEmpty ? "No Documents" : "No Results",
+                    searchText.isEmpty ? "没有文档" : "没有结果",
                     systemImage: searchText.isEmpty ? "doc.text" : "magnifyingglass"
                 )
             }
@@ -425,7 +445,7 @@ struct DocumentListPane: View {
     // MARK: - Rename
 
     private func renameField(for doc: WritingDocument) -> some View {
-        TextField("Title", text: $renameText, onCommit: {
+        TextField("标题", text: $renameText, onCommit: {
             store.renameDocument(id: doc.id, newTitle: renameText)
             renamingDocID = nil
         })
@@ -446,7 +466,7 @@ struct DocumentListPane: View {
 
     @ViewBuilder
     private func docContextMenu(for doc: WritingDocument) -> some View {
-        Button(bulkSelection.contains(doc.id) ? "Deselect" : "Select for bulk action") {
+        Button(bulkSelection.contains(doc.id) ? "取消选择" : "选择以批量操作") {
             if bulkSelection.contains(doc.id) {
                 bulkSelection.remove(doc.id)
             } else {
@@ -455,8 +475,8 @@ struct DocumentListPane: View {
         }
 
         if !store.documentTypes.isEmpty {
-            Menu("Set Type") {
-                Button("New Type from This Document…") {
+            Menu("设置类型") {
+                Button("从此文档新建类型…") {
                     organisePrompt = .newType(doc)
                 }
                 Divider()
@@ -466,7 +486,7 @@ struct DocumentListPane: View {
             }
         }
 
-        Button(doc.isOrganised ? "Move to Inbox" : "Mark Organised") {
+        Button(doc.isOrganised ? "移到收件箱" : "标记为已整理") {
             if doc.isOrganised {
                 var updated = doc
                 updated.isOrganised = false
@@ -482,7 +502,7 @@ struct DocumentListPane: View {
             store.togglePin(id: doc.id)
         } label: {
             Label(
-                doc.isPinned ? "Unpin" : "Pin",
+                doc.isPinned ? "取消置顶" : "置顶",
                 systemImage: doc.isPinned ? "pin.slash" : "pin"
             )
         }
@@ -490,10 +510,10 @@ struct DocumentListPane: View {
             renameText = doc.title
             renamingDocID = doc.id
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         if !spaceStore.topLevelSpaces.isEmpty || doc.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: doc.spaceID) { newSpaceID in
                     store.moveDocument(id: doc.id, toSpace: newSpaceID)
                 }
@@ -502,13 +522,13 @@ struct DocumentListPane: View {
         Button {
             PDFExportService.export(document: doc)
         } label: {
-            Label("Export as PDF", systemImage: "arrow.down.doc")
+            Label("导出为 PDF", systemImage: "arrow.down.doc")
         }
         Divider()
         Button(role: .destructive) {
             store.deleteDocument(id: doc.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 }

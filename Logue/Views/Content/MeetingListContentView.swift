@@ -99,7 +99,7 @@ struct MeetingListContentView<TrailingPanel: View>: View {
         if let spaceID, let space = spaceStore.space(for: spaceID) {
             return space.name
         }
-        return "All Meetings"
+        return "全部会议"
     }
 
     private var hasUpcomingEvents: Bool {
@@ -134,21 +134,21 @@ struct MeetingListContentView<TrailingPanel: View>: View {
         }
         .background(AppThemeConstants.contentBackground)
         .onDisappear { searchDebounceTask?.cancel() }
-        .alert("Rename Meeting", isPresented: $showRenameAlert) {
-            TextField("Title", text: $renameText)
-            Button("Rename") {
+        .alert("重命名会议", isPresented: $showRenameAlert) {
+            TextField("标题", text: $renameText)
+            Button("重命名") {
                 if let id = renamingMeetingID {
                     store.renameMeeting(id: id, newTitle: renameText)
                 }
                 renamingMeetingID = nil
             }
-            Button("Cancel", role: .cancel) {
+            Button("取消", role: .cancel) {
                 renamingMeetingID = nil
             }
         }
         .navigationTitle(title)
-        .navigationSubtitle("\(filteredMeetings.count) meeting\(filteredMeetings.count == 1 ? "" : "s")")
-        .searchable(text: $searchText, placement: .toolbar, prompt: "Search meetings")
+        .navigationSubtitle("\(filteredMeetings.count) 场会议")
+        .searchable(text: $searchText, placement: .toolbar, prompt: "搜索会议")
         .refreshable {
             // Exposes macOS's "Refresh" menu item + Cmd-R binding.
             // Calendar events are the only async source-of-truth in this view;
@@ -194,26 +194,26 @@ struct MeetingListContentView<TrailingPanel: View>: View {
         ToolbarItem(placement: .navigation) {
             Button {
                 let meeting = store.createMeeting(
-                    title: "Meeting \(Date.now.formatted(date: .abbreviated, time: .shortened))",
+                    title: "会议 \(Date.now.formatted(date: .abbreviated, time: .shortened))",
                     inSpace: spaceID
                 )
                 store.selectedMeetingID = meeting.id
             } label: {
                 Image(systemName: "plus")
-                    .accessibilityLabel("New Meeting")
+                    .accessibilityLabel("新建会议")
             }
-            .help("New Meeting")
+            .help("新建会议")
         }
         ToolbarItemGroup(placement: .primaryAction) {
             Menu {
                 if spaceID == nil {
-                    Section("Filter") {
+                    Section("筛选") {
                         ForEach(MeetingFilterMode.allCases, id: \.rawValue) { mode in
                             Button {
                                 filterMode = mode
                             } label: {
                                 HStack {
-                                    Label(mode.rawValue, systemImage: mode.icon)
+                                    Label(mode.displayName, systemImage: mode.icon)
                                     if filterMode == mode {
                                         Spacer()
                                         Image(systemName: "checkmark")
@@ -223,13 +223,13 @@ struct MeetingListContentView<TrailingPanel: View>: View {
                         }
                     }
                 }
-                Section("Sort By") {
+                Section("排序方式") {
                     ForEach(MeetingSortOrder.allCases, id: \.rawValue) { order in
                         Button {
                             sortOrderRaw = order.rawValue
                         } label: {
                             HStack {
-                                Text(order.rawValue)
+                                Text(order.displayName)
                                 if sortOrder == order {
                                     Spacer()
                                     Image(systemName: "checkmark")
@@ -241,8 +241,8 @@ struct MeetingListContentView<TrailingPanel: View>: View {
             } label: {
                 Image(systemName: "ellipsis.circle")
             }
-            .help("Filter & Sort")
-            .accessibilityLabel("Filter and Sort")
+            .help("筛选和排序")
+            .accessibilityLabel("筛选和排序")
 
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -253,8 +253,8 @@ struct MeetingListContentView<TrailingPanel: View>: View {
             } label: {
                 Image(systemName: viewMode == .list ? "square.grid.2x2" : "list.bullet")
             }
-            .help(viewMode == .list ? "Grid View" : "List View")
-            .accessibilityLabel(viewMode == .list ? "Switch to grid view" : "Switch to list view")
+            .help(viewMode == .list ? "网格视图" : "列表视图")
+            .accessibilityLabel(viewMode == .list ? "切换到网格视图" : "切换到列表视图")
         }
     }
 
@@ -263,7 +263,7 @@ struct MeetingListContentView<TrailingPanel: View>: View {
     private var tagFilterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 6) {
-                FilterChip(label: "All", isSelected: selectedTagFilter == nil) {
+                FilterChip(label: "全部", isSelected: selectedTagFilter == nil) {
                     filterMode = .all
                     selectedTagFilter = nil
                 }
@@ -379,7 +379,7 @@ struct MeetingListContentView<TrailingPanel: View>: View {
                 Image(systemName: "calendar")
                     .font(.caption)
                     .foregroundStyle(AppThemeConstants.accent)
-                Text("Upcoming")
+                Text("即将开始")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
             }
@@ -400,7 +400,7 @@ struct MeetingListContentView<TrailingPanel: View>: View {
                         HStack(spacing: 4) {
                             Text(event.startDate.formatted(date: .omitted, time: .shortened))
                             Text("\u{00B7}")
-                            Text("\(event.durationMinutes) min")
+                            Text("\(event.durationMinutes) 分钟")
                         }
                         .font(.caption)
                         .foregroundStyle(.tertiary)
@@ -414,7 +414,7 @@ struct MeetingListContentView<TrailingPanel: View>: View {
                         HStack(spacing: 3) {
                             Image(systemName: "record.circle")
                                 .font(.caption2)
-                            Text("Record")
+                            Text("录制")
                                 .font(.caption2.weight(.medium))
                         }
                     }
@@ -438,13 +438,13 @@ struct MeetingListContentView<TrailingPanel: View>: View {
             Label(emptyTitle, systemImage: emptyIcon)
         } description: {
             if searchText.isEmpty {
-                Text("Start a new meeting to begin recording.")
+                Text("新建一场会议开始录制。")
             } else {
-                Text("No meetings match '\(searchText)'")
+                Text("没有与“\(searchText)”匹配的会议")
             }
         } actions: {
             if searchText.isEmpty {
-                Button("New Meeting") {
+                Button("新建会议") {
                     tryCreateMeeting()
                 }
                 .buttonStyle(.borderedProminent)
@@ -456,14 +456,14 @@ struct MeetingListContentView<TrailingPanel: View>: View {
 
     private var emptyTitle: String {
         if !searchText.isEmpty {
-            return "No Results"
+            return "没有结果"
         }
         switch filterMode {
-        case .all: return "No Meetings"
-        case .pinned: return "No Pinned Items"
-        case .recent: return "No Recent Meetings"
-        case .archived: return "No Archived Meetings"
-        case .voiceNotes: return "No Voice Notes"
+        case .all: return "没有会议"
+        case .pinned: return "没有已置顶项目"
+        case .recent: return "没有最近的会议"
+        case .archived: return "没有已归档的会议"
+        case .voiceNotes: return "没有语音笔记"
         }
     }
 
@@ -485,7 +485,7 @@ struct MeetingListContentView<TrailingPanel: View>: View {
     /// Creates a new meeting and opens it.
     private func tryCreateMeeting(template: MeetingTemplate = .general) {
         let meeting = store.createMeeting(
-            title: "Meeting \(Date.now.formatted(date: .abbreviated, time: .shortened))",
+            title: "会议 \(Date.now.formatted(date: .abbreviated, time: .shortened))",
             template: template,
             inSpace: spaceID
         )

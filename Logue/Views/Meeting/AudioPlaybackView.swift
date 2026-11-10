@@ -41,7 +41,7 @@ struct AudioPlaybackView: View {
 
     private var panelHeader: some View {
         HStack {
-            Label("Recording", systemImage: "waveform")
+            Label("录音", systemImage: "waveform")
                 .font(.subheadline.weight(.semibold))
             Spacer()
             if meeting.audioFileURL != nil {
@@ -80,7 +80,7 @@ struct AudioPlaybackView: View {
                 .contentTransition(.symbolEffect(.replace))
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(service.isPlaying ? "Pause" : "Play")
+        .accessibilityLabel(service.isPlaying ? "暂停" : "播放")
     }
 
     private func skipButton(seconds: TimeInterval, icon: String) -> some View {
@@ -90,7 +90,7 @@ struct AudioPlaybackView: View {
                 .foregroundStyle(.secondary)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(seconds < 0 ? "Skip back 15 seconds" : "Skip forward 15 seconds")
+        .accessibilityLabel(seconds < 0 ? "后退 15 秒" : "前进 15 秒")
         .disabled(service.duration == 0)
     }
 
@@ -148,7 +148,7 @@ struct AudioPlaybackView: View {
                         .foregroundStyle(isSelected ? AppThemeConstants.accent : Color.secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("\(rateLabel(rate)) speed")
+                .accessibilityLabel("\(rateLabel(rate)) 倍速")
             }
         }
     }
@@ -161,7 +161,7 @@ struct AudioPlaybackView: View {
 
     private var bookmarkList: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Bookmarks")
+            Text("书签")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(.secondary)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -177,7 +177,7 @@ struct AudioPlaybackView: View {
                         Circle()
                             .fill(bookmark.color.swiftUIColor)
                             .frame(width: 7, height: 7)
-                        Text(bookmark.label.isEmpty ? "Bookmark" : bookmark.label)
+                        Text(bookmark.label.isEmpty ? "书签" : bookmark.label)
                             .font(.caption)
                             .foregroundStyle(.primary)
                             .lineLimit(1)
@@ -194,7 +194,7 @@ struct AudioPlaybackView: View {
                     )
                 }
                 .buttonStyle(.plain)
-                .help("Jump to \(bookmark.formattedTimestamp)")
+                .help("跳转到 \(bookmark.formattedTimestamp)")
             }
         }
     }
@@ -207,10 +207,10 @@ struct AudioPlaybackView: View {
             Image(systemName: "waveform.slash")
                 .font(.largeTitle)
                 .foregroundStyle(.tertiary)
-            Text("No recording available")
+            Text("没有可用的录音")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            Text("Start a recording to capture audio.")
+            Text("开始录音以捕获音频。")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
                 .multilineTextAlignment(.center)

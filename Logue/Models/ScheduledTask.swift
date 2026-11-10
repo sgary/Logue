@@ -28,10 +28,10 @@ struct ScheduledTask: Identifiable, Codable {
 
         var displayName: String {
             switch self {
-            case .dailyDigest: "Daily Digest"
-            case .meetingPrep: "Meeting Prep Briefing"
-            case .autoSummarize: "Auto-Summarize Meetings"
-            case .weeklyReview: "Weekly Action Item Review"
+            case .dailyDigest: "每日摘要"
+            case .meetingPrep: "会议准备简报"
+            case .autoSummarize: "自动总结会议"
+            case .weeklyReview: "每周待办回顾"
             }
         }
 
@@ -47,13 +47,13 @@ struct ScheduledTask: Identifiable, Codable {
         var description: String {
             switch self {
             case .dailyDigest:
-                "Generate a summary digest of all today's meetings at a scheduled time."
+                "在预定时间生成今天所有会议的摘要简报。"
             case .meetingPrep:
-                "Generate a briefing with past context before upcoming calendar meetings."
+                "在即将到来的日历会议前，生成包含过往上下文的简报。"
             case .autoSummarize:
-                "Automatically summarize meetings that don't have summaries yet."
+                "自动为还没有摘要的会议生成摘要。"
             case .weeklyReview:
-                "Compile all pending action items into a weekly review."
+                "把所有待处理的待办事项汇总成一份每周回顾。"
             }
         }
 

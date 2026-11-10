@@ -130,7 +130,7 @@ extension MarkdownNSTextView {
         }
         wikiLinkMenuTarget = target
 
-        let menu = NSMenu(title: "Link to")
+        let menu = NSMenu(title: "链接到")
         for candidate in candidates {
             let item = NSMenuItem(
                 title: candidate.title,

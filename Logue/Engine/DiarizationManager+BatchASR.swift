@@ -1,6 +1,37 @@
 import FluidAudio
 import Foundation
 
+// MARK: - Batch Model Selection
+
+/// Which Parakeet model can re-transcribe a session, given the language it was recorded in.
+///
+/// The batch pass is an upgrade over the live stream for the languages Parakeet covers, and the
+/// opposite for the rest: asked to transcribe Mandarin, Parakeet TDT has no Chinese tokens and
+/// returns English-sounding words, which `TranscriptRealignment` then pours straight into the
+/// transcript the user watched being written. A session with no model therefore skips the pass and
+/// keeps what the live transcriber heard.
+enum BatchASRModel {
+    /// The model for a BCP-47 language code, or `nil` when Parakeet does not cover the language.
+    ///
+    /// v3 covers 25 European languages. Chinese, Japanese, Korean, Arabic and Hindi are not among
+    /// them; FluidAudio's Chinese CTC model emits text only, without the word timings the alignment
+    /// needs, so it cannot stand in here.
+    static func version(forLanguageCode code: String) -> AsrModelVersion? {
+        switch code.lowercased() {
+        case "bg", "hr", "cs", "da", "nl", "en", "et", "fi", "fr", "de", "el", "hu",
+             "it", "lv", "lt", "mt", "pl", "pt", "ro", "sk", "sl", "es", "sv", "ru", "uk":
+            .v3
+        default:
+            nil
+        }
+    }
+
+    /// The model for the language a locale names, or `nil` when there is none.
+    static func version(for locale: Locale) -> AsrModelVersion? {
+        locale.language.languageCode.flatMap { version(forLanguageCode: $0.identifier) }
+    }
+}
+
 // MARK: - Batch ASR (Post-Recording Transcription)
 
 extension DiarizationManager {
@@ -135,18 +166,26 @@ extension DiarizationManager {
 
     /// The Parakeet manager, loading and caching the models on first use.
     /// Shared by the in-memory batch pass and the long-recording file pass.
+    ///
+    /// Returns `nil` without loading anything when this session's language has no batch model:
+    /// the pass then contributes no words, and the live transcript stands.
     func ensureAsrManager() async -> AsrManager? {
+        guard let version = batchASRVersion else {
+            logger.info("Batch ASR skipped: Parakeet has no model for this session's language")
+            return nil
+        }
         if let asrManager {
             return asrManager
         }
         do {
             let models: AsrModels
-            if let cached = Self.cachedAsrModels {
+            if let cached = Self.cachedAsrModels, cached.version == version {
                 models = cached
                 logger.info("Reusing cached ASR models")
             } else {
                 logger.info("Downloading Parakeet TDT models for batch transcription...")
                 models = try await AsrModels.downloadAndLoad(
+                    version: version,
                     progressHandler: { [weak self] progress in
                         Task { @MainActor in
                             self?.modelDownloadProgress = progress.fractionCompleted

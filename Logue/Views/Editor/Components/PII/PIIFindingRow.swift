@@ -25,7 +25,7 @@ struct PIIFindingRow: View {
             Circle()
                 .fill(risk.color)
                 .frame(width: 8, height: 8)
-                .accessibilityLabel("\(risk.rawValue) risk")
+                .accessibilityLabel("\(risk.displayName) 风险")
         }
         .padding(.vertical, 4)
         .padding(.horizontal, 6)

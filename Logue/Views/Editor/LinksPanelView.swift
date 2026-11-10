@@ -24,7 +24,7 @@ struct LinksPanelView: View {
                     let neighborhood = Neighborhood(index: index, sourceID: documentID)
 
                     if neighborhood.isEmpty, index.brokenTargets(from: documentID).isEmpty {
-                        Text("No links yet. Type [[ in the document to link to another document or meeting.")
+                        Text("还没有链接。在文档中输入 [[ 即可链接到其他文档或会议。")
                             .font(.caption)
                             .foregroundStyle(.tertiary)
                             .fixedSize(horizontal: false, vertical: true)
@@ -99,7 +99,7 @@ struct LinksPanelView: View {
 
             ForEach(ids, id: \.self) { id in
                 LinkRow(
-                    title: index.title(of: id) ?? "Untitled",
+                    title: index.title(of: id) ?? "未命名",
                     kind: index.kind(of: id),
                     action: { open(id: id, kind: index.kind(of: id)) }
                 )
@@ -112,12 +112,12 @@ struct LinksPanelView: View {
         if !targets.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
                 LinksSectionHeader(
-                    title: "Unresolved",
+                    title: "无法解析",
                     systemImage: "exclamationmark.triangle",
                     itemCount: targets.count
                 )
 
-                Text("These links point at titles that do not exist.")
+                Text("这些链接指向不存在的标题。")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
 
@@ -208,6 +208,6 @@ private struct LinkRow: View {
         }
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
-        .accessibilityLabel("Open \(title)")
+        .accessibilityLabel("打开 \(title)")
     }
 }

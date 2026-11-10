@@ -43,9 +43,9 @@ final class DiarizationManager {
                 staticLogger.info("Global Sortformer pre-warm skipped: \(error.localizedDescription, privacy: .public)")
             }
         }
-        if cachedAsrModels == nil {
+        if cachedAsrModels == nil, let version = BatchASRModel.version(for: Locale.current) {
             do {
-                cachedAsrModels = try await AsrModels.downloadAndLoad(progressHandler: nil)
+                cachedAsrModels = try await AsrModels.downloadAndLoad(version: version, progressHandler: nil)
                 staticLogger.info("Global ASR model cache warmed")
             } catch {
                 staticLogger.info("Global ASR pre-warm skipped: \(error.localizedDescription, privacy: .public)")
@@ -79,6 +79,11 @@ final class DiarizationManager {
     // Extension-visible: +BatchASR
     /// Parakeet TDT batch ASR — initialized lazily on first post-recording transcription.
     var asrManager: AsrManager?
+    // Extension-visible: +BatchASR
+    /// The batch model this session's language can use, or `nil` when the live transcript is the
+    /// best one available. Set by the recording session before the models are warmed; see
+    /// `BatchASRModel`. Defaults to v3 so a diarizer used outside a session keeps the old behavior.
+    var batchASRVersion: AsrModelVersion? = .v3
     // Extension-visible: +BatchASR
     /// Silero VAD — initialized lazily, used to filter silence hallucinations from batch ASR output.
     var vadManager: VadManager?
@@ -252,7 +257,7 @@ final class DiarizationManager {
 
         var errorDescription: String? {
             switch self {
-            case .audioFormatUnavailable: "Cannot initialize audio format for diarization."
+            case .audioFormatUnavailable: "无法为发言人识别初始化音频格式。"
             }
         }
     }
@@ -308,13 +313,13 @@ final class DiarizationManager {
     /// Eliminates the model-load delay from the post-recording pipeline on every session.
     func prewarmModels() async {
         guard isEnabled else { return }
-        if asrManager == nil {
+        if asrManager == nil, let version = batchASRVersion {
             do {
                 let models: AsrModels
-                if let cached = Self.cachedAsrModels {
+                if let cached = Self.cachedAsrModels, cached.version == version {
                     models = cached
                 } else {
-                    models = try await AsrModels.downloadAndLoad(progressHandler: nil)
+                    models = try await AsrModels.downloadAndLoad(version: version, progressHandler: nil)
                     Self.cachedAsrModels = models
                 }
                 let manager = AsrManager()

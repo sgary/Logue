@@ -58,120 +58,120 @@ extension MeetingStore {
         ]
         let segments = [
             seg(
-                "Alright everyone, thanks for joining. Let's kick off the Q3 campaign planning for Acme.",
+                "大家好，感谢参加。我们开始 Acme 的 Q3 营销活动规划吧。",
                 start: 0,
                 end: 12,
                 speaker: "Sarah"
             ),
             seg(
-                "Thanks Sarah. From our side, the big priority this quarter is the product rebrand launch in August.",
+                "谢谢 Sarah。我们这边本季度最重要的任务是 8 月的产品品牌重塑发布。",
                 start: 12,
                 end: 26,
                 speaker: "James"
             ),
             seg(
-                "That aligns well with what we had in mind. Priya, can you walk us through the creative direction?",
+                "这和我们的想法很一致。Priya，能带我们过一遍创意方向吗？",
                 start: 26,
                 end: 38,
                 speaker: "Sarah"
             ),
             seg(
-                "Sure. We're thinking a clean, modern aesthetic — moving away from the heavy illustration style toward photography-driven layouts.",
+                "好的。我们想走干净、现代的美学风格——从厚重的插画风转向以摄影为主的版式。",
                 start: 38,
                 end: 55,
                 speaker: "Priya"
             ),
             seg(
-                "I love that direction. Our internal brand team has been pushing for exactly that kind of shift.",
+                "我很喜欢这个方向。我们内部的品牌团队一直在推动这样的转变。",
                 start: 55,
                 end: 68,
                 speaker: "James"
             ),
             seg(
-                "Great. In terms of deliverables, we're looking at the landing page, social assets, and a launch video. Timeline is six weeks.",
+                "很好。交付物方面，包括落地页、社交媒体素材和一支发布视频。周期是六周。",
                 start: 68,
                 end: 85,
                 speaker: "Sarah"
             ),
             seg(
-                "Six weeks is tight but doable if we lock the creative brief by end of this week.",
+                "六周有点紧，但如果本周内敲定创意简报，还是可行的。",
                 start: 85,
                 end: 98,
                 speaker: "Priya"
             ),
             seg(
-                "Agreed. James, does the forty-five K budget we discussed still work on your end?",
+                "同意。James，我们之前谈的 4.5 万美元预算你那边还能接受吗？",
                 start: 98,
                 end: 112,
                 speaker: "Sarah"
             ),
             seg(
-                "Yes, that's been approved internally. I'll send the signed SOW over by Thursday.",
+                "可以，内部已经批准了。我周四前把签好的工作说明书发过来。",
                 start: 112,
                 end: 125,
                 speaker: "James"
             ),
             seg(
-                "Perfect. Let's schedule the design review for next Tuesday so we can keep momentum. I'll send the invite out today.",
+                "太好了。我们把设计评审安排在下周二，保持推进节奏。我今天就发出邀请。",
                 start: 125,
                 end: 142,
                 speaker: "Sarah"
             ),
             seg(
-                "Sounds good. I'll have initial mood boards and a style tile ready by then.",
+                "没问题。到时候我会准备好初步的情绪板和风格样稿。",
                 start: 142,
                 end: 155,
                 speaker: "Priya"
             ),
             seg(
-                "This is shaping up nicely. Looking forward to seeing the first concepts. Thanks everyone.",
+                "进展很不错。期待看到第一批概念方案。谢谢大家。",
                 start: 155,
                 end: 168,
                 speaker: "James"
             ),
         ]
         let speakerSegments = [
-            spkSeg(sp1, start: 0, end: 12, text: "Alright everyone, thanks for joining. Let's kick off the Q3 campaign planning for Acme."),
+            spkSeg(sp1, start: 0, end: 12, text: "大家好，感谢参加。我们开始 Acme 的 Q3 营销活动规划吧。"),
             spkSeg(
                 sp2,
                 start: 12,
                 end: 26,
-                text: "Thanks Sarah. From our side, the big priority this quarter is the product rebrand launch in August."
+                text: "谢谢 Sarah。我们这边本季度最重要的任务是 8 月的产品品牌重塑发布。"
             ),
             spkSeg(
                 sp1,
                 start: 26,
                 end: 38,
-                text: "That aligns well with what we had in mind. Priya, can you walk us through the creative direction?"
+                text: "这和我们的想法很一致。Priya，能带我们过一遍创意方向吗？"
             ),
             spkSeg(
                 sp3,
                 start: 38,
                 end: 55,
-                text: "Sure. We're thinking a clean, modern aesthetic — moving away from the heavy illustration style toward photography-driven layouts."
+                text: "好的。我们想走干净、现代的美学风格——从厚重的插画风转向以摄影为主的版式。"
             ),
-            spkSeg(sp2, start: 55, end: 68, text: "I love that direction. Our internal brand team has been pushing for exactly that kind of shift."),
+            spkSeg(sp2, start: 55, end: 68, text: "我很喜欢这个方向。我们内部的品牌团队一直在推动这样的转变。"),
             spkSeg(
                 sp1,
                 start: 68,
                 end: 85,
-                text: "Great. In terms of deliverables, we're looking at the landing page, social assets, and a launch video. Timeline is six weeks."
+                text: "很好。交付物方面，包括落地页、社交媒体素材和一支发布视频。周期是六周。"
             ),
-            spkSeg(sp3, start: 85, end: 98, text: "Six weeks is tight but doable if we lock the creative brief by end of this week."),
-            spkSeg(sp1, start: 98, end: 112, text: "Agreed. James, does the forty-five K budget we discussed still work on your end?"),
-            spkSeg(sp2, start: 112, end: 125, text: "Yes, that's been approved internally. I'll send the signed SOW over by Thursday."),
+            spkSeg(sp3, start: 85, end: 98, text: "六周有点紧，但如果本周内敲定创意简报，还是可行的。"),
+            spkSeg(sp1, start: 98, end: 112, text: "同意。James，我们之前谈的 4.5 万美元预算你那边还能接受吗？"),
+            spkSeg(sp2, start: 112, end: 125, text: "可以，内部已经批准了。我周四前把签好的工作说明书发过来。"),
             spkSeg(
                 sp1,
                 start: 125,
                 end: 142,
-                text: "Perfect. Let's schedule the design review for next Tuesday so we can keep momentum. I'll send the invite out today."
+                text: "太好了。我们把设计评审安排在下周二，保持推进节奏。我今天就发出邀请。"
             ),
-            spkSeg(sp3, start: 142, end: 155, text: "Sounds good. I'll have initial mood boards and a style tile ready by then."),
-            spkSeg(sp2, start: 155, end: 168, text: "This is shaping up nicely. Looking forward to seeing the first concepts. Thanks everyone."),
+            spkSeg(sp3, start: 142, end: 155, text: "没问题。到时候我会准备好初步的情绪板和风格样稿。"),
+            spkSeg(sp2, start: 155, end: 168, text: "进展很不错。期待看到第一批概念方案。谢谢大家。"),
         ]
 
         var meeting = MeetingNote(
-            title: "Acme Q3 Kickoff",
+            title: "Acme Q3 启动会",
             createdAt: date,
             modifiedAt: date,
             recordingMode: .inPerson,
@@ -182,45 +182,45 @@ extension MeetingStore {
         meeting.segments = segments
         meeting.speakerSegments = speakerSegments
         meeting.hasSpeakerData = true
-        meeting.summary = "Kicked off Q3 campaign planning for Acme's product rebrand. Agreed on a photography-driven creative direction, six-week timeline, and $45K budget. Design review scheduled for next Tuesday."
+        meeting.summary = "启动了 Acme 产品品牌重塑的 Q3 营销活动规划。确定以摄影为主导的创意方向、六周交付周期和 4.5 万美元预算。设计评审安排在下周二。"
         meeting.isPinned = true
-        meeting.tags = ["client", "Q3"]
+        meeting.tags = ["客户", "Q3"]
         meeting.actionItems = [
-            ActionItem(title: "Finalize creative brief", assignee: "Priya", dueDescription: "End of this week", dueDate: due(3)),
-            ActionItem(title: "Schedule design review for next Tuesday", assignee: "Sarah", dueDescription: "Today", dueDate: due(0)),
-            ActionItem(title: "Send signed SOW", assignee: "James", dueDescription: "By Thursday", dueDate: due(2)),
+            ActionItem(title: "敲定创意简报", assignee: "Priya", dueDescription: "本周内", dueDate: due(3)),
+            ActionItem(title: "安排下周二的设计评审", assignee: "Sarah", dueDescription: "今天", dueDate: due(0)),
+            ActionItem(title: "发送签字版工作说明书", assignee: "James", dueDescription: "周四前", dueDate: due(2)),
         ]
         meeting.bookmarks = [
-            Bookmark(label: "Creative direction", timestamp: 38, color: .blue),
-            Bookmark(label: "Budget confirmed", timestamp: 98, color: .purple),
-            Bookmark(label: "Next steps", timestamp: 125, color: .orange),
+            Bookmark(label: "创意方向", timestamp: 38, color: .blue),
+            Bookmark(label: "预算已确认", timestamp: 98, color: .purple),
+            Bookmark(label: "下一步", timestamp: 125, color: .orange),
         ]
         meeting.smartMinutes = SmartMinutes(
             keyDecisions: [
-                "Photography-driven creative direction approved over illustration style",
-                "Budget set at $45K — approved by Acme internally",
-                "Six-week delivery timeline starting this week",
+                "确定以摄影为主导的创意方向，取代插画风格",
+                "预算定为 4.5 万美元——Acme 内部已批准",
+                "交付周期六周，从本周开始",
             ],
             discussionPoints: [
-                "Q3 priority is the August product rebrand launch",
-                "Deliverables include landing page, social assets, and launch video",
-                "Creative brief must be locked this week to meet timeline",
+                "Q3 的重点是 8 月的产品品牌重塑发布",
+                "交付物包括落地页、社交媒体素材和发布视频",
+                "为赶上进度，创意简报必须本周敲定",
             ],
             actionItems: [
-                "Priya to finalize creative brief by end of week",
-                "Sarah to send design review invite for next Tuesday",
-                "James to send signed SOW by Thursday",
+                "Priya 本周内敲定创意简报",
+                "Sarah 发出下周二设计评审的邀请",
+                "James 周四前发送签字版工作说明书",
             ],
             followUps: [
-                "Design review next Tuesday with mood boards and style tile",
-                "Priya to prepare initial concepts before review",
+                "下周二设计评审，展示情绪板和风格样稿",
+                "Priya 在评审前准备初步概念方案",
             ],
             attendeeSummary: [
-                AttendeeContribution(name: "Sarah", keyPoints: ["Set timeline and deliverables", "Confirmed budget"], speakingTimePercent: 40),
-                AttendeeContribution(name: "James", keyPoints: ["Confirmed rebrand priority", "Approved budget"], speakingTimePercent: 30),
+                AttendeeContribution(name: "Sarah", keyPoints: ["确定周期和交付物", "确认预算"], speakingTimePercent: 40),
+                AttendeeContribution(name: "James", keyPoints: ["确认品牌重塑优先级", "批准预算"], speakingTimePercent: 30),
                 AttendeeContribution(
                     name: "Priya",
-                    keyPoints: ["Proposed creative direction", "Committed to brief timeline"],
+                    keyPoints: ["提出创意方向", "承诺按时交付简报"],
                     speakingTimePercent: 30
                 ),
             ]
@@ -239,55 +239,55 @@ extension MeetingStore {
         ]
         let segments = [
             seg(
-                "Let's get the retro started. Same format — what went well, what didn't, and what we want to change.",
+                "我们开始回顾吧。还是老格式——哪些做得好、哪些不好、想改进什么。",
                 start: 0,
                 end: 14,
                 speaker: "Alex"
             ),
             seg(
-                "I'll start with what went well. The new component library saved us a ton of time on the settings page redesign.",
+                "我先说做得好的地方。新的组件库让设置页改版省了大量时间。",
                 start: 14,
                 end: 28,
                 speaker: "Dana"
             ),
             seg(
-                "Agreed. On the backend side, the migration to the new database schema went smoother than expected. Zero downtime.",
+                "同意。后端这边，迁移到新的数据库结构比预期顺利，零停机。",
                 start: 28,
                 end: 44,
                 speaker: "Raj"
             ),
             seg(
-                "Nice. Now what didn't go well? I know code review turnaround was an issue again.",
+                "不错。那哪些地方不顺利？我知道代码评审的周转又出问题了。",
                 start: 44,
                 end: 56,
                 speaker: "Alex"
             ),
             seg(
-                "Yeah, I had a PR sitting for three days. It blocked the entire notifications feature from moving forward.",
+                "是啊，我有个 PR 放了三天。整个通知功能的推进都被它卡住了。",
                 start: 56,
                 end: 70,
                 speaker: "Dana"
             ),
             seg(
-                "That's on me partly. I was deep in the migration and let reviews pile up. We need a better system for that.",
+                "部分是我的责任。我当时深陷迁移工作，评审就积压了。我们需要更好的机制。",
                 start: 70,
                 end: 86,
                 speaker: "Raj"
             ),
             seg(
-                "What if we set a twenty-four hour SLA for reviews? And rotate a designated reviewer each day so someone always has it as a priority.",
+                "如果我们定一个 24 小时的评审 SLA 呢？每天轮换一名指定评审人，保证总有人把它当优先事项。",
                 start: 86,
                 end: 106,
                 speaker: "Alex"
             ),
             seg(
-                "I like that. Also, we should add more integration tests. We caught two regressions late in the sprint that better test coverage would have prevented.",
+                "我喜欢这个主意。另外，我们应该增加集成测试。这个冲刺后期发现了两个回归问题，如果测试覆盖更好就能避免。",
                 start: 106,
                 end: 125,
                 speaker: "Dana"
             ),
             seg(
-                "Good call. I can set up a testing workshop next week to get everyone aligned on the integration test patterns we want to use.",
+                "好主意。我下周可以组织一次测试工作坊，让大家对要用的集成测试模式达成一致。",
                 start: 125,
                 end: 140,
                 speaker: "Raj"
@@ -298,55 +298,55 @@ extension MeetingStore {
                 sp1,
                 start: 0,
                 end: 14,
-                text: "Let's get the retro started. Same format — what went well, what didn't, and what we want to change."
+                text: "我们开始回顾吧。还是老格式——哪些做得好、哪些不好、想改进什么。"
             ),
             spkSeg(
                 sp2,
                 start: 14,
                 end: 28,
-                text: "I'll start with what went well. The new component library saved us a ton of time on the settings page redesign."
+                text: "我先说做得好的地方。新的组件库让设置页改版省了大量时间。"
             ),
             spkSeg(
                 sp3,
                 start: 28,
                 end: 44,
-                text: "Agreed. On the backend side, the migration to the new database schema went smoother than expected. Zero downtime."
+                text: "同意。后端这边，迁移到新的数据库结构比预期顺利，零停机。"
             ),
-            spkSeg(sp1, start: 44, end: 56, text: "Nice. Now what didn't go well? I know code review turnaround was an issue again."),
+            spkSeg(sp1, start: 44, end: 56, text: "不错。那哪些地方不顺利？我知道代码评审的周转又出问题了。"),
             spkSeg(
                 sp2,
                 start: 56,
                 end: 70,
-                text: "Yeah, I had a PR sitting for three days. It blocked the entire notifications feature from moving forward."
+                text: "是啊，我有个 PR 放了三天。整个通知功能的推进都被它卡住了。"
             ),
             spkSeg(
                 sp3,
                 start: 70,
                 end: 86,
-                text: "That's on me partly. I was deep in the migration and let reviews pile up. We need a better system for that."
+                text: "部分是我的责任。我当时深陷迁移工作，评审就积压了。我们需要更好的机制。"
             ),
             spkSeg(
                 sp1,
                 start: 86,
                 end: 106,
-                text: "What if we set a twenty-four hour SLA for reviews? And rotate a designated reviewer each day so someone always has it as a priority."
+                text: "如果我们定一个 24 小时的评审 SLA 呢？每天轮换一名指定评审人，保证总有人把它当优先事项。"
             ),
             spkSeg(
                 sp2,
                 start: 106,
                 end: 125,
-                text: "I like that. Also, we should add more integration tests. We caught two regressions late in the sprint that better test coverage would have prevented."
+                text: "我喜欢这个主意。另外，我们应该增加集成测试。这个冲刺后期发现了两个回归问题，如果测试覆盖更好就能避免。"
             ),
             spkSeg(
                 sp3,
                 start: 125,
                 end: 140,
-                text: "Good call. I can set up a testing workshop next week to get everyone aligned on the integration test patterns we want to use."
+                text: "好主意。我下周可以组织一次测试工作坊，让大家对要用的集成测试模式达成一致。"
             ),
         ]
 
         var meeting = MeetingNote(
-            title: "Sprint Retrospective",
+            title: "冲刺回顾会",
             createdAt: date,
             modifiedAt: date,
             recordingMode: .inPerson,
@@ -357,63 +357,63 @@ extension MeetingStore {
         meeting.segments = segments
         meeting.speakerSegments = speakerSegments
         meeting.hasSpeakerData = true
-        meeting.summary = "Sprint retro covering wins (component library, zero-downtime migration) and pain points (slow code reviews blocking features). Agreed on a 24-hour review SLA with daily rotation and more integration tests."
+        meeting.summary = "冲刺回顾会，总结了亮点（组件库、零停机迁移）和痛点（代码评审慢，阻塞功能推进）。确定 24 小时评审 SLA、每日轮值评审人，并增加集成测试。"
         meeting.isPinned = false
-        meeting.tags = ["sprint", "retro"]
+        meeting.tags = ["冲刺", "回顾"]
         meeting.actionItems = [
             ActionItem(
-                title: "Implement 24-hour code review SLA with daily reviewer rotation",
+                title: "落实 24 小时代码评审 SLA 和每日评审轮值",
                 assignee: "Alex",
-                dueDescription: "Next sprint",
+                dueDescription: "下个冲刺",
                 dueDate: due(5)
             ),
             ActionItem(
-                title: "Add integration tests for notifications and settings flows",
+                title: "为通知和设置流程补充集成测试",
                 assignee: "Dana",
-                dueDescription: "Next sprint",
+                dueDescription: "下个冲刺",
                 dueDate: due(5)
             ),
-            ActionItem(title: "Run testing workshop on integration test patterns", assignee: "Raj", dueDescription: "Next week", dueDate: due(4)),
+            ActionItem(title: "开展集成测试模式工作坊", assignee: "Raj", dueDescription: "下周", dueDate: due(4)),
         ]
         meeting.bookmarks = [
-            Bookmark(label: "What went well", timestamp: 14, color: .blue),
-            Bookmark(label: "Review bottleneck", timestamp: 56, color: .red),
-            Bookmark(label: "Improvement ideas", timestamp: 86, color: .purple),
+            Bookmark(label: "做得好的地方", timestamp: 14, color: .blue),
+            Bookmark(label: "评审瓶颈", timestamp: 56, color: .red),
+            Bookmark(label: "改进想法", timestamp: 86, color: .purple),
         ]
         meeting.smartMinutes = SmartMinutes(
             keyDecisions: [
-                "24-hour SLA for code reviews with rotating daily reviewer",
-                "Increase integration test coverage as a sprint goal",
+                "代码评审实行 24 小时 SLA，并每日轮换评审人",
+                "将提高集成测试覆盖率列为冲刺目标",
             ],
             discussionPoints: [
-                "Component library accelerated settings page redesign",
-                "Database migration completed with zero downtime",
-                "PR blocked for three days due to review backlog",
-                "Two regressions caught late due to missing integration tests",
+                "组件库加快了设置页改版",
+                "数据库迁移完成，零停机",
+                "因评审积压，PR 被阻塞三天",
+                "缺少集成测试，两个回归问题到后期才发现",
             ],
             actionItems: [
-                "Alex to formalize the 24-hour review SLA and rotation schedule",
-                "Dana to add integration tests for notifications and settings",
-                "Raj to run a testing workshop next week",
+                "Alex 落实 24 小时评审 SLA 和轮值表",
+                "Dana 为通知和设置补充集成测试",
+                "Raj 下周组织测试工作坊",
             ],
             followUps: [
-                "Review the new SLA process effectiveness in next retro",
-                "Track regression count next sprint to measure improvement",
+                "下次回顾会评估新 SLA 流程的效果",
+                "下个冲刺跟踪回归数量，衡量改进效果",
             ],
             attendeeSummary: [
                 AttendeeContribution(
                     name: "Alex",
-                    keyPoints: ["Facilitated discussion", "Proposed review SLA and rotation"],
+                    keyPoints: ["主持讨论", "提出评审 SLA 和轮值方案"],
                     speakingTimePercent: 35
                 ),
                 AttendeeContribution(
                     name: "Dana",
-                    keyPoints: ["Highlighted review bottleneck", "Proposed integration test improvements"],
+                    keyPoints: ["指出评审瓶颈", "提出集成测试改进"],
                     speakingTimePercent: 35
                 ),
                 AttendeeContribution(
                     name: "Raj",
-                    keyPoints: ["Shared migration success", "Offered to lead testing workshop"],
+                    keyPoints: ["分享迁移成功经验", "主动承担测试工作坊"],
                     speakingTimePercent: 30
                 ),
             ]
@@ -426,54 +426,54 @@ extension MeetingStore {
     private static func makeMeeting3(date: Date) -> MeetingNote {
         let sp1 = "speaker-you", sp2 = "speaker-mia"
         let speakers = [
-            Speaker(id: sp1, name: "You", color: AppThemeConstants.speakerBlurple),
+            Speaker(id: sp1, name: "你", color: AppThemeConstants.speakerBlurple),
             Speaker(id: sp2, name: "Mia", color: AppThemeConstants.speakerGreen),
         ]
         let segments = [
             seg(
-                "Okay so the midterm is in two weeks. I think we should focus on graph algorithms since that's the biggest chunk of the exam.",
+                "好，期中考试还有两周。我觉得应该重点复习图算法，因为那是考试占比最大的部分。",
                 start: 0,
                 end: 15,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "Yeah, Professor Kim said at least thirty percent would be on graphs. Should we start with shortest path or spanning trees?",
+                "对，Kim 教授说至少 30% 会考图。我们先从最短路径还是生成树开始？",
                 start: 15,
                 end: 28,
                 speaker: "Mia"
             ),
             seg(
-                "Let's do shortest path first. I always get confused about when to use Dijkstra versus Bellman-Ford.",
+                "先做最短路径吧。我总是搞不清什么时候用 Dijkstra、什么时候用 Bellman-Ford。",
                 start: 28,
                 end: 42,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "The key thing is negative edges. Dijkstra doesn't handle them, Bellman-Ford does. Also Dijkstra is greedy, Bellman-Ford is dynamic programming.",
+                "关键是负权边。Dijkstra 处理不了，Bellman-Ford 可以。另外 Dijkstra 是贪心算法，Bellman-Ford 是动态规划。",
                 start: 42,
                 end: 58,
                 speaker: "Mia"
             ),
             seg(
-                "Right, and the time complexity difference is pretty big. Dijkstra is O of V squared with a basic array or E log V with a min-heap.",
+                "对，时间复杂度差别也挺大。用普通数组时 Dijkstra 是 O(V²)，用最小堆是 O(E log V)。",
                 start: 58,
                 end: 74,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "We should also practice the trace-through problems. Last year's exam had two of those where you had to show each step of the algorithm.",
+                "我们还应该练一练推演题。去年的考试有两道这样的题，要求写出算法的每一步。",
                 start: 74,
                 end: 88,
                 speaker: "Mia"
             ),
             seg(
-                "Good idea. I found a set of practice problems on the course website. Want to split them and then compare answers Thursday?",
+                "好主意。我在课程网站上找到了一套练习题。要不要分头做，周四对答案？",
                 start: 88,
                 end: 102,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "Sounds good. I'll also review the past two exams — I heard the TA has them posted in the shared drive.",
+                "可以。我还会复习前两年的试卷——听说助教把它们传到共享盘了。",
                 start: 102,
                 end: 118,
                 speaker: "Mia"
@@ -484,54 +484,54 @@ extension MeetingStore {
                 sp1,
                 start: 0,
                 end: 15,
-                text: "Okay so the midterm is in two weeks. I think we should focus on graph algorithms since that's the biggest chunk of the exam."
+                text: "好，期中考试还有两周。我觉得应该重点复习图算法，因为那是考试占比最大的部分。"
             ),
             spkSeg(
                 sp2,
                 start: 15,
                 end: 28,
-                text: "Yeah, Professor Kim said at least thirty percent would be on graphs. Should we start with shortest path or spanning trees?"
+                text: "对，Kim 教授说至少 30% 会考图。我们先从最短路径还是生成树开始？"
             ),
             spkSeg(
                 sp1,
                 start: 28,
                 end: 42,
-                text: "Let's do shortest path first. I always get confused about when to use Dijkstra versus Bellman-Ford."
+                text: "先做最短路径吧。我总是搞不清什么时候用 Dijkstra、什么时候用 Bellman-Ford。"
             ),
             spkSeg(
                 sp2,
                 start: 42,
                 end: 58,
-                text: "The key thing is negative edges. Dijkstra doesn't handle them, Bellman-Ford does. Also Dijkstra is greedy, Bellman-Ford is dynamic programming."
+                text: "关键是负权边。Dijkstra 处理不了，Bellman-Ford 可以。另外 Dijkstra 是贪心算法，Bellman-Ford 是动态规划。"
             ),
             spkSeg(
                 sp1,
                 start: 58,
                 end: 74,
-                text: "Right, and the time complexity difference is pretty big. Dijkstra is O of V squared with a basic array or E log V with a min-heap."
+                text: "对，时间复杂度差别也挺大。用普通数组时 Dijkstra 是 O(V²)，用最小堆是 O(E log V)。"
             ),
             spkSeg(
                 sp2,
                 start: 74,
                 end: 88,
-                text: "We should also practice the trace-through problems. Last year's exam had two of those where you had to show each step of the algorithm."
+                text: "我们还应该练一练推演题。去年的考试有两道这样的题，要求写出算法的每一步。"
             ),
             spkSeg(
                 sp1,
                 start: 88,
                 end: 102,
-                text: "Good idea. I found a set of practice problems on the course website. Want to split them and then compare answers Thursday?"
+                text: "好主意。我在课程网站上找到了一套练习题。要不要分头做，周四对答案？"
             ),
             spkSeg(
                 sp2,
                 start: 102,
                 end: 118,
-                text: "Sounds good. I'll also review the past two exams — I heard the TA has them posted in the shared drive."
+                text: "可以。我还会复习前两年的试卷——听说助教把它们传到共享盘了。"
             ),
         ]
 
         var meeting = MeetingNote(
-            title: "CS 301 Study Group",
+            title: "CS 301 学习小组",
             createdAt: date,
             modifiedAt: date,
             recordingMode: .inPerson,
@@ -542,46 +542,46 @@ extension MeetingStore {
         meeting.segments = segments
         meeting.speakerSegments = speakerSegments
         meeting.hasSpeakerData = true
-        meeting.summary = "Planned midterm study strategy for CS 301. Focused on graph algorithms — Dijkstra vs Bellman-Ford, complexity analysis, and trace-through problems. Splitting practice problems and reviewing past exams before Thursday."
+        meeting.summary = "制定了 CS 301 期中复习策略。重点复习图算法——Dijkstra 与 Bellman-Ford 的对比、复杂度分析和推演题。分工练习题目，并在周四前复习往年试卷。"
         meeting.isPinned = false
-        meeting.tags = ["study", "algorithms"]
+        meeting.tags = ["学习", "算法"]
         meeting.actionItems = [
             ActionItem(
-                title: "Practice Dijkstra and Bellman-Ford trace-through problems",
-                assignee: "You",
-                dueDescription: "By Thursday",
+                title: "练习 Dijkstra 和 Bellman-Ford 推演题",
+                assignee: "你",
+                dueDescription: "周四前",
                 dueDate: due(1)
             ),
-            ActionItem(title: "Review past two midterm exams from shared drive", assignee: "Mia", dueDescription: "By Thursday", dueDate: due(1)),
+            ActionItem(title: "复习共享盘里的前两年期中试卷", assignee: "Mia", dueDescription: "周四前", dueDate: due(1)),
         ]
         meeting.bookmarks = [
-            Bookmark(label: "Dijkstra vs Bellman-Ford", timestamp: 42, color: .blue),
-            Bookmark(label: "Practice plan", timestamp: 88, color: .purple),
+            Bookmark(label: "Dijkstra 与 Bellman-Ford", timestamp: 42, color: .blue),
+            Bookmark(label: "练习计划", timestamp: 88, color: .purple),
         ]
         meeting.smartMinutes = SmartMinutes(
             keyDecisions: [
-                "Focus study efforts on graph algorithms for the midterm",
-                "Start with shortest path algorithms before spanning trees",
+                "期中复习重点放在图算法",
+                "先复习最短路径算法，再复习生成树",
             ],
             discussionPoints: [
-                "Graph algorithms make up at least 30% of the midterm",
-                "Dijkstra is greedy and fails on negative edges; Bellman-Ford uses DP",
-                "Time complexity: Dijkstra O(E log V) with min-heap vs Bellman-Ford O(VE)",
-                "Past exams include step-by-step trace-through problems",
+                "图算法至少占期中考试的 30%",
+                "Dijkstra 是贪心算法，遇到负权边会失效；Bellman-Ford 使用动态规划",
+                "时间复杂度：Dijkstra 用最小堆为 O(E log V)，Bellman-Ford 为 O(VE)",
+                "往年试卷包含逐步推演题",
             ],
             actionItems: [
-                "Split practice problems from course website and compare Thursday",
-                "Mia to pull past exams from shared drive",
+                "分工完成课程网站上的练习题，周四对答案",
+                "Mia 从共享盘取往年试卷",
             ],
             followUps: [
-                "Meet Thursday to compare answers on practice problems",
-                "Move to spanning trees and MST algorithms after shortest path",
+                "周四碰面，核对练习题答案",
+                "最短路径之后转向生成树和最小生成树算法",
             ],
             attendeeSummary: [
-                AttendeeContribution(name: "You", keyPoints: ["Set study focus on graphs", "Found practice problems"], speakingTimePercent: 50),
+                AttendeeContribution(name: "你", keyPoints: ["确定以图算法为复习重点", "找到练习题"], speakingTimePercent: 50),
                 AttendeeContribution(
                     name: "Mia",
-                    keyPoints: ["Clarified algorithm differences", "Suggested trace-through practice"],
+                    keyPoints: ["讲清算法区别", "建议练习推演题"],
                     speakingTimePercent: 50
                 ),
             ]
@@ -594,57 +594,57 @@ extension MeetingStore {
     private static func makeMeeting4(date: Date) -> MeetingNote {
         let sp1 = "speaker-you", sp2 = "speaker-prof-lee"
         let speakers = [
-            Speaker(id: sp1, name: "You", color: AppThemeConstants.speakerBlurple),
-            Speaker(id: sp2, name: "Prof. Lee", color: AppThemeConstants.speakerOrange),
+            Speaker(id: sp1, name: "你", color: AppThemeConstants.speakerBlurple),
+            Speaker(id: sp2, name: "Lee 教授", color: AppThemeConstants.speakerOrange),
         ]
         let segments = [
             seg(
-                "Hi Professor Lee, thanks for meeting. I wanted to get your feedback on my case study draft before I go further.",
+                "Lee 教授你好，感谢你抽时间。我想在继续写之前听听你对案例研究初稿的反馈。",
                 start: 0,
                 end: 14,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "Of course. I read through it last night. Your analysis of the Patagonia case is solid, but the stakeholder section needs more depth.",
+                "当然。我昨晚读了一遍。你对 Patagonia 案例的分析很扎实，但利益相关方那一节还需要更深入。",
                 start: 14,
                 end: 30,
-                speaker: "Prof. Lee"
+                speaker: "Lee 教授"
             ),
             seg(
-                "Can you be more specific about what's missing? I thought I covered the main groups — shareholders, employees, and customers.",
+                "能具体说说缺什么吗？我以为主要群体都覆盖了——股东、员工和客户。",
                 start: 30,
                 end: 44,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "You did, but you're not addressing the supply chain workers. For an ethics paper, that's a critical stakeholder group you can't overlook.",
+                "确实覆盖了，但你没有涉及供应链工人。对一篇伦理学的论文来说，这是不能忽略的关键利益相关方。",
                 start: 44,
                 end: 58,
-                speaker: "Prof. Lee"
+                speaker: "Lee 教授"
             ),
             seg(
-                "That's a great point. I'll add a section on supply chain labor practices and how they factor into the ethical framework.",
+                "这个提醒很重要。我会加一节讲供应链的劳动实践，以及它们如何纳入伦理框架。",
                 start: 58,
                 end: 72,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "Also, your citations are a bit thin in the theoretical framework section. You should reference Freeman's stakeholder theory directly and maybe add Donaldson and Preston.",
+                "另外，理论框架部分的引用有点单薄。你应该直接引用 Freeman 的利益相关者理论，也许再加上 Donaldson 和 Preston。",
                 start: 72,
                 end: 88,
-                speaker: "Prof. Lee"
+                speaker: "Lee 教授"
             ),
             seg(
-                "Got it. I have the Freeman text — I'll pull the relevant sections. Is Donaldson and Preston the 1995 paper?",
+                "明白。Freeman 的书我有——会把相关章节找出来。Donaldson 和 Preston 是 1995 年那篇吗？",
                 start: 88,
                 end: 100,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "Yes, the instrumental, normative, and descriptive taxonomy one. Submit the revised draft by Friday and I'll give you final feedback before the deadline.",
+                "对，就是讲工具性、规范性和描述性分类的那篇。周五前提交修改稿，我会在截止日期前给你最终反馈。",
                 start: 100,
                 end: 114,
-                speaker: "Prof. Lee"
+                speaker: "Lee 教授"
             ),
         ]
         let speakerSegments = [
@@ -652,54 +652,54 @@ extension MeetingStore {
                 sp1,
                 start: 0,
                 end: 14,
-                text: "Hi Professor Lee, thanks for meeting. I wanted to get your feedback on my case study draft before I go further."
+                text: "Lee 教授你好，感谢你抽时间。我想在继续写之前听听你对案例研究初稿的反馈。"
             ),
             spkSeg(
                 sp2,
                 start: 14,
                 end: 30,
-                text: "Of course. I read through it last night. Your analysis of the Patagonia case is solid, but the stakeholder section needs more depth."
+                text: "当然。我昨晚读了一遍。你对 Patagonia 案例的分析很扎实，但利益相关方那一节还需要更深入。"
             ),
             spkSeg(
                 sp1,
                 start: 30,
                 end: 44,
-                text: "Can you be more specific about what's missing? I thought I covered the main groups — shareholders, employees, and customers."
+                text: "能具体说说缺什么吗？我以为主要群体都覆盖了——股东、员工和客户。"
             ),
             spkSeg(
                 sp2,
                 start: 44,
                 end: 58,
-                text: "You did, but you're not addressing the supply chain workers. For an ethics paper, that's a critical stakeholder group you can't overlook."
+                text: "确实覆盖了，但你没有涉及供应链工人。对一篇伦理学的论文来说，这是不能忽略的关键利益相关方。"
             ),
             spkSeg(
                 sp1,
                 start: 58,
                 end: 72,
-                text: "That's a great point. I'll add a section on supply chain labor practices and how they factor into the ethical framework."
+                text: "这个提醒很重要。我会加一节讲供应链的劳动实践，以及它们如何纳入伦理框架。"
             ),
             spkSeg(
                 sp2,
                 start: 72,
                 end: 88,
-                text: "Also, your citations are a bit thin in the theoretical framework section. You should reference Freeman's stakeholder theory directly and maybe add Donaldson and Preston."
+                text: "另外，理论框架部分的引用有点单薄。你应该直接引用 Freeman 的利益相关者理论，也许再加上 Donaldson 和 Preston。"
             ),
             spkSeg(
                 sp1,
                 start: 88,
                 end: 100,
-                text: "Got it. I have the Freeman text — I'll pull the relevant sections. Is Donaldson and Preston the 1995 paper?"
+                text: "明白。Freeman 的书我有——会把相关章节找出来。Donaldson 和 Preston 是 1995 年那篇吗？"
             ),
             spkSeg(
                 sp2,
                 start: 100,
                 end: 114,
-                text: "Yes, the instrumental, normative, and descriptive taxonomy one. Submit the revised draft by Friday and I'll give you final feedback before the deadline."
+                text: "对，就是讲工具性、规范性和描述性分类的那篇。周五前提交修改稿，我会在截止日期前给你最终反馈。"
             ),
         ]
 
         var meeting = MeetingNote(
-            title: "Project Check-in w/ Prof. Lee",
+            title: "与 Lee 教授的项目会面",
             createdAt: date,
             modifiedAt: date,
             recordingMode: .onlineMeeting,
@@ -710,54 +710,54 @@ extension MeetingStore {
         meeting.segments = segments
         meeting.speakerSegments = speakerSegments
         meeting.hasSpeakerData = true
-        meeting.summary = "Reviewed Business Ethics case study draft with Prof. Lee. Key feedback: expand stakeholder analysis to include supply chain workers, and strengthen citations with Freeman and Donaldson & Preston. Revised draft due Friday."
+        meeting.summary = "与 Lee 教授审阅了商业伦理案例研究初稿。主要反馈：把供应链工人纳入利益相关方分析，补充 Freeman 以及 Donaldson & Preston 的文献引用。修改稿周五前提交。"
         meeting.isPinned = false
-        meeting.tags = ["office-hours"]
+        meeting.tags = ["答疑"]
         meeting.actionItems = [
             ActionItem(
-                title: "Revise stakeholder section to include supply chain workers",
-                assignee: "You",
-                dueDescription: "Before Friday",
+                title: "修改利益相关方一节，纳入供应链工人",
+                assignee: "你",
+                dueDescription: "周五前",
                 dueDate: due(2)
             ),
             ActionItem(
-                title: "Add Freeman and Donaldson & Preston citations to theoretical framework",
-                assignee: "You",
-                dueDescription: "Before Friday",
+                title: "在理论框架中补充 Freeman 和 Donaldson & Preston 的引用",
+                assignee: "你",
+                dueDescription: "周五前",
                 dueDate: due(2)
             ),
-            ActionItem(title: "Submit revised draft", assignee: "You", dueDescription: "Friday", dueDate: due(3)),
+            ActionItem(title: "提交修改稿", assignee: "你", dueDescription: "周五", dueDate: due(3)),
         ]
         meeting.bookmarks = [
-            Bookmark(label: "Stakeholder feedback", timestamp: 44, color: .red),
-            Bookmark(label: "Citation guidance", timestamp: 72, color: .blue),
-            Bookmark(label: "Deadline confirmed", timestamp: 100, color: .orange),
+            Bookmark(label: "利益相关方反馈", timestamp: 44, color: .red),
+            Bookmark(label: "引用建议", timestamp: 72, color: .blue),
+            Bookmark(label: "截止日期已确认", timestamp: 100, color: .orange),
         ]
         meeting.smartMinutes = SmartMinutes(
             keyDecisions: [
-                "Add supply chain workers as a key stakeholder group in the analysis",
-                "Revised draft deadline set for Friday",
+                "将供应链工人作为关键利益相关方纳入分析",
+                "修改稿截止日期定为周五",
             ],
             discussionPoints: [
-                "Patagonia case analysis is solid overall",
-                "Stakeholder section missing supply chain labor perspective",
-                "Theoretical framework needs stronger citations",
-                "Freeman's stakeholder theory and Donaldson & Preston (1995) recommended",
+                "Patagonia 案例分析整体扎实",
+                "利益相关方一节缺少供应链劳动视角",
+                "理论框架需要加强文献引用",
+                "建议引用 Freeman 的利益相关者理论和 Donaldson & Preston（1995）",
             ],
             actionItems: [
-                "Expand stakeholder section with supply chain labor practices",
-                "Add Freeman and Donaldson & Preston references",
-                "Submit revised draft by Friday for final feedback",
+                "在利益相关方一节补充供应链劳动实践",
+                "补充 Freeman 和 Donaldson & Preston 的参考文献",
+                "周五前提交修改稿以获取最终反馈",
             ],
             followUps: [
-                "Prof. Lee to provide final feedback after Friday submission",
-                "Final paper due after incorporating last round of feedback",
+                "Lee 教授在周五提交后给出最终反馈",
+                "整合最后一轮反馈后提交期末论文",
             ],
             attendeeSummary: [
-                AttendeeContribution(name: "You", keyPoints: ["Presented draft progress", "Clarified missing areas"], speakingTimePercent: 45),
+                AttendeeContribution(name: "你", keyPoints: ["汇报初稿进展", "明确待补充内容"], speakingTimePercent: 45),
                 AttendeeContribution(
-                    name: "Prof. Lee",
-                    keyPoints: ["Identified stakeholder gap", "Recommended key citations"],
+                    name: "Lee 教授",
+                    keyPoints: ["指出利益相关方缺口", "推荐关键文献"],
                     speakingTimePercent: 55
                 ),
             ]
@@ -770,54 +770,54 @@ extension MeetingStore {
     private static func makeMeeting5(date: Date) -> MeetingNote {
         let sp1 = "speaker-you", sp2 = "speaker-kai"
         let speakers = [
-            Speaker(id: sp1, name: "You", color: AppThemeConstants.speakerBlurple),
+            Speaker(id: sp1, name: "你", color: AppThemeConstants.speakerBlurple),
             Speaker(id: sp2, name: "Kai", color: AppThemeConstants.speakerCyan),
         ]
         let segments = [
             seg(
-                "Alright, let's nail down the Japan trip. We've got two weeks in September — I'm thinking Tokyo, Kyoto, and Osaka.",
+                "好，我们把日本之行定下来。9 月有两周时间——我想去东京、京都和大阪。",
                 start: 0,
                 end: 14,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "Love that route. I'd say five days in Tokyo, four in Kyoto, and three in Osaka. That leaves a couple of buffer days for day trips.",
+                "这条路线很好。我建议东京五天、京都四天、大阪三天。这样还能留出几天安排一日游。",
                 start: 14,
                 end: 30,
                 speaker: "Kai"
             ),
             seg(
-                "Perfect. For Tokyo I want to hit Shibuya, Akihabara, and definitely Tsukiji outer market. Maybe a day trip to Kamakura?",
+                "完美。在东京我想去涩谷、秋叶原，还有筑地场外市场。也许再加个镰仓一日游？",
                 start: 30,
                 end: 46,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "Kamakura is a great call. We should get the JR Pass — it'll cover the bullet trains between cities and the Kamakura day trip.",
+                "镰仓是个好主意。我们应该买 JR Pass——城市之间的新干线和镰仓一日游都能覆盖。",
                 start: 46,
                 end: 60,
                 speaker: "Kai"
             ),
             seg(
-                "Yeah, the fourteen-day pass is around fifty thousand yen. Totally worth it. What about accommodation — hotels or ryokans?",
+                "对，14 天通票大概五万日元，很值。住宿呢——酒店还是日式旅馆？",
                 start: 60,
                 end: 74,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "I'd say hotels in Tokyo and Osaka, but we should definitely do a ryokan in Kyoto. There's one in Arashiyama that has private onsen rooms.",
+                "东京和大阪住酒店，但京都一定要住一次日式旅馆。岚山有一家带私人温泉的房间。",
                 start: 74,
                 end: 90,
                 speaker: "Kai"
             ),
             seg(
-                "Oh that sounds amazing. Budget-wise, I'm thinking we should aim for around three thousand each for everything minus flights.",
+                "听起来太棒了。预算方面，我想不含机票的话，每人控制在三千美元左右。",
                 start: 90,
                 end: 104,
-                speaker: "You"
+                speaker: "你"
             ),
             seg(
-                "That's doable. Flights are cheapest if we book in the next two weeks. I saw round trips for around eight hundred from SFO.",
+                "可以做到。接下来两周内订机票最便宜。我看到旧金山往返大概八百美元。",
                 start: 104,
                 end: 120,
                 speaker: "Kai"
@@ -828,54 +828,54 @@ extension MeetingStore {
                 sp1,
                 start: 0,
                 end: 14,
-                text: "Alright, let's nail down the Japan trip. We've got two weeks in September — I'm thinking Tokyo, Kyoto, and Osaka."
+                text: "好，我们把日本之行定下来。9 月有两周时间——我想去东京、京都和大阪。"
             ),
             spkSeg(
                 sp2,
                 start: 14,
                 end: 30,
-                text: "Love that route. I'd say five days in Tokyo, four in Kyoto, and three in Osaka. That leaves a couple of buffer days for day trips."
+                text: "这条路线很好。我建议东京五天、京都四天、大阪三天。这样还能留出几天安排一日游。"
             ),
             spkSeg(
                 sp1,
                 start: 30,
                 end: 46,
-                text: "Perfect. For Tokyo I want to hit Shibuya, Akihabara, and definitely Tsukiji outer market. Maybe a day trip to Kamakura?"
+                text: "完美。在东京我想去涩谷、秋叶原，还有筑地场外市场。也许再加个镰仓一日游？"
             ),
             spkSeg(
                 sp2,
                 start: 46,
                 end: 60,
-                text: "Kamakura is a great call. We should get the JR Pass — it'll cover the bullet trains between cities and the Kamakura day trip."
+                text: "镰仓是个好主意。我们应该买 JR Pass——城市之间的新干线和镰仓一日游都能覆盖。"
             ),
             spkSeg(
                 sp1,
                 start: 60,
                 end: 74,
-                text: "Yeah, the fourteen-day pass is around fifty thousand yen. Totally worth it. What about accommodation — hotels or ryokans?"
+                text: "对，14 天通票大概五万日元，很值。住宿呢——酒店还是日式旅馆？"
             ),
             spkSeg(
                 sp2,
                 start: 74,
                 end: 90,
-                text: "I'd say hotels in Tokyo and Osaka, but we should definitely do a ryokan in Kyoto. There's one in Arashiyama that has private onsen rooms."
+                text: "东京和大阪住酒店，但京都一定要住一次日式旅馆。岚山有一家带私人温泉的房间。"
             ),
             spkSeg(
                 sp1,
                 start: 90,
                 end: 104,
-                text: "Oh that sounds amazing. Budget-wise, I'm thinking we should aim for around three thousand each for everything minus flights."
+                text: "听起来太棒了。预算方面，我想不含机票的话，每人控制在三千美元左右。"
             ),
             spkSeg(
                 sp2,
                 start: 104,
                 end: 120,
-                text: "That's doable. Flights are cheapest if we book in the next two weeks. I saw round trips for around eight hundred from SFO."
+                text: "可以做到。接下来两周内订机票最便宜。我看到旧金山往返大概八百美元。"
             ),
         ]
 
         var meeting = MeetingNote(
-            title: "Trip Planning Call",
+            title: "旅行计划通话",
             createdAt: date,
             modifiedAt: date,
             recordingMode: .inPerson,
@@ -886,43 +886,43 @@ extension MeetingStore {
         meeting.segments = segments
         meeting.speakerSegments = speakerSegments
         meeting.hasSpeakerData = true
-        meeting.summary = "Planned two-week Japan trip for September covering Tokyo, Kyoto, and Osaka. Agreed on itinerary split, JR Pass, ryokan in Kyoto, and $3K per-person budget excluding flights."
+        meeting.summary = "规划了 9 月的两周日本之行，覆盖东京、京都和大阪。确定了行程分配、JR Pass、京都的日式旅馆，以及不含机票每人 3000 美元的预算。"
         meeting.isPinned = false
-        meeting.tags = ["travel", "japan"]
+        meeting.tags = ["旅行", "日本"]
         meeting.actionItems = [
-            ActionItem(title: "Book flights from SFO within the next two weeks", assignee: "Kai", dueDescription: "Next two weeks", dueDate: due(10)),
-            ActionItem(title: "Reserve ryokan in Arashiyama, Kyoto", assignee: "You", dueDescription: "This month", dueDate: due(14)),
-            ActionItem(title: "Purchase 14-day JR Pass", assignee: "You", dueDescription: "Before departure", dueDate: due(21)),
+            ActionItem(title: "两周内预订旧金山出发的机票", assignee: "Kai", dueDescription: "未来两周", dueDate: due(10)),
+            ActionItem(title: "预订京都岚山的日式旅馆", assignee: "你", dueDescription: "本月", dueDate: due(14)),
+            ActionItem(title: "购买 14 天 JR Pass", assignee: "你", dueDescription: "出发前", dueDate: due(21)),
         ]
         meeting.bookmarks = [
-            Bookmark(label: "Itinerary breakdown", timestamp: 14, color: .blue),
-            Bookmark(label: "JR Pass decision", timestamp: 46, color: .purple),
-            Bookmark(label: "Budget discussion", timestamp: 90, color: .orange),
+            Bookmark(label: "行程分配", timestamp: 14, color: .blue),
+            Bookmark(label: "JR Pass 方案", timestamp: 46, color: .purple),
+            Bookmark(label: "预算讨论", timestamp: 90, color: .orange),
         ]
         meeting.smartMinutes = SmartMinutes(
             keyDecisions: [
-                "Route: Tokyo (5 days) → Kyoto (4 days) → Osaka (3 days) with buffer days",
-                "Ryokan stay in Arashiyama, Kyoto; hotels in Tokyo and Osaka",
-                "Budget: ~$3K per person excluding flights",
+                "路线：东京（5 天）→ 京都（4 天）→ 大阪（3 天），另留缓冲日",
+                "京都岚山住日式旅馆；东京和大阪住酒店",
+                "预算：不含机票每人约 3000 美元",
             ],
             discussionPoints: [
-                "Tokyo highlights: Shibuya, Akihabara, Tsukiji, day trip to Kamakura",
-                "14-day JR Pass covers bullet trains and day trips (~¥50,000)",
-                "Round-trip flights from SFO around $800 if booked soon",
-                "Arashiyama ryokan with private onsen rooms",
+                "东京亮点：涩谷、秋叶原、筑地，镰仓一日游",
+                "14 天 JR Pass 覆盖新干线和一日游（约 5 万日元）",
+                "尽早订票，旧金山往返约 800 美元",
+                "岚山带私人温泉的日式旅馆",
             ],
             actionItems: [
-                "Kai to book flights within two weeks for best price",
-                "Reserve Arashiyama ryokan",
-                "Purchase JR Pass before departure",
+                "Kai 两周内订机票，争取最优价格",
+                "预订岚山的日式旅馆",
+                "出发前购买 JR Pass",
             ],
             followUps: [
-                "Research specific restaurants and reservations needed in advance",
-                "Look into pocket Wi-Fi rental for the trip",
+                "研究想去的餐厅以及需要提前预订的项目",
+                "了解随身 Wi-Fi 租赁",
             ],
             attendeeSummary: [
-                AttendeeContribution(name: "You", keyPoints: ["Proposed route and Tokyo activities", "Set budget target"], speakingTimePercent: 50),
-                AttendeeContribution(name: "Kai", keyPoints: ["Suggested time split and ryokan", "Found flight pricing"], speakingTimePercent: 50),
+                AttendeeContribution(name: "你", keyPoints: ["提出路线和东京行程", "确定预算目标"], speakingTimePercent: 50),
+                AttendeeContribution(name: "Kai", keyPoints: ["建议时间分配和日式旅馆", "查到机票价格"], speakingTimePercent: 50),
             ]
         )
         return meeting
@@ -939,61 +939,61 @@ extension MeetingStore {
         ]
         let segments = [
             seg(
-                "Good morning everyone. Let's walk through the Meridian Technologies engagement agreement. Michael, you've reviewed the liability section?",
+                "大家早上好。我们过一遍 Meridian Technologies 的合作协议。Michael，责任条款你看过了吗？",
                 start: 0,
                 end: 14,
                 speaker: "Rebecca"
             ),
             seg(
-                "Yes. The indemnification clause in Section 4 is too broad. They want us to indemnify against any third-party IP claims, which is unusual for this type of engagement.",
+                "看过了。第 4 条的赔偿条款范围太宽。他们要求我们对任何第三方知识产权索赔进行赔偿，这类合作里这很不寻常。",
                 start: 14,
                 end: 30,
                 speaker: "Michael"
             ),
             seg(
-                "I agree. In our standard template, indemnification is limited to direct damages from our work product. This goes well beyond that.",
+                "我同意。在我们的标准模板里，赔偿仅限于我们工作成果造成的直接损失。这一条远远超出了。",
                 start: 30,
                 end: 44,
                 speaker: "Lisa"
             ),
             seg(
-                "Let's counter with a mutual indemnification clause and cap our liability at twice the contract value. That's the approach we took with the Nexus deal.",
+                "我们以互相赔偿条款作为反提案，并把责任上限设为合同金额的两倍。Nexus 那笔交易就是这么做的。",
                 start: 44,
                 end: 60,
                 speaker: "Rebecca"
             ),
             seg(
-                "Good reference. The NDA section looks fine, standard twelve-month tail. But the non-compete clause in Section 7 is problematic — it would block us from working with any fintech client for two years.",
+                "这个参照很好。保密协议部分没问题，标准的十二个月尾期。但第 7 条的竞业限制有问题——它会让我们两年内不能与任何金融科技客户合作。",
                 start: 60,
                 end: 80,
                 speaker: "Michael"
             ),
             seg(
-                "That's a non-starter. We have three active fintech clients. I'd suggest narrowing it to direct competitors of Meridian specifically, not the entire sector.",
+                "这完全没法接受。我们有三家正在合作的金融科技客户。我建议把它收窄到仅限 Meridian 的直接竞争对手，而不是整个行业。",
                 start: 80,
                 end: 96,
                 speaker: "Lisa"
             ),
             seg(
-                "Exactly. I'll draft the redline today. Michael, can you prepare the liability cap analysis with the financial scenarios? Lisa, please pull the Nexus precedent for the indemnification language.",
+                "正是如此。我今天起草红线稿。Michael，你能准备带财务情景的责任上限分析吗？Lisa，请把 Nexus 的赔偿条款先例找出来。",
                 start: 96,
                 end: 116,
                 speaker: "Rebecca"
             ),
             seg(
-                "Will do. I'll also flag the termination clause — they have a termination for convenience with only seven days notice, which doesn't give us enough runway.",
+                "没问题。我还会标注终止条款——他们的任意终止只需提前七天通知，留给我们的过渡时间不够。",
                 start: 116,
                 end: 132,
                 speaker: "Michael"
             ),
             seg(
-                "Good catch. Let's push for thirty days minimum. Rebecca, should we schedule the client call for Thursday or Friday?",
+                "发现得好。我们争取至少三十天。Rebecca，客户通话安排在周四还是周五？",
                 start: 132,
                 end: 146,
                 speaker: "Lisa"
             ),
             seg(
-                "Thursday afternoon works best. I want the redline done by Wednesday so we can align internally before the call. Let's wrap up — everyone clear on action items?",
+                "周四下午最合适。我希望周三完成红线稿，这样通话前可以内部对齐。我们收尾吧——大家都清楚待办事项了吗？",
                 start: 146,
                 end: 164,
                 speaker: "Rebecca"
@@ -1004,66 +1004,66 @@ extension MeetingStore {
                 sp1,
                 start: 0,
                 end: 14,
-                text: "Good morning everyone. Let's walk through the Meridian Technologies engagement agreement. Michael, you've reviewed the liability section?"
+                text: "大家早上好。我们过一遍 Meridian Technologies 的合作协议。Michael，责任条款你看过了吗？"
             ),
             spkSeg(
                 sp2,
                 start: 14,
                 end: 30,
-                text: "Yes. The indemnification clause in Section 4 is too broad. They want us to indemnify against any third-party IP claims, which is unusual for this type of engagement."
+                text: "看过了。第 4 条的赔偿条款范围太宽。他们要求我们对任何第三方知识产权索赔进行赔偿，这类合作里这很不寻常。"
             ),
             spkSeg(
                 sp3,
                 start: 30,
                 end: 44,
-                text: "I agree. In our standard template, indemnification is limited to direct damages from our work product. This goes well beyond that."
+                text: "我同意。在我们的标准模板里，赔偿仅限于我们工作成果造成的直接损失。这一条远远超出了。"
             ),
             spkSeg(
                 sp1,
                 start: 44,
                 end: 60,
-                text: "Let's counter with a mutual indemnification clause and cap our liability at twice the contract value. That's the approach we took with the Nexus deal."
+                text: "我们以互相赔偿条款作为反提案，并把责任上限设为合同金额的两倍。Nexus 那笔交易就是这么做的。"
             ),
             spkSeg(
                 sp2,
                 start: 60,
                 end: 80,
-                text: "Good reference. The NDA section looks fine, standard twelve-month tail. But the non-compete clause in Section 7 is problematic — it would block us from working with any fintech client for two years."
+                text: "这个参照很好。保密协议部分没问题，标准的十二个月尾期。但第 7 条的竞业限制有问题——它会让我们两年内不能与任何金融科技客户合作。"
             ),
             spkSeg(
                 sp3,
                 start: 80,
                 end: 96,
-                text: "That's a non-starter. We have three active fintech clients. I'd suggest narrowing it to direct competitors of Meridian specifically, not the entire sector."
+                text: "这完全没法接受。我们有三家正在合作的金融科技客户。我建议把它收窄到仅限 Meridian 的直接竞争对手，而不是整个行业。"
             ),
             spkSeg(
                 sp1,
                 start: 96,
                 end: 116,
-                text: "Exactly. I'll draft the redline today. Michael, can you prepare the liability cap analysis with the financial scenarios? Lisa, please pull the Nexus precedent for the indemnification language."
+                text: "正是如此。我今天起草红线稿。Michael，你能准备带财务情景的责任上限分析吗？Lisa，请把 Nexus 的赔偿条款先例找出来。"
             ),
             spkSeg(
                 sp2,
                 start: 116,
                 end: 132,
-                text: "Will do. I'll also flag the termination clause — they have a termination for convenience with only seven days notice, which doesn't give us enough runway."
+                text: "没问题。我还会标注终止条款——他们的任意终止只需提前七天通知，留给我们的过渡时间不够。"
             ),
             spkSeg(
                 sp3,
                 start: 132,
                 end: 146,
-                text: "Good catch. Let's push for thirty days minimum. Rebecca, should we schedule the client call for Thursday or Friday?"
+                text: "发现得好。我们争取至少三十天。Rebecca，客户通话安排在周四还是周五？"
             ),
             spkSeg(
                 sp1,
                 start: 146,
                 end: 164,
-                text: "Thursday afternoon works best. I want the redline done by Wednesday so we can align internally before the call. Let's wrap up — everyone clear on action items?"
+                text: "周四下午最合适。我希望周三完成红线稿，这样通话前可以内部对齐。我们收尾吧——大家都清楚待办事项了吗？"
             ),
         ]
 
         var meeting = MeetingNote(
-            title: "Contract Review — Meridian Deal",
+            title: "合同评审——Meridian 交易",
             createdAt: date,
             modifiedAt: date,
             recordingMode: .onlineMeeting,
@@ -1075,99 +1075,99 @@ extension MeetingStore {
         meeting.segments = segments
         meeting.speakerSegments = speakerSegments
         meeting.hasSpeakerData = true
-        meeting.summary = "Reviewed Meridian Technologies engagement agreement. Key issues: overbroad indemnification (counter with mutual + 2x cap), non-compete too wide (narrow to direct competitors), termination notice too short (push for 30 days). Redline draft by Wednesday, client call Thursday."
+        meeting.summary = "审阅了 Meridian Technologies 的合作协议。主要问题：赔偿条款范围过宽（以互相赔偿 + 两倍上限作为反提案）、竞业限制过广（收窄至直接竞争对手）、终止通知期过短（争取 30 天）。周三完成红线稿，周四与客户通话。"
         meeting.isPinned = true
-        meeting.tags = ["contract", "meridian", "review"]
-        meeting.topicKeywords = ["contract", "liability", "indemnification", "NDA", "non-compete"]
+        meeting.tags = ["合同", "Meridian", "评审"]
+        meeting.topicKeywords = ["合同", "责任", "赔偿", "NDA", "竞业限制"]
         meeting.transcriptionLanguage = "en"
         meeting.calendarEventID = "CAL-MERIDIAN-2026-03"
         meeting.scheduledStartTime = date
         meeting.actionItems = [
             ActionItem(
-                title: "Draft contract redline with counter-proposals",
+                title: "起草合同红线稿及反提案",
                 assignee: "Rebecca",
-                dueDescription: "Wednesday",
+                dueDescription: "周三",
                 isCompleted: true,
                 dueDate: due(1)
             ),
             ActionItem(
-                title: "Prepare liability cap analysis with financial scenarios",
+                title: "准备带财务情景的责任上限分析",
                 assignee: "Michael",
-                dueDescription: "Wednesday",
+                dueDescription: "周三",
                 dueDate: due(1),
                 reminderDate: due(0)
             ),
             ActionItem(
-                title: "Pull Nexus deal indemnification language as precedent",
+                title: "整理 Nexus 交易的赔偿条款作为先例",
                 assignee: "Lisa",
-                dueDescription: "Tuesday",
+                dueDescription: "周二",
                 isCompleted: true,
                 dueDate: due(0)
             ),
             ActionItem(
-                title: "Schedule client call for Thursday afternoon",
+                title: "安排周四下午的客户通话",
                 assignee: "Rebecca",
-                dueDescription: "Today",
+                dueDescription: "今天",
                 isCompleted: true,
                 dueDate: due(0)
             ),
             ActionItem(
-                title: "Flag termination clause — push for 30-day notice minimum",
+                title: "标注终止条款——争取至少 30 天通知期",
                 assignee: "Michael",
-                dueDescription: "In redline",
+                dueDescription: "写入红线稿",
                 dueDate: due(1)
             ),
         ]
         meeting.bookmarks = [
-            Bookmark(label: "Indemnification issue", timestamp: 14, color: .red),
-            Bookmark(label: "Liability cap approach", timestamp: 44, color: .blue),
-            Bookmark(label: "Non-compete problem", timestamp: 60, color: .yellow),
-            Bookmark(label: "Action items", timestamp: 96, color: .purple),
-            Bookmark(label: "Termination clause", timestamp: 116, color: .orange),
+            Bookmark(label: "赔偿条款问题", timestamp: 14, color: .red),
+            Bookmark(label: "责任上限方案", timestamp: 44, color: .blue),
+            Bookmark(label: "竞业限制问题", timestamp: 60, color: .yellow),
+            Bookmark(label: "待办事项", timestamp: 96, color: .purple),
+            Bookmark(label: "终止条款", timestamp: 116, color: .orange),
         ]
         meeting.chatMessages = [
-            MeetingChatMessage(role: .user, content: "What exactly is the risk with the broad indemnification clause?"),
+            MeetingChatMessage(role: .user, content: "这条宽泛的赔偿条款到底有什么风险？"),
             MeetingChatMessage(
                 role: .assistant,
-                content: "The indemnification clause in Section 4 requires your firm to cover any third-party IP claims, even those unrelated to your work product. This means if Meridian is sued for patent infringement on their own technology, they could potentially seek indemnification from you. The standard approach — which Rebecca proposed — is mutual indemnification limited to direct damages arising from each party's own work, with a liability cap (2x contract value in this case). This protects both parties proportionally."
+                content: "第 4 条的赔偿条款要求你方承担任何第三方知识产权索赔，即使这些索赔与你的工作成果无关。这意味着如果 Meridian 因其自有技术被诉专利侵权，他们也可能向你方寻求赔偿。标准做法——也就是 Rebecca 提出的方案——是互相赔偿，且仅限各方自身工作引起的直接损失，同时设置责任上限（本例为合同金额的两倍）。这样能按比例保护双方。"
             ),
         ]
         meeting.smartMinutes = SmartMinutes(
             keyDecisions: [
-                "Counter indemnification with mutual clause capped at 2x contract value",
-                "Narrow non-compete from entire fintech sector to Meridian direct competitors only",
-                "Push termination notice from 7 days to 30 days minimum",
-                "Client call scheduled for Thursday afternoon",
+                "以互相赔偿条款反提案，责任上限为合同金额两倍",
+                "将竞业限制从整个金融科技行业收窄至 Meridian 的直接竞争对手",
+                "将终止通知期从 7 天争取到至少 30 天",
+                "客户通话定在周四下午",
             ],
             discussionPoints: [
-                "Section 4 indemnification is overbroad — covers third-party IP claims beyond work product",
-                "NDA section acceptable with standard 12-month tail",
-                "Non-compete in Section 7 would block work with 3 active fintech clients",
-                "Termination for convenience with 7-day notice insufficient for transition",
-                "Nexus deal precedent used successfully for similar indemnification language",
+                "第 4 条赔偿范围过宽——覆盖工作成果之外的第三方知识产权索赔",
+                "保密协议部分可接受，标准的 12 个月尾期",
+                "第 7 条竞业限制会阻碍与 3 家现有金融科技客户的合作",
+                "任意终止仅提前 7 天通知，不足以完成过渡",
+                "Nexus 交易的先例曾成功用于类似赔偿条款",
             ],
             actionItems: [
-                "Rebecca to draft redline by Wednesday",
-                "Michael to prepare liability cap financial analysis",
-                "Lisa to pull Nexus indemnification precedent",
-                "Michael to address termination clause in redline",
+                "Rebecca 周三前完成红线稿",
+                "Michael 准备责任上限的财务分析",
+                "Lisa 整理 Nexus 的赔偿条款先例",
+                "Michael 在红线稿中处理终止条款",
             ],
             followUps: [
-                "Internal alignment meeting Wednesday to review redline before client call",
-                "Client call Thursday afternoon to present counter-proposals",
+                "周三内部对齐会，在客户通话前审阅红线稿",
+                "周四下午客户通话，提出反提案",
             ],
             attendeeSummary: [
                 AttendeeContribution(
                     name: "Rebecca",
-                    keyPoints: ["Led discussion", "Proposed liability cap approach", "Set timeline"],
+                    keyPoints: ["主持讨论", "提出责任上限方案", "确定时间表"],
                     speakingTimePercent: 40
                 ),
                 AttendeeContribution(
                     name: "Michael",
-                    keyPoints: ["Identified indemnification and termination issues", "Referenced NDA review"],
+                    keyPoints: ["指出赔偿和终止条款问题", "提及保密协议审查"],
                     speakingTimePercent: 35
                 ),
-                AttendeeContribution(name: "Lisa", keyPoints: ["Flagged non-compete risk", "Suggested narrowing scope"], speakingTimePercent: 25),
+                AttendeeContribution(name: "Lisa", keyPoints: ["指出竞业限制风险", "建议收窄范围"], speakingTimePercent: 25),
             ]
         )
         return meeting
@@ -1178,39 +1178,39 @@ extension MeetingStore {
     private static func makeMeeting7(date: Date) -> MeetingNote {
         let segments = [
             seg(
-                "Quick compliance update. The GDPR audit prep is on track — we've completed four of seven data protection impact assessments. The remaining three cover our analytics pipeline, customer support tools, and the new marketing platform.",
+                "快速同步一下合规进展。GDPR 审计准备按计划进行——七项数据保护影响评估已完成四项。剩下三项分别涉及分析管线、客户支持工具和新的营销平台。",
                 start: 0,
                 end: 18,
-                speaker: "Speaker"
+                speaker: "发言人"
             ),
             seg(
-                "Training completion is at eighty-two percent across the company. Engineering and legal are at one hundred percent. Sales and marketing are lagging — about sixty-five percent. I've sent reminders and set a hard deadline for next Friday.",
+                "全公司培训完成率是 82%。工程和法务是 100%。销售和市场落后，大约 65%。我已经发了提醒，并把下周五定为硬性截止日期。",
                 start: 18,
                 end: 36,
-                speaker: "Speaker"
+                speaker: "发言人"
             ),
             seg(
-                "The cookie consent banner update went live yesterday. We're now compliant with the latest ePrivacy guidance. Analytics shows a forty-three percent opt-in rate, which is actually above industry average.",
+                "Cookie 同意横幅的更新昨天上线了。我们现在符合最新的 ePrivacy 指南。分析显示选择加入率为 43%，其实高于行业平均水平。",
                 start: 36,
                 end: 52,
-                speaker: "Speaker"
+                speaker: "发言人"
             ),
             seg(
-                "One blocker — the data erasure API endpoint is still in progress. Engineering says it needs another week. I've flagged it as high priority since it's required for GDPR Article 17 compliance. That's the main risk item right now.",
+                "有一个阻塞项——数据删除 API 接口仍在开发中。工程说还需要一周。我把它标为高优先级，因为这是 GDPR 第 17 条合规所必需的。这是目前的主要风险项。",
                 start: 52,
                 end: 70,
-                speaker: "Speaker"
+                speaker: "发言人"
             ),
             seg(
-                "Next steps: I'll follow up with sales leadership on the training gaps, and I have a call with our external auditor on Monday to review the DPIA documentation. That's it for today.",
+                "下一步：我会跟进销售管理层，补齐培训缺口；周一我和外部审计师有一次通话，审阅 DPIA 文档。今天就这些。",
                 start: 70,
                 end: 84,
-                speaker: "Speaker"
+                speaker: "发言人"
             ),
         ]
 
         var meeting = MeetingNote(
-            title: "Compliance Training Standup",
+            title: "合规培训站会",
             createdAt: date,
             modifiedAt: date,
             recordingMode: .voiceNote,
@@ -1221,44 +1221,44 @@ extension MeetingStore {
         meeting.segments = segments
         meeting.hasSpeakerData = false
         meeting.isArchived = true
-        meeting.summary = "Voice note standup on compliance status. GDPR audit: 4/7 DPIAs done. Training at 82% (sales/marketing lagging). Cookie consent live with 43% opt-in. Blocker: erasure API needs another week."
-        meeting.tags = ["compliance", "standup", "GDPR"]
-        meeting.topicKeywords = ["GDPR", "compliance", "audit", "training", "cookie consent", "data erasure"]
+        meeting.summary = "关于合规状态的语音站会。GDPR 审计：7 项 DPIA 已完成 4 项。培训完成率 82%（销售和市场落后）。Cookie 同意横幅已上线，选择加入率 43%。阻塞项：数据删除 API 还需一周。"
+        meeting.tags = ["合规", "站会", "GDPR"]
+        meeting.topicKeywords = ["GDPR", "合规", "审计", "培训", "Cookie 同意", "数据删除"]
         meeting.actionItems = [
             ActionItem(
-                title: "Complete remaining 3 DPIAs (analytics, support, marketing)",
+                title: "完成剩余 3 项 DPIA（分析、支持、营销）",
                 assignee: "Rebecca",
-                dueDescription: "End of month",
+                dueDescription: "月底",
                 dueDate: due(7)
             ),
             ActionItem(
-                title: "Follow up with sales leadership on training completion",
+                title: "跟进销售管理层的培训完成情况",
                 assignee: "Rebecca",
-                dueDescription: "This week",
+                dueDescription: "本周",
                 isCompleted: true,
                 dueDate: due(-1)
             ),
-            ActionItem(title: "External auditor call — review DPIA documentation", assignee: "Rebecca", dueDescription: "Monday", dueDate: due(2)),
+            ActionItem(title: "与外部审计师通话——审阅 DPIA 文档", assignee: "Rebecca", dueDescription: "周一", dueDate: due(2)),
         ]
         meeting.smartMinutes = SmartMinutes(
             keyDecisions: [
-                "Hard deadline set for training completion: next Friday",
-                "Data erasure API flagged as high-priority blocker",
+                "培训完成的硬性截止日期定为下周五",
+                "数据删除 API 被标记为高优先级阻塞项",
             ],
             discussionPoints: [
-                "4 of 7 DPIAs completed; remaining cover analytics, support tools, and marketing platform",
-                "Company-wide training at 82% — engineering and legal at 100%, sales/marketing at 65%",
-                "Cookie consent banner live with 43% opt-in rate (above industry average)",
-                "Erasure API needs another week from engineering",
+                "7 项 DPIA 已完成 4 项；剩余涉及分析、支持工具和营销平台",
+                "全公司培训完成率 82%——工程和法务 100%，销售和市场 65%",
+                "Cookie 同意横幅已上线，选择加入率 43%（高于行业平均）",
+                "数据删除 API 还需工程再开发一周",
             ],
             actionItems: [
-                "Follow up with sales leadership on training gaps",
-                "Monday call with external auditor on DPIA review",
-                "Escalate erasure API timeline with engineering lead",
+                "跟进销售管理层的培训缺口",
+                "周一向外部审计师通话，审阅 DPIA",
+                "与工程负责人升级沟通数据删除 API 的时间表",
             ],
             followUps: [
-                "Check training numbers again by Friday deadline",
-                "Review erasure API progress mid-week",
+                "周五截止前再核对一次培训数据",
+                "周中检查数据删除 API 的进展",
             ],
             attendeeSummary: []
         )
@@ -1270,69 +1270,69 @@ extension MeetingStore {
     private static func makeMeeting8(date: Date) -> MeetingNote {
         let sp1 = "speaker-dr-chen", sp2 = "speaker-dr-patel"
         let speakers = [
-            Speaker(id: sp1, name: "Dr. Chen", color: AppThemeConstants.speakerBlurple),
-            Speaker(id: sp2, name: "Dr. Patel", color: AppThemeConstants.speakerPink),
+            Speaker(id: sp1, name: "Chen 医生", color: AppThemeConstants.speakerBlurple),
+            Speaker(id: sp2, name: "Patel 医生", color: AppThemeConstants.speakerPink),
         ]
         let segments = [
             seg(
-                "Thanks for the consult, Dr. Patel. I have a forty-two year old female presenting with six weeks of fatigue and bilateral hand joint pain. Morning stiffness lasting about forty-five minutes.",
+                "感谢会诊，Patel 医生。患者女性，42 岁，表现为六周乏力和双手关节对称性疼痛。晨僵持续约四十五分钟。",
                 start: 0,
                 end: 16,
-                speaker: "Dr. Chen"
+                speaker: "Chen 医生"
             ),
             seg(
-                "Any lab results back yet?",
+                "化验结果出来了吗？",
                 start: 16,
                 end: 20,
-                speaker: "Dr. Patel"
+                speaker: "Patel 医生"
             ),
             seg(
-                "Yes — RF is positive at sixty-eight, anti-CCP is elevated at ninety-two. ESR and CRP both elevated. ANA is weakly positive at one to eighty.",
+                "出来了——RF 阳性，68；抗 CCP 升高，92。ESR 和 CRP 都升高。ANA 弱阳性，1:80。",
                 start: 20,
                 end: 36,
-                speaker: "Dr. Chen"
+                speaker: "Chen 医生"
             ),
             seg(
-                "That's a strong serologic profile for rheumatoid arthritis. With the clinical presentation — symmetric small joint involvement, prolonged morning stiffness, and positive RF and anti-CCP — she meets the 2010 ACR/EULAR criteria.",
+                "这是类风湿关节炎很强的血清学表现。结合临床表现——小关节对称受累、晨僵时间延长，以及 RF 和抗 CCP 阳性——她符合 2010 ACR/EULAR 标准。",
                 start: 36,
                 end: 56,
-                speaker: "Dr. Patel"
+                speaker: "Patel 医生"
             ),
             seg(
-                "That's what I was thinking. Her mother also has RA, and her sister has lupus. Should I be concerned about overlap given the positive ANA?",
+                "我也是这么想的。她母亲有类风湿关节炎，妹妹有狼疮。考虑到 ANA 阳性，我需要担心重叠综合征吗？",
                 start: 56,
                 end: 70,
-                speaker: "Dr. Chen"
+                speaker: "Chen 医生"
             ),
             seg(
-                "The ANA at one to eighty is low titer and nonspecific — it can occur in RA without indicating lupus. I'd check dsDNA and complement levels to rule it out, but the clinical picture points squarely to RA.",
+                "ANA 1:80 属于低滴度且不特异——类风湿关节炎中也会出现，并不代表狼疮。我会查 dsDNA 和补体水平来排除，但临床情况明确指向类风湿关节炎。",
                 start: 70,
                 end: 90,
-                speaker: "Dr. Patel"
+                speaker: "Patel 医生"
             ),
             seg(
-                "What's your recommended treatment approach? She's currently on levothyroxine for hypothyroidism and taking ibuprofen as needed.",
+                "你推荐怎么治疗？她目前在用左甲状腺素治疗甲减，必要时服用布洛芬。",
                 start: 90,
                 end: 104,
-                speaker: "Dr. Chen"
+                speaker: "Chen 医生"
             ),
             seg(
-                "I'd start with methotrexate fifteen milligrams weekly — that's first-line for moderate RA. Add folic acid one milligram daily to reduce side effects. We should get baseline liver function and CBC before starting.",
+                "我建议从每周 15mg 甲氨蝶呤开始——这是中度类风湿关节炎的一线治疗。每天加 1mg 叶酸以减少副作用。开始用药前应该查肝功能和血常规基线。",
                 start: 104,
                 end: 124,
-                speaker: "Dr. Patel"
+                speaker: "Patel 医生"
             ),
             seg(
-                "Makes sense. And if she doesn't respond adequately to methotrexate alone?",
+                "有道理。如果单用甲氨蝶呤效果不够呢？",
                 start: 124,
                 end: 132,
-                speaker: "Dr. Chen"
+                speaker: "Chen 医生"
             ),
             seg(
-                "Then we'd consider adding a biologic — likely a TNF inhibitor or a JAK inhibitor depending on her profile. But let's give methotrexate twelve weeks to assess response before escalating. I'll see her in my clinic in four weeks for a rheumatology baseline.",
+                "那我们会考虑加用生物制剂——根据她的情况，可能是 TNF 抑制剂或 JAK 抑制剂。但先给甲氨蝶呤十二周评估疗效，再考虑升级。四周后她到我的门诊做风湿科基线评估。",
                 start: 132,
                 end: 154,
-                speaker: "Dr. Patel"
+                speaker: "Patel 医生"
             ),
         ]
         let speakerSegments = [
@@ -1340,56 +1340,56 @@ extension MeetingStore {
                 sp1,
                 start: 0,
                 end: 16,
-                text: "Thanks for the consult, Dr. Patel. I have a forty-two year old female presenting with six weeks of fatigue and bilateral hand joint pain. Morning stiffness lasting about forty-five minutes."
+                text: "感谢会诊，Patel 医生。患者女性，42 岁，表现为六周乏力和双手关节对称性疼痛。晨僵持续约四十五分钟。"
             ),
-            spkSeg(sp2, start: 16, end: 20, text: "Any lab results back yet?"),
+            spkSeg(sp2, start: 16, end: 20, text: "化验结果出来了吗？"),
             spkSeg(
                 sp1,
                 start: 20,
                 end: 36,
-                text: "Yes — RF is positive at sixty-eight, anti-CCP is elevated at ninety-two. ESR and CRP both elevated. ANA is weakly positive at one to eighty."
+                text: "出来了——RF 阳性，68；抗 CCP 升高，92。ESR 和 CRP 都升高。ANA 弱阳性，1:80。"
             ),
             spkSeg(
                 sp2,
                 start: 36,
                 end: 56,
-                text: "That's a strong serologic profile for rheumatoid arthritis. With the clinical presentation — symmetric small joint involvement, prolonged morning stiffness, and positive RF and anti-CCP — she meets the 2010 ACR/EULAR criteria."
+                text: "这是类风湿关节炎很强的血清学表现。结合临床表现——小关节对称受累、晨僵时间延长，以及 RF 和抗 CCP 阳性——她符合 2010 ACR/EULAR 标准。"
             ),
             spkSeg(
                 sp1,
                 start: 56,
                 end: 70,
-                text: "That's what I was thinking. Her mother also has RA, and her sister has lupus. Should I be concerned about overlap given the positive ANA?"
+                text: "我也是这么想的。她母亲有类风湿关节炎，妹妹有狼疮。考虑到 ANA 阳性，我需要担心重叠综合征吗？"
             ),
             spkSeg(
                 sp2,
                 start: 70,
                 end: 90,
-                text: "The ANA at one to eighty is low titer and nonspecific — it can occur in RA without indicating lupus. I'd check dsDNA and complement levels to rule it out, but the clinical picture points squarely to RA."
+                text: "ANA 1:80 属于低滴度且不特异——类风湿关节炎中也会出现，并不代表狼疮。我会查 dsDNA 和补体水平来排除，但临床情况明确指向类风湿关节炎。"
             ),
             spkSeg(
                 sp1,
                 start: 90,
                 end: 104,
-                text: "What's your recommended treatment approach? She's currently on levothyroxine for hypothyroidism and taking ibuprofen as needed."
+                text: "你推荐怎么治疗？她目前在用左甲状腺素治疗甲减，必要时服用布洛芬。"
             ),
             spkSeg(
                 sp2,
                 start: 104,
                 end: 124,
-                text: "I'd start with methotrexate fifteen milligrams weekly — that's first-line for moderate RA. Add folic acid one milligram daily to reduce side effects. We should get baseline liver function and CBC before starting."
+                text: "我建议从每周 15mg 甲氨蝶呤开始——这是中度类风湿关节炎的一线治疗。每天加 1mg 叶酸以减少副作用。开始用药前应该查肝功能和血常规基线。"
             ),
-            spkSeg(sp1, start: 124, end: 132, text: "Makes sense. And if she doesn't respond adequately to methotrexate alone?"),
+            spkSeg(sp1, start: 124, end: 132, text: "有道理。如果单用甲氨蝶呤效果不够呢？"),
             spkSeg(
                 sp2,
                 start: 132,
                 end: 154,
-                text: "Then we'd consider adding a biologic — likely a TNF inhibitor or a JAK inhibitor depending on her profile. But let's give methotrexate twelve weeks to assess response before escalating. I'll see her in my clinic in four weeks for a rheumatology baseline."
+                text: "那我们会考虑加用生物制剂——根据她的情况，可能是 TNF 抑制剂或 JAK 抑制剂。但先给甲氨蝶呤十二周评估疗效，再考虑升级。四周后她到我的门诊做风湿科基线评估。"
             ),
         ]
 
         var meeting = MeetingNote(
-            title: "Patient Case Conference",
+            title: "患者病例讨论会",
             createdAt: date,
             modifiedAt: date,
             recordingMode: .inPerson,
@@ -1401,94 +1401,94 @@ extension MeetingStore {
         meeting.segments = segments
         meeting.speakerSegments = speakerSegments
         meeting.hasSpeakerData = true
-        meeting.summary = "Rheumatology consult for 42F with fatigue and bilateral hand joint pain. Labs show positive RF (68) and anti-CCP (92), elevated inflammatory markers. Diagnosis: rheumatoid arthritis per 2010 ACR/EULAR criteria. Plan: start methotrexate 15mg weekly with folic acid, rheumatology follow-up in 4 weeks."
+        meeting.summary = "42 岁女性的风湿科会诊，表现为乏力和双手关节对称性疼痛。检查显示 RF 阳性（68）、抗 CCP 升高（92），炎症指标升高。诊断：符合 2010 ACR/EULAR 标准的类风湿关节炎。方案：开始每周 15mg 甲氨蝶呤并补充叶酸，4 周后风湿科随访。"
         meeting.isPinned = true
-        meeting.tags = ["case-conference", "rheumatology"]
-        meeting.topicKeywords = ["patient", "diagnosis", "treatment", "rheumatoid arthritis", "methotrexate"]
+        meeting.tags = ["病例讨论", "风湿科"]
+        meeting.topicKeywords = ["患者", "诊断", "治疗", "类风湿关节炎", "甲氨蝶呤"]
         meeting.transcriptionLanguage = "en"
         meeting.actionItems = [
             ActionItem(
-                title: "Order baseline CBC and liver function panel before starting methotrexate",
-                assignee: "Dr. Chen",
-                dueDescription: "Before treatment",
+                title: "开始甲氨蝶呤前开具血常规和肝功能基线检查",
+                assignee: "Chen 医生",
+                dueDescription: "治疗前",
                 isCompleted: true,
                 dueDate: due(-1),
                 reminderDate: due(-2)
             ),
             ActionItem(
-                title: "Prescribe methotrexate 15mg weekly + folic acid 1mg daily",
-                assignee: "Dr. Chen",
-                dueDescription: "At next visit",
+                title: "处方甲氨蝶呤每周 15mg + 叶酸每日 1mg",
+                assignee: "Chen 医生",
+                dueDescription: "下次就诊时",
                 isCompleted: true,
                 dueDate: due(0)
             ),
             ActionItem(
-                title: "Order dsDNA and complement levels to rule out lupus overlap",
-                assignee: "Dr. Chen",
-                dueDescription: "With baseline labs",
+                title: "开具 dsDNA 和补体检查，排除狼疮重叠",
+                assignee: "Chen 医生",
+                dueDescription: "随基线检查",
                 isCompleted: true,
                 dueDate: due(-1)
             ),
             ActionItem(
-                title: "Schedule rheumatology baseline visit in 4 weeks",
-                assignee: "Dr. Patel",
-                dueDescription: "4 weeks",
+                title: "安排 4 周后的风湿科基线随访",
+                assignee: "Patel 医生",
+                dueDescription: "4 周后",
                 isCompleted: true,
                 dueDate: due(0),
                 reminderDate: due(-1)
             ),
         ]
         meeting.bookmarks = [
-            Bookmark(label: "Lab results", timestamp: 20, color: .blue),
-            Bookmark(label: "RA diagnosis", timestamp: 36, color: .purple),
-            Bookmark(label: "ANA discussion", timestamp: 70, color: .yellow),
-            Bookmark(label: "Treatment plan", timestamp: 104, color: .orange),
+            Bookmark(label: "化验结果", timestamp: 20, color: .blue),
+            Bookmark(label: "类风湿关节炎诊断", timestamp: 36, color: .purple),
+            Bookmark(label: "ANA 讨论", timestamp: 70, color: .yellow),
+            Bookmark(label: "治疗方案", timestamp: 104, color: .orange),
         ]
         meeting.chatMessages = [
-            MeetingChatMessage(role: .user, content: "What are the main side effects of methotrexate I should counsel the patient about?"),
+            MeetingChatMessage(role: .user, content: "甲氨蝶呤的主要副作用有哪些，我需要向患者交代？"),
             MeetingChatMessage(
                 role: .assistant,
-                content: "The most common side effects of methotrexate for RA include: (1) GI symptoms — nausea, mouth sores, and decreased appetite, which folic acid supplementation helps mitigate; (2) Liver toxicity — requires baseline and periodic liver function monitoring; (3) Bone marrow suppression — monitor CBC regularly; (4) Increased infection risk due to immunosuppression. Less common but important: pulmonary toxicity (pneumonitis) and teratogenicity — contraception is essential for women of childbearing age."
+                content: "甲氨蝶呤治疗类风湿关节炎最常见的副作用包括：（1）胃肠道症状——恶心、口腔溃疡和食欲下降，补充叶酸有助于减轻；（2）肝毒性——需要基线和定期肝功能监测；（3）骨髓抑制——定期监测血常规；（4）免疫抑制导致感染风险增加。较少见但很重要：肺毒性（肺炎）和致畸性——育龄女性必须避孕。"
             ),
-            MeetingChatMessage(role: .user, content: "Should I be concerned about drug interactions with her levothyroxine?"),
+            MeetingChatMessage(role: .user, content: "需要担心和她用的左甲状腺素发生药物相互作用吗？"),
             MeetingChatMessage(
                 role: .assistant,
-                content: "Methotrexate and levothyroxine do not have a significant direct interaction. However, methotrexate can affect liver metabolism and protein binding, so it's prudent to recheck TSH about 6-8 weeks after starting methotrexate to ensure thyroid hormone levels remain stable. No dose adjustment is typically needed upfront."
+                content: "甲氨蝶呤和左甲状腺素没有明显的直接相互作用。不过甲氨蝶呤会影响肝脏代谢和蛋白结合，所以开始用药后 6–8 周复查 TSH 比较稳妥，以确认甲状腺激素水平稳定。通常不需要一开始就调整剂量。"
             ),
         ]
         meeting.smartMinutes = SmartMinutes(
             keyDecisions: [
-                "Diagnosis: rheumatoid arthritis based on 2010 ACR/EULAR criteria",
-                "First-line treatment: methotrexate 15mg weekly with folic acid 1mg daily",
-                "Rule out lupus overlap with dsDNA and complement levels",
-                "Reassess at 12 weeks; escalate to biologic if inadequate response",
+                "诊断：依据 2010 ACR/EULAR 标准诊断为类风湿关节炎",
+                "一线治疗：每周 15mg 甲氨蝶呤，每日 1mg 叶酸",
+                "通过 dsDNA 和补体水平排除狼疮重叠",
+                "12 周时复评；疗效不足则升级为生物制剂",
             ],
             discussionPoints: [
-                "Presentation: 42F, 6 weeks fatigue and bilateral hand joint pain, 45-min morning stiffness",
-                "Labs: RF 68 (positive), anti-CCP 92 (elevated), ESR and CRP elevated, ANA 1:80 (weak positive)",
-                "Family history notable for RA (mother) and lupus (sister)",
-                "Low-titer ANA is nonspecific in RA context — not indicative of lupus",
-                "Methotrexate is first-line for moderate RA; biologics reserved for inadequate responders",
+                "表现：42 岁女性，乏力及双手关节对称性疼痛 6 周，晨僵 45 分钟",
+                "化验：RF 68（阳性）、抗 CCP 92（升高）、ESR 和 CRP 升高、ANA 1:80（弱阳性）",
+                "家族史：母亲患类风湿关节炎，妹妹患狼疮",
+                "低滴度 ANA 在类风湿关节炎中不特异——不提示狼疮",
+                "甲氨蝶呤是中度类风湿关节炎的一线用药；生物制剂用于疗效不佳者",
             ],
             actionItems: [
-                "Dr. Chen to order baseline labs (CBC, LFTs, dsDNA, complement)",
-                "Dr. Chen to prescribe methotrexate + folic acid at next visit",
-                "Dr. Patel to see patient in 4 weeks for rheumatology baseline",
+                "Chen 医生开具基线检查（血常规、肝功能、dsDNA、补体）",
+                "Chen 医生在下次就诊时处方甲氨蝶呤 + 叶酸",
+                "Patel 医生 4 周后接诊患者，做风湿科基线评估",
             ],
             followUps: [
-                "Reassess methotrexate response at 12 weeks",
-                "Consider biologic (TNF inhibitor or JAK inhibitor) if inadequate response",
-                "Recheck TSH 6-8 weeks after starting methotrexate",
+                "12 周时评估甲氨蝶呤疗效",
+                "疗效不足时考虑生物制剂（TNF 抑制剂或 JAK 抑制剂）",
+                "开始甲氨蝶呤后 6–8 周复查 TSH",
             ],
             attendeeSummary: [
                 AttendeeContribution(
-                    name: "Dr. Chen",
-                    keyPoints: ["Presented case and labs", "Asked about lupus overlap and drug interactions"],
+                    name: "Chen 医生",
+                    keyPoints: ["汇报病例和化验结果", "询问狼疮重叠和药物相互作用"],
                     speakingTimePercent: 45
                 ),
                 AttendeeContribution(
-                    name: "Dr. Patel",
-                    keyPoints: ["Confirmed RA diagnosis", "Recommended methotrexate regimen", "Addressed ANA concern"],
+                    name: "Patel 医生",
+                    keyPoints: ["确认类风湿关节炎诊断", "推荐甲氨蝶呤方案", "解答 ANA 相关疑问"],
                     speakingTimePercent: 55
                 ),
             ]
@@ -1501,70 +1501,70 @@ extension MeetingStore {
     private static func makeMeeting9(date: Date) -> MeetingNote {
         let sp1 = "speaker-dr-nakamura", sp2 = "speaker-kate", sp3 = "speaker-dr-wong"
         let speakers = [
-            Speaker(id: sp1, name: "Dr. Nakamura", color: AppThemeConstants.speakerBlurple),
+            Speaker(id: sp1, name: "Nakamura 医生", color: AppThemeConstants.speakerBlurple),
             Speaker(id: sp2, name: "Kate", color: AppThemeConstants.speakerCyan),
-            Speaker(id: sp3, name: "Dr. Wong", color: AppThemeConstants.speakerPink),
+            Speaker(id: sp3, name: "Wong 医生", color: AppThemeConstants.speakerPink),
         ]
         let segments = [
             seg(
-                "Let's brainstorm the Phase Two protocol design. We need to finalize the enrollment criteria and endpoint strategy before the IND submission next month.",
+                "我们来头脑风暴 II 期方案设计。下个月提交 IND 之前，需要敲定入组标准和终点策略。",
                 start: 0,
                 end: 14,
-                speaker: "Dr. Nakamura"
+                speaker: "Nakamura 医生"
             ),
             seg(
-                "I've been looking at comparable trials. Most Phase Two RA trials target two hundred to three hundred patients with a one-to-one-to-one randomization across low dose, high dose, and placebo.",
+                "我看了一些同类试验。多数 II 期类风湿关节炎试验入组 200 到 300 例，按低剂量、高剂量和安慰剂做 1:1:1 随机分组。",
                 start: 14,
                 end: 30,
                 speaker: "Kate"
             ),
             seg(
-                "Two forty is our sweet spot — eighty per arm gives us ninety percent power for the ACR20 primary endpoint assuming a twenty-five percentage point difference from placebo.",
+                "240 例是我们的理想规模——每组 80 例，假设与安慰剂相差 25 个百分点，ACR20 主要终点可达到 90% 的检验效能。",
                 start: 30,
                 end: 46,
-                speaker: "Dr. Wong"
+                speaker: "Wong 医生"
             ),
             seg(
-                "What about the dose selection? The Phase One PK data suggests five and fifteen milligrams bracket the target exposure range.",
+                "剂量怎么选？I 期 PK 数据提示 5mg 和 15mg 覆盖了目标暴露范围。",
                 start: 46,
                 end: 60,
-                speaker: "Dr. Nakamura"
+                speaker: "Nakamura 医生"
             ),
             seg(
-                "The five milligram dose showed good JAK1 selectivity with minimal JAK2 inhibition. Fifteen milligrams had stronger efficacy signals but we need to watch the hematologic parameters closely.",
+                "5mg 剂量显示出良好的 JAK1 选择性，对 JAK2 的抑制很小。15mg 的疗效信号更强，但需要密切监测血液学指标。",
                 start: 60,
                 end: 78,
                 speaker: "Kate"
             ),
             seg(
-                "I'd recommend adding a Data Safety Monitoring Board review at the Week 8 interim. If we see unexpected hepatotoxicity or significant cytopenias, we can pause enrollment.",
+                "我建议在第 8 周中期增加一次数据安全监查委员会（DSMB）审查。如果出现意外的肝毒性或明显的血细胞减少，我们可以暂停入组。",
                 start: 78,
                 end: 96,
-                speaker: "Dr. Wong"
+                speaker: "Wong 医生"
             ),
             seg(
-                "Good idea. What about the patient population? We discussed requiring inadequate response to methotrexate as an inclusion criterion.",
+                "好主意。患者人群呢？我们讨论过把甲氨蝶呤应答不足作为入选标准。",
                 start: 96,
                 end: 110,
-                speaker: "Dr. Nakamura"
+                speaker: "Nakamura 医生"
             ),
             seg(
-                "That's standard for this class. I'd also suggest excluding prior JAK inhibitor use to keep the population clean. And we should think about the site selection — I'm proposing eighteen centers across the US and Canada.",
+                "这对这类药物是标准做法。我还建议排除既往使用过 JAK 抑制剂的患者，保持人群纯净。另外要考虑中心选择——我提议在美国和加拿大设 18 个中心。",
                 start: 110,
                 end: 130,
                 speaker: "Kate"
             ),
             seg(
-                "Eighteen sites should give us good enrollment velocity. Target twelve to fourteen months for full enrollment. One thing I want to flag — the FDA has been asking about cardiovascular safety for JAK inhibitors lately. We should include MACE as an exploratory endpoint.",
+                "18 个中心应该能保证不错的入组速度。目标是 12 到 14 个月完成全部入组。有一点我想提出来——FDA 最近一直在关注 JAK 抑制剂的心血管安全性。我们应该把 MACE 作为探索性终点。",
                 start: 130,
                 end: 152,
-                speaker: "Dr. Wong"
+                speaker: "Wong 医生"
             ),
             seg(
-                "Absolutely. Let's add that. Kate, can you draft the full protocol document this week? I'd like to circulate it to the advisory board by Friday.",
+                "完全同意，加上它。Kate，你能本周起草完整的方案文档吗？我想在周五前发给顾问委员会。",
                 start: 152,
                 end: 166,
-                speaker: "Dr. Nakamura"
+                speaker: "Nakamura 医生"
             ),
         ]
         let speakerSegments = [
@@ -1572,66 +1572,66 @@ extension MeetingStore {
                 sp1,
                 start: 0,
                 end: 14,
-                text: "Let's brainstorm the Phase Two protocol design. We need to finalize the enrollment criteria and endpoint strategy before the IND submission next month."
+                text: "我们来头脑风暴 II 期方案设计。下个月提交 IND 之前，需要敲定入组标准和终点策略。"
             ),
             spkSeg(
                 sp2,
                 start: 14,
                 end: 30,
-                text: "I've been looking at comparable trials. Most Phase Two RA trials target two hundred to three hundred patients with a one-to-one-to-one randomization across low dose, high dose, and placebo."
+                text: "我看了一些同类试验。多数 II 期类风湿关节炎试验入组 200 到 300 例，按低剂量、高剂量和安慰剂做 1:1:1 随机分组。"
             ),
             spkSeg(
                 sp3,
                 start: 30,
                 end: 46,
-                text: "Two forty is our sweet spot — eighty per arm gives us ninety percent power for the ACR20 primary endpoint assuming a twenty-five percentage point difference from placebo."
+                text: "240 例是我们的理想规模——每组 80 例，假设与安慰剂相差 25 个百分点，ACR20 主要终点可达到 90% 的检验效能。"
             ),
             spkSeg(
                 sp1,
                 start: 46,
                 end: 60,
-                text: "What about the dose selection? The Phase One PK data suggests five and fifteen milligrams bracket the target exposure range."
+                text: "剂量怎么选？I 期 PK 数据提示 5mg 和 15mg 覆盖了目标暴露范围。"
             ),
             spkSeg(
                 sp2,
                 start: 60,
                 end: 78,
-                text: "The five milligram dose showed good JAK1 selectivity with minimal JAK2 inhibition. Fifteen milligrams had stronger efficacy signals but we need to watch the hematologic parameters closely."
+                text: "5mg 剂量显示出良好的 JAK1 选择性，对 JAK2 的抑制很小。15mg 的疗效信号更强，但需要密切监测血液学指标。"
             ),
             spkSeg(
                 sp3,
                 start: 78,
                 end: 96,
-                text: "I'd recommend adding a Data Safety Monitoring Board review at the Week 8 interim. If we see unexpected hepatotoxicity or significant cytopenias, we can pause enrollment."
+                text: "我建议在第 8 周中期增加一次数据安全监查委员会（DSMB）审查。如果出现意外的肝毒性或明显的血细胞减少，我们可以暂停入组。"
             ),
             spkSeg(
                 sp1,
                 start: 96,
                 end: 110,
-                text: "Good idea. What about the patient population? We discussed requiring inadequate response to methotrexate as an inclusion criterion."
+                text: "好主意。患者人群呢？我们讨论过把甲氨蝶呤应答不足作为入选标准。"
             ),
             spkSeg(
                 sp2,
                 start: 110,
                 end: 130,
-                text: "That's standard for this class. I'd also suggest excluding prior JAK inhibitor use to keep the population clean. And we should think about the site selection — I'm proposing eighteen centers across the US and Canada."
+                text: "这对这类药物是标准做法。我还建议排除既往使用过 JAK 抑制剂的患者，保持人群纯净。另外要考虑中心选择——我提议在美国和加拿大设 18 个中心。"
             ),
             spkSeg(
                 sp3,
                 start: 130,
                 end: 152,
-                text: "Eighteen sites should give us good enrollment velocity. Target twelve to fourteen months for full enrollment. One thing I want to flag — the FDA has been asking about cardiovascular safety for JAK inhibitors lately. We should include MACE as an exploratory endpoint."
+                text: "18 个中心应该能保证不错的入组速度。目标是 12 到 14 个月完成全部入组。有一点我想提出来——FDA 最近一直在关注 JAK 抑制剂的心血管安全性。我们应该把 MACE 作为探索性终点。"
             ),
             spkSeg(
                 sp1,
                 start: 152,
                 end: 166,
-                text: "Absolutely. Let's add that. Kate, can you draft the full protocol document this week? I'd like to circulate it to the advisory board by Friday."
+                text: "完全同意，加上它。Kate，你能本周起草完整的方案文档吗？我想在周五前发给顾问委员会。"
             ),
         ]
 
         var meeting = MeetingNote(
-            title: "Research Protocol Brainstorm",
+            title: "研究方案头脑风暴",
             createdAt: date,
             modifiedAt: date,
             recordingMode: .onlineMeeting,
@@ -1644,75 +1644,75 @@ extension MeetingStore {
         meeting.speakerSegments = speakerSegments
         meeting.hasSpeakerData = true
         meeting.scheduledStartTime = date
-        meeting.summary = "Brainstormed Phase II clinical trial protocol for BTC-4501 (JAK1 inhibitor for RA). Key decisions: 240 patients across 3 arms, 5mg and 15mg doses, ACR20 primary endpoint at Week 12, DSMB interim at Week 8, 18 trial sites, MACE as exploratory CV safety endpoint."
+        meeting.summary = "围绕 BTC-4501（用于类风湿关节炎的 JAK1 抑制剂）的 II 期临床试验方案进行头脑风暴。关键决定：240 例患者、3 个组别、5mg 和 15mg 剂量、第 12 周 ACR20 主要终点、第 8 周 DSMB 中期审查、18 个试验中心、MACE 作为探索性心血管安全性终点。"
         meeting.isPinned = false
-        meeting.tags = ["research", "protocol", "phase-2"]
-        meeting.topicKeywords = ["trial", "protocol", "endpoints", "enrollment", "JAK inhibitor", "ACR20"]
+        meeting.tags = ["研究", "方案", "II 期"]
+        meeting.topicKeywords = ["试验", "方案", "终点", "入组", "JAK 抑制剂", "ACR20"]
         meeting.actionItems = [
-            ActionItem(title: "Draft full Phase II protocol document", assignee: "Kate", dueDescription: "This week", dueDate: due(-2)),
-            ActionItem(title: "Circulate protocol to advisory board", assignee: "Dr. Nakamura", dueDescription: "Friday", dueDate: due(-1)),
+            ActionItem(title: "起草完整的 II 期方案文档", assignee: "Kate", dueDescription: "本周", dueDate: due(-2)),
+            ActionItem(title: "将方案发给顾问委员会", assignee: "Nakamura 医生", dueDescription: "周五", dueDate: due(-1)),
             ActionItem(
-                title: "Finalize site selection list — 18 centers US and Canada",
+                title: "敲定中心名单——美国及加拿大 18 个中心",
                 assignee: "Kate",
-                dueDescription: "Before IND submission",
+                dueDescription: "IND 提交前",
                 dueDate: due(-3)
             ),
             ActionItem(
-                title: "Add MACE as exploratory cardiovascular safety endpoint",
-                assignee: "Dr. Wong",
-                dueDescription: "In protocol draft",
+                title: "将 MACE 列为探索性心血管安全性终点",
+                assignee: "Wong 医生",
+                dueDescription: "写入方案初稿",
                 isCompleted: true,
                 dueDate: due(-2)
             ),
         ]
         meeting.bookmarks = [
-            Bookmark(label: "Sample size rationale", timestamp: 30, color: .blue),
-            Bookmark(label: "Dose selection", timestamp: 46, color: .purple),
-            Bookmark(label: "DSMB interim review", timestamp: 78, color: .red),
-            Bookmark(label: "CV safety endpoint", timestamp: 130, color: .orange),
+            Bookmark(label: "样本量依据", timestamp: 30, color: .blue),
+            Bookmark(label: "剂量选择", timestamp: 46, color: .purple),
+            Bookmark(label: "DSMB 中期审查", timestamp: 78, color: .red),
+            Bookmark(label: "心血管安全性终点", timestamp: 130, color: .orange),
         ]
         meeting.smartMinutes = SmartMinutes(
             keyDecisions: [
-                "240 patients total — 80 per arm (low dose, high dose, placebo)",
-                "Doses: 5mg and 15mg oral, once daily",
-                "Primary endpoint: ACR20 response at Week 12",
-                "DSMB interim safety review at Week 8",
-                "18 trial sites across US and Canada",
-                "MACE added as exploratory cardiovascular safety endpoint",
+                "共 240 例患者——每组 80 例（低剂量、高剂量、安慰剂）",
+                "剂量：5mg 和 15mg 口服，每日一次",
+                "主要终点：第 12 周 ACR20 应答率",
+                "第 8 周进行 DSMB 中期安全性审查",
+                "在美国和加拿大设 18 个试验中心",
+                "将 MACE 列为探索性心血管安全性终点",
             ],
             discussionPoints: [
-                "Comparable trials use 200-300 patients with 1:1:1 randomization",
-                "90% power for 25-percentage-point ACR20 difference from placebo",
-                "Phase 1 PK data supports 5mg and 15mg dose bracket",
-                "5mg shows good JAK1 selectivity; 15mg stronger efficacy but hematologic monitoring needed",
-                "FDA increasingly focused on CV safety for JAK inhibitor class",
-                "Enrollment target: 12-14 months across 18 sites",
+                "同类试验入组 200–300 例，按 1:1:1 随机分组",
+                "ACR20 相对安慰剂差 25 个百分点时，检验效能 90%",
+                "I 期 PK 数据支持 5mg 和 15mg 的剂量区间",
+                "5mg 显示良好的 JAK1 选择性；15mg 疗效更强但需监测血液学指标",
+                "FDA 日益关注 JAK 抑制剂类别的心血管安全性",
+                "入组目标：18 个中心，12–14 个月完成",
             ],
             actionItems: [
-                "Kate to draft full protocol document this week",
-                "Dr. Nakamura to circulate to advisory board by Friday",
-                "Kate to finalize site selection list",
-                "Dr. Wong to incorporate MACE exploratory endpoint",
+                "Kate 本周起草完整方案文档",
+                "Nakamura 医生周五前发给顾问委员会",
+                "Kate 敲定中心名单",
+                "Wong 医生纳入 MACE 探索性终点",
             ],
             followUps: [
-                "Advisory board feedback due within 2 weeks of circulation",
-                "IND submission target: next month",
-                "Pre-IND meeting with FDA to discuss CV safety monitoring plan",
+                "顾问委员会在收到后 2 周内反馈",
+                "IND 提交目标：下个月",
+                "与 FDA 召开 pre-IND 会议，讨论心血管安全性监测方案",
             ],
             attendeeSummary: [
                 AttendeeContribution(
-                    name: "Dr. Nakamura",
-                    keyPoints: ["Set timeline for IND submission", "Led dose selection discussion"],
+                    name: "Nakamura 医生",
+                    keyPoints: ["确定 IND 提交时间表", "主导剂量选择讨论"],
                     speakingTimePercent: 30
                 ),
                 AttendeeContribution(
                     name: "Kate",
-                    keyPoints: ["Benchmarked comparable trials", "Analyzed PK data for dose rationale", "Proposed site strategy"],
+                    keyPoints: ["对标同类试验", "分析 PK 数据支持剂量依据", "提出中心策略"],
                     speakingTimePercent: 35
                 ),
                 AttendeeContribution(
-                    name: "Dr. Wong",
-                    keyPoints: ["Calculated sample size", "Recommended DSMB interim", "Flagged CV safety endpoint"],
+                    name: "Wong 医生",
+                    keyPoints: ["计算样本量", "建议 DSMB 中期审查", "提出心血管安全性终点"],
                     speakingTimePercent: 35
                 ),
             ]

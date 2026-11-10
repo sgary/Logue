@@ -624,7 +624,7 @@ final class WritingNSTextView: NSTextView {
     let addBlockButton: NSButton = {
         let btn = NSButton()
         let symConfig = NSImage.SymbolConfiguration(pointSize: 12, weight: .medium)
-        btn.image = NSImage(systemSymbolName: "plus", accessibilityDescription: "Add block")?
+        btn.image = NSImage(systemSymbolName: "plus", accessibilityDescription: "添加块")?
             .withSymbolConfiguration(symConfig)
         btn.image?.isTemplate = true
         btn.imageScaling = .scaleNone

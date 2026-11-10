@@ -41,7 +41,7 @@ struct InlineDiagramView: View {
 
     private func diagramCell(_ entry: DiagramRef) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(entry.alt.isEmpty ? "Diagram" : entry.alt)
+            Text(entry.alt.isEmpty ? "图表" : entry.alt)
                 .font(.caption2)
                 .foregroundStyle(.secondary)
             SVGFileView(url: entry.url)
@@ -57,14 +57,14 @@ struct InlineDiagramView: View {
                 Button {
                     NSWorkspace.shared.open(entry.url)
                 } label: {
-                    Label("Open", systemImage: "arrow.up.right.square")
+                    Label("打开", systemImage: "arrow.up.right.square")
                 }
                 .buttonStyle(.borderless)
                 .controlSize(.small)
                 Button {
                     NSWorkspace.shared.activateFileViewerSelecting([entry.url])
                 } label: {
-                    Label("Show in Finder", systemImage: "folder")
+                    Label("在访达中显示", systemImage: "folder")
                 }
                 .buttonStyle(.borderless)
                 .controlSize(.small)
@@ -138,7 +138,7 @@ private struct SVGFileView: NSViewRepresentable {
     func updateNSView(_ nsView: WKWebView, context: Context) {
         guard let svg = try? String(contentsOf: url, encoding: .utf8) else {
             nsView.loadHTMLString(
-                "<html><body style='color:gray;font-family:-apple-system'>Couldn't load diagram</body></html>",
+                "<html><body style='color:gray;font-family:-apple-system'>无法加载图表</body></html>",
                 baseURL: nil
             )
             return

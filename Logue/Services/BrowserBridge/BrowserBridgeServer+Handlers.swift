@@ -159,7 +159,7 @@ extension BrowserBridgeServer {
 
         let body = (try? JSONSerialization.jsonObject(with: request.body)) as? [String: Any] ?? [:]
         guard let prompt = Self.prompt(from: body, route: route), !prompt.isEmpty else {
-            connection.send(.error("No message to answer.", status: 400), origin: origin, keepAlive: true)
+            connection.send(.error("没有可回答的消息。", status: 400), origin: origin, keepAlive: true)
             return
         }
 
@@ -307,7 +307,7 @@ extension BrowserBridgeServer {
             logger.error("Browser bridge stream failed: \(error.localizedDescription, privacy: .public)")
             // Reported inside the stream, because the head has already gone out and the status
             // code can no longer say anything.
-            connection.write(HTTPMessage.eventFrame(Self.errorFrame(message: "Logue could not answer that.")))
+            connection.write(HTTPMessage.eventFrame(Self.errorFrame(message: "Logue 暂时无法回答这个问题。")))
         }
         connection.write(Data("data: [DONE]\n\n".utf8), thenClose: true)
     }

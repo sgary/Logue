@@ -27,7 +27,7 @@ struct ExternalChangePlanTests {
         let plan = ExternalChangePlanner.plan(scanned: [doc], known: [doc])
 
         #expect(plan.isEmpty)
-        #expect(plan.summary == "No changes")
+        #expect(plan.summary == "无更改")
     }
 
     @Test("An empty folder with no documents produces no change")

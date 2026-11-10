@@ -131,7 +131,7 @@ struct DocumentWorkspaceView: View {
             .measuringWorkspaceWidth()
             .background(AppThemeConstants.contentBackground)
             .navigationTitle(doc.title)
-            .navigationSubtitle(focusState.isActive ? "\(doc.wordCount) words · Focus Mode" : "\(doc.wordCount) words")
+            .navigationSubtitle(focusState.isActive ? "\(doc.wordCount) 字 · 专注模式" : "\(doc.wordCount) 字")
             .toolbar {
                 if focusState.isActive {
                     focusModeToolbarContent
@@ -625,7 +625,7 @@ extension DocumentWorkspaceView {
                 }
 
                 if !hasTriggeredAutoTitle,
-                   updated.title == "Untitled Document",
+                   updated.title == "未命名文档",
                    newText.trimmingCharacters(in: .whitespacesAndNewlines).count > 50
                 {
                     hasTriggeredAutoTitle = true
@@ -672,7 +672,7 @@ extension DocumentWorkspaceView {
             }
 
             HStack(spacing: 6) {
-                TextField("Add tag…", text: $newTagText)
+                TextField("添加标签…", text: $newTagText)
                     .textFieldStyle(.plain)
                     .font(.subheadline)
                     .focused($isTagFieldFocused)
@@ -684,7 +684,7 @@ extension DocumentWorkspaceView {
                             .foregroundStyle(AppThemeConstants.accent)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Add tag")
+                    .accessibilityLabel("添加标签")
                 }
             }
             .padding(8)

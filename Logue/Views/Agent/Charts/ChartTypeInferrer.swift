@@ -28,10 +28,10 @@ enum AutoChartType: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .bar: "Bar"
-        case .pie: "Pie"
-        case .line: "Line"
-        case .scatter: "Scatter"
+        case .bar: "柱状图"
+        case .pie: "饼图"
+        case .line: "折线图"
+        case .scatter: "散点图"
         }
     }
 

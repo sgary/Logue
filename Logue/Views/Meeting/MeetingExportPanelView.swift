@@ -9,51 +9,51 @@ struct MeetingExportPanelView: View {
 
     var body: some View {
         List {
-            Section("Export") {
+            Section("导出") {
                 ExportOptionButton(
-                    title: "Full Transcript",
-                    subtitle: "Plain text with timestamps and speaker labels",
+                    title: "完整转写",
+                    subtitle: "包含时间戳和发言人标签的纯文本",
                     icon: "doc.text",
                     action: { exportTranscript() }
                 )
 
                 ExportOptionButton(
-                    title: "Smart Minutes",
-                    subtitle: "Structured summary with decisions, action items, and follow-ups",
+                    title: "会议纪要",
+                    subtitle: "包含决策、待办事项和后续跟进的结构化摘要",
                     icon: "doc.plaintext",
                     action: { exportSmartMinutes() }
                 )
 
                 ExportOptionButton(
-                    title: "Action Items",
-                    subtitle: "Checklist of action items with assignees",
+                    title: "待办事项",
+                    subtitle: "含负责人的待办事项清单",
                     icon: "checklist",
                     action: { exportActionItems() }
                 )
 
                 ExportOptionButton(
                     title: "Markdown",
-                    subtitle: "Full meeting notes in Markdown format",
+                    subtitle: "Markdown 格式的完整会议笔记",
                     icon: "text.document",
                     action: { exportMarkdown() }
                 )
 
                 if !meeting.bookmarks.isEmpty {
                     ExportOptionButton(
-                        title: "Bookmarked Moments",
-                        subtitle: "\(meeting.bookmarks.count) bookmarks with transcript context",
+                        title: "书签时刻",
+                        subtitle: "\(meeting.bookmarks.count) 个书签及其转写上下文",
                         icon: "bookmark.fill",
                         action: { exportBookmarks() }
                     )
                 }
             }
 
-            Section("Quick Copy") {
+            Section("快速复制") {
                 HStack(spacing: 8) {
                     Button {
                         copyToClipboard(meeting.fullTranscript)
                     } label: {
-                        Label("Transcript", systemImage: "doc.on.doc")
+                        Label("转写", systemImage: "doc.on.doc")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
@@ -62,10 +62,10 @@ struct MeetingExportPanelView: View {
                     Button {
                         let content = meeting.smartMinutes != nil
                             ? meeting.smartMinutesMarkdown()
-                            : (meeting.summary ?? "No summary available")
+                            : (meeting.summary ?? "暂无摘要")
                         copyToClipboard(content)
                     } label: {
-                        Label("Summary", systemImage: "doc.on.doc")
+                        Label("摘要", systemImage: "doc.on.doc")
                             .frame(maxWidth: .infinity)
                     }
                     .buttonStyle(.bordered)
@@ -81,7 +81,7 @@ struct MeetingExportPanelView: View {
             }
 
             Section {
-                PrivacyBadge("Exported files stay on your device.")
+                PrivacyBadge("导出的文件仅保存在你的设备上。")
             }
         }
         .listStyle(.inset)
@@ -113,7 +113,7 @@ struct MeetingExportPanelView: View {
 
     private func copyToClipboard(_ text: String) {
         Self.copyToClipboard(text)
-        exportStatus = "Copied to clipboard"
+        exportStatus = "已复制到剪贴板"
         Task {
             try? await Task.sleep(for: AppConstants.Delays.toastDismiss)
             await MainActor.run { exportStatus = nil }
@@ -124,16 +124,16 @@ struct MeetingExportPanelView: View {
 
     static func exportTranscript(meeting: MeetingNote) {
         let content = meeting.fullTranscript
-        saveFile(content: content, defaultName: "\(meeting.title) - Transcript.txt", contentType: .plainText)
+        saveFile(content: content, defaultName: "\(meeting.title) - 转写.txt", contentType: .plainText)
     }
 
     static func exportSmartMinutes(meeting: MeetingNote) {
         let content = meeting.smartMinutesMarkdown()
-        saveFile(content: content, defaultName: "\(meeting.title) - Minutes.md", contentType: .plainText)
+        saveFile(content: content, defaultName: "\(meeting.title) - 会议纪要.md", contentType: .plainText)
     }
 
     static func exportActionItems(meeting: MeetingNote) {
-        var content = "# Action Items — \(meeting.title)\n\n"
+        var content = "# 待办事项 — \(meeting.title)\n\n"
         for item in meeting.actionItems {
             let check = item.isCompleted ? "[x]" : "[ ]"
             var line = "- \(check) \(item.title)"
@@ -141,58 +141,58 @@ struct MeetingExportPanelView: View {
                 line += " (@\(assignee))"
             }
             if let due = item.dueDescription {
-                line += " — due: \(due)"
+                line += " — 截止：\(due)"
             }
             content += line + "\n"
         }
-        saveFile(content: content, defaultName: "\(meeting.title) - Action Items.md", contentType: .plainText)
+        saveFile(content: content, defaultName: "\(meeting.title) - 待办事项.md", contentType: .plainText)
     }
 
     static func exportBookmarks(meeting: MeetingNote) {
-        var content = "# Bookmarked Moments — \(meeting.title)\n\n"
-        content += "**Date:** \(meeting.createdAt.formatted())\n"
-        content += "**Bookmarks:** \(meeting.bookmarks.count)\n\n"
+        var content = "# 书签时刻 — \(meeting.title)\n\n"
+        content += "**日期：** \(meeting.createdAt.formatted())\n"
+        content += "**书签：** \(meeting.bookmarks.count)\n\n"
 
         for bookmark in meeting.bookmarks.sorted(by: { $0.timestamp < $1.timestamp }) {
-            let label = bookmark.label.isEmpty ? "Bookmark" : bookmark.label
+            let label = bookmark.label.isEmpty ? "书签" : bookmark.label
             content += "## [\(bookmark.formattedTimestamp)] \(label)\n\n"
 
             let nearby = meeting.segments.filter { segment in
                 segment.startTime >= bookmark.timestamp - 5 && segment.startTime <= bookmark.timestamp + 10
             }
             if nearby.isEmpty {
-                content += "_No transcript at this timestamp._\n\n"
+                content += "_此时间戳没有转写内容。_\n\n"
             } else {
                 for segment in nearby {
-                    let speaker = segment.speakerLabel ?? "Speaker"
-                    content += "> [\(segment.formattedStartTime)] **\(speaker):** \(segment.text)\n"
+                    let speaker = segment.speakerLabel ?? "发言人"
+                    content += "> [\(segment.formattedStartTime)] **\(speaker)：** \(segment.text)\n"
                 }
                 content += "\n"
             }
         }
 
-        saveFile(content: content, defaultName: "\(meeting.title) - Bookmarks.md", contentType: .plainText)
+        saveFile(content: content, defaultName: "\(meeting.title) - 书签.md", contentType: .plainText)
     }
 
     static func exportMarkdown(meeting: MeetingNote) {
         var content = "# \(meeting.title)\n\n"
-        content += "**Date:** \(meeting.createdAt.formatted())\n"
-        content += "**Duration:** \(meeting.formattedDuration)\n"
-        content += "**Mode:** \(meeting.recordingMode.label)\n\n"
+        content += "**日期：** \(meeting.createdAt.formatted())\n"
+        content += "**时长：** \(meeting.formattedDuration)\n"
+        content += "**模式：** \(meeting.recordingMode.label)\n\n"
 
         if let summary = meeting.summary {
-            content += "## Summary\n\n\(summary)\n\n"
+            content += "## 摘要\n\n\(summary)\n\n"
         }
 
         if let minutes = meeting.smartMinutes, !minutes.actionItems.isEmpty {
-            content += "## Action Items\n\n"
+            content += "## 待办事项\n\n"
             for item in minutes.actionItems {
                 content += "- [ ] \(item)\n"
             }
             content += "\n"
         }
 
-        content += "## Transcript\n\n"
+        content += "## 转写\n\n"
         content += meeting.fullTranscript
 
         saveFile(content: content, defaultName: "\(meeting.title).md", contentType: .plainText)
@@ -252,7 +252,7 @@ private struct ExportOptionButton: View {
             }
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Export \(title)")
+        .accessibilityLabel("导出\(title)")
         .accessibilityHint(subtitle)
     }
 }

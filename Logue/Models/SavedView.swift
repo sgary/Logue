@@ -58,13 +58,13 @@ enum FilterField: Equatable, Codable, Sendable {
 
     var label: String {
         switch self {
-        case .title: "Title"
-        case .body: "Body"
-        case .tag: "Tag"
-        case .modifiedAt: "Modified"
-        case .createdAt: "Created"
-        case .isPinned: "Pinned"
-        case .isOrganised: "Organised"
+        case .title: "标题"
+        case .body: "正文"
+        case .tag: "标签"
+        case .modifiedAt: "修改时间"
+        case .createdAt: "创建时间"
+        case .isPinned: "已置顶"
+        case .isOrganised: "已整理"
         case let .property(key): key.replacingOccurrences(of: "_", with: " ").capitalized
         }
     }
@@ -89,15 +89,15 @@ enum FilterComparator: String, Equatable, Codable, CaseIterable, Sendable {
 
     var label: String {
         switch self {
-        case .is: "is"
-        case .isNot: "is not"
-        case .contains: "contains"
-        case .doesNotContain: "does not contain"
-        case .isEmpty: "is empty"
-        case .isNotEmpty: "is not empty"
-        case .matchesRegex: "matches regex"
-        case .isOnOrAfter: "is on or after"
-        case .isBefore: "is before"
+        case .is: "是"
+        case .isNot: "不是"
+        case .contains: "包含"
+        case .doesNotContain: "不包含"
+        case .isEmpty: "为空"
+        case .isNotEmpty: "不为空"
+        case .matchesRegex: "匹配正则"
+        case .isOnOrAfter: "不早于"
+        case .isBefore: "早于"
         }
     }
 
@@ -234,7 +234,7 @@ struct FilterGroup: Equatable, Codable, Identifiable, Sendable {
         case any
 
         var label: String {
-            self == .all ? "All" : "Any"
+            self == .all ? "全部" : "任一"
         }
     }
 
@@ -276,10 +276,10 @@ enum SavedViewSort: String, Equatable, Codable, CaseIterable, Sendable {
 
     var label: String {
         switch self {
-        case .recentlyModified: "Recently modified"
-        case .oldestModified: "Oldest first"
-        case .titleAscending: "Title A–Z"
-        case .titleDescending: "Title Z–A"
+        case .recentlyModified: "最近修改"
+        case .oldestModified: "最早优先"
+        case .titleAscending: "标题 A–Z"
+        case .titleDescending: "标题 Z–A"
         }
     }
 

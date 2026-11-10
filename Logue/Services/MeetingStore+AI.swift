@@ -296,9 +296,11 @@ extension MeetingStore {
     /// Bug-1 fix: Voice Note uses Date.formatted(.abbreviated) which produces locale-dependent output,
     /// so we use hasPrefix instead of a strict date regex.
     func isDefaultTitle(_ title: String) -> Bool {
-        title == "Untitled Meeting"
+        title == "未命名会议"
             || title.range(of: #"^Meeting \d{4}-\d{2}-\d{2}"#, options: .regularExpression) != nil
+            || title.hasPrefix("会议 ")
             || title.hasPrefix("Voice Note ")
+            || title.hasPrefix("语音笔记 ")
     }
 
     // MARK: - AI Space Suggestion

@@ -182,6 +182,13 @@ extension RecordingSessionManager {
         }
 
         let diarizer = DiarizationManager()
+        // Same rule as a live session: a language Parakeet cannot transcribe keeps the
+        // checkpointed transcript instead of being overwritten by English batch output.
+        let requestedLocale = MeetingStore.shared.meetings
+            .first { $0.id == meetingID }
+            .flatMap { TranscriptionLanguage(rawValue: $0.transcriptionLanguage ?? "auto")?.locale }
+        let locale = await SpeechTranscriberEngine.resolvedLocale(preferred: requestedLocale)
+        diarizer.batchASRVersion = BatchASRModel.version(for: locale)
         do {
             try await diarizer.initialize()
         } catch {
@@ -190,7 +197,7 @@ extension RecordingSessionManager {
         }
 
         diarizingMeetingID = meetingID
-        diarizationStage = "Recovering meeting…"
+        diarizationStage = "正在恢复会议…"
         defer {
             diarizingMeetingID = nil
             diarizationStage = ""

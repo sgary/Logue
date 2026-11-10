@@ -44,7 +44,7 @@ struct AgentConversationListView: View {
 
     private var header: some View {
         HStack {
-            Text(showArchived ? "Archived" : "Conversations")
+            Text(showArchived ? "已归档" : "对话")
                 .font(.headline)
             Spacer()
             if !showArchived {
@@ -56,7 +56,7 @@ struct AgentConversationListView: View {
                         .font(.title3)
                 }
                 .buttonStyle(.plain)
-                .help("New conversation")
+                .help("新建对话")
             }
         }
         .padding(.horizontal, 16)
@@ -70,7 +70,7 @@ struct AgentConversationListView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.tertiary)
                 .font(.caption)
-            TextField("Search conversations…", text: $searchText)
+            TextField("搜索对话…", text: $searchText)
                 .textFieldStyle(.plain)
                 .font(.callout)
         }
@@ -99,7 +99,7 @@ struct AgentConversationListView: View {
                 if !showArchived {
                     let pinned = visibleConversations.filter(\.isPinned)
                     if !pinned.isEmpty {
-                        Section("Pinned") {
+                        Section("已置顶") {
                             ForEach(pinned) { conv in conversationRow(conv) }
                         }
                     }
@@ -119,9 +119,9 @@ struct AgentConversationListView: View {
 
     private var emptyMessage: String {
         if !searchText.isEmpty {
-            return "No matches"
+            return "没有匹配项"
         }
-        return showArchived ? "No archived conversations" : "No conversations yet"
+        return showArchived ? "还没有已归档的对话" : "还没有对话"
     }
 
     // MARK: - Footer (Archived toggle)
@@ -136,7 +136,7 @@ struct AgentConversationListView: View {
                 HStack(spacing: 6) {
                     Image(systemName: showArchived ? "tray.full" : "archivebox")
                         .font(.caption)
-                    Text(showArchived ? "Active conversations" : "Archived")
+                    Text(showArchived ? "活跃对话" : "已归档")
                         .font(.caption)
                     Spacer()
                 }
@@ -184,7 +184,7 @@ struct AgentConversationListView: View {
                 }
             }
             HStack {
-                Text("\(conversation.messages.count) messages")
+                Text("\(conversation.messages.count) 条消息")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
                 Spacer()
@@ -198,7 +198,7 @@ struct AgentConversationListView: View {
 
     private func renameRow(_ conversation: AgentConversation) -> some View {
         HStack(spacing: 6) {
-            TextField("Conversation title", text: $renameDraft, onCommit: {
+            TextField("对话标题", text: $renameDraft, onCommit: {
                 commitRename(conversation: conversation)
             })
             .textFieldStyle(.plain)
@@ -305,19 +305,19 @@ struct AgentConversationListView: View {
 
         var groups: [DateGroup] = []
         if !today.isEmpty {
-            groups.append(.init(title: "Today", conversations: today))
+            groups.append(.init(title: "今天", conversations: today))
         }
         if !yest.isEmpty {
-            groups.append(.init(title: "Yesterday", conversations: yest))
+            groups.append(.init(title: "昨天", conversations: yest))
         }
         if !week.isEmpty {
-            groups.append(.init(title: "Last 7 days", conversations: week))
+            groups.append(.init(title: "最近 7 天", conversations: week))
         }
         if !month.isEmpty {
-            groups.append(.init(title: "Last 30 days", conversations: month))
+            groups.append(.init(title: "最近 30 天", conversations: month))
         }
         if !older.isEmpty {
-            groups.append(.init(title: "Older", conversations: older))
+            groups.append(.init(title: "更早", conversations: older))
         }
         return groups
     }

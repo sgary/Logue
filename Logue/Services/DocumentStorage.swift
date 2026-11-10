@@ -300,31 +300,27 @@ final class DocumentStorage {
         var errorDescription: String? {
             switch self {
             case let .exportFailed(count, reason):
-                "\(count) document(s) could not be written, so nothing was changed. First problem: \(reason)"
+                "\(count) 个文档无法写入，因此未做任何更改。第一个问题：\(reason)"
             case .folderUnavailable:
-                "The Logue folder could not be found, so nothing was changed. If it is on a drive "
-                    + "that is not connected, or you moved it, put it back and try again."
+                "找不到 Logue 文件夹，因此未做任何更改。如果它在未连接的磁盘上，或你移动了它，"
+                    + "请将其放回后重试。"
             case let .reEncryptionIncomplete(count):
-                "\(count) document(s) had not finished writing to encrypted storage, so the folder "
-                    + "was left where it is. Your documents are safe in both places — try turning "
-                    + "the setting off again."
+                "\(count) 个文档尚未完成写入加密存储，因此文件夹保留在原处。你的文档在两处都是"
+                    + "安全的，请尝试再次关闭该设置。"
             case let .taskReEncryptionIncomplete(count):
                 // No "try again" here: the mode has already flipped by the time this is thrown,
                 // so pointing the user back at the toggle points them at a control that is
                 // already off. The folder is still on disk, which is the thing to say.
                 if let count {
-                    "\(count) task(s) had not finished writing to encrypted storage, so the Logue "
-                        + "folder was left where it is. Your tasks are still in it — nothing was "
-                        + "deleted."
+                    "\(count) 个任务尚未完成写入加密存储，因此 Logue 文件夹保留在原处。"
+                        + "你的任务仍在其中，没有删除任何内容。"
                 } else {
-                    "Some tasks could not be read back from the Logue folder, so it was left where "
-                        + "it is. Nothing was deleted; check the Tasks folder for files that cannot "
-                        + "be opened."
+                    "有些任务无法从 Logue 文件夹读回，因此该文件夹保留在原处。"
+                        + "没有删除任何内容；请检查任务文件夹中是否有无法打开的文件。"
                 }
             case let .folderIncomplete(found, expected):
-                "The folder holds \(found) document(s) but Logue has \(expected), so nothing was "
-                    + "changed. Press the rescan button in the sidebar to reconcile them first — "
-                    + "switching now would discard the difference."
+                "该文件夹中有 \(found) 个文档，但 Logue 有 \(expected) 个，因此未做任何更改。"
+                    + "请先按侧边栏中的重新扫描按钮进行协调，现在切换会丢弃差异。"
             }
         }
     }
@@ -360,7 +356,7 @@ final class DocumentStorage {
         guard reconciled.isSuccess else {
             throw SwitchError.exportFailed(
                 count: reconciled.export.failures.count,
-                firstReason: reconciled.export.failures.values.first ?? "unknown"
+                firstReason: reconciled.export.failures.values.first ?? "未知"
             )
         }
 

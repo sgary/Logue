@@ -23,7 +23,7 @@ struct ActionItemsRingCard: View {
     var body: some View {
         InsightCardShell {
             VStack(spacing: 10) {
-                CardSectionHeader(icon: "checkmark.circle", title: "Action Items")
+                CardSectionHeader(icon: "checkmark.circle", title: "待办事项")
 
                 HStack(spacing: 14) {
                     // Ring
@@ -48,17 +48,17 @@ struct ActionItemsRingCard: View {
                     }
                     .frame(width: ringSize, height: ringSize)
                     .accessibilityElement(children: .combine)
-                    .accessibilityLabel("\(stats.completed) of \(stats.total) action items completed")
+                    .accessibilityLabel("已完成 \(stats.completed)/\(stats.total) 个待办事项")
 
                     // Labels
                     VStack(alignment: .leading, spacing: 6) {
-                        statLabel(value: "\(stats.pending)", label: "Pending", color: .secondary)
+                        statLabel(value: "\(stats.pending)", label: "待处理", color: .secondary)
                         if stats.overdue > 0 {
-                            statLabel(value: "\(stats.overdue)", label: "Overdue", color: AppThemeConstants.error)
+                            statLabel(value: "\(stats.overdue)", label: "已逾期", color: AppThemeConstants.error)
                         }
                         statLabel(
                             value: "\(Int(stats.completionRate))%",
-                            label: "Complete",
+                            label: "完成率",
                             color: ringColor
                         )
                     }

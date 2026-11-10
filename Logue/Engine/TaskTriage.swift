@@ -12,11 +12,11 @@ enum TriageKind: String, Codable, Sendable, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .priority: "Priority"
-        case .due: "Due date"
-        case .tag: "Tag"
-        case .stale: "Stale"
-        case .duplicate: "Duplicate"
+        case .priority: "优先级"
+        case .due: "截止日期"
+        case .tag: "标签"
+        case .stale: "久未更新"
+        case .duplicate: "重复"
         }
     }
 

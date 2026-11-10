@@ -37,7 +37,7 @@ struct DocumentSearchBar: View {
                 .foregroundStyle(.secondary)
                 .font(.caption)
 
-            TextField("Replace with", text: $searchState.replacement)
+            TextField("替换为", text: $searchState.replacement)
                 .textFieldStyle(.plain)
                 .font(.subheadline)
                 .frame(minWidth: 120, maxWidth: 200)
@@ -46,16 +46,16 @@ struct DocumentSearchBar: View {
             Divider()
                 .frame(height: 16)
 
-            Button("Replace", action: replaceCurrent)
+            Button("替换", action: replaceCurrent)
                 .buttonStyle(.plain)
                 .font(.caption.weight(.medium))
                 .disabled(searchState.matches.isEmpty)
 
-            Button("All", action: replaceAll)
+            Button("全部", action: replaceAll)
                 .buttonStyle(.plain)
                 .font(.caption.weight(.medium))
                 .disabled(searchState.matches.isEmpty)
-                .help("Replace all matches")
+                .help("替换所有匹配项")
         }
     }
 
@@ -79,7 +79,7 @@ struct DocumentSearchBar: View {
                 .foregroundStyle(.secondary)
                 .font(.caption)
 
-            TextField("Find in document", text: $searchState.query)
+            TextField("在文档中查找", text: $searchState.query)
                 .textFieldStyle(.plain)
                 .font(.subheadline)
                 .focused($isFieldFocused)
@@ -110,8 +110,8 @@ struct DocumentSearchBar: View {
             .toggleStyle(.button)
             .buttonStyle(.plain)
             .foregroundStyle(searchState.matchCase ? AppThemeConstants.accent : .secondary)
-            .help("Match Case")
-            .accessibilityLabel("Match Case")
+            .help("区分大小写")
+            .accessibilityLabel("区分大小写")
 
             Toggle(isOn: $searchState.wholeWord) {
                 Text("W")
@@ -121,8 +121,8 @@ struct DocumentSearchBar: View {
             .toggleStyle(.button)
             .buttonStyle(.plain)
             .foregroundStyle(searchState.wholeWord ? AppThemeConstants.accent : .secondary)
-            .help("Match Whole Word")
-            .accessibilityLabel("Match Whole Word")
+            .help("全字匹配")
+            .accessibilityLabel("全字匹配")
 
             Divider()
                 .frame(height: 16)
@@ -136,7 +136,7 @@ struct DocumentSearchBar: View {
             }
             .buttonStyle(.plain)
             .disabled(searchState.matches.isEmpty)
-            .accessibilityLabel("Previous match")
+            .accessibilityLabel("上一个匹配项")
 
             Button {
                 searchState.nextMatch()
@@ -147,7 +147,7 @@ struct DocumentSearchBar: View {
             }
             .buttonStyle(.plain)
             .disabled(searchState.matches.isEmpty)
-            .accessibilityLabel("Next match")
+            .accessibilityLabel("下一个匹配项")
 
             if document != nil {
                 Button {
@@ -158,8 +158,8 @@ struct DocumentSearchBar: View {
                 }
                 .buttonStyle(.plain)
                 .foregroundStyle(searchState.isReplaceVisible ? AppThemeConstants.accent : .secondary)
-                .help("Show Replace")
-                .accessibilityLabel("Show Replace")
+                .help("显示替换")
+                .accessibilityLabel("显示替换")
             }
 
             Button {
@@ -170,7 +170,7 @@ struct DocumentSearchBar: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Close search")
+            .accessibilityLabel("关闭搜索")
         }
     }
 }

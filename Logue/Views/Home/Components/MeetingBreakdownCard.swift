@@ -16,10 +16,10 @@ struct MeetingBreakdownCard: View {
     var body: some View {
         InsightCardShell {
             VStack(alignment: .leading, spacing: 12) {
-                CardSectionHeader(icon: "chart.bar.doc.horizontal", title: "Meeting Types")
+                CardSectionHeader(icon: "chart.bar.doc.horizontal", title: "会议类型")
 
                 if breakdown.isEmpty {
-                    Text("No meetings recorded yet")
+                    Text("还没有录制会议")
                         .font(.callout)
                         .foregroundStyle(.tertiary)
                 } else {

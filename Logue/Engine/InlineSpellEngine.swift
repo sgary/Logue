@@ -90,8 +90,8 @@ struct InlineSpellEngine {
                 type: .spelling,
                 original: word,
                 replacement: best ?? word,
-                explanation: best.map { "Did you mean \"\($0)\"?" }
-                    ?? "Possible spelling error.",
+                explanation: best.map { "你是不是想输入“\($0)”？" }
+                    ?? "可能有拼写错误。",
                 confidence: best != nil ? 0.90 : 0.70,
                 textRange: misspelled
             ))
@@ -120,7 +120,7 @@ struct InlineSpellEngine {
             if let detailDicts = details as? [[String: Any]], !detailDicts.isEmpty {
                 for detail in detailDicts {
                     let desc = (detail[NSGrammarUserDescription] as? String)
-                        ?? "Possible grammar issue."
+                        ?? "可能有语法问题。"
 
                     // Grammar details may specify a sub-range within the grammar range.
                     var detailRange = grammarRange

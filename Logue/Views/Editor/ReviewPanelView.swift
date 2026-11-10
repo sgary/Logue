@@ -95,7 +95,7 @@ struct ReviewPanelView: View {
                 } label: {
                     HStack(spacing: 4) {
                         ProgressView().controlSize(.mini)
-                        Text("Cancel")
+                        Text("取消")
                     }
                 }
                 .buttonStyle(.bordered)
@@ -104,7 +104,7 @@ struct ReviewPanelView: View {
                 Button(action: analyzeAll) {
                     HStack(spacing: 4) {
                         Image(systemName: "wand.and.stars")
-                        Text("Analyze")
+                        Text("分析")
                     }
                 }
                 .buttonStyle(.borderedProminent)
@@ -171,11 +171,11 @@ extension ReviewPanelView {
             if let error = scoreError {
                 errorView(error)
             } else if isAnalyzing, overallGrade == nil {
-                loadingView("Grading your writing…")
+                loadingView("正在为你的写作评分…")
             } else if let grade = overallGrade {
                 scoreResultsView(grade)
             } else {
-                emptyView(icon: "graduationcap", title: "No grade yet", subtitle: "Get comprehensive scoring with detailed feedback")
+                emptyView(icon: "graduationcap", title: "还没有评分", subtitle: "获得全面评分和详细反馈")
             }
         }
     }
@@ -210,7 +210,7 @@ extension ReviewPanelView {
     private func overallGradeCard(_ grade: OverallGrade) -> some View {
         VStack(spacing: 12) {
             HStack {
-                Text("Overall Grade")
+                Text("总体评分")
                     .font(.subheadline.weight(.semibold))
                 Spacer()
             }
@@ -247,9 +247,9 @@ extension ReviewPanelView {
             if let error = reactionsError {
                 errorView(error)
             } else if isAnalyzing, reactions.isEmpty {
-                loadingView("Analyzing reactions…")
+                loadingView("正在分析读者反应…")
             } else if reactions.isEmpty {
-                emptyView(icon: "person.2", title: "No reactions yet", subtitle: "Predict how readers will emotionally respond")
+                emptyView(icon: "person.2", title: "还没有读者反应", subtitle: "预测读者的情绪反应")
             } else {
                 List {
                     ForEach(reactions) { reaction in
@@ -289,12 +289,12 @@ private extension ReviewPanelView {
     func errorView(_ message: String) -> some View {
         VStack(spacing: 10) {
             Image(systemName: "exclamationmark.triangle").font(.largeTitle).foregroundStyle(AppThemeConstants.error)
-            Text("Analysis Failed").font(.subheadline.weight(.medium))
+            Text("分析失败").font(.subheadline.weight(.medium))
             Text(message).font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.center).padding(.horizontal, 20)
             Button(action: analyzeAll) {
                 HStack(spacing: 4) {
                     Image(systemName: "arrow.clockwise")
-                    Text("Retry")
+                    Text("重试")
                 }
             }
             .buttonStyle(.bordered)
@@ -352,7 +352,7 @@ private extension ReviewPanelView {
             let grade = try await withRetry {
                 let response = try await LLMEngine.shared.chat(prompt: prompt)
                 guard let parsed = self.parseGrade(response) else {
-                    throw NSError(domain: "ReviewPanel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse grade results."])
+                    throw NSError(domain: "ReviewPanel", code: 0, userInfo: [NSLocalizedDescriptionKey: "无法解析评分结果。"])
                 }
                 return parsed
             }
@@ -388,7 +388,7 @@ private extension ReviewPanelView {
                 let response = try await LLMEngine.shared.chat(prompt: prompt)
                 let parsed = self.parseReactions(response)
                 guard !parsed.isEmpty else {
-                    throw NSError(domain: "ReviewPanel", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse reaction results."])
+                    throw NSError(domain: "ReviewPanel", code: 0, userInfo: [NSLocalizedDescriptionKey: "无法解析反应结果。"])
                 }
                 return parsed
             }
@@ -409,7 +409,7 @@ private extension ReviewPanelView {
               let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
         else { return nil }
 
-        let summary = json["summary"] as? String ?? "Detailed assessment completed."
+        let summary = json["summary"] as? String ?? "详细评估已完成。"
         guard let gradesArray = json["grades"] as? [[String: Any]] else { return nil }
 
         var grades: [Grade] = []

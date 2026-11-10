@@ -10,10 +10,10 @@ struct MeetingBookmarksPanelView: View {
     @FocusState private var isEditFocused: Bool
 
     private static let typePresets: [(label: String, color: BookmarkColor)] = [
-        ("Key Decision", .blue),
-        ("Action Item", .orange),
-        ("Important", .red),
-        ("Question", .purple),
+        ("关键决策", .blue),
+        ("待办事项", .orange),
+        ("重要", .red),
+        ("问题", .purple),
     ]
 
     var body: some View {
@@ -21,8 +21,8 @@ struct MeetingBookmarksPanelView: View {
             if meeting.bookmarks.isEmpty {
                 EmptyStateView(
                     icon: "bookmark",
-                    title: "No bookmarks yet",
-                    description: "Add bookmarks during recording or click the bookmark icon on any transcript segment."
+                    title: "还没有书签",
+                    description: "录音过程中可添加书签，或点击任意转写段落上的书签图标。"
                 )
             } else {
                 List {
@@ -53,11 +53,11 @@ struct MeetingBookmarksPanelView: View {
                 Circle()
                     .fill(bookmark.color.swiftUIColor)
                     .frame(width: 8, height: 8)
-                    .accessibilityLabel("\(bookmark.color.rawValue) bookmark")
+                    .accessibilityLabel("\(Self.colorName(bookmark.color))书签")
 
                 VStack(alignment: .leading, spacing: 2) {
                     HStack(spacing: 5) {
-                        Text(bookmark.label.isEmpty ? "Bookmark" : bookmark.label)
+                        Text(bookmark.label.isEmpty ? "书签" : bookmark.label)
                             .font(.callout.weight(.medium))
                             .foregroundStyle(.primary)
                             .lineLimit(1)
@@ -89,14 +89,14 @@ struct MeetingBookmarksPanelView: View {
         }
         .buttonStyle(.plain)
         .contextMenu { bookmarkContextMenu(bookmark) }
-        .accessibilityHint(bookmark.source == .ai ? "AI-generated highlight" : "User bookmark")
+        .accessibilityHint(bookmark.source == .ai ? "AI 生成的高亮" : "用户添加的书签")
     }
 
     private var aiSourceBadge: some View {
         Image(systemName: "sparkles")
             .font(.caption2)
             .foregroundStyle(AppThemeConstants.brandPrimary)
-            .help("AI-generated highlight")
+            .help("AI 生成的高亮")
             .accessibilityHidden(true)
     }
 
@@ -104,7 +104,7 @@ struct MeetingBookmarksPanelView: View {
 
     @ViewBuilder
     private func bookmarkContextMenu(_ bookmark: Bookmark) -> some View {
-        Menu("Change Type") {
+        Menu("更改类型") {
             ForEach(Self.typePresets, id: \.label) { preset in
                 Button {
                     var updated = bookmark
@@ -122,14 +122,14 @@ struct MeetingBookmarksPanelView: View {
             }
         }
 
-        Button("Rename") {
+        Button("重命名") {
             editLabel = bookmark.label
             editingBookmarkID = bookmark.id
         }
 
         Divider()
 
-        Button("Delete", role: .destructive) {
+        Button("删除", role: .destructive) {
             store.removeBookmark(bookmarkID: bookmark.id, from: meeting.id)
         }
     }
@@ -141,9 +141,9 @@ struct MeetingBookmarksPanelView: View {
             Circle()
                 .fill(bookmark.color.swiftUIColor)
                 .frame(width: 8, height: 8)
-                .accessibilityLabel("\(bookmark.color.rawValue) bookmark")
+                .accessibilityLabel("\(Self.colorName(bookmark.color))书签")
 
-            TextField("Label", text: $editLabel)
+            TextField("标签", text: $editLabel)
                 .textFieldStyle(.roundedBorder)
                 .font(.callout)
                 .focused($isEditFocused)
@@ -165,8 +165,8 @@ struct MeetingBookmarksPanelView: View {
                     .foregroundStyle(.tint)
             }
             .buttonStyle(.plain)
-            .help("Save bookmark")
-            .accessibilityLabel("Save bookmark")
+            .help("保存书签")
+            .accessibilityLabel("保存书签")
 
             Button {
                 editingBookmarkID = nil
@@ -175,8 +175,8 @@ struct MeetingBookmarksPanelView: View {
                     .foregroundStyle(.tertiary)
             }
             .buttonStyle(.plain)
-            .help("Cancel edit")
-            .accessibilityLabel("Cancel edit")
+            .help("取消编辑")
+            .accessibilityLabel("取消编辑")
         }
     }
 
@@ -188,6 +188,16 @@ struct MeetingBookmarksPanelView: View {
     }
 
     // MARK: - Helpers
+
+    private static func colorName(_ color: BookmarkColor) -> String {
+        switch color {
+        case .red: "红色"
+        case .orange: "橙色"
+        case .yellow: "黄色"
+        case .blue: "蓝色"
+        case .purple: "紫色"
+        }
+    }
 
     private func nearestSegmentText(for bookmark: Bookmark) -> String? {
         let sorted = meeting.segments.sorted { $0.startTime < $1.startTime }

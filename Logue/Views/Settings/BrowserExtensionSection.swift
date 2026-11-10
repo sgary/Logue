@@ -28,13 +28,12 @@ struct BrowserExtensionSection: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Browser Extension")
+            Text("浏览器扩展")
                 .font(.headline)
 
-            Text("Let the Logue browser extension use this Mac's models — chat and writing tools "
-                + "in your browser, answered by whichever model Logue is set to use. "
-                + "The extension talks to Logue over your Mac's own loopback address, and the "
-                + "reply comes back the same way.")
+            Text("让 Logue 浏览器扩展使用这台 Mac 的模型——在浏览器中聊天和使用写作工具，"
+                + "由 Logue 当前使用的模型来回答。"
+                + "扩展通过这台 Mac 自身的回环地址与 Logue 通信，回答也以同样方式返回。")
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -44,7 +43,7 @@ struct BrowserExtensionSection: View {
             }
             .controlSize(.small)
 
-            Toggle("Allow the browser extension to connect", isOn: $isEnabled)
+            Toggle("允许浏览器扩展连接", isOn: $isEnabled)
                 .toggleStyle(.switch)
                 .onChange(of: isEnabled) { _, enabled in
                     BrowserBridgeSettings.isEnabled = enabled
@@ -58,10 +57,9 @@ struct BrowserExtensionSection: View {
                 }
             }
 
-            Text("While this is on, Logue accepts connections on 127.0.0.1 — reachable only from "
-                + "this Mac, never from the network. Any program running as you can reach it too. "
-                + "Logue accepts them by default so the extension works once installed; turn this "
-                + "off to close the port, and it stays off.")
+            Text("开启期间，Logue 会在 127.0.0.1 上接受连接——仅这台 Mac 可访问，网络中的其他设备无法访问。"
+                + "以你的身份运行的程序同样可以访问。"
+                + "Logue 默认接受连接，以便扩展安装后即可使用；关闭后会释放端口，并保持关闭。")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -72,8 +70,8 @@ struct BrowserExtensionSection: View {
     /// local bridge — and this is the Privacy tab, where the claim has to be exactly right.
     private var externalProviderWarning: some View {
         Label(
-            "Your active model is an external provider, so text sent from the browser goes to it "
-                + "rather than staying on this Mac. Switch to an on-device model to keep it local.",
+            "你当前使用的模型来自外部提供商，因此从浏览器发送的文本会发往该提供商，"
+                + "而不会留在这台 Mac 上。切换到设备端模型可保持本地处理。",
             systemImage: "exclamationmark.triangle.fill"
         )
         .font(.caption)
@@ -84,7 +82,7 @@ struct BrowserExtensionSection: View {
     @ViewBuilder
     private var statusRow: some View {
         if let port = bridge.activePort {
-            Label("Listening on 127.0.0.1:\(String(port))", systemImage: "checkmark.circle.fill")
+            Label("正在监听 127.0.0.1:\(String(port))", systemImage: "checkmark.circle.fill")
                 .font(.callout)
                 .foregroundStyle(AppThemeConstants.success)
         } else if let error = bridge.lastError {
@@ -95,7 +93,7 @@ struct BrowserExtensionSection: View {
                 .foregroundStyle(AppThemeConstants.error)
                 .fixedSize(horizontal: false, vertical: true)
         } else {
-            Label("Starting…", systemImage: "clock")
+            Label("正在启动…", systemImage: "clock")
                 .font(.callout)
                 .foregroundStyle(.secondary)
         }

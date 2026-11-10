@@ -62,7 +62,7 @@ struct AIChatPanelView: View {
             if let pending = pendingMessage {
                 pendingMessage = nil
                 contextSelection = pending
-                inputText = "Please help me improve or analyse this text."
+                inputText = "请帮我改进或分析这段文本。"
                 focusInput = true
             }
         }
@@ -70,7 +70,7 @@ struct AIChatPanelView: View {
             guard let pending = newValue else { return }
             pendingMessage = nil
             contextSelection = pending
-            inputText = "Please help me improve or analyse this text."
+            inputText = "请帮我改进或分析这段文本。"
             focusInput = true
         }
     }
@@ -89,8 +89,8 @@ struct AIChatPanelView: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
-            .help("Clear chat")
-            .accessibilityLabel("Clear chat")
+            .help("清空聊天")
+            .accessibilityLabel("清空聊天")
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 6)
@@ -110,9 +110,9 @@ struct AIChatPanelView: View {
             }
 
             VStack(spacing: 4) {
-                Text("How can I help?")
+                Text("有什么可以帮你？")
                     .font(.headline)
-                Text("Ask me anything about your writing.")
+                Text("关于你的写作，尽管问我。")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -120,48 +120,48 @@ struct AIChatPanelView: View {
             .padding(.horizontal, 12)
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("Ideas for you")
+                Text("给你的灵感")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
 
                 FlowLayout(spacing: 6) {
                     if document.body.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        QuickPromptChip(label: "Help me brainstorm", icon: "brain") {
-                            sendMessage("Help me brainstorm ideas for what to write about.")
+                        QuickPromptChip(label: "帮我头脑风暴", icon: "brain") {
+                            sendMessage("帮我头脑风暴一下可以写什么主题。")
                         }
-                        QuickPromptChip(label: "Create an outline", icon: "list.bullet.rectangle") {
-                            sendMessage("Help me create a structured outline for my document.")
+                        QuickPromptChip(label: "创建大纲", icon: "list.bullet.rectangle") {
+                            sendMessage("帮我为这篇文档列一个结构清晰的大纲。")
                         }
-                        QuickPromptChip(label: "Write a first draft", icon: "pencil.line") {
-                            sendMessage("Help me write a first draft. What topic should we start with?")
+                        QuickPromptChip(label: "写初稿", icon: "pencil.line") {
+                            sendMessage("帮我写一份初稿。你想从什么主题开始？")
                         }
-                        QuickPromptChip(label: "Writing tips", icon: "lightbulb") {
-                            sendMessage("Give me some tips for writing effectively.")
+                        QuickPromptChip(label: "写作技巧", icon: "lightbulb") {
+                            sendMessage("给我一些高效写作的建议。")
                         }
                     } else {
-                        QuickPromptChip(label: "Improve my writing", icon: "wand.and.stars") {
-                            sendMessage("Please review and suggest improvements for my writing in this document.")
+                        QuickPromptChip(label: "改进我的写作", icon: "wand.and.stars") {
+                            sendMessage("请审阅这篇文档，并给出改进建议。")
                         }
-                        QuickPromptChip(label: "Fix grammar", icon: "checkmark.shield") {
-                            sendMessage("Please identify and fix all grammar and spelling issues in the document.")
+                        QuickPromptChip(label: "修正语法", icon: "checkmark.shield") {
+                            sendMessage("请找出并修正文档中的所有语法和拼写问题。")
                         }
-                        QuickPromptChip(label: "Make it concise", icon: "arrow.down.to.line.compact") {
-                            sendMessage("Please make the writing more concise without losing meaning.")
+                        QuickPromptChip(label: "精简表达", icon: "arrow.down.to.line.compact") {
+                            sendMessage("请在不丢失原意的前提下让文字更简洁。")
                         }
-                        QuickPromptChip(label: "Change tone", icon: "speaker.wave.2") {
-                            sendMessage("Please adjust the tone of my writing to be more appropriate for the intended audience.")
+                        QuickPromptChip(label: "调整语气", icon: "speaker.wave.2") {
+                            sendMessage("请调整文字语气，使其更适合目标读者。")
                         }
-                        QuickPromptChip(label: "Summarize", icon: "text.justify.left") {
-                            sendMessage("Please provide a brief summary of this document.")
+                        QuickPromptChip(label: "总结", icon: "text.justify.left") {
+                            sendMessage("请简要总结这篇文档。")
                         }
-                        QuickPromptChip(label: "Expand ideas", icon: "arrow.up.left.and.arrow.down.right") {
-                            sendMessage("Please help me expand and develop the ideas in this document further.")
+                        QuickPromptChip(label: "展开思路", icon: "arrow.up.left.and.arrow.down.right") {
+                            sendMessage("请帮我进一步展开和发展文档中的观点。")
                         }
-                        QuickPromptChip(label: "Add examples", icon: "lightbulb") {
-                            sendMessage("Please suggest relevant examples I could add to strengthen my writing.")
+                        QuickPromptChip(label: "添加示例", icon: "lightbulb") {
+                            sendMessage("请建议一些可以增强文章说服力的相关示例。")
                         }
-                        QuickPromptChip(label: "Simplify language", icon: "text.redaction") {
-                            sendMessage("Please simplify the language to make it easier to understand.")
+                        QuickPromptChip(label: "简化语言", icon: "text.redaction") {
+                            sendMessage("请简化语言，让它更容易理解。")
                         }
                     }
                 }
@@ -242,7 +242,7 @@ struct AIChatPanelView: View {
                     .foregroundStyle(.tertiary)
             }
             .buttonStyle(.plain)
-            .help("Remove selected text context")
+            .help("移除所选文本上下文")
         }
         .fixedSize(horizontal: false, vertical: true)
         .padding(8)
@@ -285,8 +285,8 @@ struct AIChatPanelView: View {
                         .foregroundStyle(voiceManager.isRecording ? AppThemeConstants.error : .secondary)
                 }
                 .buttonStyle(.plain)
-                .help(voiceManager.isRecording ? "Stop voice input" : "Voice input")
-                .accessibilityLabel(voiceManager.isRecording ? "Stop voice input" : "Start voice input")
+                .help(voiceManager.isRecording ? "停止语音输入" : "语音输入")
+                .accessibilityLabel(voiceManager.isRecording ? "停止语音输入" : "开始语音输入")
 
                 if isTyping {
                     Button(action: stopGeneration) {
@@ -295,8 +295,8 @@ struct AIChatPanelView: View {
                             .foregroundStyle(AppThemeConstants.accent)
                     }
                     .buttonStyle(.plain)
-                    .help("Stop generating")
-                    .accessibilityLabel("Stop generating")
+                    .help("停止生成")
+                    .accessibilityLabel("停止生成")
                 } else {
                     Button(action: submit) {
                         Image(systemName: "arrow.up.circle.fill")
@@ -306,8 +306,8 @@ struct AIChatPanelView: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(inputText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || LLMEngineStatus.shared.isBusy)
-                    .help("Send message")
-                    .accessibilityLabel("Send message")
+                    .help("发送消息")
+                    .accessibilityLabel("发送消息")
                 }
             }
             .padding(.horizontal, 12)
@@ -433,7 +433,7 @@ struct AIChatPanelView: View {
         let errorText = if let engineErr = error as? LLMError {
             engineErr.localizedDescription
         } else {
-            "Something went wrong: \(error.localizedDescription)"
+            "出了点问题：\(error.localizedDescription)"
         }
         if let idx = messages.firstIndex(where: { $0.id == messageID }),
            messages[idx].content.isEmpty

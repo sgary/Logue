@@ -143,7 +143,7 @@ extension TableBlockView {
             let best = guesses.first ?? wordText
             spellHits.append(SpellHit(
                 word: wordText, replacement: best,
-                explanation: guesses.isEmpty ? "Possible spelling error." : "Did you mean \"\(best)\"?",
+                explanation: guesses.isEmpty ? "可能有拼写错误。" : "你指的是“\(best)”吗？",
                 underlineRect: NSRect(x: pos.xOffset, y: pos.lineY - lineHeight, width: underlineWidth, height: lineHeight + 2),
                 row: row, col: col, range: misspelled
             ))
@@ -169,7 +169,7 @@ extension TableBlockView {
             .font: NSFont.systemFont(ofSize: 11, weight: .medium),
             .foregroundColor: NSColor.tertiaryLabelColor,
         ]
-        let str = NSAttributedString(string: "+ Row", attributes: attrs)
+        let str = NSAttributedString(string: "+ 行", attributes: attrs)
         let strSize = str.size()
         str.draw(at: NSPoint(x: btnRect.midX - strSize.width / 2, y: btnRect.midY - strSize.height / 2))
     }

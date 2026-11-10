@@ -510,7 +510,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
         let recorder = RecordingSessionManager.shared
         let isRecording = recorder.isRecording
 
-        let openItem = NSMenuItem(title: "Open Logue", action: #selector(showMainWindow), keyEquivalent: "")
+        let openItem = NSMenuItem(title: "打开 Logue", action: #selector(showMainWindow), keyEquivalent: "")
         openItem.target = self
         openItem.image = NSImage(systemSymbolName: "macwindow", accessibilityDescription: nil)
         menu.addItem(openItem)
@@ -525,11 +525,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
                 {
                     return meeting.title
                 }
-                return "Meeting"
+                return "会议"
             }()
             let elapsed = TranscriptSegment.formatTime(recorder.elapsedTime)
             let recordingItem = NSMenuItem(
-                title: "Recording: \(meetingTitle) — \(elapsed)",
+                title: "正在录制：\(meetingTitle) — \(elapsed)",
                 action: #selector(showActiveRecording),
                 keyEquivalent: ""
             )
@@ -537,7 +537,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
             recordingItem.image = NSImage.menuBarRecordingDot
             menu.addItem(recordingItem)
 
-            let stopItem = NSMenuItem(title: "Stop Recording", action: #selector(stopActiveRecording), keyEquivalent: "")
+            let stopItem = NSMenuItem(title: "停止录制", action: #selector(stopActiveRecording), keyEquivalent: "")
             stopItem.target = self
             stopItem.image = NSImage(systemSymbolName: "stop.circle", accessibilityDescription: nil)
             menu.addItem(stopItem)
@@ -545,18 +545,18 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
             menu.addItem(NSMenuItem.separator())
         }
 
-        let chatItem = NSMenuItem(title: "Ask Logue", action: #selector(showChatInterface), keyEquivalent: "")
+        let chatItem = NSMenuItem(title: "询问 Logue", action: #selector(showChatInterface), keyEquivalent: "")
         chatItem.target = self
         chatItem.image = NSImage(systemSymbolName: "sparkles", accessibilityDescription: nil)
         menu.addItem(chatItem)
 
-        let onlineItem = NSMenuItem(title: "Online Meeting", action: #selector(startOnlineMeeting), keyEquivalent: "")
+        let onlineItem = NSMenuItem(title: "线上会议", action: #selector(startOnlineMeeting), keyEquivalent: "")
         onlineItem.target = self
         onlineItem.image = NSImage(systemSymbolName: "video.fill", accessibilityDescription: nil)
         onlineItem.isEnabled = !isRecording
         menu.addItem(onlineItem)
 
-        let inPersonItem = NSMenuItem(title: "In-Person Meeting", action: #selector(startInPersonMeeting), keyEquivalent: "")
+        let inPersonItem = NSMenuItem(title: "线下会议", action: #selector(startInPersonMeeting), keyEquivalent: "")
         inPersonItem.target = self
         inPersonItem.image = NSImage(systemSymbolName: "person.2.fill", accessibilityDescription: nil)
         inPersonItem.isEnabled = !isRecording
@@ -564,12 +564,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
 
         menu.addItem(NSMenuItem.separator())
 
-        let settingsItem = NSMenuItem(title: "Settings\u{2026}", action: #selector(showSettings), keyEquivalent: "")
+        let settingsItem = NSMenuItem(title: "设置\u{2026}", action: #selector(showSettings), keyEquivalent: "")
         settingsItem.target = self
         settingsItem.image = NSImage(systemSymbolName: "gear", accessibilityDescription: nil)
         menu.addItem(settingsItem)
 
-        let quitItem = NSMenuItem(title: "Quit Logue", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "")
+        let quitItem = NSMenuItem(title: "退出 Logue", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "")
         quitItem.image = NSImage(systemSymbolName: "power", accessibilityDescription: nil)
         menu.addItem(quitItem)
 
@@ -678,7 +678,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
 
         let hostingController = NSHostingController(rootView: ResourceUsageView())
         let window = NSWindow(contentViewController: hostingController)
-        window.title = "Resource Usage"
+        window.title = "资源占用"
         window.styleMask = [.titled, .closable, .miniaturizable]
         window.isReleasedWhenClosed = false
         window.center()
@@ -696,7 +696,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
 
         let hostingController = NSHostingController(rootView: BugReportView())
         let window = NSWindow(contentViewController: hostingController)
-        window.title = "Report Bug / Issue"
+        window.title = "报告问题"
         window.styleMask = [.titled, .closable]
         window.isReleasedWhenClosed = false
         window.center()
@@ -715,7 +715,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
 
         let hostingController = NSHostingController(rootView: KeyboardShortcutsView())
         let window = NSWindow(contentViewController: hostingController)
-        window.title = "Keyboard Shortcuts"
+        window.title = "键盘快捷键"
         window.styleMask = [.titled, .closable, .miniaturizable]
         window.isReleasedWhenClosed = false
         window.center()
@@ -758,7 +758,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, UNUserNotificationCent
     private func startMeeting(mode: RecordingMode) {
         let store = MeetingStore.shared
         let meeting = store.createMeeting(
-            title: "Meeting \(Date.now.formatted(date: .abbreviated, time: .shortened))",
+            title: "会议 \(Date.now.formatted(date: .abbreviated, time: .shortened))",
             mode: mode,
             template: .general
         )

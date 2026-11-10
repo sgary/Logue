@@ -41,14 +41,14 @@ struct ScoreRingView: View {
                     .font(.title2.weight(.bold).monospacedDigit())
                     .foregroundStyle(ringColor)
                     .animation(.spring(response: 0.6), value: score)
-                Text("Score")
+                Text("评分")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
         }
         .frame(width: size, height: size)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel("Score: \(Int(score)) out of 100")
+        .accessibilityLabel("评分：\(Int(score))，满分 100")
         .accessibilityValue("\(Int(score))%")
     }
 }
@@ -85,7 +85,7 @@ struct CategoryScoreBar: View {
             .frame(height: 4)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(label): \(Int(score)) out of 100")
+        .accessibilityLabel("\(label)：\(Int(score))，满分 100")
         .accessibilityValue("\(Int(score))%")
     }
 }

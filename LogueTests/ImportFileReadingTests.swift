@@ -174,7 +174,7 @@ struct ImportFileReadingTests {
         let scanned = DocumentStore.collect(from: [try vault()], storedRoot: nil, limits: limits)
 
         #expect(scanned.fileCount == 2)
-        #expect(scanned.stoppedEarly?.contains("2 files") == true)
+        #expect(scanned.stoppedEarly?.contains("2 个文件") == true)
     }
 
     @Test("A walk stops at the byte cap and says so")
@@ -236,7 +236,7 @@ struct ImportFileReadingTests {
         let scanned = DocumentStore.collect(from: [url], storedRoot: storedRoot, limits: .init(maxDepth: 12))
 
         #expect(scanned.files.isEmpty)
-        #expect(scanned.skipped.first?.reason == "already in the Logue folder")
+        #expect(scanned.skipped.first?.reason == "已在 Logue 文件夹中")
     }
 
     /// `max(1, …)` still permitted one level below a destination already at the cap, and that

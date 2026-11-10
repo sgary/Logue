@@ -88,7 +88,7 @@ extension SpaceContentPane {
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
 
-                Text(doc.snippet.isEmpty ? "Empty document" : doc.snippet)
+                Text(doc.snippet.isEmpty ? "空文档" : doc.snippet)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(snippetLines)
@@ -97,7 +97,7 @@ extension SpaceContentPane {
                 Spacer(minLength: 0)
 
                 HStack {
-                    Text("\(doc.wordCount)w")
+                    Text("\(doc.wordCount) 字")
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
                     Spacer()
@@ -132,13 +132,13 @@ extension SpaceContentPane {
         Button {
             documentStore.selectedDocumentID = doc.id
         } label: {
-            Label("Open", systemImage: "doc.text")
+            Label("打开", systemImage: "doc.text")
         }
         Button {
             documentStore.togglePin(id: doc.id)
         } label: {
             Label(
-                doc.isPinned ? "Unpin" : "Pin",
+                doc.isPinned ? "取消置顶" : "置顶",
                 systemImage: doc.isPinned ? "pin.slash" : "pin"
             )
         }
@@ -146,19 +146,19 @@ extension SpaceContentPane {
             renameText = doc.title
             renamingDocID = doc.id
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         moveToSpaceMenu(forDocument: doc)
         Button {
             PDFExportService.export(document: doc)
         } label: {
-            Label("Export as PDF", systemImage: "arrow.down.doc")
+            Label("导出为 PDF", systemImage: "arrow.down.doc")
         }
         Divider()
         Button(role: .destructive) {
             documentStore.deleteDocument(id: doc.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 
@@ -250,13 +250,13 @@ extension SpaceContentPane {
         Button {
             meetingStore.selectedMeetingID = meeting.id
         } label: {
-            Label("Open", systemImage: "waveform")
+            Label("打开", systemImage: "waveform")
         }
         Button {
             meetingStore.togglePin(id: meeting.id)
         } label: {
             Label(
-                meeting.isPinned ? "Unpin" : "Pin",
+                meeting.isPinned ? "取消置顶" : "置顶",
                 systemImage: meeting.isPinned ? "pin.slash" : "pin"
             )
         }
@@ -264,13 +264,13 @@ extension SpaceContentPane {
             renameText = meeting.title
             renamingMeetingID = meeting.id
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         Button {
             meetingStore.toggleArchive(id: meeting.id)
         } label: {
             Label(
-                meeting.isArchived ? "Unarchive" : "Archive",
+                meeting.isArchived ? "取消归档" : "归档",
                 systemImage: meeting.isArchived ? "tray.and.arrow.up" : "archivebox"
             )
         }
@@ -279,7 +279,7 @@ extension SpaceContentPane {
         Button(role: .destructive) {
             meetingStore.trashMeeting(id: meeting.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 
@@ -351,7 +351,7 @@ extension SpaceContentPane {
                                 .foregroundStyle(AppThemeConstants.pinnedColor)
                         }
                     }
-                    Text(doc.snippet.isEmpty ? "Empty document" : doc.snippet)
+                    Text(doc.snippet.isEmpty ? "空文档" : doc.snippet)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
@@ -431,12 +431,12 @@ extension SpaceContentPane {
     func spaceItemCountText(docCount: Int, meetingCount: Int) -> String {
         var parts: [String] = []
         if docCount > 0 {
-            parts.append("\(docCount) doc\(docCount == 1 ? "" : "s")")
+            parts.append("\(docCount) 个文档")
         }
         if meetingCount > 0 {
-            parts.append("\(meetingCount) meeting\(meetingCount == 1 ? "" : "s")")
+            parts.append("\(meetingCount) 场会议")
         }
-        return parts.isEmpty ? "Empty space" : parts.joined(separator: ", ")
+        return parts.isEmpty ? "空空间" : parts.joined(separator: "，")
     }
 
     func navigateToSpace(_ childID: UUID) {
@@ -452,7 +452,7 @@ extension SpaceContentPane {
         Button {
             navigateToSpace(child.id)
         } label: {
-            Label("Open", systemImage: "folder")
+            Label("打开", systemImage: "folder")
         }
 
         Divider()
@@ -460,43 +460,43 @@ extension SpaceContentPane {
         Button {
             iconPickerSpaceID = child.id
         } label: {
-            Label("Change Icon", systemImage: "star.square.on.square")
+            Label("更改图标", systemImage: "star.square.on.square")
         }
 
         Button {
             renameText = child.name
             renamingSpaceID = child.id
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
 
         Divider()
 
         Button {
-            if let sub = spaceStore.createSpace(name: "New Space", parentID: child.id) {
+            if let sub = spaceStore.createSpace(name: "新建空间", parentID: child.id) {
                 navigateToSpace(sub.id)
                 renameText = ""
                 renamingSpaceID = sub.id
             }
         } label: {
-            Label("New Sub-Space", systemImage: "folder.badge.plus")
+            Label("新建子空间", systemImage: "folder.badge.plus")
         }
 
         Button {
             let doc = documentStore.createDocument(inSpace: child.id)
             documentStore.selectedDocumentID = doc.id
         } label: {
-            Label("New Document", systemImage: "doc.badge.plus")
+            Label("新建文档", systemImage: "doc.badge.plus")
         }
 
         Button {
             let meeting = meetingStore.createMeeting(
-                title: "Meeting \(Date.now.formatted(date: .abbreviated, time: .shortened))",
+                title: "会议 \(Date.now.formatted(date: .abbreviated, time: .shortened))",
                 inSpace: child.id
             )
             meetingStore.selectedMeetingID = meeting.id
         } label: {
-            Label("New Meeting", systemImage: "waveform.badge.plus")
+            Label("新建会议", systemImage: "waveform.badge.plus")
         }
 
         Divider()
@@ -504,7 +504,7 @@ extension SpaceContentPane {
         Button(role: .destructive) {
             spaceStore.deleteSpace(id: child.id)
         } label: {
-            Label("Delete Space", systemImage: "trash")
+            Label("删除空间", systemImage: "trash")
         }
     }
 
@@ -513,7 +513,7 @@ extension SpaceContentPane {
     @ViewBuilder
     func moveToSpaceMenu(forDocument doc: WritingDocument) -> some View {
         if !spaceStore.topLevelSpaces.isEmpty || doc.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: doc.spaceID) { newSpaceID in
                     documentStore.moveDocument(id: doc.id, toSpace: newSpaceID)
                 }
@@ -524,7 +524,7 @@ extension SpaceContentPane {
     @ViewBuilder
     func moveToSpaceMenu(forMeeting meeting: MeetingNote) -> some View {
         if !spaceStore.topLevelSpaces.isEmpty || meeting.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: meeting.spaceID) { newSpaceID in
                     meetingStore.moveMeeting(id: meeting.id, toSpace: newSpaceID)
                 }

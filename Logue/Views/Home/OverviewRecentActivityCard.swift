@@ -72,10 +72,10 @@ struct OverviewRecentActivityCard: View {
     var body: some View {
         InsightCardShell {
             VStack(alignment: .leading, spacing: 14) {
-                CardSectionHeader(icon: "clock.arrow.circlepath", title: "Recent Activity")
+                CardSectionHeader(icon: "clock.arrow.circlepath", title: "最近活动")
                 let items = recentItems
                 if items.isEmpty {
-                    Text("No recent activity")
+                    Text("没有最近活动")
                         .font(.caption)
                         .foregroundStyle(.tertiary)
                         .frame(maxWidth: .infinity)
@@ -132,7 +132,7 @@ struct OverviewRecentActivityCard: View {
                     Image(systemName: "pin.fill")
                         .font(.caption2)
                         .foregroundStyle(AppThemeConstants.pinnedColor)
-                        .accessibilityLabel("Favorited")
+                        .accessibilityLabel("已置顶")
                 }
                 Image(systemName: "chevron.right")
                     .font(.caption2)
@@ -144,6 +144,6 @@ struct OverviewRecentActivityCard: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(item.title)
-        .accessibilityHint("Opens \(item.title)")
+        .accessibilityHint("打开 \(item.title)")
     }
 }

@@ -53,8 +53,8 @@ struct DocumentPropertyTests {
     @Test("Every value renders a display string")
     func displayStrings() {
         #expect(PropertyValue.text("Active").displayString == "Active")
-        #expect(PropertyValue.boolean(true).displayString == "Yes")
-        #expect(PropertyValue.boolean(false).displayString == "No")
+        #expect(PropertyValue.boolean(true).displayString == "是")
+        #expect(PropertyValue.boolean(false).displayString == "否")
         #expect(PropertyValue.list(["a", "b"]).displayString == "a, b")
         #expect(PropertyValue.number(3).displayString == "3")
         #expect(PropertyValue.number(3.5).displayString == "3.5")

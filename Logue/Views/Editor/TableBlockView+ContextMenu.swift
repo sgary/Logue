@@ -49,13 +49,13 @@ extension TableBlockView {
         let row = rowIndex(atY: loc.y)
         let menu = NSMenu()
 
-        let addRowItem = NSMenuItem(title: "Add Row Below", action: #selector(contextAddRow), keyEquivalent: "")
+        let addRowItem = NSMenuItem(title: "在下方添加行", action: #selector(contextAddRow), keyEquivalent: "")
         addRowItem.target = self
         addRowItem.image = NSImage(systemSymbolName: "plus.rectangle", accessibilityDescription: nil)
         menu.addItem(addRowItem)
 
         if tableData.rows.count > 1, row >= 0, row < tableData.rows.count {
-            let delRowItem = NSMenuItem(title: "Delete Row", action: #selector(contextDeleteRow), keyEquivalent: "")
+            let delRowItem = NSMenuItem(title: "删除行", action: #selector(contextDeleteRow), keyEquivalent: "")
             delRowItem.target = self
             delRowItem.tag = row
             delRowItem.image = NSImage(systemSymbolName: "minus.rectangle", accessibilityDescription: nil)
@@ -64,7 +64,7 @@ extension TableBlockView {
 
         menu.addItem(.separator())
 
-        let addColItem = NSMenuItem(title: "Add Column", action: #selector(contextAddColumn), keyEquivalent: "")
+        let addColItem = NSMenuItem(title: "添加列", action: #selector(contextAddColumn), keyEquivalent: "")
         addColItem.target = self
         addColItem.image = NSImage(systemSymbolName: "plus.rectangle.portrait", accessibilityDescription: nil)
         menu.addItem(addColItem)
@@ -83,7 +83,7 @@ extension TableBlockView {
                 }
             }
 
-            let delColItem = NSMenuItem(title: "Delete Column", action: #selector(contextDeleteColumn), keyEquivalent: "")
+            let delColItem = NSMenuItem(title: "删除列", action: #selector(contextDeleteColumn), keyEquivalent: "")
             delColItem.target = self
             delColItem.tag = clickedCol
             delColItem.image = NSImage(systemSymbolName: "minus.rectangle.portrait", accessibilityDescription: nil)

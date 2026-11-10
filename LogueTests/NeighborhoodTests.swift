@@ -41,7 +41,7 @@ struct NeighborhoodTests {
         ])
         let neighborhood = Neighborhood(index: index, sourceID: alphaID)
 
-        let group = neighborhood.groups.first { $0.title == "Links to" }
+        let group = neighborhood.groups.first { $0.title == "链接到" }
         #expect(group?.itemIDs == [betaID])
     }
 
@@ -53,7 +53,7 @@ struct NeighborhoodTests {
         ])
         let neighborhood = Neighborhood(index: index, sourceID: betaID)
 
-        let group = neighborhood.groups.first { $0.title == "Linked from" }
+        let group = neighborhood.groups.first { $0.title == "反向链接" }
         #expect(group?.itemIDs == [alphaID])
     }
 

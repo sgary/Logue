@@ -2,22 +2,22 @@ import SwiftUI
 
 /// Common icons for template creation — curated subset of SF Symbols.
 private let templateIconOptions: [(name: String, symbol: String)] = [
-    ("Document", "doc.text"),
-    ("Note", "note.text"),
-    ("List", "list.bullet"),
-    ("Checklist", "checklist"),
-    ("Clipboard", "clipboard"),
-    ("Book", "book"),
-    ("Lightbulb", "lightbulb"),
-    ("Star", "star"),
-    ("Flag", "flag"),
-    ("Chart", "chart.bar"),
-    ("Person", "person"),
-    ("Calendar", "calendar"),
-    ("Folder", "folder"),
-    ("Gear", "gearshape"),
-    ("Pencil", "pencil.and.outline"),
-    ("Code", "chevron.left.forwardslash.chevron.right"),
+    ("文档", "doc.text"),
+    ("笔记", "note.text"),
+    ("列表", "list.bullet"),
+    ("清单", "checklist"),
+    ("剪贴板", "clipboard"),
+    ("书籍", "book"),
+    ("灯泡", "lightbulb"),
+    ("星标", "star"),
+    ("旗帜", "flag"),
+    ("图表", "chart.bar"),
+    ("人物", "person"),
+    ("日历", "calendar"),
+    ("文件夹", "folder"),
+    ("齿轮", "gearshape"),
+    ("铅笔", "pencil.and.outline"),
+    ("代码", "chevron.left.forwardslash.chevron.right"),
 ]
 
 /// Sheet for saving an existing document as a reusable template.
@@ -35,7 +35,7 @@ struct SaveAsTemplateSheet: View {
         VStack(spacing: 0) {
             // Header
             HStack {
-                Text("Save as Template")
+                Text("保存为模板")
                     .font(.headline)
                 Spacer()
                 Button { dismiss() } label: {
@@ -50,18 +50,18 @@ struct SaveAsTemplateSheet: View {
 
             // Form
             Form {
-                TextField("Template Name", text: $templateName)
+                TextField("模板名称", text: $templateName)
 
-                Picker("Category", selection: $selectedCategory) {
+                Picker("分类", selection: $selectedCategory) {
                     ForEach(TemplateCategory.allCases) { category in
-                        Label(category.rawValue, systemImage: category.icon)
+                        Label(category.displayName, systemImage: category.icon)
                             .tag(category)
                     }
                 }
 
-                TextField("Description (optional)", text: $templateDescription)
+                TextField("描述（可选）", text: $templateDescription)
 
-                LabeledContent("Icon") {
+                LabeledContent("图标") {
                     iconPicker
                 }
             }
@@ -72,10 +72,10 @@ struct SaveAsTemplateSheet: View {
 
             // Actions
             HStack {
-                Button("Cancel") { dismiss() }
+                Button("取消") { dismiss() }
                     .keyboardShortcut(.cancelAction)
                 Spacer()
-                Button("Save Template") {
+                Button("保存模板") {
                     let name = templateName.trimmingCharacters(in: .whitespacesAndNewlines)
                     guard !name.isEmpty else { return }
                     templateStore.saveDocumentAsTemplate(

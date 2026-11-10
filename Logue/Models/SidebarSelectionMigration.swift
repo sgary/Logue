@@ -21,8 +21,8 @@ enum LibraryPanel: String, Sendable, Equatable, CaseIterable {
 
     var title: String {
         switch self {
-        case .actionItems: "Action Items"
-        case .templates: "Templates"
+        case .actionItems: "待办事项"
+        case .templates: "模板"
         }
     }
 

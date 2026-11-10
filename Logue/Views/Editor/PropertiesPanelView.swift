@@ -26,7 +26,7 @@ struct PropertiesPanelView: View {
     @ViewBuilder
     private var existingProperties: some View {
         if document.propertyKeys.isEmpty {
-            Text("No properties yet. Add one below to make this document filterable.")
+            Text("还没有属性。在下方添加一个，让文档可以被筛选。")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -54,7 +54,7 @@ struct PropertiesPanelView: View {
 
         if !missing.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Add")
+                Text("添加")
                     .font(.subheadline.weight(.semibold))
 
                 FlowLayout(spacing: 6) {
@@ -86,18 +86,18 @@ struct PropertiesPanelView: View {
         VStack(alignment: .leading, spacing: 8) {
             if showingAddField {
                 HStack(spacing: 6) {
-                    TextField("Property name", text: $newKey)
+                    TextField("属性名称", text: $newKey)
                         .textFieldStyle(.roundedBorder)
                         .font(.caption)
                         .onSubmit(commitNewKey)
 
-                    Button("Add", action: commitNewKey)
+                    Button("添加", action: commitNewKey)
                         .font(.caption)
                         .disabled(PropertyKey.sanitisedKey(newKey) == nil)
                 }
 
                 if !newKey.isEmpty, PropertyKey.sanitisedKey(newKey) == nil {
-                    Text("Names cannot start with an underscore or be only symbols.")
+                    Text("名称不能以下划线开头，也不能只包含符号。")
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }
@@ -105,7 +105,7 @@ struct PropertiesPanelView: View {
                 Button {
                     showingAddField = true
                 } label: {
-                    Label("Custom property", systemImage: "plus")
+                    Label("自定义属性", systemImage: "plus")
                         .font(.caption)
                 }
                 .buttonStyle(.plain)
@@ -154,7 +154,7 @@ private struct PropertyRow: View {
                             .foregroundStyle(.tertiary)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Remove \(key)")
+                    .accessibilityLabel("移除 \(key)")
                 }
             }
 
@@ -186,7 +186,7 @@ private struct PropertyRow: View {
             // `store.updateDocument`, which stamps `modifiedAt` and does an encrypted disk write.
             // Per keystroke, undebounced, while the rest of the editor debounces. `modifiedAt` is
             // also what saved views sort on, so opening a panel reordered the library.
-            TextField("Value", text: $draft)
+            TextField("值", text: $draft)
                 .textFieldStyle(.roundedBorder)
                 .font(.callout)
                 .onAppear { draft = value?.displayString ?? "" }

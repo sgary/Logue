@@ -184,7 +184,7 @@ final class TaskStorage {
         var errorDescription: String? {
             switch self {
             case let .exportFailed(count):
-                "\(count) task(s) could not be written to the folder."
+                "\(count) 个任务无法写入文件夹。"
             }
         }
     }

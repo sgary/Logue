@@ -10,11 +10,11 @@ enum WritingGoalMode: String, CaseIterable, Codable, Sendable {
 
     var displayName: String {
         switch self {
-        case .academic: "Academic"
-        case .business: "Business"
-        case .casual: "Casual"
-        case .creative: "Creative"
-        case .technical: "Technical"
+        case .academic: "学术"
+        case .business: "商务"
+        case .casual: "随性"
+        case .creative: "创意"
+        case .technical: "技术"
         }
     }
 
@@ -32,11 +32,11 @@ enum WritingGoalMode: String, CaseIterable, Codable, Sendable {
     /// Short one-liner shown in the goals card.
     var shortDescription: String {
         switch self {
-        case .academic: "Essays, research papers, and formal writing"
-        case .business: "Emails, reports, and professional documents"
-        case .casual: "Chats, blogs, and personal notes"
-        case .creative: "Stories, poems, and imaginative writing"
-        case .technical: "Documentation, code comments, and specs"
+        case .academic: "论文、研究报告与正式写作"
+        case .business: "邮件、报告与专业文档"
+        case .casual: "聊天、博客与个人笔记"
+        case .creative: "故事、诗歌与想象性写作"
+        case .technical: "文档、代码注释与规格说明"
         }
     }
 

@@ -71,13 +71,13 @@ struct OnboardingView: View {
         HStack {
             // Hide Back on the microphone page and during model download/activation.
             if currentPage > 0, currentPage < pageCount - 1, currentPage != 1, !isModelBusy {
-                Button("Back") {
+                Button("返回") {
                     withAnimation(.easeInOut(duration: 0.25)) { currentPage -= 1 }
                 }
                 .buttonStyle(.plain)
                 .foregroundStyle(.secondary)
-                .accessibilityLabel("Go back")
-                .accessibilityHint("Returns to the previous onboarding step")
+                .accessibilityLabel("返回")
+                .accessibilityHint("回到上一个引导步骤")
             }
 
             Spacer()
@@ -90,12 +90,12 @@ struct OnboardingView: View {
                         .frame(width: 6, height: 6)
                 }
             }
-            .accessibilityLabel("Step \(currentPage + 1) of \(pageCount)")
+            .accessibilityLabel("第 \(currentPage + 1) 步，共 \(pageCount) 步")
 
             Spacer()
 
             if currentPage < pageCount - 1 {
-                Button(currentPage == 0 ? "Get Started" : "Next") {
+                Button(currentPage == 0 ? "开始使用" : "继续") {
                     withAnimation(.easeInOut(duration: 0.25)) { currentPage += 1 }
                 }
                 .buttonStyle(.borderedProminent)
@@ -103,19 +103,19 @@ struct OnboardingView: View {
                 .controlSize(.regular)
                 .disabled(isNavigationBlocked)
                 .help(isNavigationBlocked && currentPage == 2
-                    ? "Download and activate the AI model to continue"
+                    ? "下载并启用 AI 模型后继续"
                     : "")
-                .accessibilityLabel(currentPage == 0 ? "Get Started" : "Next step")
-                .accessibilityHint("Advances to the next onboarding step")
+                .accessibilityLabel(currentPage == 0 ? "开始使用" : "下一步")
+                .accessibilityHint("进入下一个引导步骤")
             } else {
-                Button("Start Using Logue") {
+                Button("开始使用 Logue") {
                     onComplete()
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(AppThemeConstants.accent)
                 .controlSize(.regular)
-                .accessibilityLabel("Start Using Logue")
-                .accessibilityHint("Completes onboarding and opens the app")
+                .accessibilityLabel("开始使用 Logue")
+                .accessibilityHint("完成引导并打开应用")
             }
         }
         .padding(.horizontal, AppThemeConstants.paddingXLarge)
@@ -134,25 +134,25 @@ struct OnboardingView: View {
                 .foregroundStyle(AppThemeConstants.accent)
 
             VStack(spacing: 8) {
-                Text("Welcome to Logue")
+                Text("欢迎使用 Logue")
                     .font(.title.bold())
-                Text("Your privacy-first AI meeting assistant")
+                Text("隐私优先的 AI 会议助手")
                     .font(.headline)
                     .foregroundStyle(.secondary)
             }
 
             VStack(alignment: .leading, spacing: 12) {
-                featureRow(icon: "mic.fill", text: "Record and transcribe meetings on-device")
-                featureRow(icon: "sparkles", text: "AI-powered summaries and action items")
-                featureRow(icon: "doc.text", text: "Smart writing assistant for documents")
-                featureRow(icon: "lock.shield.fill", text: "Everything stays on your Mac")
+                featureRow(icon: "mic.fill", text: "在设备端录制并转写会议")
+                featureRow(icon: "sparkles", text: "AI 驱动的摘要与待办事项")
+                featureRow(icon: "doc.text", text: "智能文档写作助手")
+                featureRow(icon: "lock.shield.fill", text: "所有内容都留在这台 Mac 上")
             }
             .padding(.horizontal, 40)
             .padding(.top, 8)
 
             Spacer()
 
-            PrivacyBadge("All processing happens locally. Your data never leaves your Mac.")
+            PrivacyBadge("所有处理都在本地完成，你的数据不会离开这台 Mac。")
                 .padding(.bottom, 8)
         }
         .padding(AppThemeConstants.paddingXLarge)
@@ -174,9 +174,9 @@ struct OnboardingView: View {
             }
 
             VStack(spacing: 8) {
-                Text("Microphone Access")
+                Text("麦克风权限")
                     .font(.title2.bold())
-                Text("Logue needs your microphone to transcribe meetings and voice notes on-device.")
+                Text("Logue 需要麦克风权限，以便在设备端转写会议和语音笔记。")
                     .font(.body)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -184,13 +184,13 @@ struct OnboardingView: View {
             }
 
             if micGranted, speechGranted {
-                Label("Microphone & Speech Recognition Enabled", systemImage: "checkmark.circle.fill")
+                Label("麦克风与语音识别已启用", systemImage: "checkmark.circle.fill")
                     .font(.callout.weight(.medium))
                     .foregroundStyle(AppThemeConstants.success)
             } else {
                 VStack(spacing: 10) {
                     if !micGranted {
-                        Button("Grant Microphone Access") {
+                        Button("授予麦克风权限") {
                             Task {
                                 micGranted = await AVCaptureDevice.requestAccess(for: .audio)
                             }
@@ -198,27 +198,27 @@ struct OnboardingView: View {
                         .buttonStyle(.borderedProminent)
                         .tint(AppThemeConstants.accent)
                         .controlSize(.large)
-                        .accessibilityLabel("Grant Microphone Access")
-                        .accessibilityHint("Requests microphone permission for meeting recording")
+                        .accessibilityLabel("授予麦克风权限")
+                        .accessibilityHint("请求麦克风权限以录制会议")
                     }
 
                     if !speechGranted {
-                        Button("Enable Speech Recognition") {
+                        Button("启用语音识别") {
                             Task {
                                 speechGranted = await requestSpeechPermission()
                             }
                         }
                         .buttonStyle(.bordered)
                         .controlSize(.large)
-                        .accessibilityLabel("Enable Speech Recognition")
-                        .accessibilityHint("Requests speech recognition permission for transcription")
+                        .accessibilityLabel("启用语音识别")
+                        .accessibilityHint("请求语音识别权限以进行转写")
                     }
                 }
             }
 
             Spacer()
 
-            PrivacyBadge("Audio is processed entirely on-device using Apple Speech.")
+            PrivacyBadge("音频完全在设备端通过 Apple 语音技术处理。")
                 .padding(.bottom, 8)
         }
         .padding(AppThemeConstants.paddingXLarge)
@@ -244,9 +244,9 @@ struct OnboardingView: View {
             }
 
             VStack(spacing: 8) {
-                Text("Calendar Integration")
+                Text("日历集成")
                     .font(.title2.bold())
-                Text("See upcoming meetings in Logue to quickly start recording when a meeting begins.")
+                Text("在 Logue 中查看即将开始的会议，会议开始时即可快速开始录制。")
                     .font(.body)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -254,33 +254,33 @@ struct OnboardingView: View {
             }
 
             if calendarManager.isAuthorized {
-                Label("Calendar Connected", systemImage: "checkmark.circle.fill")
+                Label("日历已连接", systemImage: "checkmark.circle.fill")
                     .font(.callout.weight(.medium))
                     .foregroundStyle(AppThemeConstants.success)
             } else {
                 VStack(spacing: 10) {
-                    Button("Connect Calendar") {
+                    Button("连接日历") {
                         Task { await calendarManager.requestAccess() }
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.large)
-                    .accessibilityLabel("Connect Calendar")
-                    .accessibilityHint("Requests calendar access to show upcoming meetings")
+                    .accessibilityLabel("连接日历")
+                    .accessibilityHint("请求日历权限以显示即将开始的会议")
 
-                    Button("Skip — I'll set this up later") {
+                    Button("跳过——稍后设置") {
                         withAnimation(.easeInOut(duration: 0.25)) { currentPage += 1 }
                     }
                     .buttonStyle(.plain)
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                    .accessibilityLabel("Skip calendar setup")
+                    .accessibilityLabel("跳过日历设置")
                 }
             }
 
             Spacer()
 
-            PrivacyBadge("Calendar data is read locally. Nothing is uploaded.")
+            PrivacyBadge("日历数据仅在本地读取，不会上传。")
                 .padding(.bottom, 8)
         }
         .padding(AppThemeConstants.paddingXLarge)
@@ -306,9 +306,9 @@ struct OnboardingView: View {
             }
 
             VStack(spacing: 8) {
-                Text("Accessibility Access")
+                Text("辅助功能权限")
                     .font(.title2.bold())
-                Text("Logue uses Accessibility to power the writing assistant, auto-suggestions, and text replacement across all apps.")
+                Text("Logue 使用辅助功能来支持写作助手、自动建议以及跨应用文本替换。")
                     .font(.body)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -316,35 +316,35 @@ struct OnboardingView: View {
             }
 
             if accessibilityGranted {
-                Label("Accessibility Access Enabled", systemImage: "checkmark.circle.fill")
+                Label("辅助功能权限已启用", systemImage: "checkmark.circle.fill")
                     .font(.callout.weight(.medium))
                     .foregroundStyle(AppThemeConstants.success)
             } else {
                 VStack(spacing: 10) {
-                    Button("Grant Accessibility Access") {
+                    Button("授予辅助功能权限") {
                         AccessibilityService.shared.checkAccessibilityPermission(prompt: true)
                         startAccessibilityPolling()
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.large)
-                    .accessibilityLabel("Grant Accessibility Access")
-                    .accessibilityHint("Opens system settings to grant accessibility permission")
+                    .accessibilityLabel("授予辅助功能权限")
+                    .accessibilityHint("打开系统设置以授予辅助功能权限")
 
-                    Button("Skip — I'll set this up later") {
+                    Button("跳过——稍后设置") {
                         stopAccessibilityPolling()
                         withAnimation(.easeInOut(duration: 0.25)) { currentPage += 1 }
                     }
                     .buttonStyle(.plain)
                     .font(.callout)
                     .foregroundStyle(.secondary)
-                    .accessibilityLabel("Skip accessibility setup")
+                    .accessibilityLabel("跳过辅助功能设置")
                 }
             }
 
             Spacer()
 
-            PrivacyBadge("Accessibility is used only for text interactions. No data leaves your Mac.")
+            PrivacyBadge("辅助功能仅用于文本交互，数据不会离开这台 Mac。")
                 .padding(.bottom, 8)
         }
         .padding(AppThemeConstants.paddingXLarge)
@@ -383,11 +383,11 @@ struct OnboardingView: View {
             }
 
             VStack(spacing: 8) {
-                Text("Launch at Login")
+                Text("登录时启动")
                     .font(.title2.bold())
                 Text(
-                    "Logue lives in your menu bar and is always ready when you need it."
-                        + " Enable launch at login so it's available whenever you start your Mac."
+                    "Logue 常驻菜单栏，随时待命。"
+                        + "启用登录时启动，开机后即可使用。"
                 )
                 .font(.body)
                 .foregroundStyle(.secondary)
@@ -395,7 +395,7 @@ struct OnboardingView: View {
                 .frame(maxWidth: 380)
             }
 
-            Toggle("Launch Logue at Login", isOn: $launchAtLogin)
+            Toggle("登录时启动 Logue", isOn: $launchAtLogin)
                 .toggleStyle(.switch)
                 .onChange(of: launchAtLogin) { _, newValue in
                     do {
@@ -410,17 +410,17 @@ struct OnboardingView: View {
                 }
                 .frame(maxWidth: 240)
 
-            Button("Skip — I'll set this up later") {
+            Button("跳过——稍后设置") {
                 withAnimation(.easeInOut(duration: 0.25)) { currentPage += 1 }
             }
             .buttonStyle(.plain)
             .font(.callout)
             .foregroundStyle(.secondary)
-            .accessibilityLabel("Skip launch at login setup")
+            .accessibilityLabel("跳过登录时启动设置")
 
             Spacer()
 
-            PrivacyBadge("Logue runs locally in your menu bar. No background data collection.")
+            PrivacyBadge("Logue 在菜单栏本地运行，不会在后台收集数据。")
                 .padding(.bottom, 8)
         }
         .padding(AppThemeConstants.paddingXLarge)
@@ -442,17 +442,17 @@ struct OnboardingView: View {
             }
 
             VStack(spacing: 8) {
-                Text("You're All Set!")
+                Text("一切就绪！")
                     .font(.title2.bold())
-                Text("Here are some shortcuts to get you started:")
+                Text("以下是一些入门快捷键：")
                     .font(.body)
                     .foregroundStyle(.secondary)
             }
 
             VStack(alignment: .leading, spacing: 12) {
-                shortcutRow(keys: "Cmd + N", label: "New Document")
-                shortcutRow(keys: "Cmd + Shift + N", label: "New Meeting")
-                shortcutRow(keys: ShortcutManager.shared.commandCenterShortcut.displayString, label: "Ask Logue (global)")
+                shortcutRow(keys: "⌘N", label: "新建文档")
+                shortcutRow(keys: "⌘⇧N", label: "新建会议")
+                shortcutRow(keys: ShortcutManager.shared.commandCenterShortcut.displayString, label: "询问 Logue（全局）")
             }
             .padding(.horizontal, 40)
             .padding(.vertical, 12)

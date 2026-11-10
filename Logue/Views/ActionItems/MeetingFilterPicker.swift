@@ -31,7 +31,7 @@ struct MeetingFilterPicker: View {
 
     private var selectedTitle: String {
         guard let selection, let match = meetings.first(where: { $0.id == selection })
-        else { return "All meetings" }
+        else { return "所有会议" }
         return match.title
     }
 
@@ -53,8 +53,8 @@ struct MeetingFilterPicker: View {
         }
         .buttonStyle(.bordered)
         .controlSize(.small)
-        .help("Show items from one meeting")
-        .accessibilityLabel("Filter by meeting, \(selectedTitle)")
+        .help("只显示某场会议的项目")
+        .accessibilityLabel("按会议筛选，\(selectedTitle)")
         .popover(isPresented: $isPresented, arrowEdge: .bottom) {
             popoverContent
         }
@@ -62,7 +62,7 @@ struct MeetingFilterPicker: View {
 
     private var popoverContent: some View {
         VStack(spacing: 0) {
-            TextField("Search meetings", text: $query)
+            TextField("搜索会议", text: $query)
                 .textFieldStyle(.roundedBorder)
                 .padding(AppThemeConstants.paddingSmall)
 
@@ -70,7 +70,7 @@ struct MeetingFilterPicker: View {
 
             ScrollView {
                 LazyVStack(spacing: 0) {
-                    row(title: "All meetings", count: nil, id: nil)
+                    row(title: "所有会议", count: nil, id: nil)
                     if !matches.isEmpty {
                         Divider()
                     }
@@ -82,7 +82,7 @@ struct MeetingFilterPicker: View {
             .frame(height: popoverListHeight)
 
             if matches.isEmpty, !query.isEmpty {
-                Text("No meetings match")
+                Text("没有匹配的会议")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .padding(AppThemeConstants.paddingSmall)
@@ -126,6 +126,6 @@ struct MeetingFilterPicker: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(count.map { "\(title), \($0) items" } ?? title)
+        .accessibilityLabel(count.map { "\(title)，\($0) 项" } ?? title)
     }
 }

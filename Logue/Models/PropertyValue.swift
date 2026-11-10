@@ -30,7 +30,7 @@ enum PropertyValue: Equatable, Sendable {
         case let .date(value):
             Self.dateFormatter.string(from: value)
         case let .boolean(value):
-            value ? "Yes" : "No"
+            value ? "是" : "否"
         case let .list(values):
             values.joined(separator: ", ")
         case let .unknown(_, value):
@@ -135,12 +135,12 @@ enum PropertyKey: String, CaseIterable, Sendable {
 
     var label: String {
         switch self {
-        case .type: "Type"
-        case .status: "Status"
+        case .type: "类型"
+        case .status: "状态"
         case .url: "URL"
-        case .dueDate: "Due date"
-        case .author: "Author"
-        case .priority: "Priority"
+        case .dueDate: "截止日期"
+        case .author: "作者"
+        case .priority: "优先级"
         }
     }
 

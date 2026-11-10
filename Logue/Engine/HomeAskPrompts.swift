@@ -19,8 +19,8 @@ enum HomeAskPrompts {
 
     /// What an untitled meeting is called. Shared so a chip label and the sentence it
     /// fills cannot disagree about what the user is asking about.
-    static let untitledMeeting = "Untitled meeting"
-    static let untitledDocument = "Untitled document"
+    static let untitledMeeting = "未命名会议"
+    static let untitledDocument = "未命名文档"
 
     /// Trims a user-authored title down to something safe to quote.
     ///
@@ -72,24 +72,23 @@ enum HomeAskPrompts {
     static func meeting(title: String, isSummarized: Bool) -> String {
         let name = sanitize(title, fallback: untitledMeeting)
         if isSummarized {
-            return "What were the decisions in “\(name)”?"
+            return "“\(name)”里做出了哪些决策？"
         }
-        return "Summarize the meeting “\(name)” and pull out the action items."
+        return "总结会议“\(name)”，并提炼出待办事项。"
     }
 
     static func document(title: String) -> String {
         let name = sanitize(title, fallback: untitledDocument)
-        return "Help me continue writing “\(name)”."
+        return "帮我继续写“\(name)”。"
     }
 
     static func actionItem(title: String) -> String {
-        let name = sanitize(title, fallback: "this action item")
-        return "What do I need to do for “\(name)”, and what is the context "
-            + "from the meeting it came from?"
+        let name = sanitize(title, fallback: "这个待办事项")
+        return "“\(name)”需要我做什么？它来自哪场会议，背景是什么？"
     }
 
     static func calendarEvent(title: String) -> String {
-        let name = sanitize(title, fallback: "this meeting")
-        return "Prepare me for “\(name)” — what happened last time and what is still outstanding?"
+        let name = sanitize(title, fallback: "这场会议")
+        return "帮我为“\(name)”做准备——上次发生了什么，还有什么没完成？"
     }
 }

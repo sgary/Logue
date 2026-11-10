@@ -30,11 +30,11 @@ enum HomeSuggestions {
     /// Shown before the workspace has anything in it, where nothing can be named yet.
     /// These teach capability instead, which is the only thing left to offer.
     static let firstRunChips: [Chip] = [
-        Chip(label: "What can you do?", prompt: "What can you do?"),
-        Chip(label: "Record my next meeting", prompt: "Record my next meeting"),
+        Chip(label: "你能做什么？", prompt: "你能做什么？"),
+        Chip(label: "录制下一场会议", prompt: "帮我录制下一场会议"),
         Chip(
-            label: "Draft a document",
-            prompt: "Draft a document from an outline I will give you"
+            label: "起草文档",
+            prompt: "根据我稍后给出的提纲起草一份文档"
         ),
     ]
 
@@ -52,19 +52,19 @@ enum HomeSuggestions {
             let name = HomeAskPrompts.sanitize(title, fallback: HomeAskPrompts.untitledMeeting)
             chips.append(
                 Chip(
-                    label: "Summarize “\(name)”",
+                    label: "总结“\(name)”",
                     prompt: HomeAskPrompts.meeting(title: title, isSummarized: false)
                 )
             )
         }
         if inputs.overdueCount > 0 {
-            chips.append(Chip(label: "What’s overdue?", prompt: "What’s overdue?"))
+            chips.append(Chip(label: "哪些任务逾期了？", prompt: "哪些任务逾期了？"))
         }
         if inputs.meetingsToday > 0 {
-            chips.append(Chip(label: "What did I miss today?", prompt: "What did I miss today?"))
+            chips.append(Chip(label: "我今天错过了什么？", prompt: "我今天错过了什么？"))
         }
         if chips.isEmpty {
-            chips.append(Chip(label: "What can you do?", prompt: "What can you do?"))
+            chips.append(Chip(label: "你能做什么？", prompt: "你能做什么？"))
         }
 
         return Array(chips.prefix(maximum))

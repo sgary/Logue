@@ -12,7 +12,7 @@ struct CategoryBadge: View {
             HStack(spacing: 4) {
                 Image(systemName: category.icon)
                     .font(.caption2)
-                Text(category.rawValue)
+                Text(category.displayName)
                     .font(.caption)
                     .lineLimit(1)
             }
@@ -40,9 +40,9 @@ struct CategoryBadge: View {
         .onHover { hovering in
             withAnimation(.easeInOut(duration: 0.12)) { isHovered = hovering }
         }
-        .accessibilityLabel("\(category.rawValue) category")
-        .accessibilityValue(isEnabled ? "Enabled" : "Disabled")
-        .accessibilityHint("Double-tap to toggle")
+        .accessibilityLabel("\(category.displayName) 类别")
+        .accessibilityValue(isEnabled ? "已启用" : "已停用")
+        .accessibilityHint("双击切换")
         .accessibilityAddTraits(isEnabled ? .isSelected : [])
     }
 }

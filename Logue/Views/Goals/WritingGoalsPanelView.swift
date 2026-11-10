@@ -20,9 +20,9 @@ struct WritingGoalsPanelView: View {
             // ── Header ─────────────────────────────────────────────────
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Writing Goals")
+                    Text("写作目标")
                         .font(.title3.bold())
-                    Text("Optimise suggestions for your context")
+                    Text("根据你的写作场景优化建议")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -33,7 +33,7 @@ struct WritingGoalsPanelView: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Close")
+                .accessibilityLabel("关闭")
             }
             .padding(.horizontal, 20)
             .padding(.top, 20)
@@ -44,7 +44,7 @@ struct WritingGoalsPanelView: View {
             // ── Goal mode grid ─────────────────────────────────────────
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text("Writing Style")
+                    Text("写作风格")
                         .font(.headline)
                         .padding(.horizontal, 20)
                         .padding(.top, 16)
@@ -63,7 +63,7 @@ struct WritingGoalsPanelView: View {
 
                     // ── Goal description ───────────────────────────────
                     VStack(alignment: .leading, spacing: 6) {
-                        Text("What this means")
+                        Text("这意味着什么")
                             .font(.subheadline.weight(.medium))
                         Text(selectedMode.systemDescription)
                             .font(.callout)
@@ -82,9 +82,9 @@ struct WritingGoalsPanelView: View {
             // ── Footer actions ─────────────────────────────────────────
             HStack {
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("取消") { dismiss() }
                     .keyboardShortcut(.escape)
-                Button("Apply") {
+                Button("应用") {
                     var updated = document
                     updated.goalMode = selectedMode
                     onSave(updated)
@@ -149,7 +149,7 @@ private struct GoalModeCard: View {
         .onHover { isHovered = $0 }
         .animation(.easeInOut(duration: 0.12), value: isHovered)
         .animation(.easeInOut(duration: 0.12), value: isSelected)
-        .accessibilityLabel("\(mode.displayName): \(mode.shortDescription)")
+        .accessibilityLabel("\(mode.displayName)：\(mode.shortDescription)")
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

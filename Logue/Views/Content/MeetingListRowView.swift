@@ -12,7 +12,7 @@ struct MeetingListRowView: View {
         HomeCardShell(
             action: onSelect,
             accessibilityLabel: meetingAccessibilityLabel,
-            accessibilityHint: "Opens meeting"
+            accessibilityHint: "打开会议"
         ) { _ in
             HStack(spacing: 12) {
                 Image(systemName: meeting.recordingMode.iconName)
@@ -58,13 +58,13 @@ struct MeetingListRowView: View {
                 Image(systemName: "pin.fill")
                     .font(.caption2)
                     .foregroundStyle(AppThemeConstants.pinnedColor)
-                    .accessibilityLabel("Pinned")
+                    .accessibilityLabel("已置顶")
             }
             if meeting.isArchived {
                 Image(systemName: "archivebox")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
-                    .accessibilityLabel("Archived")
+                    .accessibilityLabel("已归档")
             }
         }
     }
@@ -103,7 +103,7 @@ struct MeetingListRowView: View {
                     in: RoundedRectangle(cornerRadius: AppThemeConstants.radiusXSmall)
                 )
                 .accessibilityElement(children: .combine)
-                .accessibilityLabel("\(pending) pending action items")
+                .accessibilityLabel("\(pending) 个待完成的待办事项")
             }
         }
     }
@@ -112,17 +112,17 @@ struct MeetingListRowView: View {
     private var meetingAccessibilityLabel: String {
         var parts: [String] = [meeting.title]
         if meeting.isPinned {
-            parts.append("pinned")
+            parts.append("已置顶")
         }
         if meeting.isArchived {
-            parts.append("archived")
+            parts.append("已归档")
         }
         let pending = meeting.actionItems.filter { !$0.isCompleted }.count
         if pending > 0 {
-            parts.append("\(pending) pending action item\(pending == 1 ? "" : "s")")
+            parts.append("\(pending) 个待完成的待办事项")
         }
         parts.append(meeting.createdAt.formatted(.relative(presentation: .named)))
-        return parts.joined(separator: ", ")
+        return parts.joined(separator: "，")
     }
 }
 
@@ -139,32 +139,32 @@ struct MeetingContextMenuContent: View {
         Button {
             store.selectedMeetingID = meeting.id
         } label: {
-            Label("Open", systemImage: "waveform")
+            Label("打开", systemImage: "waveform")
         }
         Button {
             store.togglePin(id: meeting.id)
         } label: {
             Label(
-                meeting.isPinned ? "Unpin" : "Pin",
+                meeting.isPinned ? "取消置顶" : "置顶",
                 systemImage: meeting.isPinned ? "pin.slash" : "pin"
             )
         }
         Button {
             onRename()
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         Button {
             store.toggleArchive(id: meeting.id)
         } label: {
             Label(
-                meeting.isArchived ? "Unarchive" : "Archive",
+                meeting.isArchived ? "取消归档" : "归档",
                 systemImage: meeting.isArchived ? "tray.and.arrow.up" : "archivebox"
             )
         }
 
         if !spaceStore.topLevelSpaces.isEmpty || meeting.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: meeting.spaceID) { newSpaceID in
                     store.moveMeeting(id: meeting.id, toSpace: newSpaceID)
                 }
@@ -176,7 +176,7 @@ struct MeetingContextMenuContent: View {
         Button(role: .destructive) {
             store.trashMeeting(id: meeting.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 }

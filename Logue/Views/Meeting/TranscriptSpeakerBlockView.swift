@@ -134,8 +134,8 @@ struct SpeakerBlockView: View {
                     .foregroundStyle(Color.secondary.opacity(0.5))
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Add bookmark at \(TranscriptSegment.formatTime(segment.startTime))")
-            .help("Add bookmark here")
+            .accessibilityLabel("在 \(TranscriptSegment.formatTime(segment.startTime)) 添加书签")
+            .help("在此处添加书签")
             .popover(
                 isPresented: Binding(
                     get: { bookmarkingSegmentID == segment.id },
@@ -168,14 +168,14 @@ struct SpeakerBlockView: View {
                 .foregroundStyle(speakerColor(for: shown?.1) ?? Color.secondary)
                 .opacity(mark == nil ? 0.55 : 1)
                 .frame(width: 22, alignment: .trailing)
-                .help(speakerName.isEmpty ? "" : "\(speakerName) — right-click to rename")
+                .help(speakerName.isEmpty ? "" : "\(speakerName) — 右键点击以重命名")
                 .contextMenu {
                     if onRenameSpeaker != nil, !speakerName.isEmpty {
                         Button {
                             speakerNameDraft = speakerName
                             isEditingSpeakerName = true
                         } label: {
-                            Label("Rename Speaker", systemImage: "pencil")
+                            Label("重命名发言人", systemImage: "pencil")
                         }
                     }
                 }
@@ -212,7 +212,7 @@ struct SpeakerBlockView: View {
         HStack(spacing: 6) {
             if let speaker = block.speakerLabel {
                 if isEditingSpeakerName {
-                    TextField("Speaker name", text: $speakerNameDraft)
+                    TextField("发言人名称", text: $speakerNameDraft)
                         .textFieldStyle(.roundedBorder)
                         .font(.caption.weight(.semibold))
                         .foregroundStyle(accentColor)
@@ -234,12 +234,12 @@ struct SpeakerBlockView: View {
                             }
                         }
 
-                    Button("Done") { commitSpeakerRename(oldName: speaker) }
+                    Button("完成") { commitSpeakerRename(oldName: speaker) }
                         .font(.caption)
                         .buttonStyle(.bordered)
                         .controlSize(.mini)
 
-                    Button("Cancel") { isEditingSpeakerName = false }
+                    Button("取消") { isEditingSpeakerName = false }
                         .font(.caption)
                         .buttonStyle(.plain)
                         .foregroundStyle(.secondary)
@@ -252,14 +252,14 @@ struct SpeakerBlockView: View {
                                 isEditingSpeakerName = true
                             }
                         }
-                        .help(onRenameSpeaker != nil ? "Double-click to rename speaker" : "")
+                        .help(onRenameSpeaker != nil ? "双击以重命名发言人" : "")
                         .contextMenu {
                             if onRenameSpeaker != nil {
                                 Button {
                                     speakerNameDraft = speaker
                                     isEditingSpeakerName = true
                                 } label: {
-                                    Label("Rename Speaker", systemImage: "pencil")
+                                    Label("重命名发言人", systemImage: "pencil")
                                 }
                             }
                         }

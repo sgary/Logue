@@ -42,7 +42,7 @@ enum TaskTextParser {
     /// A year out. Anything further is a typo, and large values overflow date arithmetic.
     static let maxRelativeDays = 365
 
-    private static let fallbackTitle = "Untitled task"
+    private static let fallbackTitle = "未命名任务"
 
     /// Weekday symbols mapped to `Calendar`'s 1-based Sunday-first numbering.
     private static let weekdays: [String: Int] = [
@@ -66,7 +66,8 @@ enum TaskTextParser {
     // MARK: - Entry point
 
     static func parse(_ text: String, now: Date = .now, calendar: Calendar = .current) -> ParsedTask {
-        var tokens = text.split(whereSeparator: \.isWhitespace).map(String.init)
+        let normalized = normalizingChineseDateWords(text)
+        var tokens = normalized.split(whereSeparator: \.isWhitespace).map(String.init)
         var tags: [String] = []
         var priority = TaskPriority.medium
         var recurrence: TaskRecurrence?
@@ -85,6 +86,52 @@ enum TaskTextParser {
             tags: tags,
             recurrence: recurrence
         )
+    }
+
+    // MARK: - Title
+
+    /// Rewrites Chinese date and recurrence words into the tokens the parser already knows.
+    ///
+    /// Chinese is written without spaces, so `明天发送演示文稿` arrives as one token. Mapping
+    /// the date words to their English tokens (with padding spaces) lets the existing
+    /// token-based rules run unchanged and keeps the title readable.
+    private static func normalizingChineseDateWords(_ text: String) -> String {
+        let replacements: [(String, String)] = [
+            // Longer phrases first, so a prefix does not swallow them.
+            ("大后天", " in 3 days "),
+            ("下个星期一", " next week "), ("下个星期二", " next week "),
+            ("下个星期三", " next week "), ("下个星期四", " next week "),
+            ("下个星期五", " next week "), ("下个星期六", " next week "),
+            ("下个星期日", " next week "), ("下个星期天", " next week "),
+            ("下周一", " next week "), ("下周二", " next week "),
+            ("下周三", " next week "), ("下周四", " next week "),
+            ("下周五", " next week "), ("下周六", " next week "),
+            ("下周日", " next week "), ("下周天", " next week "),
+            ("下个星期", " next week "), ("下个月", " next month "), ("下周", " next week "),
+            ("每个星期", " weekly "), ("每个月", " monthly "), ("每星期", " weekly "),
+            ("每天", " daily "), ("每日", " daily "), ("每周", " weekly "), ("每月", " monthly "),
+            ("后天", " in 2 days "),
+            ("3天后", " in 3 days "), ("三天后", " in 3 days "), ("2天后", " in 2 days "),
+            ("两天后", " in 2 days "), ("1天后", " in 1 day "), ("一天后", " in 1 day "),
+            ("两周后", " in 2 weeks "), ("两周后", " in 2 weeks "), ("一周后", " in 1 week "),
+            ("一个月后", " in 1 month "),
+            ("明天", " tomorrow "), ("明日", " tomorrow "),
+            ("今天", " today "), ("今日", " today "),
+            ("星期一", " monday "), ("星期二", " tuesday "), ("星期三", " wednesday "),
+            ("星期四", " thursday "), ("星期五", " friday "), ("星期六", " saturday "),
+            ("星期日", " sunday "), ("星期天", " sunday "),
+            ("礼拜一", " monday "), ("礼拜二", " tuesday "), ("礼拜三", " wednesday "),
+            ("礼拜四", " thursday "), ("礼拜五", " friday "), ("礼拜六", " saturday "),
+            ("礼拜日", " sunday "), ("礼拜天", " sunday "),
+            ("周一", " monday "), ("周二", " tuesday "), ("周三", " wednesday "),
+            ("周四", " thursday "), ("周五", " friday "), ("周六", " saturday "),
+            ("周日", " sunday "), ("周天", " sunday "),
+        ]
+        var result = text
+        for (chinese, english) in replacements {
+            result = result.replacingOccurrences(of: chinese, with: english)
+        }
+        return result
     }
 
     // MARK: - Title

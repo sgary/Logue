@@ -20,16 +20,16 @@ enum DeepResearchStep: String, CaseIterable {
     /// Display label shown in the progress UI.
     var displayLabel: String {
         switch self {
-        case .idle: "Ready"
-        case .checkingSufficiency: "Checking your prompt"
-        case .synthesizingPrompt: "Refining the question"
-        case .planningSections: "Planning sections"
-        case .researching: "Researching"
-        case .writingDraft: "Writing draft"
-        case .creatingDiagrams: "Creating diagrams"
-        case .finalizing: "Finalizing report"
-        case .completed: "Done"
-        case .failed: "Failed"
+        case .idle: "就绪"
+        case .checkingSufficiency: "正在检查提示词"
+        case .synthesizingPrompt: "正在完善问题"
+        case .planningSections: "正在规划章节"
+        case .researching: "正在研究"
+        case .writingDraft: "正在撰写初稿"
+        case .creatingDiagrams: "正在创建图表"
+        case .finalizing: "正在完成报告"
+        case .completed: "完成"
+        case .failed: "失败"
         }
     }
 

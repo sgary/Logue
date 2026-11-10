@@ -166,19 +166,19 @@ enum OrganisePrompt: Identifiable {
 
     var title: String {
         switch self {
-        case .newView: "Save as View"
-        case .renameView: "Rename View"
-        case .newType: "New Type"
-        case .renameType: "Rename Type"
+        case .newView: "保存为视图"
+        case .renameView: "重命名视图"
+        case .newType: "新建类型"
+        case .renameType: "重命名类型"
         }
     }
 
     var prompt: String {
         switch self {
-        case .newView: "Name this view. It keeps the filter and sort you are using now."
-        case .renameView: "New name for this view."
-        case .newType: "Name this type. It takes this document's properties as its defaults."
-        case .renameType: "New name for this type."
+        case .newView: "为这个视图命名。它将保留你当前使用的筛选和排序。"
+        case .renameView: "为此视图输入新名称。"
+        case .newType: "为这个类型命名。它将把此文档的属性作为默认值。"
+        case .renameType: "为此类型输入新名称。"
         }
     }
 
@@ -210,16 +210,16 @@ struct OrganiseNamingSheet: View {
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
 
-            TextField("Name", text: $name)
+            TextField("名称", text: $name)
                 .textFieldStyle(.roundedBorder)
                 .focused($isFocused)
                 .onSubmit(commit)
 
             HStack {
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("取消") { dismiss() }
                     .keyboardShortcut(.cancelAction)
-                Button("Save", action: commit)
+                Button("保存", action: commit)
                     .buttonStyle(.borderedProminent)
                     .disabled(name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }

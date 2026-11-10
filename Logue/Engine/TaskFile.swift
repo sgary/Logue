@@ -87,7 +87,7 @@ enum TaskFile {
         }
 
         var task = TaskItem(id: id)
-        task.title = scalar(fields, "title") ?? "Untitled task"
+        task.title = scalar(fields, "title") ?? "未命名任务"
         // A malformed enum falls back rather than failing the read: losing a priority costs
         // a badge, refusing the file costs the user their task.
         task.status = TaskStatus(rawValue: scalar(fields, "status") ?? "") ?? .todo

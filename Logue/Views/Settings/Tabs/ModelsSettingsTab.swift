@@ -58,12 +58,12 @@ struct ModelsSettingsTab: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Models")
+            Text("模型")
                 .font(.title3.bold())
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
                 .padding(.bottom, 4)
-            Text("Connect cloud or local AI providers — OpenAI, Anthropic, OpenRouter, Ollama, and more.")
+            Text("连接云端或本地 AI 提供商，例如 OpenAI、Anthropic、OpenRouter、Ollama 等。")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 20)
@@ -93,10 +93,10 @@ struct ModelsSettingsTab: View {
 
     private var onDeviceModelsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("On-Device Models")
+            Text("设备端模型")
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(.secondary)
-            Text("Run AI locally on your Mac — no internet required.")
+            Text("在你的 Mac 上本地运行 AI，无需联网。")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
 
@@ -116,7 +116,7 @@ struct ModelsSettingsTab: View {
                 Button {
                     withAnimation { isAddingCustomMLX = true }
                 } label: {
-                    Label("Add Model from HuggingFace", systemImage: "plus.circle")
+                    Label("从 HuggingFace 添加模型", systemImage: "plus.circle")
                         .font(.caption)
                 }
                 .buttonStyle(.plain)
@@ -127,7 +127,7 @@ struct ModelsSettingsTab: View {
 
     private var addCustomMLXForm: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Paste a model URL from the mlx-community on HuggingFace.")
+            Text("粘贴 HuggingFace 上 mlx-community 的模型 URL。")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
 
@@ -152,7 +152,7 @@ struct ModelsSettingsTab: View {
 
             HStack {
                 Spacer()
-                Button("Cancel") {
+                Button("取消") {
                     withAnimation(.easeInOut(duration: 0.25)) {
                         isAddingCustomMLX = false
                         hfURLInput = ""
@@ -160,7 +160,7 @@ struct ModelsSettingsTab: View {
                 }
                 .controlSize(.small)
 
-                Button("Add Model") { addCustomMLXModel() }
+                Button("添加模型") { addCustomMLXModel() }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.small)
@@ -189,8 +189,8 @@ struct ModelsSettingsTab: View {
 
     private var connectNewModelForm: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Picker("Provider", selection: $selectedProvider) {
-                Text("Select a provider…").tag(APIProviderType?.none)
+            Picker("提供商", selection: $selectedProvider) {
+                Text("选择提供商…").tag(APIProviderType?.none)
                 ForEach(APIProviderType.connectableProviders) { provider in
                     Text(provider.displayName)
                         .tag(APIProviderType?.some(provider))
@@ -211,7 +211,7 @@ struct ModelsSettingsTab: View {
                 // Cancel button when no provider selected yet
                 HStack {
                     Spacer()
-                    Button("Cancel") {
+                    Button("取消") {
                         withAnimation(.easeInOut(duration: 0.25)) {
                             isConnectingAPI = false
                             selectedProvider = nil
@@ -275,7 +275,7 @@ struct ModelsSettingsTab: View {
             // Action buttons
             HStack {
                 Spacer()
-                Button("Cancel") {
+                Button("取消") {
                     withAnimation(.easeInOut(duration: 0.25)) {
                         isConnectingAPI = false
                         selectedProvider = nil
@@ -284,7 +284,7 @@ struct ModelsSettingsTab: View {
                 }
                 .controlSize(.small)
 
-                Button("Connect") { addModel() }
+                Button("连接") { addModel() }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.small)
@@ -297,7 +297,7 @@ struct ModelsSettingsTab: View {
 
     private var connectedModelsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Connected Models")
+            Text("已连接的模型")
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(.secondary)
 
@@ -316,7 +316,7 @@ struct ModelsSettingsTab: View {
                 Button {
                     withAnimation { isConnectingAPI = true }
                 } label: {
-                    Label("Connect a Model", systemImage: "plus.circle")
+                    Label("连接模型", systemImage: "plus.circle")
                         .font(.caption)
                 }
                 .buttonStyle(.plain)
@@ -338,17 +338,17 @@ struct ModelsSettingsTab: View {
 
     private var apiKeyField: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("API Key")
+            Text("API 密钥")
                 .font(.caption.weight(.medium))
                 .foregroundStyle(.secondary)
-            SecureField("Enter your API key", text: $apiKey)
+            SecureField("输入你的 API 密钥", text: $apiKey)
                 .textFieldStyle(.roundedBorder)
         }
     }
 
     private var endpointField: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Endpoint URL")
+            Text("端点 URL")
                 .font(.caption.weight(.medium))
                 .foregroundStyle(.secondary)
 
@@ -364,7 +364,7 @@ struct ModelsSettingsTab: View {
                     Image(systemName: "exclamationmark.triangle.fill")
                         .font(.caption2)
                         .foregroundStyle(AppThemeConstants.warning)
-                        .help("Remote endpoints should use HTTPS")
+                        .help("远程端点应使用 HTTPS")
                 }
             }
         }
@@ -372,10 +372,10 @@ struct ModelsSettingsTab: View {
 
     private var modelNameField: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Model Name")
+            Text("模型名称")
                 .font(.caption.weight(.medium))
                 .foregroundStyle(.secondary)
-            TextField("e.g. gpt-5.4, gpt-5.4-mini, llama3, mistral", text: $modelName)
+            TextField("例如 gpt-5.4、gpt-5.4-mini、llama3、mistral", text: $modelName)
                 .textFieldStyle(.roundedBorder)
         }
     }
@@ -391,7 +391,7 @@ struct ModelsSettingsTab: View {
                     } else {
                         HStack(spacing: 4) {
                             ConnectionStatusDot(status: connectionStatus)
-                            Text("Scan Models").font(.caption)
+                            Text("扫描模型").font(.caption)
                         }
                     }
                 }
@@ -411,18 +411,18 @@ struct ModelsSettingsTab: View {
 
     private var anthropicModelPicker: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Model").font(.caption.weight(.medium)).foregroundStyle(.secondary)
+            Text("模型").font(.caption.weight(.medium)).foregroundStyle(.secondary)
             if useCustomAnthropicModel {
                 HStack(spacing: 6) {
-                    TextField("Enter model name", text: $modelName).textFieldStyle(.roundedBorder).font(.caption)
-                    Button("Cancel") { useCustomAnthropicModel = false; modelName = AnthropicClient.knownModels.first ?? "" }.controlSize(.small)
+                    TextField("输入模型名称", text: $modelName).textFieldStyle(.roundedBorder).font(.caption)
+                    Button("取消") { useCustomAnthropicModel = false; modelName = AnthropicClient.knownModels.first ?? "" }.controlSize(.small)
                 }
             } else {
                 HStack(spacing: 6) {
                     Picker("", selection: $modelName) {
                         ForEach(AnthropicClient.knownModels, id: \.self) { Text($0).tag($0) }
                     }.labelsHidden()
-                    Button("Custom") { useCustomAnthropicModel = true }.controlSize(.small)
+                    Button("自定义") { useCustomAnthropicModel = true }.controlSize(.small)
                 }
             }
         }
@@ -430,18 +430,18 @@ struct ModelsSettingsTab: View {
 
     private var authToggle: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Toggle("Requires API Key", isOn: $requiresAuth)
+            Toggle("需要 API 密钥", isOn: $requiresAuth)
                 .font(.caption.weight(.medium))
 
             if requiresAuth {
-                SecureField("Bearer API Key", text: $apiKey)
+                SecureField("Bearer API 密钥", text: $apiKey)
                     .textFieldStyle(.roundedBorder)
             }
         }
     }
 
     private var scannedModelsChips: some View {
-        Picker("Select a model", selection: $modelName) {
+        Picker("选择模型", selection: $modelName) {
             ForEach(scannedModels, id: \.self) { model in
                 Text(model).tag(model)
             }
@@ -455,13 +455,13 @@ struct ModelsSettingsTab: View {
 private extension ModelsSettingsTab {
     func providerDescription(for provider: APIProviderType) -> String {
         switch provider {
-        case .openai: "Connect to the OpenAI API (GPT-4o, GPT-4, etc.)."
-        case .anthropic: "Connect to the Anthropic Messages API (Claude models)."
-        case .openRouter: "Connect to OpenRouter for access to multiple providers."
-        case .ollama: "Connect to a local Ollama instance."
-        case .lmStudio: "Connect to LM Studio."
-        case .llamacpp: "Connect to a llama.cpp server."
-        case .openaiCompatible: "Connect to any OpenAI-compatible API endpoint."
+        case .openai: "连接到 OpenAI API（GPT-4o、GPT-4 等）。"
+        case .anthropic: "连接到 Anthropic Messages API（Claude 模型）。"
+        case .openRouter: "连接 OpenRouter，访问多个提供商。"
+        case .ollama: "连接到本地 Ollama 实例。"
+        case .lmStudio: "连接到 LM Studio。"
+        case .llamacpp: "连接到 llama.cpp 服务器。"
+        case .openaiCompatible: "连接到任何兼容 OpenAI 的 API 端点。"
         }
     }
 
@@ -511,7 +511,7 @@ private extension ModelsSettingsTab {
                     modelName = first
                 }
             } else {
-                connectionStatus = .error("No models found")
+                connectionStatus = .error("未找到模型")
             }
         }
     }
@@ -530,12 +530,12 @@ private extension ModelsSettingsTab {
 
     func addModel() {
         guard let provider = selectedProvider else { return }
-        let name = modelName.isEmpty ? "Custom Model" : modelName
+        let name = modelName.isEmpty ? "自定义模型" : modelName
         let config = ModelConfiguration(
             id: UUID().uuidString,
             type: .api,
             displayName: "\(name) (\(provider.displayName))",
-            description: "\(provider.displayName) endpoint.",
+            description: "\(provider.displayName) 端点。",
             endpoint: endpoint.isEmpty ? nil : endpoint,
             apiKey: (!apiKey.isEmpty) ? apiKey : nil,
             modelName: modelName.isEmpty ? nil : modelName,

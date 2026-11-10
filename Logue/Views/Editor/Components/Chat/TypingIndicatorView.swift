@@ -30,7 +30,7 @@ struct TypingIndicatorView: View {
         )
         .frame(maxWidth: .infinity, alignment: .leading)
         .onAppear { animPhase = true }
-        .accessibilityLabel("AI is typing")
+        .accessibilityLabel("AI 正在输入")
         .accessibilityAddTraits(.updatesFrequently)
     }
 }

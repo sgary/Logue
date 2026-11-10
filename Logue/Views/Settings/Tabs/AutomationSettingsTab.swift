@@ -6,19 +6,19 @@ struct AutomationSettingsTab: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Automation")
+            Text("自动化")
                 .font(.title3.bold())
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
                 .padding(.bottom, 4)
 
-            Text("Schedule AI tasks to run automatically — digests, meeting prep, and more.")
+            Text("安排 AI 任务自动运行，例如摘要、会议准备等。")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 20)
                 .padding(.bottom, 4)
 
-            PrivacyBadge("All automation runs on-device using your local AI model.")
+            PrivacyBadge("所有自动化都使用你的本地 AI 模型在设备端运行。")
                 .padding(.horizontal, 20)
                 .padding(.bottom, 16)
 
@@ -77,15 +77,15 @@ private struct TaskConfigurationCard: View {
                 .toggleStyle(.switch)
                 .tint(AppThemeConstants.accent)
                 .labelsHidden()
-                .accessibilityLabel("Enable \(task.taskType.displayName)")
+                .accessibilityLabel("启用\(task.taskType.displayName)")
             }
             .contentShape(Rectangle())
             .onTapGesture {
                 withAnimation(.easeInOut(duration: 0.2)) { isExpanded.toggle() }
             }
             .accessibilityElement(children: .contain)
-            .accessibilityLabel("\(task.taskType.displayName) configuration")
-            .accessibilityHint(isExpanded ? "Double-tap to collapse" : "Double-tap to expand")
+            .accessibilityLabel("\(task.taskType.displayName)配置")
+            .accessibilityHint(isExpanded ? "双击收起" : "双击展开")
 
             // Expanded configuration
             if isExpanded, task.isEnabled {
@@ -104,7 +104,7 @@ private struct TaskConfigurationCard: View {
                     HStack(spacing: 4) {
                         Image(systemName: "clock")
                             .font(.caption2)
-                        Text("Last run: \(lastRun.formatted(date: .abbreviated, time: .shortened))")
+                        Text("上次运行：\(lastRun.formatted(date: .abbreviated, time: .shortened))")
                             .font(.caption2)
                     }
                     .foregroundStyle(.tertiary)
@@ -142,7 +142,7 @@ private struct TaskConfigurationCard: View {
                     } else {
                         Image(systemName: "play.fill").font(.caption2)
                     }
-                    Text(isRunningThis ? "Running…" : "Run Now")
+                    Text(isRunningThis ? "正在运行…" : "立即运行")
                         .font(.caption.weight(.medium))
                 }
                 .padding(.horizontal, 10)
@@ -152,7 +152,7 @@ private struct TaskConfigurationCard: View {
             .controlSize(.small)
             .tint(AppThemeConstants.accent)
             .disabled(taskManager.isRunningTask)
-            .accessibilityLabel("Run \(task.taskType.displayName) now")
+            .accessibilityLabel("立即运行\(task.taskType.displayName)")
 
             Spacer()
         }
@@ -176,7 +176,7 @@ private struct TaskConfigurationCard: View {
 
     private var dailyTimeConfig: some View {
         HStack(spacing: 8) {
-            Text("Run at")
+            Text("每天")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
@@ -188,7 +188,7 @@ private struct TaskConfigurationCard: View {
             .labelsHidden()
             .frame(width: 90)
 
-            Text("every day")
+            Text("运行")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -196,20 +196,20 @@ private struct TaskConfigurationCard: View {
 
     private var meetingPrepConfig: some View {
         HStack(spacing: 8) {
-            Text("Prepare")
+            Text("在日历事件开始前")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
             Picker("", selection: minutesBeforeBinding) {
-                Text("5 min").tag(5)
-                Text("10 min").tag(10)
-                Text("15 min").tag(15)
-                Text("30 min").tag(30)
+                Text("5 分钟").tag(5)
+                Text("10 分钟").tag(10)
+                Text("15 分钟").tag(15)
+                Text("30 分钟").tag(30)
             }
             .labelsHidden()
             .frame(width: 90)
 
-            Text("before calendar events")
+            Text("准备")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -217,23 +217,23 @@ private struct TaskConfigurationCard: View {
 
     private var weeklyConfig: some View {
         HStack(spacing: 8) {
-            Text("Run on")
+            Text("每周")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
             Picker("", selection: dayOfWeekBinding) {
-                Text("Sunday").tag(1)
-                Text("Monday").tag(2)
-                Text("Tuesday").tag(3)
-                Text("Wednesday").tag(4)
-                Text("Thursday").tag(5)
-                Text("Friday").tag(6)
-                Text("Saturday").tag(7)
+                Text("周日").tag(1)
+                Text("周一").tag(2)
+                Text("周二").tag(3)
+                Text("周三").tag(4)
+                Text("周四").tag(5)
+                Text("周五").tag(6)
+                Text("周六").tag(7)
             }
             .labelsHidden()
             .frame(width: 120)
 
-            Text("at")
+            Text("于")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
@@ -298,16 +298,16 @@ private struct TaskRunHistorySection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Label("Run History", systemImage: "clock.arrow.circlepath")
+                Label("运行历史", systemImage: "clock.arrow.circlepath")
                     .font(.subheadline.weight(.semibold))
                 Spacer()
-                Button("Clear") {
+                Button("清除") {
                     taskManager.clearHistory()
                 }
                 .font(.caption)
                 .buttonStyle(.plain)
                 .foregroundStyle(.secondary)
-                .accessibilityLabel("Clear run history")
+                .accessibilityLabel("清除运行历史")
             }
 
             ForEach(taskManager.runHistory.prefix(20)) { record in
@@ -315,7 +315,7 @@ private struct TaskRunHistorySection: View {
                     .contentShape(Rectangle())
                     .onTapGesture { selectedRecord = record }
                     .accessibilityAddTraits(.isButton)
-                    .accessibilityHint("Double-tap to view details")
+                    .accessibilityHint("双击查看详情")
             }
         }
         .padding(14)
@@ -435,14 +435,14 @@ private struct TaskRunDetailSheet: View {
                         DocumentStore.shared.selectedDocumentID = docID
                         dismiss()
                     } label: {
-                        Label("Open Document", systemImage: "arrow.up.right.square")
+                        Label("打开文档", systemImage: "arrow.up.right.square")
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
-                    .accessibilityLabel("Open generated document")
+                    .accessibilityLabel("打开生成的文档")
                 }
                 Spacer()
-                Button("Done") { dismiss() }
+                Button("完成") { dismiss() }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.small)
@@ -463,9 +463,9 @@ private struct TaskRunDetailSheet: View {
 
     private var statusLabel: String {
         switch record.status {
-        case .success: "Success"
-        case .noContent: "No Content"
-        case .failed: "Failed"
+        case .success: "成功"
+        case .noContent: "无内容"
+        case .failed: "失败"
         }
     }
 

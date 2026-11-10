@@ -62,10 +62,10 @@ struct OnboardingV2View: View {
                 .font(.system(size: 64))
                 .foregroundStyle(.green)
                 .symbolEffect(.pulse)
-            Text("Everything stays on your Mac")
+            Text("所有内容都留在这台 Mac 上")
                 .font(.title.weight(.semibold))
                 .multilineTextAlignment(.center)
-            Text("Logue runs every model, embedding, and inference call on-device. No data leaves this Mac. No analytics, no telemetry, no servers.")
+            Text("Logue 的所有模型、向量嵌入和推理都在设备端运行。数据不会离开这台 Mac。没有分析、没有遥测、没有服务器。")
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -77,9 +77,9 @@ struct OnboardingV2View: View {
 
     private var modelCard: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Label("Choose your model", systemImage: "cpu")
+            Label("选择你的模型", systemImage: "cpu")
                 .font(.title2.weight(.semibold))
-            Text("This model runs locally for chat, summaries, and on-device search. You can change it anytime in Settings → Models.")
+            Text("此模型在本地运行，用于聊天、摘要和设备端搜索。你可以随时在“设置 → 模型”中更改。")
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
@@ -87,7 +87,7 @@ struct OnboardingV2View: View {
                 VStack(spacing: 6) {
                     let modelList = modelManager.allModels
                     if modelList.isEmpty {
-                        Text("No models installed yet — open Settings → Models to browse.")
+                        Text("还没有安装模型——打开“设置 → 模型”浏览。")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     } else {
@@ -99,7 +99,7 @@ struct OnboardingV2View: View {
             }
             .frame(maxHeight: 220)
 
-            Text("Tip: 4-bit quantized 7B models fit comfortably in 16 GB unified memory.")
+            Text("提示：4 位量化的 7B 模型可轻松放入 16 GB 统一内存。")
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
         }
@@ -135,26 +135,26 @@ struct OnboardingV2View: View {
 
     private var hotkeyCard: some View {
         VStack(alignment: .leading, spacing: 14) {
-            Label("Set your hotkeys", systemImage: "command.square.fill")
+            Label("设置快捷键", systemImage: "command.square.fill")
                 .font(.title2.weight(.semibold))
-            Text("Logue exposes two cross-app shortcuts. Both are rebindable later from Settings → Shortcuts.")
+            Text("Logue 提供两个跨应用快捷键，之后可在“设置 → 快捷键”中更改。")
                 .font(.callout)
                 .foregroundStyle(.secondary)
 
             shortcutCard(
                 icon: "sparkles",
-                title: "Menu-bar companion",
+                title: "菜单栏助手",
                 combo: "⌥Space",
-                detail: "Pop up a quick chat window from any app"
+                detail: "在任意应用中弹出快速聊天窗口"
             )
             shortcutCard(
                 icon: "text.cursor",
-                title: "Inline writing assistant",
+                title: "行内写作助手",
                 combo: "⌘⌃I",
-                detail: "Rewrite selected text in any app — Simplify, Expand, Fix Grammar, …"
+                detail: "在任意应用中重写所选文本——简化、扩写、修正语法…"
             )
 
-            Text("First time you use ⌘⌃I, macOS will ask for Accessibility permission so Logue can read your selection.")
+            Text("首次使用 ⌘⌃I 时，macOS 会请求辅助功能权限，以便 Logue 读取你的选中文本。")
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
 
@@ -208,14 +208,14 @@ struct OnboardingV2View: View {
             }
             Spacer()
             if current != .privacy {
-                Button("Back") {
+                Button("返回") {
                     if let prev = Card(rawValue: current.rawValue - 1) {
                         current = prev
                     }
                 }
                 .keyboardShortcut(.leftArrow, modifiers: [])
             }
-            Button(current == .hotkey ? "Get started" : "Continue") {
+            Button(current == .hotkey ? "开始使用" : "继续") {
                 if let next = Card(rawValue: current.rawValue + 1) {
                     current = next
                 } else {

@@ -25,7 +25,7 @@ struct HierarchicalSpaceMenu: View {
             Button {
                 onSelect(nil)
             } label: {
-                Label("Remove from Space", systemImage: "arrow.uturn.backward")
+                Label("从空间移除", systemImage: "arrow.uturn.backward")
             }
             Divider()
         }
@@ -81,7 +81,7 @@ private struct SpaceMenuNode: View {
                 Button {
                     onSelect(space.id)
                 } label: {
-                    Label("Move Here", systemImage: "arrow.right")
+                    Label("移动到这里", systemImage: "arrow.right")
                 }
                 Divider()
                 ForEach(children) { child in

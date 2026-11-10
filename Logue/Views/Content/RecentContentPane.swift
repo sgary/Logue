@@ -38,9 +38,9 @@ struct RecentContentPane: View {
                 ContentLoadingView()
             } else if recentItems.isEmpty {
                 ContentUnavailableView {
-                    Label("No Recent Items", systemImage: "clock")
+                    Label("没有最近项目", systemImage: "clock")
                 } description: {
-                    Text("Your recently modified documents and meetings will appear here.")
+                    Text("你最近修改的文档和会议会显示在这里。")
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             } else if viewMode == .grid {
@@ -50,8 +50,8 @@ struct RecentContentPane: View {
             }
         }
         .background(AppThemeConstants.contentBackground)
-        .navigationTitle("Recent")
-        .navigationSubtitle("Last \(recentItems.count) item\(recentItems.count == 1 ? "" : "s")")
+        .navigationTitle("最近")
+        .navigationSubtitle("最近 \(recentItems.count) 个项目")
         .toolbar {
             ToolbarItemGroup(placement: .primaryAction) {
                 viewModeMenu
@@ -65,8 +65,8 @@ struct RecentContentPane: View {
                 } label: {
                     Image(systemName: viewMode == .list ? "square.grid.2x2" : "list.bullet")
                 }
-                .help(viewMode == .list ? "Grid View" : "List View")
-                .accessibilityLabel(viewMode == .list ? "Switch to grid view" : "Switch to list view")
+                .help(viewMode == .list ? "网格视图" : "列表视图")
+                .accessibilityLabel(viewMode == .list ? "切换到网格视图" : "切换到列表视图")
             }
         }
     }
@@ -75,14 +75,14 @@ struct RecentContentPane: View {
 
     private var viewModeMenu: some View {
         Menu {
-            Section("View") {
+            Section("视图") {
                 Button {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         viewModeRaw = ContentViewMode.list.rawValue
                     }
                 } label: {
                     HStack {
-                        Label("List", systemImage: "list.bullet")
+                        Label("列表", systemImage: "list.bullet")
                         if viewMode == .list {
                             Spacer(); Image(systemName: "checkmark")
                         }
@@ -94,7 +94,7 @@ struct RecentContentPane: View {
                     }
                 } label: {
                     HStack {
-                        Label("Grid", systemImage: "square.grid.2x2")
+                        Label("网格", systemImage: "square.grid.2x2")
                         if viewMode == .grid {
                             Spacer(); Image(systemName: "checkmark")
                         }
@@ -104,7 +104,7 @@ struct RecentContentPane: View {
         } label: {
             Image(systemName: "ellipsis.circle")
         }
-        .help("Options")
+        .help("选项")
     }
 
     // MARK: - List
@@ -177,7 +177,7 @@ struct RecentContentPane: View {
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
 
-                Text(doc.snippet.isEmpty ? "Empty document" : doc.snippet)
+                Text(doc.snippet.isEmpty ? "空文档" : doc.snippet)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(snippetLines)
@@ -283,7 +283,7 @@ struct RecentContentPane: View {
                         }
                     }
                     HStack(spacing: 8) {
-                        Text(doc.snippet.isEmpty ? "Empty document" : doc.snippet)
+                        Text(doc.snippet.isEmpty ? "空文档" : doc.snippet)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
@@ -360,18 +360,18 @@ struct RecentContentPane: View {
         Button {
             documentStore.selectedDocumentID = doc.id
         } label: {
-            Label("Open", systemImage: "doc.text")
+            Label("打开", systemImage: "doc.text")
         }
         Button {
             documentStore.togglePin(id: doc.id)
         } label: {
             Label(
-                doc.isPinned ? "Unpin" : "Pin",
+                doc.isPinned ? "取消置顶" : "置顶",
                 systemImage: doc.isPinned ? "pin.slash" : "pin"
             )
         }
         if !spaceStore.topLevelSpaces.isEmpty || doc.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: doc.spaceID) { newSpaceID in
                     documentStore.moveDocument(id: doc.id, toSpace: newSpaceID)
                 }
@@ -381,7 +381,7 @@ struct RecentContentPane: View {
         Button(role: .destructive) {
             documentStore.deleteDocument(id: doc.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 
@@ -390,13 +390,13 @@ struct RecentContentPane: View {
         Button {
             meetingStore.selectedMeetingID = meeting.id
         } label: {
-            Label("Open", systemImage: "waveform")
+            Label("打开", systemImage: "waveform")
         }
         Button {
             meetingStore.togglePin(id: meeting.id)
         } label: {
             Label(
-                meeting.isPinned ? "Unpin" : "Pin",
+                meeting.isPinned ? "取消置顶" : "置顶",
                 systemImage: meeting.isPinned ? "pin.slash" : "pin"
             )
         }
@@ -404,12 +404,12 @@ struct RecentContentPane: View {
             meetingStore.toggleArchive(id: meeting.id)
         } label: {
             Label(
-                meeting.isArchived ? "Unarchive" : "Archive",
+                meeting.isArchived ? "取消归档" : "归档",
                 systemImage: meeting.isArchived ? "tray.and.arrow.up" : "archivebox"
             )
         }
         if !spaceStore.topLevelSpaces.isEmpty || meeting.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: meeting.spaceID) { newSpaceID in
                     meetingStore.moveMeeting(id: meeting.id, toSpace: newSpaceID)
                 }
@@ -419,7 +419,7 @@ struct RecentContentPane: View {
         Button(role: .destructive) {
             meetingStore.trashMeeting(id: meeting.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 

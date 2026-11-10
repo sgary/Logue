@@ -269,7 +269,7 @@ extension BrowserBridgeServer {
         } catch {
             logger.error("Browser bridge tool stream failed: \(error.localizedDescription, privacy: .public)")
             connection.write(HTTPMessage.eventFrame(Self.errorFrame(
-                message: "Logue could not answer that."
+                message: "Logue 暂时无法回答这个问题。"
             )))
         }
         connection.write(Data("data: [DONE]\n\n".utf8), thenClose: true)

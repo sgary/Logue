@@ -49,7 +49,7 @@ final class AccessibilityService {
                   app.bundleIdentifier != Bundle.main.bundleIdentifier
             else { return }
             Task { @MainActor [weak self] in
-                self?.focusedAppName = app.localizedName ?? "Unknown"
+                self?.focusedAppName = app.localizedName ?? "未知"
                 self?.focusedAppIcon = app.icon
             }
         }
@@ -85,7 +85,7 @@ final class AccessibilityService {
         if let frontApp = NSWorkspace.shared.frontmostApplication {
             if frontApp.bundleIdentifier != Bundle.main.bundleIdentifier {
                 sourceAppPID = frontApp.processIdentifier
-                focusedAppName = frontApp.localizedName ?? "Unknown"
+                focusedAppName = frontApp.localizedName ?? "未知"
                 focusedAppIcon = frontApp.icon
             }
         }
@@ -243,7 +243,7 @@ final class AccessibilityService {
     func updateFocusedAppName() {
         if let frontApp = NSWorkspace.shared.frontmostApplication {
             if frontApp.bundleIdentifier != Bundle.main.bundleIdentifier {
-                focusedAppName = frontApp.localizedName ?? "Unknown"
+                focusedAppName = frontApp.localizedName ?? "未知"
                 focusedAppIcon = frontApp.icon
             }
         }

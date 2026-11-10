@@ -69,8 +69,8 @@ enum AttachmentIntake {
         panel.canChooseFiles = true
         panel.canChooseDirectories = false
         panel.allowedContentTypes = acceptedTypes
-        panel.prompt = "Attach"
-        panel.message = "Select files to attach to your message"
+        panel.prompt = "附件"
+        panel.message = "选择要附加到消息的文件"
 
         let urls: [URL] = await withCheckedContinuation { continuation in
             panel.begin { response in

@@ -109,9 +109,9 @@ struct TaskListView: View {
             }
         }
         .background(AppThemeConstants.contentBackground)
-        .navigationTitle("Tasks")
+        .navigationTitle("任务")
         .navigationSubtitle(subtitle)
-        .searchable(text: $searchText, placement: .toolbar, prompt: "Search tasks")
+        .searchable(text: $searchText, placement: .toolbar, prompt: "搜索任务")
         .toolbar {
             toolbarContent
         }
@@ -122,7 +122,7 @@ struct TaskListView: View {
 
     private var subtitle: String {
         let total = visibleTasks.count
-        return "\(total) task\(total == 1 ? "" : "s")"
+        return "\(total) 个任务"
     }
 
     // MARK: - Toolbar
@@ -138,8 +138,8 @@ struct TaskListView: View {
             } label: {
                 Image(systemName: "plus")
             }
-            .help("Add a task")
-            .accessibilityLabel("Add a task")
+            .help("添加任务")
+            .accessibilityLabel("添加任务")
             .keyboardShortcut("n", modifiers: [.command, .shift])
 
             Button {
@@ -153,8 +153,8 @@ struct TaskListView: View {
             // Concurrent inference races on the shared session; this is the project-wide
             // guard for any control that reaches the engine.
             .disabled(engineStatus.isBusy || store.openTasks.isEmpty)
-            .help("Ask Logue to review your open tasks")
-            .accessibilityLabel("Triage tasks")
+            .help("让 Logue 检查你的未完成任务")
+            .accessibilityLabel("分诊任务")
 
             sortMenu
         }
@@ -162,14 +162,14 @@ struct TaskListView: View {
 
     private var sortMenu: some View {
         Menu {
-            Picker("Sort", selection: $sortOrderRaw) {
+            Picker("排序", selection: $sortOrderRaw) {
                 ForEach(TaskSortOrder.allCases, id: \.rawValue) { order in
                     Text(order.displayName).tag(order.rawValue)
                 }
             }
             if !store.allTags.isEmpty {
                 Divider()
-                Button("All tags") { selectedTag = nil }
+                Button("所有标签") { selectedTag = nil }
                 ForEach(store.allTags, id: \.self) { tag in
                     Button(tag) { selectedTag = tag }
                 }
@@ -177,8 +177,8 @@ struct TaskListView: View {
         } label: {
             Image(systemName: "arrow.up.arrow.down.circle")
         }
-        .help("Sort and filter")
-        .accessibilityLabel("Sort tasks")
+        .help("排序与筛选")
+        .accessibilityLabel("排序任务")
     }
 
     // MARK: - Filter Chip Bar
@@ -195,7 +195,7 @@ struct TaskListView: View {
                     ) {
                         filterModeRaw = mode.rawValue
                     }
-                    .accessibilityLabel("\(mode.displayName), \(count) tasks")
+                    .accessibilityLabel("\(mode.displayName)，\(count) 个任务")
                 }
             }
             .padding(.horizontal, 24)
@@ -232,7 +232,7 @@ struct TaskListView: View {
                     .contextMenu {
                         priorityMenu(for: task)
                         Divider()
-                        Button("Delete", role: .destructive) {
+                        Button("删除", role: .destructive) {
                             if selectedTaskID == task.id {
                                 selectedTaskID = nil
                             }
@@ -250,7 +250,7 @@ struct TaskListView: View {
     }
 
     private func priorityMenu(for task: TaskItem) -> some View {
-        Menu("Priority") {
+        Menu("优先级") {
             ForEach(TaskPriority.allCases, id: \.rawValue) { priority in
                 Button {
                     var updated = task
@@ -266,7 +266,7 @@ struct TaskListView: View {
     private var triageSheet: some View {
         VStack(alignment: .trailing, spacing: 0) {
             TaskTriagePanelView()
-            Button("Done") {
+            Button("完成") {
                 showTriage = false
                 triageService.clear()
             }
@@ -288,15 +288,15 @@ struct TaskListView: View {
 
     private var emptyTitle: String {
         if !searchText.isEmpty {
-            return "No Matching Tasks"
+            return "没有匹配的任务"
         }
         switch filterMode {
-        case .all: return "Nothing Here"
-        case .today: return "Nothing Due Today"
-        case .overdue: return "Nothing Overdue"
-        case .upcoming: return "Nothing Upcoming"
-        case .noDueDate: return "Every Task Has a Date"
-        case .completed: return "No Completed Tasks"
+        case .all: return "这里还没有内容"
+        case .today: return "今天没有到期任务"
+        case .overdue: return "没有逾期任务"
+        case .upcoming: return "没有即将到期的任务"
+        case .noDueDate: return "所有任务都有日期"
+        case .completed: return "没有已完成的任务"
         }
     }
 
@@ -313,15 +313,15 @@ struct TaskListView: View {
 
     private var emptyDescription: String {
         if !searchText.isEmpty {
-            return "No tasks match \"\(searchText)\""
+            return "没有与“\(searchText)”匹配的任务"
         }
         switch filterMode {
-        case .all: return "Type above to add a task. Try \"Send the deck tomorrow #launch !\"."
-        case .today: return "Nothing is due today."
-        case .overdue: return "No task is past its due date."
-        case .upcoming: return "Nothing is scheduled ahead."
-        case .noDueDate: return "Every open task has a due date."
-        case .completed: return "Completed tasks will appear here."
+        case .all: return "在上方输入即可添加任务。例如：“明天发送演示文稿 #发布 !”。"
+        case .today: return "今天没有任务到期。"
+        case .overdue: return "没有任务逾期。"
+        case .upcoming: return "没有安排在未来。"
+        case .noDueDate: return "所有未完成任务都有截止日期。"
+        case .completed: return "已完成的任务会显示在这里。"
         }
     }
 

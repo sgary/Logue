@@ -10,10 +10,10 @@ struct BookmarkChip: View {
     @State private var showPopover = false
 
     private static let typePresets: [(label: String, color: BookmarkColor)] = [
-        ("Key Decision", .blue),
-        ("Action Item", .orange),
-        ("Important", .red),
-        ("Question", .purple),
+        ("关键决策", .blue),
+        ("待办事项", .orange),
+        ("重要", .red),
+        ("问题", .purple),
     ]
 
     var body: some View {
@@ -33,7 +33,7 @@ struct BookmarkChip: View {
             .foregroundStyle(bookmark.color.swiftUIColor)
         }
         .buttonStyle(.plain)
-        .help(bookmark.label.isEmpty ? "Bookmark at \(bookmark.formattedTimestamp)" : "\(bookmark.label) · \(bookmark.formattedTimestamp)")
+        .help(bookmark.label.isEmpty ? "\(bookmark.formattedTimestamp) 处的书签" : "\(bookmark.label) · \(bookmark.formattedTimestamp)")
         .popover(isPresented: $showPopover, arrowEdge: .bottom) {
             VStack(alignment: .leading, spacing: 6) {
                 ForEach(Self.typePresets, id: \.label) { preset in
@@ -64,7 +64,7 @@ struct BookmarkChip: View {
                     onRemove?(bookmark.id)
                     showPopover = false
                 } label: {
-                    Label("Remove Bookmark", systemImage: "bookmark.slash")
+                    Label("移除书签", systemImage: "bookmark.slash")
                         .font(.caption)
                 }
                 .buttonStyle(.plain)
@@ -84,10 +84,10 @@ struct BlockBookmarkPicker: View {
     @State private var customLabel = ""
 
     private static let presets: [(String, BookmarkColor)] = [
-        ("Key Decision", .blue),
-        ("Action Item", .orange),
-        ("Important", .red),
-        ("Question", .purple),
+        ("关键决策", .blue),
+        ("待办事项", .orange),
+        ("重要", .red),
+        ("问题", .purple),
     ]
 
     var body: some View {
@@ -117,7 +117,7 @@ struct BlockBookmarkPicker: View {
                 Circle()
                     .fill(BookmarkColor.yellow.swiftUIColor)
                     .frame(width: 8, height: 8)
-                TextField("Custom label...", text: $customLabel)
+                TextField("自定义标签…", text: $customLabel)
                     .textFieldStyle(.plain)
                     .font(.caption)
                     .onSubmit { submitCustom() }

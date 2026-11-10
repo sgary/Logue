@@ -26,6 +26,17 @@ enum CommandCategory: String, CaseIterable {
     case meeting = "Meetings"
     case actionItem = "Action Items"
     case ai = "AI Tools"
+
+    var displayName: String {
+        switch self {
+        case .navigation: "导航"
+        case .create: "创建"
+        case .document: "文档"
+        case .meeting: "会议"
+        case .actionItem: "待办事项"
+        case .ai: "AI 工具"
+        }
+    }
 }
 
 // MARK: - Command Palette View
@@ -58,6 +69,7 @@ struct CommandPaletteView: View {
             return command.title.lowercased().contains(query)
                 || (command.subtitle?.lowercased().contains(query) ?? false)
                 || command.category.rawValue.lowercased().contains(query)
+                || command.category.displayName.contains(query)
         }
     }
 
@@ -87,12 +99,12 @@ struct CommandPaletteView: View {
                     .font(.system(size: 16, weight: .medium))
                     .foregroundStyle(.secondary)
 
-                TextField("Type a command...", text: $searchText)
+                TextField("输入命令…", text: $searchText)
                     .textFieldStyle(.plain)
                     .font(.system(size: 16))
                     .focused($isSearchFocused)
-                    .accessibilityLabel("Command search")
-                    .accessibilityHint("Type to search for commands")
+                    .accessibilityLabel("命令搜索")
+                    .accessibilityHint("输入以搜索命令")
                     .onSubmit {
                         executeSelected()
                     }
@@ -105,8 +117,8 @@ struct CommandPaletteView: View {
                             .foregroundStyle(.tertiary)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Clear search")
-                    .accessibilityHint("Clears the command search text")
+                    .accessibilityLabel("清除搜索")
+                    .accessibilityHint("清除命令搜索文本")
                 }
             }
             .padding(.horizontal, 16)
@@ -129,7 +141,7 @@ struct CommandPaletteView: View {
                     Image(systemName: "magnifyingglass")
                         .font(.title2)
                         .foregroundStyle(.tertiary)
-                    Text(searchText.isEmpty ? "Type to search" : "No results for \"\(searchText)\"")
+                    Text(searchText.isEmpty ? "输入以搜索" : "没有找到“\(searchText)”的结果")
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                 }
@@ -139,7 +151,7 @@ struct CommandPaletteView: View {
                     ScrollView {
                         LazyVStack(alignment: .leading, spacing: 0) {
                             ForEach(groupedCommands, id: \.0) { category, items in
-                                Text(category.rawValue)
+                                Text(category.displayName)
                                     .font(.caption.weight(.semibold))
                                     .foregroundStyle(.tertiary)
                                     .padding(.horizontal, 16)
@@ -172,9 +184,9 @@ struct CommandPaletteView: View {
             // Footer
             Divider()
             HStack(spacing: 16) {
-                footerHint(icon: "arrow.up.arrow.down", text: "Navigate")
-                footerHint(icon: "return", text: "Select")
-                footerHint(icon: "escape", text: "Close")
+                footerHint(icon: "arrow.up.arrow.down", text: "导航")
+                footerHint(icon: "return", text: "选择")
+                footerHint(icon: "escape", text: "关闭")
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
@@ -274,7 +286,7 @@ struct CommandPaletteView: View {
             .map { doc in
                 let snippet = documentSnippet(for: doc, query: lowered)
                 return CommandItem(
-                    doc.title.isEmpty ? "Untitled Document" : doc.title,
+                    doc.title.isEmpty ? "未命名文档" : doc.title,
                     icon: "doc.text",
                     category: .document,
                     subtitle: snippet
@@ -429,7 +441,7 @@ private struct CommandRow: View {
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
         .accessibilityLabel(item.title)
-        .accessibilityHint(item.subtitle ?? "Executes this command")
+        .accessibilityHint(item.subtitle ?? "执行此命令")
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

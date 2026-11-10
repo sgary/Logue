@@ -13,18 +13,18 @@ struct HomeSpacesSection: View {
         if !spaces.isEmpty {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
-                    CardSectionHeader(icon: "folder.fill", title: "Your Spaces")
+                    CardSectionHeader(icon: "folder.fill", title: "你的空间")
                     Spacer()
                     if spaces.count > 6 {
                         // B20: Disabled until spaces navigation is wired
                         Button {} label: {
-                            Text("View All")
+                            Text("查看全部")
                                 .font(.caption.weight(.medium))
                                 .foregroundStyle(AppThemeConstants.accent)
                         }
                         .buttonStyle(.plain)
                         .disabled(true)
-                        .help("Coming soon")
+                        .help("即将推出")
                         .accessibilityHidden(true)
                     }
                 }
@@ -61,7 +61,7 @@ struct HomeSpacesSection: View {
                         .foregroundStyle(AppThemeConstants.accent)
                     Spacer()
                     if recentCount > 0 {
-                        Text("\(recentCount) new")
+                        Text("\(recentCount) 个新增")
                             .font(.caption2.weight(.medium))
                             .foregroundStyle(AppThemeConstants.success)
                             .padding(.horizontal, 6)
@@ -114,12 +114,12 @@ struct HomeSpacesSection: View {
     private func itemCountText(docCount: Int, meetingCount: Int) -> String {
         var parts: [String] = []
         if docCount > 0 {
-            parts.append("\(docCount) doc\(docCount == 1 ? "" : "s")")
+            parts.append("\(docCount) 个文档")
         }
         if meetingCount > 0 {
-            parts.append("\(meetingCount) meeting\(meetingCount == 1 ? "" : "s")")
+            parts.append("\(meetingCount) 场会议")
         }
-        return parts.isEmpty ? "Empty space" : parts.joined(separator: ", ")
+        return parts.isEmpty ? "空空间" : parts.joined(separator: "，")
     }
 
     private func recentItemCount(for spaceID: UUID) -> Int {

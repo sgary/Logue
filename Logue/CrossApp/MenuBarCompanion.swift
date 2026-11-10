@@ -147,11 +147,11 @@ struct MenuBarCompanionView: View {
     private var header: some View {
         HStack(spacing: 6) {
             Image(systemName: "sparkles").foregroundStyle(Color.accentColor)
-            Text("Ask Logue")
+            Text("询问 Logue")
                 .font(.callout.weight(.semibold))
             TrustChip(label: UICopy.Trust.local)
             Spacer()
-            Text("⌥Space to toggle")
+            Text("⌥Space 唤起/收起")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         }
@@ -159,17 +159,17 @@ struct MenuBarCompanionView: View {
 
     private var inputCard: some View {
         VStack(alignment: .leading, spacing: 8) {
-            TextField("Ask anything…", text: $prompt)
+            TextField("问点什么…", text: $prompt)
                 .textFieldStyle(.roundedBorder)
                 .focused($inputFocused)
                 .font(.body)
                 .onSubmit { send() }
             HStack {
-                Text("Sends to your active conversation.")
+                Text("发送到当前对话。")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                 Spacer()
-                Button("Send") { send() }
+                Button("发送") { send() }
                     .keyboardShortcut(.return)
                     .disabled(prompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
@@ -178,7 +178,7 @@ struct MenuBarCompanionView: View {
 
     private var recentRow: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Recent")
+            Text("最近")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(.secondary)
                 .textCase(.uppercase)
@@ -187,7 +187,7 @@ struct MenuBarCompanionView: View {
                 .sorted { $0.modifiedAt > $1.modifiedAt }
                 .prefix(3)
             if recent.isEmpty {
-                Text("No conversations yet")
+                Text("还没有对话")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             } else {

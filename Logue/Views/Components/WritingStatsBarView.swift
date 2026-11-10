@@ -29,21 +29,21 @@ struct WritingStatsBarView: View {
     private var statsRow: some View {
         HStack(spacing: 16) {
             if isAnalyzing {
-                Label("Analysing…", systemImage: "ellipsis")
+                Label("分析中…", systemImage: "ellipsis")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
 
-            statItem(label: "Words", value: "\(stats.wordCount)")
-            statItem(label: "Sentences", value: "\(stats.sentenceCount)")
-            statItem(label: "Readability", value: String(format: "%.0f", stats.fleschReadingEase))
+            statItem(label: "字数", value: "\(stats.wordCount)")
+            statItem(label: "句数", value: "\(stats.sentenceCount)")
+            statItem(label: "可读性", value: String(format: "%.0f", stats.fleschReadingEase))
 
             Spacer()
 
             // Reading time
             let minutes = Double(stats.wordCount) / 238.0
             if minutes >= 1 {
-                Text("\(Int(ceil(minutes))) min read")
+                Text("\(Int(ceil(minutes))) 分钟阅读")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
@@ -61,6 +61,6 @@ struct WritingStatsBarView: View {
                 .foregroundStyle(.secondary)
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(label): \(value)")
+        .accessibilityLabel("\(label)：\(value)")
     }
 }

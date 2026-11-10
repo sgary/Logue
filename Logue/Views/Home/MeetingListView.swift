@@ -11,19 +11,19 @@ struct MeetingListView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppThemeConstants.contentBackground)
-        .navigationTitle("Meetings")
+        .navigationTitle("会议")
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button {
                     let meeting = store.createMeeting(
-                        title: "Meeting \(Date.now.formatted(date: .abbreviated, time: .shortened))"
+                        title: "会议 \(Date.now.formatted(date: .abbreviated, time: .shortened))"
                     )
                     store.selectedMeetingID = meeting.id
                 } label: {
                     Image(systemName: "plus")
-                        .accessibilityLabel("New Meeting")
+                        .accessibilityLabel("新建会议")
                 }
-                .help("New Meeting")
+                .help("新建会议")
             }
         }
         .onAppear {
@@ -31,7 +31,7 @@ struct MeetingListView: View {
             if store.selectedMeetingID == nil {
                 if store.activeMeetings.isEmpty {
                     _ = store.createMeeting(
-                        title: "Untitled Meeting",
+                        title: "未命名会议",
                         mode: .inPerson,
                         template: .general
                     )

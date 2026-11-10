@@ -30,21 +30,21 @@ extension SpaceStore {
     static func makeSeedSpaces() -> [Space] {
         [
             // Top-level
-            Space(id: SeedSpaceID.work, name: "Work", sortOrder: 0, icon: "briefcase.fill", isExpanded: true),
-            Space(id: SeedSpaceID.school, name: "School", sortOrder: 1, icon: "book.closed.fill", isExpanded: true),
-            Space(id: SeedSpaceID.personal, name: "Personal", sortOrder: 2, icon: "house.fill"),
+            Space(id: SeedSpaceID.work, name: "工作", sortOrder: 0, icon: "briefcase.fill", isExpanded: true),
+            Space(id: SeedSpaceID.school, name: "学校", sortOrder: 1, icon: "book.closed.fill", isExpanded: true),
+            Space(id: SeedSpaceID.personal, name: "个人", sortOrder: 2, icon: "house.fill"),
 
             // Work children
-            Space(id: SeedSpaceID.clientProjects, name: "Client Projects", parentID: SeedSpaceID.work, sortOrder: 0, icon: "person.2.circle"),
-            Space(id: SeedSpaceID.internal, name: "Internal", parentID: SeedSpaceID.work, sortOrder: 1, icon: "lock.shield"),
+            Space(id: SeedSpaceID.clientProjects, name: "客户项目", parentID: SeedSpaceID.work, sortOrder: 0, icon: "person.2.circle"),
+            Space(id: SeedSpaceID.internal, name: "内部", parentID: SeedSpaceID.work, sortOrder: 1, icon: "lock.shield"),
 
             // School children
             Space(id: SeedSpaceID.cs301, name: "CS 301", parentID: SeedSpaceID.school, sortOrder: 0, icon: "terminal"),
-            Space(id: SeedSpaceID.businessEthics, name: "Business Ethics", parentID: SeedSpaceID.school, sortOrder: 1, icon: "building.columns"),
+            Space(id: SeedSpaceID.businessEthics, name: "商业伦理", parentID: SeedSpaceID.school, sortOrder: 1, icon: "building.columns"),
 
             // Standalone persona spaces
-            Space(id: SeedSpaceID.legal, name: "Legal", sortOrder: 3, icon: "scalemass.fill"),
-            Space(id: SeedSpaceID.healthcare, name: "Healthcare", sortOrder: 4, icon: "cross.case.fill"),
+            Space(id: SeedSpaceID.legal, name: "法务", sortOrder: 3, icon: "scalemass.fill"),
+            Space(id: SeedSpaceID.healthcare, name: "医疗", sortOrder: 4, icon: "cross.case.fill"),
         ]
     }
 }

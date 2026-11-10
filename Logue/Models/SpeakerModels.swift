@@ -51,6 +51,21 @@ struct Speaker: Identifiable, Codable, Sendable {
         ]
         return colors[index % colors.count]
     }
+
+    // MARK: - Automatic naming
+
+    /// The generated name for an automatically detected speaker.
+    static func autoName(_ number: Int) -> String {
+        "发言人 \(number)"
+    }
+
+    /// Whether this is an automatically generated speaker name.
+    ///
+    /// Recognises the legacy English prefix too, so meetings recorded before the
+    /// interface was translated still renumber and collapse to short labels.
+    static func isAutoName(_ name: String) -> Bool {
+        name.hasPrefix("发言人 ") || name.hasPrefix("Speaker ")
+    }
 }
 
 // MARK: - Speaker Segment

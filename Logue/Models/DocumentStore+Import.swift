@@ -158,18 +158,18 @@ extension DocumentStore {
             return description(for: importError)
         }
         let cocoa = error as NSError
-        guard cocoa.domain == NSCocoaErrorDomain else { return "could not be read" }
+        guard cocoa.domain == NSCocoaErrorDomain else { return "无法读取" }
         switch CocoaError.Code(rawValue: cocoa.code) {
         case .fileReadNoPermission:
-            return "no permission to read it"
+            return "没有读取权限"
         case .fileReadNoSuchFile:
-            return "the file was not there"
+            return "文件不存在"
         case .fileReadInapplicableStringEncoding:
-            return "not readable as text"
+            return "无法作为文本读取"
         case .fileReadUnknown:
-            return "its size could not be read"
+            return "无法读取其大小"
         default:
-            return "could not be read"
+            return "无法读取"
         }
     }
 
@@ -330,7 +330,7 @@ extension DocumentStore {
         guard path.count <= limits.maxDepth else {
             scanned.skipped.append(ImportOutcome.Skipped(
                 file: directory.lastPathComponent,
-                reason: "nested deeper than \(limits.maxDepth) folders below the destination"
+                reason: "在目标下嵌套超过 \(limits.maxDepth) 层文件夹"
             ))
             return
         }
@@ -340,7 +340,7 @@ extension DocumentStore {
             // file identifier, and without this their whole contents vanished from the import
             // with nothing said.
             scanned.skipped.append(ImportOutcome.Skipped(
-                file: directory.lastPathComponent, reason: "the folder could not be identified"
+                file: directory.lastPathComponent, reason: "无法识别该文件夹"
             ))
             return
         }
@@ -366,7 +366,7 @@ extension DocumentStore {
                 "Import could not read a folder: \(error.localizedDescription, privacy: .public)"
             )
             scanned.skipped.append(ImportOutcome.Skipped(
-                file: directory.lastPathComponent, reason: "the folder could not be read"
+                file: directory.lastPathComponent, reason: "无法读取该文件夹"
             ))
             return
         }
@@ -401,7 +401,7 @@ extension DocumentStore {
         let name = url.lastPathComponent
         guard MarkdownImport.allowedExtensions.contains(url.pathExtension.lowercased()) else {
             if path.isEmpty {
-                scanned.skipped.append(ImportOutcome.Skipped(file: name, reason: "not a markdown or text file"))
+                scanned.skipped.append(ImportOutcome.Skipped(file: name, reason: "不是 Markdown 或文本文件"))
             }
             return
         }
@@ -413,7 +413,7 @@ extension DocumentStore {
         // Counted before the read. Everything read is held in memory until the whole selection has
         // been walked, so the cap has to bound what is taken on, not what has already been taken.
         guard budget.files < limits.maxFiles else {
-            scanned.stoppedEarly = "more than \(limits.maxFiles) files"
+            scanned.stoppedEarly = "超过 \(limits.maxFiles) 个文件"
             return
         }
         // Not `?? 0`. A size we could not read is not a small one — the same rule `readText`
@@ -421,12 +421,12 @@ extension DocumentStore {
         // files nothing can say anything about.
         guard let size = try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize else {
             scanned.skipped.append(ImportOutcome.Skipped(
-                file: name, reason: "its size could not be read"
+                file: name, reason: "无法读取其大小"
             ))
             return
         }
         guard budget.bytes + size <= limits.maxTotalBytes else {
-            scanned.stoppedEarly = "more than \(limits.maxTotalBytes / 1_048_576) MB of files"
+            scanned.stoppedEarly = "超过 \(limits.maxTotalBytes / 1_048_576) MB 的文件"
             return
         }
         budget.files += 1
@@ -587,17 +587,17 @@ extension DocumentStore {
         // differently-cased component would otherwise slip past and be imported twice.
         let file = url.resolvingSymlinksInPath().standardizedFileURL.path.lowercased()
         guard file.hasPrefix(storedRoot + "/") else { return nil }
-        return "already in the Logue folder"
+        return "已在 Logue 文件夹中"
     }
 
     nonisolated private static func description(for error: MarkdownImport.ImportError) -> String {
         switch error {
         case .emptyFile:
-            "file is empty"
+            "文件为空"
         case let .unsupportedExtension(ext):
-            ext.isEmpty ? "unsupported file type" : "unsupported file type .\(ext)"
+            ext.isEmpty ? "不支持的文件类型" : "不支持的文件类型 .\(ext)"
         case .fileTooLarge:
-            "larger than the \(MarkdownImport.maxFileBytes / 1_048_576) MB limit"
+            "超过 \(MarkdownImport.maxFileBytes / 1_048_576) MB 限制"
         }
     }
 }

@@ -17,12 +17,12 @@ enum TaskFilterMode: String, CaseIterable, Codable, Sendable {
 
     var displayName: String {
         switch self {
-        case .all: "All"
-        case .today: "Today"
-        case .overdue: "Overdue"
-        case .upcoming: "Upcoming"
-        case .noDueDate: "No Date"
-        case .completed: "Completed"
+        case .all: "全部"
+        case .today: "今天"
+        case .overdue: "已逾期"
+        case .upcoming: "即将到期"
+        case .noDueDate: "无日期"
+        case .completed: "已完成"
         }
     }
 
@@ -48,10 +48,10 @@ enum TaskSortOrder: String, CaseIterable, Codable, Sendable {
 
     var displayName: String {
         switch self {
-        case .dueDateAsc: "Due Date"
-        case .priorityDesc: "Priority"
-        case .createdNewest: "Recently Added"
-        case .title: "Title"
+        case .dueDateAsc: "截止日期"
+        case .priorityDesc: "优先级"
+        case .createdNewest: "最近添加"
+        case .title: "标题"
         }
     }
 }

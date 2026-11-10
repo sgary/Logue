@@ -8,9 +8,9 @@ struct ComingSoonPanelView: View {
             Image(systemName: tool.icon)
                 .font(.largeTitle)
                 .foregroundStyle(.secondary)
-            Text(tool.rawValue)
+            Text(tool.displayName)
                 .font(.headline)
-            Text("Coming soon")
+            Text("即将推出")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }

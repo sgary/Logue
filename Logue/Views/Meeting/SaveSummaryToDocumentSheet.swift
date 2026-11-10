@@ -53,7 +53,7 @@ struct SaveSummaryToDocumentSheet: View {
                 Image(systemName: "square.and.arrow.down.on.square")
                     .font(.title3)
                     .foregroundStyle(AppThemeConstants.accent)
-                Text("Save to Document")
+                Text("保存到文档")
                     .font(.title3.bold())
             }
 
@@ -73,30 +73,30 @@ struct SaveSummaryToDocumentSheet: View {
 
             // Action buttons
             HStack {
-                Button("Cancel") {
+                Button("取消") {
                     isPresented = false
                 }
                 .keyboardShortcut(.cancelAction)
-                .accessibilityLabel("Cancel")
-                .accessibilityHint("Dismisses the save sheet without saving")
+                .accessibilityLabel("取消")
+                .accessibilityHint("关闭保存面板且不保存")
 
                 Spacer()
 
-                Button("Save") {
+                Button("保存") {
                     performSave()
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(AppThemeConstants.accent)
                 .keyboardShortcut(.defaultAction)
                 .disabled(!canSave)
-                .accessibilityLabel("Save summary")
-                .accessibilityHint("Saves the meeting summary to the selected document")
+                .accessibilityLabel("保存摘要")
+                .accessibilityHint("将会议摘要保存到所选文档")
             }
         }
         .padding(24)
         .frame(width: 420)
         .onAppear {
-            newDocTitle = "\(meeting.title) — Minutes"
+            newDocTitle = "\(meeting.title) — 会议纪要"
         }
     }
 
@@ -104,11 +104,11 @@ struct SaveSummaryToDocumentSheet: View {
 
     private var spaceSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Space")
+            Text("空间")
                 .font(.subheadline.weight(.medium))
 
             Picker("", selection: $selectedSpaceID) {
-                Text("No Space").tag(UUID?.none)
+                Text("无空间").tag(UUID?.none)
                 ForEach(spaceStore.topLevelSpaces) { space in
                     Label(space.name, systemImage: space.icon ?? "folder")
                         .tag(Optional(space.id))
@@ -121,7 +121,7 @@ struct SaveSummaryToDocumentSheet: View {
                     Image(systemName: "folder.badge.plus")
                         .font(.callout)
                         .foregroundStyle(.secondary)
-                    TextField("Space name", text: $newSpaceName, onCommit: {
+                    TextField("空间名称", text: $newSpaceName, onCommit: {
                         createNewSpace()
                     })
                     .textFieldStyle(.roundedBorder)
@@ -130,15 +130,15 @@ struct SaveSummaryToDocumentSheet: View {
                         showNewSpaceField = false
                         newSpaceName = ""
                     }
-                    Button("Add") {
+                    Button("添加") {
                         createNewSpace()
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.small)
                     .disabled(newSpaceName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                    .accessibilityLabel("Add space")
-                    .accessibilityHint("Creates a new space with the entered name")
+                    .accessibilityLabel("添加空间")
+                    .accessibilityHint("使用输入的名称创建新空间")
                 }
             } else {
                 Button {
@@ -149,13 +149,13 @@ struct SaveSummaryToDocumentSheet: View {
                         isNewSpaceFocused = true
                     }
                 } label: {
-                    Label("New Space", systemImage: "plus")
+                    Label("新建空间", systemImage: "plus")
                         .font(.callout)
                         .foregroundStyle(AppThemeConstants.accent)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("New space")
-                .accessibilityHint("Shows a field to create a new space")
+                .accessibilityLabel("新建空间")
+                .accessibilityHint("显示用于创建新空间的输入框")
             }
         }
     }
@@ -173,13 +173,13 @@ struct SaveSummaryToDocumentSheet: View {
 
     private var targetSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Save to")
+            Text("保存到")
                 .font(.subheadline.weight(.medium))
 
             SelectableOptionCard(
                 icon: "doc.badge.plus",
-                title: "New Document",
-                description: "Create a new document with the summary",
+                title: "新建文档",
+                description: "创建一个包含摘要的新文档",
                 isSelected: documentTarget == .newDocument
             ) {
                 documentTarget = .newDocument
@@ -187,8 +187,8 @@ struct SaveSummaryToDocumentSheet: View {
 
             SelectableOptionCard(
                 icon: "doc.text",
-                title: "Existing Document",
-                description: "Append the summary to an existing document",
+                title: "现有文档",
+                description: "将摘要追加到现有文档",
                 isSelected: documentTarget == .existingDocument
             ) {
                 documentTarget = .existingDocument
@@ -200,9 +200,9 @@ struct SaveSummaryToDocumentSheet: View {
 
     private var titleField: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("Title")
+            Text("标题")
                 .font(.subheadline.weight(.medium))
-            TextField("Document title", text: $newDocTitle)
+            TextField("文档标题", text: $newDocTitle)
                 .textFieldStyle(.roundedBorder)
         }
     }
@@ -211,7 +211,7 @@ struct SaveSummaryToDocumentSheet: View {
 
     private var documentPicker: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("Document")
+            Text("文档")
                 .font(.subheadline.weight(.medium))
 
             if availableDocuments.isEmpty {
@@ -219,7 +219,7 @@ struct SaveSummaryToDocumentSheet: View {
                     Image(systemName: "doc.text.magnifyingglass")
                         .font(.caption)
                         .foregroundStyle(.tertiary)
-                    Text(selectedSpaceID != nil ? "No documents in this space" : "No documents available")
+                    Text(selectedSpaceID != nil ? "此空间中没有文档" : "没有可用的文档")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -231,7 +231,7 @@ struct SaveSummaryToDocumentSheet: View {
                 )
             } else {
                 Picker("", selection: $selectedDocumentID) {
-                    Text("Select a document…").tag(UUID?.none)
+                    Text("选择文档…").tag(UUID?.none)
                     ForEach(availableDocuments) { doc in
                         Text(doc.title).tag(Optional(doc.id))
                     }
@@ -248,7 +248,7 @@ struct SaveSummaryToDocumentSheet: View {
 
         if documentTarget == .newDocument {
             let title = newDocTitle.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-                ? "\(meeting.title) — Minutes"
+                ? "\(meeting.title) — 会议纪要"
                 : newDocTitle.trimmingCharacters(in: .whitespacesAndNewlines)
             let doc = documentStore.createDocument(title: title, inSpace: selectedSpaceID)
             var updated = doc

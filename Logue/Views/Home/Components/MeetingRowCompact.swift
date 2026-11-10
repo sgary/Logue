@@ -32,7 +32,7 @@ struct MeetingRowCompact: View {
                 Image(systemName: "pin.fill")
                     .font(.caption2)
                     .foregroundStyle(AppThemeConstants.pinnedColor)
-                    .accessibilityLabel("Favorited")
+                    .accessibilityLabel("已置顶")
             }
         }
         .padding(AppThemeConstants.paddingMedium)
@@ -43,6 +43,6 @@ struct MeetingRowCompact: View {
         )
         .overlay(HandCursorArea())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Meeting: \(meeting.title)")
+        .accessibilityLabel("会议：\(meeting.title)")
     }
 }

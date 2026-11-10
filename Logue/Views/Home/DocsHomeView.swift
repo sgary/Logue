@@ -14,7 +14,7 @@ struct DocsHomeView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(AppThemeConstants.contentBackground)
-        .navigationTitle("Documents")
+        .navigationTitle("文档")
         .toolbar {
             ToolbarItem(placement: .automatic) {
                 Button {
@@ -22,9 +22,9 @@ struct DocsHomeView: View {
                     store.selectedDocumentID = doc.id
                 } label: {
                     Image(systemName: "square.and.pencil")
-                        .accessibilityLabel("New Document")
+                        .accessibilityLabel("新建文档")
                 }
-                .help("New Document")
+                .help("新建文档")
             }
         }
     }

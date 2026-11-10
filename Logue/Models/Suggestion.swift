@@ -33,13 +33,13 @@ enum SuggestionType: String, Codable, Sendable, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .grammar: "Grammar"
-        case .spelling: "Spelling"
-        case .punctuation: "Punctuation"
-        case .style: "Style"
-        case .clarity: "Clarity"
-        case .tone: "Tone"
-        case .conciseness: "Conciseness"
+        case .grammar: "语法"
+        case .spelling: "拼写"
+        case .punctuation: "标点"
+        case .style: "风格"
+        case .clarity: "清晰度"
+        case .tone: "语气"
+        case .conciseness: "简洁"
         }
     }
 
@@ -56,15 +56,15 @@ enum SuggestionType: String, Codable, Sendable, CaseIterable {
     /// Category-level display name matching the sidebar tabs.
     var categoryDisplayName: String {
         if isCorrectness {
-            return "Correctness"
+            return "正确性"
         }
         if isClarity {
-            return "Clarity"
+            return "清晰度"
         }
         if isDelivery {
-            return "Delivery"
+            return "表达"
         }
-        return "Correctness"
+        return "正确性"
     }
 
     /// SwiftUI color for badge and suggestion card accents.

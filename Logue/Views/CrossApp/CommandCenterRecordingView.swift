@@ -70,7 +70,7 @@ struct CommandCenterRecordingView: View {
                 .frame(width: 36, height: 10)
 
             if segments.isEmpty {
-                Text("Listening\u{2026}")
+                Text("正在聆听\u{2026}")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.white.opacity(0.25))
             }
@@ -91,7 +91,7 @@ struct CommandCenterRecordingView: View {
             }
             .buttonStyle(.plain)
             .contentShape(Circle())
-            .help("Minimize")
+            .help("最小化")
 
             // Open in app
             Button {
@@ -107,7 +107,7 @@ struct CommandCenterRecordingView: View {
             }
             .buttonStyle(.plain)
             .contentShape(Circle())
-            .help("Open in Logue")
+            .help("在 Logue 中打开")
 
             // Stop recording — collapses island + shows toast
             Button {
@@ -117,7 +117,7 @@ struct CommandCenterRecordingView: View {
                 HStack(spacing: 4) {
                     Image(systemName: "stop.fill")
                         .font(.caption2.weight(.bold))
-                    Text("Stop")
+                    Text("停止")
                         .font(.caption.weight(.semibold))
                 }
                 .foregroundStyle(.white)
@@ -187,7 +187,7 @@ struct RecordingSavedToastView: View {
             Image(systemName: "checkmark.circle.fill")
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(AppThemeConstants.success)
-            Text("Meeting saved")
+            Text("会议已保存")
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(.white.opacity(0.9))
         }

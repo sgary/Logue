@@ -92,7 +92,7 @@ struct TaskInspectorPanel: View {
 
     private var header: some View {
         HStack {
-            Text("Task")
+            Text("任务")
                 .font(.headline)
             Spacer()
             Button(action: onClose) {
@@ -100,8 +100,8 @@ struct TaskInspectorPanel: View {
             }
             .buttonStyle(.plain)
             .foregroundStyle(.secondary)
-            .help("Close")
-            .accessibilityLabel("Close task details")
+            .help("关闭")
+            .accessibilityLabel("关闭任务详情")
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
@@ -110,8 +110,8 @@ struct TaskInspectorPanel: View {
     // MARK: - Title
 
     private var titleSection: some View {
-        section("Title") {
-            TextField("Title", text: titleBinding, axis: .vertical)
+        section("标题") {
+            TextField("标题", text: titleBinding, axis: .vertical)
                 .textFieldStyle(.plain)
                 .lineLimit(1 ... 4)
                 .focused($focus, equals: .title)
@@ -127,11 +127,11 @@ struct TaskInspectorPanel: View {
     // MARK: - Due date
 
     private var dueDateSection: some View {
-        section("Due") {
+        section("截止日期") {
             if let due = task.dueDate {
                 HStack {
                     DatePicker(
-                        "Due",
+                        "截止日期",
                         selection: Binding(
                             get: { due },
                             set: { newValue in
@@ -146,7 +146,7 @@ struct TaskInspectorPanel: View {
                     )
                     .labelsHidden()
 
-                    Button("Clear") {
+                    Button("清除") {
                         var updated = task
                         updated.dueDate = nil
                         onChange(updated)
@@ -154,7 +154,7 @@ struct TaskInspectorPanel: View {
                     .buttonStyle(.link)
                 }
             } else {
-                Button("Add a due date") {
+                Button("添加截止日期") {
                     var updated = task
                     updated.dueDate = Calendar.current.startOfDay(for: .now)
                     onChange(updated)
@@ -167,8 +167,8 @@ struct TaskInspectorPanel: View {
     // MARK: - Priority
 
     private var prioritySection: some View {
-        section("Priority") {
-            Picker("Priority", selection: Binding(
+        section("优先级") {
+            Picker("优先级", selection: Binding(
                 get: { task.priority },
                 set: { newValue in
                     var updated = task
@@ -188,7 +188,7 @@ struct TaskInspectorPanel: View {
     // MARK: - Tags
 
     private var tagsSection: some View {
-        section("Tags") {
+        section("标签") {
             VStack(alignment: .leading, spacing: 8) {
                 if !task.tags.isEmpty {
                     FlowingTags(tags: task.tags) { tag in
@@ -199,12 +199,12 @@ struct TaskInspectorPanel: View {
                 }
 
                 if task.tags.count < TaskTextParser.maxTags {
-                    TextField("Add a tag", text: $newTag)
+                    TextField("添加标签", text: $newTag)
                         .textFieldStyle(.roundedBorder)
                         .focused($focus, equals: .tag)
                         .onSubmit(commitTag)
                 } else {
-                    Text("Five tags is the limit.")
+                    Text("最多只能添加五个标签。")
                         .font(.caption)
                         .foregroundStyle(.tertiary)
                 }
@@ -215,12 +215,12 @@ struct TaskInspectorPanel: View {
     // MARK: - Recurrence
 
     private var recurrenceSection: some View {
-        section("Repeats") {
-            Menu(task.recurrence?.displayName ?? "Never") {
-                Button("Never") { setRecurrence(nil) }
+        section("重复") {
+            Menu(task.recurrence?.displayName ?? "从不") {
+                Button("从不") { setRecurrence(nil) }
                 Divider()
                 ForEach(TaskRecurrence.Unit.allCases, id: \.rawValue) { unit in
-                    Button("Every \(unit.rawValue)") {
+                    Button(TaskRecurrence(unit: unit, interval: 1).displayName) {
                         setRecurrence(TaskRecurrence(unit: unit, interval: 1))
                     }
                 }
@@ -232,7 +232,7 @@ struct TaskInspectorPanel: View {
     // MARK: - Notes
 
     private var notesSection: some View {
-        section("Notes") {
+        section("笔记") {
             TextEditor(text: notesBinding)
                 .font(.body)
                 .scrollContentBackground(.hidden)
@@ -251,21 +251,21 @@ struct TaskInspectorPanel: View {
     @ViewBuilder
     private var sourceSection: some View {
         if let meetingTitle {
-            section("From") {
+            section("来源") {
                 Button(action: onOpenSource) {
                     Label(meetingTitle, systemImage: "waveform")
                         .lineLimit(1)
                 }
                 .buttonStyle(.plain)
                 .foregroundStyle(AppThemeConstants.accent)
-                .help("Open the meeting this came from")
+                .help("打开此任务的来源会议")
             }
         }
     }
 
     private var deleteButton: some View {
         Button(role: .destructive, action: onDelete) {
-            Label("Delete Task", systemImage: "trash")
+            Label("删除任务", systemImage: "trash")
         }
         .buttonStyle(.plain)
         .foregroundStyle(AppThemeConstants.error)

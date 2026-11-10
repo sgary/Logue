@@ -361,7 +361,7 @@ final class AgentCoordinator {
 
         // Auto-title
         if let conv = store.conversations.first(where: { $0.id == conversationID }),
-           conv.title == "New Conversation",
+           conv.title == "新建对话",
            let lastUser = conv.messages.last(where: { $0.role == .user })
         {
             store.updateTitle(String(lastUser.content.prefix(60)), for: conversationID)
@@ -371,7 +371,7 @@ final class AgentCoordinator {
         let isLoaded = await LLMEngine.shared.isModelLoaded
         guard isLoaded else {
             store.appendMessage(
-                AgentMessage(role: .assistant, content: "No AI model is loaded. Please select a model in Settings."),
+                AgentMessage(role: .assistant, content: "尚未加载 AI 模型。请在设置中选择一个模型。"),
                 to: conversationID
             )
             return
@@ -448,10 +448,10 @@ final class AgentCoordinator {
             )
         } catch {
             logger.error("Failed to start agent graph: \(error.localizedDescription)")
-            run.fail("Couldn't start the agent: \(error.localizedDescription)")
+            run.fail("无法启动智能体：\(error.localizedDescription)")
             store.updateLastAssistantMessage(
                 in: conversationID,
-                content: "I encountered an error starting the agent. Please try again."
+                content: "启动智能体时出错，请重试。"
             )
             run.endStreaming()
             await AgentChatGraph.shared.clearCallbacks()
@@ -523,10 +523,10 @@ final class AgentCoordinator {
             }
         } catch {
             logger.error("Agent graph stream error: \(error.localizedDescription)")
-            run.fail("Agent stream failed: \(error.localizedDescription)")
+            run.fail("智能体运行失败：\(error.localizedDescription)")
             if run.streamingText.isEmpty {
                 store.updateLastAssistantMessage(
-                    in: conversationID, content: "I encountered an error. Please try again."
+                    in: conversationID, content: "出了点问题，请重试。"
                 )
             }
         }
@@ -547,7 +547,7 @@ final class AgentCoordinator {
            !conv.messages.contains(where: { $0.role == .assistant && !$0.content.isEmpty })
         {
             store.appendMessage(
-                AgentMessage(role: .assistant, content: "I wasn't able to generate a response. Please try rephrasing."),
+                AgentMessage(role: .assistant, content: "无法生成回复，请换个说法再试。"),
                 to: conversationID
             )
         }

@@ -16,20 +16,20 @@ struct DocumentCardView: View {
             content: { isHovered in cardBody(isHovered: isHovered) },
             contextMenu: { contextMenuItems }
         )
-        .alert("Delete Document?", isPresented: $showDeleteConfirmation) {
-            Button("Delete", role: .destructive) {
+        .alert("删除文档？", isPresented: $showDeleteConfirmation) {
+            Button("删除", role: .destructive) {
                 store.deleteDocument(id: document.id)
             }
-            Button("Cancel", role: .cancel) {}
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("\"\(document.title)\" will be permanently deleted.")
+            Text("“\(document.title)”将被永久删除。")
         }
-        .alert("Rename Document", isPresented: $showRenameAlert) {
-            TextField("Title", text: $renameText)
-            Button("Rename") {
+        .alert("重命名文档", isPresented: $showRenameAlert) {
+            TextField("标题", text: $renameText)
+            Button("重命名") {
                 store.renameDocument(id: document.id, newTitle: renameText)
             }
-            Button("Cancel", role: .cancel) {}
+            Button("取消", role: .cancel) {}
         }
     }
 
@@ -79,14 +79,14 @@ struct DocumentCardView: View {
                                 .background(.quaternary, in: RoundedRectangle(cornerRadius: AppThemeConstants.radiusXSmall))
                         }
                         .buttonStyle(.plain)
-                        .help("Document options")
-                        .accessibilityLabel("Document options")
+                        .help("文档选项")
+                        .accessibilityLabel("文档选项")
                         .popover(isPresented: $showMenu, arrowEdge: .bottom) {
                             cardMenuContent
                         }
                     }
                 }
-                Text("Edited \(document.modifiedAt.formatted(.relative(presentation: .named)))")
+                Text("编辑于 \(document.modifiedAt.formatted(.relative(presentation: .named)))")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
             }
@@ -104,7 +104,7 @@ struct DocumentCardView: View {
                 showMenu = false
             } label: {
                 Label(
-                    document.isPinned ? "Unpin" : "Pin",
+                    document.isPinned ? "取消置顶" : "置顶",
                     systemImage: document.isPinned ? "pin.slash" : "pin"
                 )
                 .font(.subheadline)
@@ -118,7 +118,7 @@ struct DocumentCardView: View {
                 renameText = document.title
                 showRenameAlert = true
             } label: {
-                Label("Rename", systemImage: "pencil")
+                Label("重命名", systemImage: "pencil")
                     .font(.subheadline)
             }
             .buttonStyle(.plain)
@@ -131,7 +131,7 @@ struct DocumentCardView: View {
                 showMenu = false
                 showDeleteConfirmation = true
             } label: {
-                Label("Move to Trash", systemImage: "trash")
+                Label("移到废纸篓", systemImage: "trash")
                     .font(.subheadline)
                     .foregroundStyle(AppThemeConstants.error)
             }
@@ -150,13 +150,13 @@ struct DocumentCardView: View {
         Button {
             store.selectedDocumentID = document.id
         } label: {
-            Label("Open", systemImage: "doc.text")
+            Label("打开", systemImage: "doc.text")
         }
         Button {
             store.togglePin(id: document.id)
         } label: {
             Label(
-                document.isPinned ? "Unpin" : "Pin",
+                document.isPinned ? "取消置顶" : "置顶",
                 systemImage: document.isPinned ? "pin.slash" : "pin"
             )
         }
@@ -164,13 +164,13 @@ struct DocumentCardView: View {
             renameText = document.title
             showRenameAlert = true
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         Divider()
         Button(role: .destructive) {
             showDeleteConfirmation = true
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 }

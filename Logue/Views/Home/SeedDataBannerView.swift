@@ -23,23 +23,23 @@ struct SeedDataBannerView: View {
                     .foregroundStyle(AppThemeConstants.brandPrimary)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Exploring with sample data")
+                    Text("正在用示例数据体验")
                         .font(.subheadline.weight(.medium))
-                    Text("Clear examples when you're ready to start fresh.")
+                    Text("准备好从头开始时，清除示例数据。")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
 
                 Spacer()
 
-                Button("Clear Examples") {
+                Button("清除示例") {
                     showConfirmation = true
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.small)
                 .tint(AppThemeConstants.accent)
-                .accessibilityLabel("Clear example data")
-                .accessibilityHint("Removes all sample documents, meetings, and folders")
+                .accessibilityLabel("清除示例数据")
+                .accessibilityHint("移除所有示例文档、会议和文件夹")
 
                 Button {
                     withAnimation(.easeOut(duration: 0.2)) {
@@ -51,7 +51,7 @@ struct SeedDataBannerView: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Dismiss sample data banner")
+                .accessibilityLabel("关闭示例数据横幅")
             }
             .padding(14)
             .background(
@@ -64,16 +64,16 @@ struct SeedDataBannerView: View {
             )
             .transition(.opacity.combined(with: .move(edge: .top)))
             .confirmationDialog(
-                "Clear all example data?",
+                "清除所有示例数据？",
                 isPresented: $showConfirmation,
                 titleVisibility: .visible
             ) {
-                Button("Clear Examples", role: .destructive) {
+                Button("清除示例", role: .destructive) {
                     clearSeedData()
                 }
-                Button("Cancel", role: .cancel) {}
+                Button("取消", role: .cancel) {}
             } message: {
-                Text("This will remove all sample documents, meetings, and folders. This cannot be undone.")
+                Text("这将移除所有示例文档、会议和文件夹。此操作无法撤销。")
             }
         }
     }

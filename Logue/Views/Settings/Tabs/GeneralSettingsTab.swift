@@ -9,9 +9,9 @@ enum AppearanceMode: String, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .system: "System"
-        case .light: "Light"
-        case .dark: "Dark"
+        case .system: "跟随系统"
+        case .light: "浅色"
+        case .dark: "深色"
         }
     }
 
@@ -70,8 +70,8 @@ struct GeneralSettingsTab: View {
 
     var body: some View {
         Form {
-            Section("Startup") {
-                Toggle("Launch at Login", isOn: $launchAtLogin)
+            Section("启动") {
+                Toggle("登录时启动", isOn: $launchAtLogin)
                     .onChange(of: launchAtLogin) { _, newValue in
                         do {
                             if newValue {
@@ -86,7 +86,7 @@ struct GeneralSettingsTab: View {
                 Button {
                     sheet = .welcomeTour
                 } label: {
-                    Label("Show welcome tour", systemImage: "sparkles")
+                    Label("显示欢迎引导", systemImage: "sparkles")
                 }
                 .buttonStyle(.borderless)
                 Button {
@@ -100,8 +100,8 @@ struct GeneralSettingsTab: View {
                 .buttonStyle(.borderless)
             }
 
-            Section("Theme") {
-                Picker("Appearance", selection: $appearanceMode) {
+            Section("主题") {
+                Picker("外观", selection: $appearanceMode) {
                     ForEach(AppearanceMode.allCases, id: \.self) { mode in
                         Label(mode.displayName, systemImage: mode.icon).tag(mode)
                     }
@@ -112,8 +112,8 @@ struct GeneralSettingsTab: View {
                 }
             }
 
-            Section("Sidebar") {
-                Picker("Sort Spaces By", selection: Binding(
+            Section("侧边栏") {
+                Picker("空间排序方式", selection: Binding(
                     get: { SidebarSpaceSortOrder(rawValue: sidebarSpaceSortOrderRaw) ?? .custom },
                     set: { sidebarSpaceSortOrderRaw = $0.rawValue }
                 )) {
@@ -126,23 +126,23 @@ struct GeneralSettingsTab: View {
                 }
             }
 
-            Section("Editor") {
+            Section("编辑器") {
                 HStack {
-                    Text("Font Size")
+                    Text("字号")
                     Spacer()
                     Text("\(Int(editorFontSize)) pt")
                         .foregroundStyle(.secondary)
                         .monospacedDigit()
                 }
                 Slider(value: $editorFontSize, in: 12 ... 24, step: 1) {
-                    Text("Font Size")
+                    Text("字号")
                 } minimumValueLabel: {
                     Text("12").font(.caption)
                 } maximumValueLabel: {
                     Text("24").font(.caption)
                 }
 
-                Picker("Default Document Width", selection: Binding(
+                Picker("默认文档宽度", selection: Binding(
                     get: { DocumentWidthMode(rawValue: defaultDocumentWidthRaw) ?? .normal },
                     set: { defaultDocumentWidthRaw = $0.rawValue }
                 )) {
@@ -150,14 +150,14 @@ struct GeneralSettingsTab: View {
                         Text(mode.label).tag(mode)
                     }
                 }
-                Text("Applies to documents you create from now on. Existing documents keep their own width.")
+                Text("仅应用于此后新建的文档。现有文档保留各自的宽度。")
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
                 Toggle(isOn: $autoSortCheckedItems) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Automatically sort checked items")
-                        Text("Move checklist items to the bottom as they are checked.")
+                        Text("自动排序已勾选项目")
+                        Text("勾选清单项后将其移到底部。")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -165,41 +165,41 @@ struct GeneralSettingsTab: View {
 
                 Toggle(isOn: $groupByDate) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Group notes by date")
-                        Text("Group documents and meetings into sections like Today, Yesterday, etc.")
+                        Text("按日期分组笔记")
+                        Text("将文档和会议分到“今天”“昨天”等分组中。")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                 }
             }
 
-            Section("Meetings") {
+            Section("会议") {
                 Toggle(isOn: $autoSaveSummaryToDocument) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Auto-save summary to document")
-                        Text("Automatically create a linked document from the meeting summary when recording ends.")
+                        Text("自动将摘要保存为文档")
+                        Text("录音结束后，自动根据会议摘要创建关联文档。")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
                 }
             }
 
-            Section("Shortcuts") {
+            Section("快捷键") {
                 ShortcutRow(
-                    title: "Ask Logue",
+                    title: "询问 Logue",
                     shortcut: $shortcutManager.commandCenterShortcut
                 ) { newShortcut in
                     shortcutManager.updateCommandCenterShortcut(newShortcut)
                 }
             }
 
-            Section("Ask Logue") {
+            Section("询问 Logue") {
                 Toggle(isOn: $webSearchEnabled) {
                     VStack(alignment: .leading, spacing: 2) {
-                        Text("Enable Web Search")
+                        Text("启用网页搜索")
                         Text(
-                            "Lets the agent search and fetch public web pages via DuckDuckGo. "
-                                + "Off by default — Logue stays fully local until you enable this."
+                            "允许智能体通过 DuckDuckGo 搜索并抓取公开网页。"
+                                + "默认关闭，启用前 Logue 保持完全本地运行。"
                         )
                         .font(.caption)
                         .foregroundStyle(.secondary)
@@ -207,17 +207,17 @@ struct GeneralSettingsTab: View {
                 }
             }
 
-            Section("Data") {
+            Section("数据") {
                 if hasClearedSeedData {
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Example Data")
-                            Text("Load sample documents, meetings, and spaces.")
+                            Text("示例数据")
+                            Text("加载示例文档、会议和空间。")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
                         Spacer()
-                        Button("Load Examples") {
+                        Button("加载示例") {
                             showLoadConfirmation = true
                         }
                         .controlSize(.small)
@@ -225,13 +225,13 @@ struct GeneralSettingsTab: View {
                 } else {
                     HStack {
                         VStack(alignment: .leading, spacing: 2) {
-                            Text("Example Data")
-                            Text("Remove all sample documents, meetings, and spaces.")
+                            Text("示例数据")
+                            Text("移除所有示例文档、会议和空间。")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
                         Spacer()
-                        Button("Clear Examples", role: .destructive) {
+                        Button("清除示例", role: .destructive) {
                             showClearConfirmation = true
                         }
                         .controlSize(.small)
@@ -248,32 +248,32 @@ struct GeneralSettingsTab: View {
         }
         .onAppear { applyAppearance() }
         .confirmationDialog(
-            "Clear all example data?",
+            "清除所有示例数据？",
             isPresented: $showClearConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Clear Examples", role: .destructive) {
+            Button("清除示例", role: .destructive) {
                 documentStore.clearAllData()
                 meetingStore.clearAllData()
                 spaceStore.clearAllData()
                 TaskStore.shared.clearAllData()
                 hasClearedSeedData = true
             }
-            Button("Cancel", role: .cancel) {}
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("This will remove all sample documents, meetings, and spaces. This cannot be undone.")
+            Text("这将移除所有示例文档、会议和空间。此操作无法撤销。")
         }
         .confirmationDialog(
-            "Load example data?",
+            "加载示例数据？",
             isPresented: $showLoadConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Load Examples") {
+            Button("加载示例") {
                 loadSeedData()
             }
-            Button("Cancel", role: .cancel) {}
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("This will add sample documents, meetings, and spaces to your library.")
+            Text("这会将示例文档、会议和空间添加到你的资料库。")
         }
     }
 

@@ -12,7 +12,7 @@ struct WeeklyActivityChart: View {
     var body: some View {
         InsightCardShell {
             VStack(alignment: .leading, spacing: 12) {
-                CardSectionHeader(icon: "chart.bar.xaxis", title: "Weekly Activity")
+                CardSectionHeader(icon: "chart.bar.xaxis", title: "每周活动")
 
                 Chart(activity) { day in
                     BarMark(
@@ -49,18 +49,18 @@ struct WeeklyActivityChart: View {
                 }
                 .chartLegend(.hidden)
                 .frame(height: 140)
-                .accessibilityLabel("Weekly activity chart")
+                .accessibilityLabel("每周活动图表")
                 .accessibilityValue(
-                    "\(activity.reduce(0) { $0 + $1.meetingCount }) meetings and \(activity.reduce(0) { $0 + $1.documentCount }) documents this week"
+                    "本周 \(activity.reduce(0) { $0 + $1.meetingCount }) 场会议和 \(activity.reduce(0) { $0 + $1.documentCount }) 个文档"
                 )
 
                 // Legend + busiest day
                 HStack(spacing: 16) {
-                    legendItem(color: Self.meetingColor, label: "Meetings")
-                    legendItem(color: Self.documentColor, label: "Documents")
+                    legendItem(color: Self.meetingColor, label: "会议")
+                    legendItem(color: Self.documentColor, label: "文档")
                     Spacer()
                     if let busiestDay {
-                        Text("Busiest: \(busiestDay)")
+                        Text("最忙：\(busiestDay)")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

@@ -33,7 +33,7 @@ struct ModelDownloadRow<M: DownloadableModel>: View {
                     Text(model.displayName)
                         .font(.subheadline.weight(.medium))
                     if model.isRecommended {
-                        Text("Recommended")
+                        Text("推荐")
                             .font(.caption2)
                             .padding(.horizontal, 5)
                             .padding(.vertical, 1)
@@ -64,19 +64,19 @@ struct ModelDownloadRow<M: DownloadableModel>: View {
                                     .foregroundStyle(.secondary)
                             }
                             .buttonStyle(.plain)
-                            .help("Cancel download")
+                            .help("取消下载")
                         }
                     } else if isActivating {
-                        InlineProgressLabel(text: "Activating…")
+                        InlineProgressLabel(text: "激活中…")
                     } else if isActive {
-                        Text("Active")
+                        Text("使用中")
                             .font(.caption2.bold())
                             .foregroundStyle(AppThemeConstants.accent)
                     } else if isDownloaded {
-                        Button("Activate", action: onAction)
+                        Button("启用", action: onAction)
                             .controlSize(.mini)
                     } else {
-                        Button("Download", action: onAction)
+                        Button("下载", action: onAction)
                             .controlSize(.mini)
                             .buttonStyle(.borderedProminent)
                             .tint(AppThemeConstants.accent)
@@ -91,17 +91,17 @@ struct ModelDownloadRow<M: DownloadableModel>: View {
                                 .foregroundStyle(AppThemeConstants.error)
                         }
                         .buttonStyle(.plain)
-                        .help("Delete downloaded model")
+                        .help("删除已下载的模型")
                     }
                 }
             }
         }
         .padding(.vertical, 4)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(model.displayName), \(model.sizeLabel)")
-        .accessibilityValue(isActive ? "Active" : isDownloading ? "Downloading" : isActivating ? "Loading" : isDownloaded ? "Downloaded" :
-            "Not downloaded")
-        .accessibilityHint(isActive ? "" : isDownloaded ? "Double tap to activate" : "Double tap to download")
+        .accessibilityLabel("\(model.displayName)，\(model.sizeLabel)")
+        .accessibilityValue(isActive ? "使用中" : isDownloading ? "下载中" : isActivating ? "加载中" : isDownloaded ? "已下载" :
+            "未下载")
+        .accessibilityHint(isActive ? "" : isDownloaded ? "双击以启用" : "双击以下载")
     }
 
     @ViewBuilder
@@ -112,7 +112,7 @@ struct ModelDownloadRow<M: DownloadableModel>: View {
         } else {
             HStack(spacing: 4) {
                 ProgressView().scaleEffect(0.7)
-                Text("Downloading...")
+                Text("下载中…")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }

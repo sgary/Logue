@@ -10,19 +10,19 @@ struct HomeQuickActions: View {
         HStack(spacing: 10) {
             HomeQuickActionButton(
                 icon: "mic.badge.plus",
-                title: "Voice Note",
+                title: "语音笔记",
                 color: AppThemeConstants.accent,
                 action: onStartRecording
             )
             HomeQuickActionButton(
                 icon: "waveform",
-                title: "New Meeting",
+                title: "新建会议",
                 color: AppThemeConstants.success,
                 action: onNewMeeting
             )
             HomeQuickActionButton(
                 icon: "doc.badge.plus",
-                title: "New Document",
+                title: "新建文档",
                 color: AppThemeConstants.categoryPurple,
                 action: onNewDocument
             )

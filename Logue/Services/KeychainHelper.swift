@@ -18,6 +18,7 @@ enum KeychainHelper {
     enum KeychainError: Error {
         case duplicateItem
         case itemNotFound
+        case accessDenied
         case unexpectedStatus(OSStatus)
         case invalidData
     }
@@ -103,17 +104,17 @@ enum KeychainHelper {
     }
 
     private static func readData(key: String) throws -> Data? {
-        // kSecUseAuthenticationUIFail prevents macOS from showing a password dialog when
-        // the item's ACL doesn't match the current code signature (common after debug
-        // rebuilds or app updates). Instead it returns errSecInteractionNotAllowed, which
-        // we handle below by deleting the stale item so it can be recreated on next save.
+        // Allow macOS to show its normal "allow access" prompt when the item's ACL does
+        // not match the current code signature (for example after an ad-hoc rebuild).
+        // Suppressing the prompt with `kSecUseAuthenticationUIFail` made the call block
+        // indefinitely on some macOS versions instead of returning an error.
         let query: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: AppConstants.bundleID,
             kSecAttrAccount as String: key,
             kSecReturnData as String: true,
             kSecMatchLimit as String: kSecMatchLimitOne,
-            kSecUseAuthenticationUI as String: kSecUseAuthenticationUIFail,
+            kSecUseAuthenticationUI as String: kSecUseAuthenticationUIAllow,
         ]
 
         var result: AnyObject?
@@ -126,12 +127,11 @@ enum KeychainHelper {
         case errSecItemNotFound:
             return nil
         case errSecAuthFailed, errSecInteractionNotAllowed, -25293:
-            // ACL mismatch — the item was created by a different code signature
-            // (common after debug rebuilds with ad-hoc signing). Delete the stale
-            // item so the caller can recreate it with the current app's ACL.
-            logger.info("Keychain ACL mismatch for '\(key, privacy: .public)' — deleting stale item")
-            delete(key: key)
-            return nil
+            // ACL mismatch. Never delete the item here: it may hold the only key that can
+            // decrypt the user's data. Surface the refusal so the caller can ask the user
+            // to approve access instead of silently generating a replacement key.
+            logger.info("Keychain access denied for '\(key, privacy: .public)' — keeping the item intact")
+            throw KeychainError.accessDenied
         default:
             throw KeychainError.unexpectedStatus(status)
         }

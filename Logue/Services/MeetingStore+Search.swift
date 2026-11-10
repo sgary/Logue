@@ -64,17 +64,17 @@ extension MeetingStore {
 
         for meeting in meetings where !meeting.isArchived && !meeting.isTrashed {
             if meeting.title.lowercased().contains(lowered) {
-                results.append((meeting, "Title", meeting.title))
+                results.append((meeting, "标题", meeting.title))
             } else if let summary = meeting.summary, summary.lowercased().contains(lowered) {
                 let snippet = extractSnippet(from: summary, around: lowered)
-                results.append((meeting, "Summary", snippet))
+                results.append((meeting, "摘要", snippet))
             } else if let segment = meeting.segments.first(where: { $0.text.lowercased().contains(lowered) }) {
                 let snippet = extractSnippet(from: segment.text, around: lowered)
-                results.append((meeting, "Transcript", snippet))
+                results.append((meeting, "转写", snippet))
             } else if let item = meeting.actionItems.first(where: { $0.title.lowercased().contains(lowered) }) {
-                results.append((meeting, "Action Item", item.title))
+                results.append((meeting, "待办事项", item.title))
             } else if let tag = meeting.tags.first(where: { $0.lowercased().contains(lowered) }) {
-                results.append((meeting, "Tag", tag))
+                results.append((meeting, "标签", tag))
             }
         }
         return results

@@ -7,7 +7,7 @@ struct InsightsSectionView: View {
     var body: some View {
         if insights.hasData {
             VStack(alignment: .leading, spacing: 12) {
-                CardSectionHeader(icon: "chart.bar.xaxis", title: "Insights")
+                CardSectionHeader(icon: "chart.bar.xaxis", title: "洞察")
                     .padding(.horizontal, 24)
 
                 // Weekly Activity (left) + Action Items + Document Stats stacked (right)

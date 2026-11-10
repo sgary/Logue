@@ -119,7 +119,7 @@ struct ActionItemInboxPanel: View {
                     .foregroundStyle(.secondary)
                     .accessibilityHidden(true)
                 SearchBarField(
-                    text: $searchText, placeholder: "Search action items", expandable: true
+                    text: $searchText, placeholder: "搜索待办事项", expandable: true
                 )
             }
             chipBar
@@ -149,7 +149,7 @@ struct ActionItemInboxPanel: View {
                     ) {
                         inboxModeRaw = mode.rawValue
                     }
-                    .accessibilityLabel("\(mode.displayName), \(count) items")
+                    .accessibilityLabel("\(mode.displayName)，\(count) 项")
                 }
             }
         }
@@ -177,8 +177,8 @@ struct ActionItemInboxPanel: View {
         // Promotion is idempotent, so pressing twice is safe by construction; disabled when
         // there is nothing left to add so the press has a visible effect.
         .disabled(promotableItems.isEmpty)
-        .help("Add every action item shown to your tasks")
-        .accessibilityLabel("Add all to Tasks")
+        .help("将显示的所有待办事项添加到任务")
+        .accessibilityLabel("全部添加到任务")
     }
 
     private var sortMenu: some View {
@@ -188,7 +188,7 @@ struct ActionItemInboxPanel: View {
                     sortOrderRaw = order.rawValue
                 } label: {
                     HStack {
-                        Text(order.rawValue)
+                        Text(order.displayName)
                         if sortOrder == order {
                             Spacer()
                             Image(systemName: "checkmark")
@@ -200,8 +200,8 @@ struct ActionItemInboxPanel: View {
             Image(systemName: "arrow.up.arrow.down.circle")
         }
         .controlSize(.small)
-        .help("Sort")
-        .accessibilityLabel("Sort action items")
+        .help("排序")
+        .accessibilityLabel("排序待办事项")
     }
 
     // MARK: - List
@@ -230,12 +230,12 @@ struct ActionItemInboxPanel: View {
 
     private var emptyTitle: String {
         if !searchText.isEmpty {
-            return "No Matching Items"
+            return "没有匹配的项目"
         }
         switch inboxMode {
-        case .inbox: return "Inbox Zero"
-        case .dismissed: return "Nothing Dismissed"
-        case .all: return "No Action Items Yet"
+        case .inbox: return "收件箱已清空"
+        case .dismissed: return "没有已忽略的项目"
+        case .all: return "还没有待办事项"
         }
     }
 
@@ -248,15 +248,15 @@ struct ActionItemInboxPanel: View {
 
     private var emptyDescription: String {
         if !searchText.isEmpty {
-            return "No action items match \"\(searchText)\""
+            return "没有与“\(searchText)”匹配的待办事项"
         }
         switch inboxMode {
         case .inbox:
-            return "Every action item Logue found has been added to your tasks or dismissed."
+            return "Logue 找到的待办事项都已添加到任务或被忽略。"
         case .dismissed:
-            return "Items you decide aren't worth acting on will appear here."
+            return "你决定无需处理的待办事项会显示在这里。"
         case .all:
-            return "Action items extracted from meetings will appear here."
+            return "从会议中提取的待办事项会显示在这里。"
         }
     }
 }

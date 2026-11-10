@@ -956,7 +956,7 @@ final class BlockNSTextView: MarkdownNSTextView {
 
     override func accessibilityRoleDescription() -> String? {
         if let level = headingLevel {
-            return "heading level \(level)"
+            return "标题级别 \(level)"
         }
         return super.accessibilityRoleDescription()
     }
@@ -1481,7 +1481,7 @@ private struct SuggestionPopoverContent: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Dismiss suggestion")
+                .accessibilityLabel("忽略建议")
             }
 
             Text(suggestion.explanation)
@@ -1498,12 +1498,12 @@ private struct SuggestionPopoverContent: View {
 
                 Spacer()
 
-                Button("Accept") { onAccept() }
+                Button("接受") { onAccept() }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.small)
 
-                Button("Dismiss") { onDismiss() }
+                Button("忽略") { onDismiss() }
                     .controlSize(.small)
             }
         }

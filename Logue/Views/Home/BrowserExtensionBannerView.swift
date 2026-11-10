@@ -49,15 +49,14 @@ struct BrowserExtensionBannerView: View {
                 .foregroundStyle(AppThemeConstants.brandPrimary)
 
             VStack(alignment: .leading, spacing: 6) {
-                Text("New: Logue in your browser")
+                Text("新功能：浏览器中的 Logue")
                     .font(.subheadline.weight(.medium))
 
                 Text(bridgeEnabled
-                    ? "The Chrome extension brings Logue's chat and writing tools into any tab, "
-                    + "answered by the model on this Mac. Logue is listening for it on your Mac's "
-                    + "own loopback address — nothing leaves the machine, and you can stop it here."
-                    : "The Chrome extension brings Logue's chat and writing tools into any tab, "
-                    + "answered by the model on this Mac. It needs Logue to accept its connection.")
+                    ? "Chrome 扩展将 Logue 的聊天和写作工具带到任意标签页，由这台 Mac 上的模型回答。"
+                    + "Logue 正在通过这台 Mac 自己的回环地址监听它 — 数据不会离开这台机器，你可以在这里停止。"
+                    : "Chrome 扩展将 Logue 的聊天和写作工具带到任意标签页，由这台 Mac 上的模型回答。"
+                    + "它需要 Logue 接受其连接。")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -71,7 +70,7 @@ struct BrowserExtensionBannerView: View {
 
                     // The off switch travels with the disclosure. Sending the user to Settings
                     // to find it would be disclosing the socket and hiding the remedy.
-                    Toggle("Accept connections", isOn: $bridgeEnabled)
+                    Toggle("接受连接", isOn: $bridgeEnabled)
                         .toggleStyle(.switch)
                         .controlSize(.mini)
                         .font(.caption)
@@ -93,7 +92,7 @@ struct BrowserExtensionBannerView: View {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Dismiss the browser extension notice")
+            .accessibilityLabel("关闭浏览器扩展通知")
         }
         .padding(14)
         .background(

@@ -15,9 +15,9 @@ enum ActionItemInboxMode: String, CaseIterable, Sendable {
 
     var displayName: String {
         switch self {
-        case .inbox: "Inbox"
-        case .dismissed: "Dismissed"
-        case .all: "All"
+        case .inbox: "收件箱"
+        case .dismissed: "已忽略"
+        case .all: "全部"
         }
     }
 

@@ -109,7 +109,7 @@ struct WhatsNewView: View {
     /// on every card would be noise.
     private var headerVersion: String? {
         guard case let .whatsNew(releases) = mode, releases.count == 1 else { return nil }
-        return releases.first.map { "Version \($0.version)" }
+        return releases.first.map { "版本 \($0.version)" }
     }
 
     private var isLastPage: Bool {
@@ -171,7 +171,7 @@ struct WhatsNewView: View {
                     .foregroundStyle(.secondary)
             }
             Spacer()
-            Text("\(min(index + 1, max(pages.count, 1))) of \(max(pages.count, 1))")
+            Text("第 \(min(index + 1, max(pages.count, 1))) 页，共 \(max(pages.count, 1)) 页")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
                 .monospacedDigit()

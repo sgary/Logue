@@ -174,7 +174,7 @@ final class MeetingStore: MeetingRepository, MeetingSegmentManager, MeetingSpeak
 
     @discardableResult
     func createMeeting(
-        title: String = "Untitled Meeting",
+        title: String = "未命名会议",
         mode: RecordingMode = .inPerson,
         template: MeetingTemplate = .general,
         inSpace spaceID: UUID? = nil
@@ -191,7 +191,7 @@ final class MeetingStore: MeetingRepository, MeetingSegmentManager, MeetingSpeak
 
     @discardableResult
     func createVoiceNote(inSpace spaceID: UUID? = nil) -> MeetingNote {
-        let baseTitle = "Voice Note \(Date.now.formatted(date: .abbreviated, time: .shortened))"
+        let baseTitle = "语音笔记 \(Date.now.formatted(date: .abbreviated, time: .shortened))"
         let deduped = uniqueTitle(baseTitle, among: activeMeetings.map(\.title))
         let note = MeetingNote(title: deduped, recordingMode: .voiceNote, template: .general, spaceID: spaceID)
         meetings.insert(note, at: 0)

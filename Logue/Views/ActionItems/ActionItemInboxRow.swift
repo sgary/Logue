@@ -21,8 +21,8 @@ struct ActionItemInboxRow: View {
             Image(systemName: "checkmark.circle.fill")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
-                .help("Already on your task list")
-                .accessibilityLabel("Already in Tasks")
+                .help("已在任务列表中")
+                .accessibilityLabel("已在任务中")
         } else if item.actionItem.isDismissed {
             Button {
                 meetingStore.setActionItemDismissed(
@@ -33,8 +33,8 @@ struct ActionItemInboxRow: View {
             }
             .buttonStyle(.plain)
             .foregroundStyle(.secondary)
-            .help("Put this back in the inbox")
-            .accessibilityLabel("Restore to inbox")
+            .help("放回收件箱")
+            .accessibilityLabel("恢复到收件箱")
             .opacity(isHovered ? 1 : 0)
         } else {
             HStack(spacing: 6) {
@@ -45,8 +45,8 @@ struct ActionItemInboxRow: View {
                 }
                 .buttonStyle(.plain)
                 .foregroundStyle(.secondary)
-                .help("Add this to your tasks")
-                .accessibilityLabel("Add to Tasks")
+                .help("添加到任务")
+                .accessibilityLabel("添加到任务")
 
                 Button {
                     meetingStore.setActionItemDismissed(
@@ -57,8 +57,8 @@ struct ActionItemInboxRow: View {
                 }
                 .buttonStyle(.plain)
                 .foregroundStyle(.secondary)
-                .help("Not something to act on")
-                .accessibilityLabel("Dismiss")
+                .help("无需处理")
+                .accessibilityLabel("忽略")
             }
             .opacity(isHovered ? 1 : 0)
         }
@@ -98,7 +98,7 @@ struct ActionItemInboxRow: View {
             if let dueDate = item.actionItem.dueDate {
                 dueBadge(dueDate)
             } else if !item.actionItem.isCompleted {
-                Text("No due date")
+                Text("无截止日期")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
@@ -138,7 +138,7 @@ struct ActionItemInboxRow: View {
         Button {
             openMeeting()
         } label: {
-            Label("Open Meeting", systemImage: "arrow.up.right.square")
+            Label("打开会议", systemImage: "arrow.up.right.square")
         }
         Button {
             HapticFeedback.levelChange()
@@ -148,7 +148,7 @@ struct ActionItemInboxRow: View {
             )
         } label: {
             Label(
-                item.actionItem.isCompleted ? "Mark Incomplete" : "Mark Complete",
+                item.actionItem.isCompleted ? "标记为未完成" : "标记为已完成",
                 systemImage: item.actionItem.isCompleted ? "circle" : "checkmark.circle"
             )
         }
@@ -158,7 +158,7 @@ struct ActionItemInboxRow: View {
             )
         } label: {
             Label(
-                item.actionItem.isDismissed ? "Restore to Inbox" : "Dismiss",
+                item.actionItem.isDismissed ? "恢复到收件箱" : "忽略",
                 systemImage: item.actionItem.isDismissed ? "arrow.uturn.backward" : "xmark.circle"
             )
         }
@@ -204,18 +204,18 @@ struct ActionItemInboxRow: View {
     private var accessibilityText: String {
         var parts: [String] = [item.actionItem.title]
         if item.actionItem.isCompleted {
-            parts.append("completed")
+            parts.append("已完成")
         }
         if item.actionItem.isDismissed {
-            parts.append("dismissed")
+            parts.append("已忽略")
         }
-        parts.append("from \(item.meetingTitle)")
+        parts.append("来自 \(item.meetingTitle)")
         if let due = item.actionItem.dueDate {
-            parts.append("due \(due.formatted(.relative(presentation: .named)))")
+            parts.append("截止 \(due.formatted(.relative(presentation: .named)))")
         }
         if let assignee = item.actionItem.assignee, !assignee.isEmpty {
-            parts.append("assigned to \(assignee)")
+            parts.append("分配给 \(assignee)")
         }
-        return parts.joined(separator: ", ")
+        return parts.joined(separator: "，")
     }
 }

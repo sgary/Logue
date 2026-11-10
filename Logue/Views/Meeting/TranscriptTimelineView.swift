@@ -136,7 +136,7 @@ struct TranscriptTimelineView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            SearchBarField(text: $searchText, placeholder: "Search transcript", expandable: true)
+            SearchBarField(text: $searchText, placeholder: "搜索转写", expandable: true)
                 .padding(.horizontal, 16)
                 .padding(.top, 12)
 
@@ -239,7 +239,7 @@ struct TranscriptTimelineView: View {
                                 HStack(spacing: 4) {
                                     Image(systemName: "arrow.down")
                                         .font(.caption2.weight(.bold))
-                                    Text("Jump to latest")
+                                    Text("跳到最新")
                                         .font(.caption.weight(.medium))
                                 }
                                 .padding(.horizontal, 12)
@@ -295,7 +295,7 @@ struct TranscriptTimelineView: View {
                     .fill(AppThemeConstants.error)
                     .frame(width: 6, height: 6)
                     .opacity(0.8)
-                Text("Live")
+                Text("实时")
                     .font(.caption2.weight(.medium))
                     .foregroundStyle(AppThemeConstants.error.opacity(0.8))
             }
@@ -333,10 +333,10 @@ struct TranscriptTimelineView: View {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 36))
                 .foregroundStyle(.tertiary)
-            Text("No matches found")
+            Text("没有找到匹配项")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            Text("Try a different search term.")
+            Text("换个搜索词试试。")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
             Spacer()
@@ -350,17 +350,17 @@ struct TranscriptTimelineView: View {
             if isLive {
                 ProgressView()
                     .scaleEffect(0.8)
-                Text("Listening...")
+                Text("正在聆听…")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
-                Text("Transcript will appear here as you speak.")
+                Text("转写内容会随着你说话显示在这里。")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             } else {
                 Image(systemName: "text.word.spacing")
                     .font(.system(size: 36))
                     .foregroundStyle(.tertiary)
-                Text("No transcript")
+                Text("暂无转写")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -483,7 +483,7 @@ struct SegmentTextRow: View {
                         Button {
                             onSeekToTime(segment.startTime)
                         } label: {
-                            Label("Play from here", systemImage: "play.fill")
+                            Label("从此处播放", systemImage: "play.fill")
                         }
                         Divider()
                     }
@@ -491,26 +491,26 @@ struct SegmentTextRow: View {
                         NSPasteboard.general.clearContents()
                         NSPasteboard.general.setString(segment.text, forType: .string)
                     } label: {
-                        Label("Copy", systemImage: "doc.on.doc")
+                        Label("复制", systemImage: "doc.on.doc")
                     }
                     if onEditSegment != nil {
                         Button {
                             editText = segment.text
                             isEditing = true
                         } label: {
-                            Label("Edit", systemImage: "pencil")
+                            Label("编辑", systemImage: "pencil")
                         }
                     }
                 }
-                .help(isDraggable ? "Drag to move, double-click to edit" : (onEditSegment != nil ? "Double-click to edit" : ""))
+                .help(isDraggable ? "拖动以移动，双击以编辑" : (onEditSegment != nil ? "双击以编辑" : ""))
             }
 
             if segment.confidence < 0.7 {
                 Image(systemName: "exclamationmark.triangle")
                     .font(.caption2)
                     .foregroundColor(AppThemeConstants.warning)
-                    .help("Low confidence transcription")
-                    .accessibilityLabel("Low confidence transcription")
+                    .help("转写置信度低")
+                    .accessibilityLabel("转写置信度低")
             }
         }
     }

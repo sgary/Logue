@@ -44,7 +44,7 @@ struct DiagnosticsReportTests {
         // Key-shaped prefixes must never appear.
         #expect(text.contains("sk-") == false)
         #expect(text.lowercased().contains("api key") == false)
-        #expect(text.contains("External providers:"))
+        #expect(text.contains("外部提供商："))
     }
 
     @Test("Sanitising strips control characters and clamps length")
@@ -64,8 +64,8 @@ struct DiagnosticsReportTests {
 
     @Test("Sanitising replaces an empty value with a placeholder")
     func sanitiseHandlesEmpty() {
-        #expect(DiagnosticsReport.sanitise("") == "unknown")
-        #expect(DiagnosticsReport.sanitise("   ") == "unknown")
+        #expect(DiagnosticsReport.sanitise("") == "未知")
+        #expect(DiagnosticsReport.sanitise("   ") == "未知")
     }
 
     @Test("Report is plain multi-line text suitable for pasting")

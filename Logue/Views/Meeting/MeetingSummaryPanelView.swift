@@ -48,9 +48,9 @@ struct MeetingSummaryPanelView: View {
                             ProgressView()
                                 .scaleEffect(0.9)
                             VStack(spacing: 4) {
-                                Text("Generating summary...")
+                                Text("正在生成摘要…")
                                     .font(.callout.weight(.medium))
-                                Text("Using on-device AI to create Smart Minutes")
+                                Text("使用设备端 AI 生成会议纪要")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                                     .multilineTextAlignment(.center)
@@ -61,10 +61,10 @@ struct MeetingSummaryPanelView: View {
                     } else {
                         EmptyStateView(
                             icon: "sparkles",
-                            title: generationMessage != nil ? "Summary generation failed" : "No summary yet",
+                            title: generationMessage != nil ? "摘要生成失败" : "暂无摘要",
                             description: generationMessage
-                                ?? "Record a meeting and generate Smart Minutes.",
-                            actionLabel: meeting.segments.isEmpty ? nil : (generationMessage != nil ? "Try Again" : "Generate Summary"),
+                                ?? "录制会议并生成会议纪要。",
+                            actionLabel: meeting.segments.isEmpty ? nil : (generationMessage != nil ? "重试" : "生成摘要"),
                             action: meeting.segments.isEmpty ? nil : {
                                 guard !LLMEngineStatus.shared.isBusy else { return }
                                 generationMessage = nil
@@ -76,9 +76,9 @@ struct MeetingSummaryPanelView: View {
                                     case .success, .noActionItems:
                                         break
                                     case let .failed(error):
-                                        generationMessage = "Failed to generate summary: \(error)"
+                                        generationMessage = "生成摘要失败：\(error)"
                                     case .skipped:
-                                        generationMessage = "AI model is not loaded. Please check Settings → Models."
+                                        generationMessage = "AI 模型尚未加载。请检查“设置”→“模型”。"
                                     }
                                 }
                             }
@@ -128,13 +128,13 @@ struct MeetingSummaryPanelView: View {
             let isIdentifyingSpeakers = recorder.isDiarizing(for: meeting.id)
 
             VStack(spacing: 4) {
-                Text(isIdentifyingSpeakers ? "Identifying speakers..." : "Generating summary...")
+                Text(isIdentifyingSpeakers ? "正在识别发言人…" : "正在生成摘要…")
                     .font(.callout.weight(.medium))
                     .foregroundStyle(.primary)
 
                 Text(isIdentifyingSpeakers
-                    ? "Analyzing audio to identify different speakers"
-                    : "Using on-device AI to create Smart Minutes")
+                    ? "正在分析音频以识别不同发言人"
+                    : "使用设备端 AI 生成会议纪要")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
@@ -159,7 +159,7 @@ struct MeetingSummaryPanelView: View {
 
         // Key Decisions
         if !minutes.keyDecisions.isEmpty {
-            SummaryCard(title: "Key Decisions", icon: "checkmark.seal", accentColor: AppThemeConstants.success) {
+            SummaryCard(title: "关键决策", icon: "checkmark.seal", accentColor: AppThemeConstants.success) {
                 ForEach(Array(minutes.keyDecisions.enumerated()), id: \.offset) { _, decision in
                     BulletRow(text: decision, color: AppThemeConstants.success)
                 }
@@ -168,7 +168,7 @@ struct MeetingSummaryPanelView: View {
 
         // Discussion Points
         if !minutes.discussionPoints.isEmpty {
-            SummaryCard(title: "Discussion Points", icon: "bubble.left.and.bubble.right", accentColor: AppThemeConstants.brandPrimary) {
+            SummaryCard(title: "讨论要点", icon: "bubble.left.and.bubble.right", accentColor: AppThemeConstants.brandPrimary) {
                 ForEach(Array(minutes.discussionPoints.enumerated()), id: \.offset) { _, point in
                     BulletRow(text: point, color: AppThemeConstants.brandPrimary)
                 }
@@ -177,7 +177,7 @@ struct MeetingSummaryPanelView: View {
 
         // Action Items
         if !minutes.actionItems.isEmpty {
-            SummaryCard(title: "Action Items", icon: "checklist", accentColor: AppThemeConstants.warning) {
+            SummaryCard(title: "待办事项", icon: "checklist", accentColor: AppThemeConstants.warning) {
                 ForEach(Array(minutes.actionItems.enumerated()), id: \.offset) { index, item in
                     BulletRow(text: item, color: AppThemeConstants.warning, index: index + 1)
                 }
@@ -186,7 +186,7 @@ struct MeetingSummaryPanelView: View {
 
         // Follow-ups
         if !minutes.followUps.isEmpty {
-            SummaryCard(title: "Follow-ups", icon: "arrow.uturn.forward", accentColor: AppThemeConstants.categoryPurple) {
+            SummaryCard(title: "后续跟进", icon: "arrow.uturn.forward", accentColor: AppThemeConstants.categoryPurple) {
                 ForEach(Array(minutes.followUps.enumerated()), id: \.offset) { _, followUp in
                     BulletRow(text: followUp, color: AppThemeConstants.categoryPurple)
                 }
@@ -195,7 +195,7 @@ struct MeetingSummaryPanelView: View {
 
         // Attendee Summary
         if !minutes.attendeeSummary.isEmpty {
-            SummaryCard(title: "Attendees", icon: "person.2", accentColor: AppThemeConstants.accent) {
+            SummaryCard(title: "参会人员", icon: "person.2", accentColor: AppThemeConstants.accent) {
                 ForEach(minutes.attendeeSummary) { attendee in
                     AttendeeRow(attendee: attendee)
                 }
@@ -214,21 +214,21 @@ struct MeetingSummaryPanelView: View {
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .help("Previous section")
+                .help("上一节")
 
                 Button { narration.togglePlayPause() } label: {
                     Image(systemName: narration.playbackState == .playing ? "pause.fill" : "play.fill")
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .help(narration.playbackState == .playing ? "Pause" : "Resume")
+                .help(narration.playbackState == .playing ? "暂停" : "继续")
 
                 Button { narration.skipForward() } label: {
                     Image(systemName: "forward.fill")
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .help("Next section")
+                .help("下一节")
 
                 if narration.totalSections > 1 {
                     Text("\(narration.currentSectionIndex + 1)/\(narration.totalSections)")
@@ -243,12 +243,12 @@ struct MeetingSummaryPanelView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "stop.fill")
-                        Text("Stop")
+                        Text("停止")
                     }
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .help("Stop narration")
+                .help("停止朗读")
             } else {
                 Spacer()
 
@@ -257,12 +257,12 @@ struct MeetingSummaryPanelView: View {
                 } label: {
                     HStack(spacing: 4) {
                         Image(systemName: "speaker.wave.2")
-                        Text("Listen")
+                        Text("朗读")
                     }
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .help("Listen to summary")
+                .help("朗读摘要")
 
                 if savedDocumentTitle != nil {
                     Button {
@@ -270,25 +270,25 @@ struct MeetingSummaryPanelView: View {
                     } label: {
                         HStack(spacing: 4) {
                             Image(systemName: "square.and.arrow.down.on.square")
-                            Text("Save Again")
+                            Text("再次保存")
                         }
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
-                    .help("Save to another document")
+                    .help("保存到其他文档")
                 } else {
                     Button {
                         showSaveToDocSheet = true
                     } label: {
                         HStack(spacing: 4) {
                             Image(systemName: "square.and.arrow.down.on.square")
-                            Text("Save")
+                            Text("保存")
                         }
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.small)
-                    .help("Save to document")
+                    .help("保存到文档")
                 }
             }
         }
@@ -313,7 +313,7 @@ struct MeetingSummaryPanelView: View {
         HStack(spacing: 8) {
             Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(AppThemeConstants.success)
-            Text("Saved to")
+            Text("已保存到")
                 .font(.callout)
                 .foregroundStyle(.secondary)
             Text(docTitle)
@@ -323,7 +323,7 @@ struct MeetingSummaryPanelView: View {
             Button {
                 documentStore.selectedDocumentID = meeting.summaryDocumentID
             } label: {
-                Text("Open")
+                Text("打开")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(AppThemeConstants.accent)
             }
@@ -340,7 +340,7 @@ struct MeetingSummaryPanelView: View {
 
     private var topicKeywordsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            SectionHeader(title: "Topics", icon: "tag")
+            SectionHeader(title: "主题", icon: "tag")
 
             FlowLayout(spacing: 6) {
                 ForEach(Array(meeting.topicKeywords.enumerated()), id: \.offset) { _, keyword in
@@ -357,7 +357,7 @@ struct MeetingSummaryPanelView: View {
         let related = store.relatedMeetings(to: meeting.id)
         if !related.isEmpty {
             VStack(alignment: .leading, spacing: 8) {
-                SectionHeader(title: "Related Meetings", icon: "link")
+                SectionHeader(title: "相关会议", icon: "link")
 
                 ForEach(related) { relatedMeeting in
                     Button {

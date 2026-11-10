@@ -59,13 +59,13 @@ struct MeetingGridCardView: View {
                 Image(systemName: "pin.fill")
                     .font(.caption2)
                     .foregroundStyle(AppThemeConstants.pinnedColor)
-                    .accessibilityLabel("Pinned")
+                    .accessibilityLabel("已置顶")
             }
             if meeting.isArchived {
                 Image(systemName: "archivebox")
                     .font(.caption2)
                     .foregroundStyle(.tertiary)
-                    .accessibilityLabel("Archived")
+                    .accessibilityLabel("已归档")
             }
         }
     }

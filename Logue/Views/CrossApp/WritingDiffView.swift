@@ -11,6 +11,14 @@ struct WritingDiffView: View {
         case inline = "Inline"
         case sideBySide = "Side by Side"
         case improved = "Result Only"
+
+        var displayName: String {
+            switch self {
+            case .inline: "行内"
+            case .sideBySide: "并排"
+            case .improved: "仅结果"
+            }
+        }
     }
 
     var body: some View {
@@ -18,7 +26,7 @@ struct WritingDiffView: View {
             HStack {
                 ForEach(DiffViewMode.allCases, id: \.rawValue) { mode in
                     Button(action: { viewMode = mode }, label: {
-                        Text(mode.rawValue)
+                        Text(mode.displayName)
                             .font(.caption2.weight(.medium))
                             .foregroundStyle(viewMode == mode ? .white : .secondary)
                             .padding(.horizontal, 10)
@@ -29,13 +37,13 @@ struct WritingDiffView: View {
                             )
                     })
                     .buttonStyle(.plain)
-                    .accessibilityLabel(mode.rawValue)
+                    .accessibilityLabel(mode.displayName)
                     .accessibilityAddTraits(viewMode == mode ? .isSelected : [])
                 }
                 Spacer()
             }
             .accessibilityElement(children: .contain)
-            .accessibilityLabel("Diff view mode")
+            .accessibilityLabel("对比视图模式")
 
             ScrollView {
                 switch viewMode {
@@ -85,7 +93,7 @@ struct WritingDiffView: View {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 4) {
                     Circle().fill(AppThemeConstants.error.opacity(0.6)).frame(width: 6, height: 6)
-                    Text("Original")
+                    Text("原文")
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(AppThemeConstants.error.opacity(0.8))
                 }
@@ -107,7 +115,7 @@ struct WritingDiffView: View {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 4) {
                     Circle().fill(AppThemeConstants.success.opacity(0.6)).frame(width: 6, height: 6)
-                    Text("Improved")
+                    Text("改进后")
                         .font(.caption2.weight(.semibold))
                         .foregroundStyle(AppThemeConstants.success.opacity(0.8))
                 }
@@ -136,7 +144,7 @@ struct WritingDiffView: View {
                 Image(systemName: "checkmark.circle.fill")
                     .font(.caption2)
                     .foregroundStyle(AppThemeConstants.success)
-                Text("Improved Text")
+                Text("改进后的文本")
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(AppThemeConstants.success.opacity(0.8))
             }

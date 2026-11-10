@@ -53,10 +53,10 @@ actor WebSearchService {
 
         var errorDescription: String? {
             switch self {
-            case .invalidQuery: "Query is empty after sanitization."
-            case let .requestFailed(reason): "Web request failed: \(reason)"
-            case .parseFailed: "Could not parse search results."
-            case .insecureURL: "Only HTTPS URLs are allowed."
+            case .invalidQuery: "清理后的查询为空。"
+            case let .requestFailed(reason): "网络请求失败：\(reason)"
+            case .parseFailed: "无法解析搜索结果。"
+            case .insecureURL: "仅允许 HTTPS 链接。"
             }
         }
     }

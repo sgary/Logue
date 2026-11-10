@@ -14,11 +14,11 @@ struct SettingsView: View {
     var body: some View {
         TabView(selection: $selectedTab) {
             GeneralSettingsTab()
-                .tabItem { Label("General", systemImage: "gear") }
+                .tabItem { Label("通用", systemImage: "gear") }
                 .tag(SettingsTab.general)
 
             ModelsSettingsTab()
-                .tabItem { Label("Models", systemImage: "globe") }
+                .tabItem { Label("模型", systemImage: "globe") }
                 .tag(SettingsTab.models)
 
             AISettingsTab()
@@ -26,23 +26,23 @@ struct SettingsView: View {
                 .tag(SettingsTab.ai)
 
             ShortcutsSettingsTab()
-                .tabItem { Label("Shortcuts", systemImage: "command") }
+                .tabItem { Label("快捷键", systemImage: "command") }
                 .tag(SettingsTab.shortcuts)
 
             PrivacySettingsTab()
-                .tabItem { Label("Privacy", systemImage: "hand.raised") }
+                .tabItem { Label("隐私", systemImage: "hand.raised") }
                 .tag(SettingsTab.privacy)
 
             PermissionsSettingsTab()
-                .tabItem { Label("Permissions", systemImage: "lock.shield") }
+                .tabItem { Label("权限", systemImage: "lock.shield") }
                 .tag(SettingsTab.permissions)
 
             BackupSettingsTab()
-                .tabItem { Label("Backup", systemImage: "externaldrive") }
+                .tabItem { Label("备份", systemImage: "externaldrive") }
                 .tag(SettingsTab.backup)
 
             AboutSettingsTab(updater: updater)
-                .tabItem { Label("About", systemImage: "info.circle") }
+                .tabItem { Label("关于", systemImage: "info.circle") }
                 .tag(SettingsTab.about)
         }
         .frame(width: 550, height: 500)

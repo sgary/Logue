@@ -18,6 +18,22 @@ enum PIICategory: String, CaseIterable, Identifiable, Codable {
         rawValue
     }
 
+    /// Localized category name for the privacy panel.
+    var displayName: String {
+        switch self {
+        case .identity: "身份信息"
+        case .contact: "联系方式"
+        case .governmentIDs: "政府证件"
+        case .financial: "财务信息"
+        case .credentials: "登录凭证"
+        case .health: "健康信息"
+        case .employmentEducation: "就业与教育"
+        case .biometric: "生物识别"
+        case .locationDevice: "位置与设备"
+        case .metadata: "元数据"
+        }
+    }
+
     var icon: String {
         switch self {
         case .identity: "person.text.rectangle"
@@ -35,16 +51,16 @@ enum PIICategory: String, CaseIterable, Identifiable, Codable {
 
     var examples: String {
         switch self {
-        case .identity: "Name, DOB, Gender"
-        case .contact: "Email, Phone, Address, Social handles"
-        case .governmentIDs: "SSN, Passport, Driver's license, Tax ID"
-        case .financial: "Bank accounts, Cards, Payment accounts, Crypto"
-        case .credentials: "Passwords, OTPs, PINs, API keys"
-        case .health: "Insurance, Medical records, Prescriptions"
-        case .employmentEducation: "Employee ID, Student ID, Transcripts"
-        case .biometric: "Fingerprints, Face, Voice, Iris"
-        case .locationDevice: "GPS, IP, Device IDs"
-        case .metadata: "Cookies, Session IDs, Usernames"
+        case .identity: "姓名、出生日期、性别"
+        case .contact: "邮箱、电话、地址、社交账号"
+        case .governmentIDs: "SSN、护照、驾照、税号"
+        case .financial: "银行账户、银行卡、支付账户、加密货币"
+        case .credentials: "密码、动态验证码、PIN、API 密钥"
+        case .health: "保险、病历、处方"
+        case .employmentEducation: "员工编号、学号、成绩单"
+        case .biometric: "指纹、人脸、声音、虹膜"
+        case .locationDevice: "GPS、IP、设备标识"
+        case .metadata: "Cookie、会话 ID、用户名"
         }
     }
 
@@ -76,6 +92,15 @@ enum PIIRisk: String, Codable, Comparable {
         case .medium: AppThemeConstants.warning
         case .high: AppThemeConstants.error
         case .critical: AppThemeConstants.error
+        }
+    }
+
+    /// Localized risk name shown in badges.
+    var displayName: String {
+        switch self {
+        case .medium: "中"
+        case .high: "高"
+        case .critical: "严重"
         }
     }
 

@@ -125,7 +125,7 @@ struct ChatHomeEmptyState: View {
     private var recentSection: some View {
         VStack(spacing: 6) {
             HStack {
-                Text("Recent")
+                Text("最近")
                     .font(.system(size: 11, weight: .semibold))
                     .foregroundStyle(.tertiary)
                 Spacer()

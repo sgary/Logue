@@ -22,8 +22,8 @@ struct OverviewPane: View {
                 searchResultsView
             }
         }
-        .searchable(text: $searchText, prompt: "Search")
-        .navigationTitle("Home")
+        .searchable(text: $searchText, prompt: "搜索")
+        .navigationTitle("首页")
         .onChange(of: searchText) { _, newValue in
             searchDebounceTask?.cancel()
             if newValue.isEmpty {
@@ -46,7 +46,7 @@ struct OverviewPane: View {
                         $0.title.localizedCaseInsensitiveContains(newValue)
                     }
                     for doc in matchingDocs {
-                        results.append((id: doc.id, title: doc.title, type: "Document", item: .document(doc.id)))
+                        results.append((id: doc.id, title: doc.title, type: "文档", item: .document(doc.id)))
                     }
 
                     // Meetings: title + summary (lightweight) + FTS5 index (transcript/keywords)
@@ -56,7 +56,7 @@ struct OverviewPane: View {
                             || ftsIDs.contains($0.id)
                     }
                     for meeting in matchingMeetings {
-                        results.append((id: meeting.id, title: meeting.title, type: "Meeting", item: .meeting(meeting.id)))
+                        results.append((id: meeting.id, title: meeting.title, type: "会议", item: .meeting(meeting.id)))
                     }
 
                     searchResults = results
@@ -94,7 +94,7 @@ struct OverviewPane: View {
                         Image(systemName: "waveform")
                             .font(.title3)
                             .foregroundStyle(.tertiary)
-                        Text("No meetings yet")
+                        Text("还没有会议")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -143,17 +143,17 @@ struct OverviewPane: View {
             }
         } header: {
             HStack {
-                Text("Recent Meetings")
+                Text("最近会议")
                 Spacer()
                 Button {
                     selectedCategory = .meetings
                 } label: {
-                    Text("View All")
+                    Text("查看全部")
                         .font(.caption)
                         .textCase(nil)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("View all meetings")
+                .accessibilityLabel("查看全部会议")
             }
         }
     }
@@ -173,7 +173,7 @@ struct OverviewPane: View {
                         Image(systemName: "doc.text")
                             .font(.title3)
                             .foregroundStyle(.tertiary)
-                        Text("No documents yet")
+                        Text("还没有文档")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -215,17 +215,17 @@ struct OverviewPane: View {
             }
         } header: {
             HStack {
-                Text("Recent Documents")
+                Text("最近文档")
                 Spacer()
                 Button {
                     selectedCategory = .documents
                 } label: {
-                    Text("View All")
+                    Text("查看全部")
                         .font(.caption)
                         .textCase(nil)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("View all documents")
+                .accessibilityLabel("查看全部文档")
             }
         }
     }
@@ -236,9 +236,9 @@ struct OverviewPane: View {
         List {
             if searchResults.isEmpty {
                 ContentUnavailableView(
-                    "No Results",
+                    "没有结果",
                     systemImage: "magnifyingglass",
-                    description: Text("No documents or meetings match '\(searchText)'")
+                    description: Text("没有与“\(searchText)”匹配的文档或会议")
                 )
             } else {
                 ForEach(searchResults, id: \.id) { result in
@@ -247,9 +247,9 @@ struct OverviewPane: View {
                         searchText = ""
                     } label: {
                         HStack(spacing: 12) {
-                            Image(systemName: result.type == "Document" ? "doc.text" : "waveform")
+                            Image(systemName: result.type == "文档" ? "doc.text" : "waveform")
                                 .font(.title3)
-                                .foregroundStyle(result.type == "Document" ? AppThemeConstants.success : AppThemeConstants.brandPrimary)
+                                .foregroundStyle(result.type == "文档" ? AppThemeConstants.success : AppThemeConstants.brandPrimary)
                                 .frame(width: 24)
 
                             VStack(alignment: .leading, spacing: 2) {

@@ -40,8 +40,8 @@ struct GetConfirmationTool: AgentTool {
             throw AgentToolError.missingParameter("title")
         }
         let message = (arguments["message"] as? String) ?? ""
-        let confirmLabel = (arguments["confirm_label"] as? String) ?? "Yes"
-        let cancelLabel = (arguments["cancel_label"] as? String) ?? "No"
+        let confirmLabel = (arguments["confirm_label"] as? String) ?? "是"
+        let cancelLabel = (arguments["cancel_label"] as? String) ?? "否"
 
         let confirmed: Bool = await MainActor.run {
             let alert = NSAlert()
@@ -109,8 +109,8 @@ struct GetTextInputTool: AgentTool {
             field.placeholderString = String(placeholder.prefix(120))
             alert.accessoryView = field
 
-            alert.addButton(withTitle: "OK")
-            alert.addButton(withTitle: "Cancel")
+            alert.addButton(withTitle: "好")
+            alert.addButton(withTitle: "取消")
 
             // Return-key submits the dialog by activating the OK button.
             field.becomeFirstResponder()
@@ -190,8 +190,8 @@ struct GetUserSelectionTool: AgentTool {
             popup.selectItem(at: defaultIndex)
             alert.accessoryView = popup
 
-            alert.addButton(withTitle: "OK")
-            alert.addButton(withTitle: "Cancel")
+            alert.addButton(withTitle: "好")
+            alert.addButton(withTitle: "取消")
 
             let response = alert.runModal()
             return response == .alertFirstButtonReturn ? popup.titleOfSelectedItem : nil

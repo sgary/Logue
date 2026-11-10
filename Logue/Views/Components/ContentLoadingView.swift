@@ -10,7 +10,7 @@ import SwiftUI
 /// instant, not like a spinner that flashed; a spinner appearing and vanishing inside 100ms reads
 /// as a glitch and tells the user less than a blank pane does.
 struct ContentLoadingView: View {
-    var label: String = "Loading…"
+    var label: String = "加载中…"
 
     @State private var isVisible = false
 

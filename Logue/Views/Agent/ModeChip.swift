@@ -26,7 +26,7 @@ struct ModeChip: View {
                     .font(.caption2)
             }
             .buttonStyle(.plain)
-            .help("Turn off \(title)")
+            .help("关闭\(title)")
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 3)

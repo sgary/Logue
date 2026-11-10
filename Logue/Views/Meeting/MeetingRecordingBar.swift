@@ -16,8 +16,8 @@ struct AudioLevelMeter: View {
                 )
             }
         }
-        .accessibilityLabel("Audio level meter")
-        .accessibilityValue("\(Int(min(level, 1.0) * 100)) percent")
+        .accessibilityLabel("音量指示器")
+        .accessibilityValue("\(Int(min(level, 1.0) * 100))%")
     }
 }
 

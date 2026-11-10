@@ -59,7 +59,7 @@ struct InlineRewritePopover: View {
                 .font(.callout)
                 .foregroundStyle(AppThemeConstants.accent)
 
-            Text("Rewrite selection")
+            Text("重写所选内容")
                 .font(.subheadline.weight(.semibold))
 
             Spacer()
@@ -74,8 +74,8 @@ struct InlineRewritePopover: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .help("Close (Esc)")
-            .accessibilityLabel("Close rewrite")
+            .help("关闭（Esc）")
+            .accessibilityLabel("关闭重写")
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
@@ -93,7 +93,7 @@ struct InlineRewritePopover: View {
             if state.isRewriting {
                 HStack(spacing: 8) {
                     PulsingDot(size: 6)
-                    Text("Generating…")
+                    Text("生成中…")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -117,7 +117,7 @@ struct InlineRewritePopover: View {
     private var instructionField: some View {
         VStack(alignment: .leading, spacing: 4) {
             TextField(
-                "Tell the AI what to change…",
+                "告诉 AI 你想改什么…",
                 text: $state.instruction,
                 axis: .vertical
             )
@@ -139,9 +139,9 @@ struct InlineRewritePopover: View {
                     state.submitInstruction()
                 }
             }
-            .accessibilityLabel("Rewrite instruction")
+            .accessibilityLabel("重写指令")
 
-            Text("E.g. \"make this shorter\" · \"more formal\" · \"turn into a bulleted list\"")
+            Text("例如：“更简短一些”·“更正式”·“改成项目符号列表”")
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
         }
@@ -149,7 +149,7 @@ struct InlineRewritePopover: View {
 
     private var originalPreview: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Selected text")
+            Text("所选文本")
                 .font(.caption2.weight(.semibold))
                 .foregroundStyle(.tertiary)
 
@@ -170,7 +170,7 @@ struct InlineRewritePopover: View {
     private var diffPreview: some View {
         VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading, spacing: 4) {
-                label("Original", color: AppThemeConstants.error)
+                label("原文", color: AppThemeConstants.error)
                 Text(state.originalText)
                     .font(.callout)
                     .foregroundStyle(.primary)
@@ -186,7 +186,7 @@ struct InlineRewritePopover: View {
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                label("Rewrite", color: AppThemeConstants.success)
+                label("重写", color: AppThemeConstants.success)
                 Text(state.rewrittenText)
                     .font(.callout)
                     .foregroundStyle(.primary)
@@ -242,13 +242,13 @@ struct InlineRewritePopover: View {
         case .awaitingInstruction:
             HStack {
                 Spacer()
-                Button("Cancel") { state.reject() }
+                Button("取消") { state.reject() }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                 Button {
                     state.submitInstruction()
                 } label: {
-                    Label("Rewrite", systemImage: "arrow.up.circle.fill")
+                    Label("重写", systemImage: "arrow.up.circle.fill")
                         .labelStyle(.titleAndIcon)
                 }
                 .buttonStyle(.borderedProminent)
@@ -256,7 +256,7 @@ struct InlineRewritePopover: View {
                 .tint(AppThemeConstants.accent)
                 .disabled(!state.canSubmit || LLMEngineStatus.shared.isBusy)
                 .keyboardShortcut(.return, modifiers: [.command])
-                .help("Send (⌘↩)")
+                .help("发送（⌘↩）")
             }
 
         case .preview:
@@ -264,7 +264,7 @@ struct InlineRewritePopover: View {
                 Button {
                     state.regenerate()
                 } label: {
-                    Label("Regenerate", systemImage: "arrow.clockwise")
+                    Label("重新生成", systemImage: "arrow.clockwise")
                         .labelStyle(.titleAndIcon)
                 }
                 .buttonStyle(.bordered)
@@ -273,7 +273,7 @@ struct InlineRewritePopover: View {
 
                 Spacer()
 
-                Button("Reject") { state.reject() }
+                Button("拒绝") { state.reject() }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
 
@@ -282,27 +282,27 @@ struct InlineRewritePopover: View {
                         HapticFeedback.levelChange()
                     }
                 } label: {
-                    Label("Accept", systemImage: "checkmark.circle.fill")
+                    Label("接受", systemImage: "checkmark.circle.fill")
                         .labelStyle(.titleAndIcon)
                 }
                 .buttonStyle(.borderedProminent)
                 .controlSize(.small)
                 .tint(AppThemeConstants.success)
                 .keyboardShortcut(.return, modifiers: [.command])
-                .help("Accept (⌘↩)")
+                .help("接受（⌘↩）")
             }
 
         case .error:
             HStack {
                 Spacer()
-                Button("Close") { state.reject() }
+                Button("关闭") { state.reject() }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                 Button {
                     // Reset to awaitingInstruction so the user can try again
                     state.regenerate()
                 } label: {
-                    Label("Try Again", systemImage: "arrow.clockwise")
+                    Label("重试", systemImage: "arrow.clockwise")
                         .labelStyle(.titleAndIcon)
                 }
                 .buttonStyle(.borderedProminent)

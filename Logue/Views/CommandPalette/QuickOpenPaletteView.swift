@@ -46,9 +46,9 @@ struct QuickOpenPaletteView: View {
 
             Divider()
             HStack(spacing: 16) {
-                footerHint(icon: "arrow.up.arrow.down", text: "Navigate")
-                footerHint(icon: "return", text: "Open")
-                footerHint(icon: "escape", text: "Close")
+                footerHint(icon: "arrow.up.arrow.down", text: "导航")
+                footerHint(icon: "return", text: "打开")
+                footerHint(icon: "escape", text: "关闭")
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
@@ -105,12 +105,12 @@ struct QuickOpenPaletteView: View {
                 .font(.system(size: 15, weight: .medium))
                 .foregroundStyle(.secondary)
 
-            TextField("Go to document or meeting…", text: $query)
+            TextField("跳转到文档或会议…", text: $query)
                 .textFieldStyle(.plain)
                 .font(.system(size: 16))
                 .focused($isSearchFocused)
-                .accessibilityLabel("Quick open search")
-                .accessibilityHint("Type part of a document or meeting title")
+                .accessibilityLabel("快速打开搜索")
+                .accessibilityHint("输入文档或会议标题的一部分")
                 .onSubmit { openSelected() }
 
             if !query.isEmpty {
@@ -121,8 +121,8 @@ struct QuickOpenPaletteView: View {
                         .foregroundStyle(.tertiary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Clear search")
-                .accessibilityHint("Clears the quick open search text")
+                .accessibilityLabel("清除搜索")
+                .accessibilityHint("清除快速打开的搜索文本")
             }
         }
         .padding(.horizontal, 16)
@@ -134,7 +134,7 @@ struct QuickOpenPaletteView: View {
             Image(systemName: "magnifyingglass")
                 .font(.title2)
                 .foregroundStyle(.tertiary)
-            Text(candidates.isEmpty ? "Nothing to open yet" : "No matches for \"\(query)\"")
+            Text(candidates.isEmpty ? "还没有可打开的内容" : "没有匹配“\(query)”的结果")
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
         }
@@ -206,8 +206,8 @@ private struct QuickOpenRow: View {
 
     private var kindLabel: String {
         switch item.kind {
-        case .document: "Document"
-        case .meeting: "Meeting"
+        case .document: "文档"
+        case .meeting: "会议"
         }
     }
 
@@ -250,8 +250,8 @@ private struct QuickOpenRow: View {
         }
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
-        .accessibilityLabel("\(item.title), \(kindLabel)")
-        .accessibilityHint("Opens this \(kindLabel.lowercased())")
+        .accessibilityLabel("\(item.title)，\(kindLabel)")
+        .accessibilityHint("打开此\(kindLabel)")
         .accessibilityAddTraits(isSelected ? .isSelected : [])
     }
 }

@@ -7,7 +7,7 @@ struct WritingDocumentTests {
     @Test("Document generates default UUID and title")
     func defaults() {
         let doc = WritingDocument()
-        #expect(doc.title == "Untitled Document")
+        #expect(doc.title == "未命名文档")
         #expect(doc.body.isEmpty)
         #expect(doc.isPinned == false)
         #expect(doc.score == nil)
@@ -31,18 +31,18 @@ struct WritingDocumentTests {
         doc.body = String(repeating: wordStr, count: 238)
 
         #expect(doc.readingTimeMinutes == 1.0)
-        #expect(doc.readingTimeLabel == "1 min read")
+        #expect(doc.readingTimeLabel == "1 分钟阅读")
 
         doc.body = "Short content"
         // < 1 min read label
         #expect(doc.readingTimeMinutes < 1.0)
-        #expect(doc.readingTimeLabel == "< 1 min read")
+        #expect(doc.readingTimeLabel == "< 1 分钟阅读")
 
         // 238 * 2.5 words = 595 words
         doc.body = String(repeating: wordStr, count: 595)
         #expect(doc.readingTimeMinutes == 2.5)
         // ceil(2.5) == 3
-        #expect(doc.readingTimeLabel == "3 min read")
+        #expect(doc.readingTimeLabel == "3 分钟阅读")
     }
 
     @Test("Snippet generated correctly")

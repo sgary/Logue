@@ -36,9 +36,9 @@ struct MeetingActionItemsPanelView: View {
                     ProgressView()
                         .scaleEffect(0.9)
                     VStack(spacing: 4) {
-                        Text("Extracting action items...")
+                        Text("正在提取待办事项…")
                             .font(.callout.weight(.medium))
-                        Text("Using on-device AI to identify tasks")
+                        Text("使用设备端 AI 识别任务")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -47,16 +47,16 @@ struct MeetingActionItemsPanelView: View {
             } else if meeting.actionItems.isEmpty {
                 EmptyStateView(
                     icon: "checklist",
-                    title: extractionMessage != nil ? "No action items found" : "No action items",
+                    title: extractionMessage != nil ? "未找到待办事项" : "暂无待办事项",
                     description: extractionMessage
                         ?? (meeting.segments.isEmpty
-                            ? "Start a meeting to extract action items."
+                            ? "开始会议以提取待办事项。"
                             : (hasSummary
-                                ? "Tap to extract action items from the existing summary."
-                                : "Action items will be extracted when you generate a summary.")),
+                                ? "点击从现有摘要中提取待办事项。"
+                                : "生成摘要后将自动提取待办事项。")),
                     actionLabel: meeting.segments.isEmpty
-                        ? (canStartMeeting ? "Start Meeting" : nil)
-                        : (extractionMessage != nil ? "Try Again" : (hasSummary ? "Extract Action Items" : "Generate Summary")),
+                        ? (canStartMeeting ? "开始会议" : nil)
+                        : (extractionMessage != nil ? "重试" : (hasSummary ? "提取待办事项" : "生成摘要")),
                     action: meeting.segments.isEmpty
                         ? (canStartMeeting ? {
                             Task { await recorder.startRecording(for: meeting) }
@@ -73,11 +73,11 @@ struct MeetingActionItemsPanelView: View {
                                     case .success:
                                         break // Action items will appear via observation
                                     case .noActionItems:
-                                        extractionMessage = "No action items were found in this meeting's transcript. You can try again."
+                                        extractionMessage = "未在本次会议的转写中找到待办事项。你可以重试。"
                                     case let .failed(error):
-                                        extractionMessage = "Failed to extract action items: \(error)"
+                                        extractionMessage = "提取待办事项失败：\(error)"
                                     case .skipped:
-                                        extractionMessage = "AI model is not loaded. Please check Settings → Models."
+                                        extractionMessage = "AI 模型尚未加载。请检查“设置”→“模型”。"
                                     }
                                 }
                             }
@@ -125,7 +125,7 @@ struct MeetingActionItemsPanelView: View {
 
     private var actionItemsControlsBar: some View {
         HStack(spacing: 8) {
-            Text("\(completedCount)/\(meeting.actionItems.count) completed")
+            Text("已完成 \(completedCount)/\(meeting.actionItems.count)")
                 .font(.caption)
                 .foregroundStyle(.secondary)
 
@@ -136,7 +136,7 @@ struct MeetingActionItemsPanelView: View {
                     HStack(spacing: 6) {
                         ProgressView()
                             .controlSize(.small)
-                        Text("Updating...")
+                        Text("正在更新…")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
@@ -149,23 +149,23 @@ struct MeetingActionItemsPanelView: View {
                             case .success:
                                 break
                             case .noActionItems:
-                                extractionMessage = "No new action items found in the latest transcript."
+                                extractionMessage = "最新转写中未发现新的待办事项。"
                             case let .failed(error):
-                                extractionMessage = "Failed to update action items: \(error)"
+                                extractionMessage = "更新待办事项失败：\(error)"
                             case .skipped:
-                                extractionMessage = "AI model is not loaded. Please check Settings → Models."
+                                extractionMessage = "AI 模型尚未加载。请检查“设置”→“模型”。"
                             }
                         }
                     } label: {
                         HStack(spacing: 4) {
                             Image(systemName: "arrow.trianglehead.2.clockwise")
-                            Text("Update")
+                            Text("更新")
                         }
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                     .disabled(isExtracting || recorder.postRecordingPipeline.isGenerating(for: meeting.id))
-                    .help("Re-extract action items with latest transcript")
+                    .help("使用最新转写重新提取待办事项")
                 }
             }
         }
@@ -198,7 +198,7 @@ private struct ActionItemRow: View {
                     .foregroundColor(item.isCompleted ? AppThemeConstants.success : .secondary)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(item.isCompleted ? "Mark incomplete" : "Mark complete")
+            .accessibilityLabel(item.isCompleted ? "标记为未完成" : "标记为完成")
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.title)
@@ -252,12 +252,12 @@ private struct ActionItemRow: View {
         if let promotedTask {
             let isDone = promotedTask.status == .done
             Label(
-                isDone ? "Done in Tasks" : "In Tasks",
+                isDone ? "已在任务中完成" : "在任务中",
                 systemImage: isDone ? "checkmark.circle.fill" : "arrow.right.circle"
             )
             .font(.caption)
             .foregroundStyle(.tertiary)
-            .help("This action item was added to your tasks")
+            .help("此待办事项已添加到你的任务")
         }
     }
 
@@ -279,7 +279,7 @@ private struct ActionItemRow: View {
                     .fixedSize()
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Due \(dueDate.formatted(date: .abbreviated, time: .omitted))")
+            .accessibilityLabel("截止 \(dueDate.formatted(date: .abbreviated, time: .omitted))")
             .popover(isPresented: $showDatePicker, arrowEdge: .bottom) {
                 dueDatePopover
             }
@@ -288,7 +288,7 @@ private struct ActionItemRow: View {
                 selectedDueDate = Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now
                 showDatePicker = true
             } label: {
-                Label("Set due date", systemImage: "calendar.badge.plus")
+                Label("设置截止日期", systemImage: "calendar.badge.plus")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
@@ -317,7 +317,7 @@ private struct ActionItemRow: View {
                     .fixedSize()
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Reminder set for \(reminderDate.formatted(date: .abbreviated, time: .shortened))")
+            .accessibilityLabel("提醒时间：\(reminderDate.formatted(date: .abbreviated, time: .shortened))")
             .popover(isPresented: $showReminderPicker, arrowEdge: .bottom) {
                 reminderPopover
             }
@@ -338,8 +338,8 @@ private struct ActionItemRow: View {
                     .foregroundStyle(.tertiary)
             }
             .buttonStyle(.plain)
-            .help("Set reminder")
-            .accessibilityLabel("Set reminder")
+            .help("设置提醒")
+            .accessibilityLabel("设置提醒")
             .popover(isPresented: $showReminderPicker, arrowEdge: .bottom) {
                 reminderPopover
             }
@@ -350,31 +350,31 @@ private struct ActionItemRow: View {
 
     private var dueDatePopover: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Due Date")
+            Text("截止日期")
                 .font(.subheadline.weight(.semibold))
 
             HStack(spacing: 6) {
-                dueDatePreset("Today", date: Calendar.current.date(
+                dueDatePreset("今天", date: Calendar.current.date(
                     bySettingHour: 17, minute: 0, second: 0, of: .now
                 ))
-                dueDatePreset("Tomorrow", date: Calendar.current.date(
+                dueDatePreset("明天", date: Calendar.current.date(
                     bySettingHour: 9, minute: 0, second: 0,
                     of: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now
                 ))
-                dueDatePreset("Next Week", date: Calendar.current.date(
+                dueDatePreset("下周", date: Calendar.current.date(
                     byAdding: .weekOfYear, value: 1, to: .now
                 ))
             }
 
             Divider()
 
-            DatePicker("Custom:", selection: $selectedDueDate, displayedComponents: [.date])
+            DatePicker("自定义：", selection: $selectedDueDate, displayedComponents: [.date])
                 .datePickerStyle(.field)
                 .font(.caption)
 
             HStack {
                 if item.dueDate != nil {
-                    Button("Remove") {
+                    Button("移除") {
                         store.setActionItemDueDate(nil, itemID: item.id, in: meetingID)
                         showDatePicker = false
                     }
@@ -383,7 +383,7 @@ private struct ActionItemRow: View {
 
                 Spacer()
 
-                Button("Set") {
+                Button("设置") {
                     store.setActionItemDueDate(selectedDueDate, itemID: item.id, in: meetingID)
                     showDatePicker = false
                 }
@@ -412,19 +412,19 @@ private struct ActionItemRow: View {
 
     private var reminderPopover: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Reminder")
+            Text("提醒")
                 .font(.subheadline.weight(.semibold))
 
             VStack(spacing: 4) {
-                reminderPreset("In 1 hour", date: Date.now.addingTimeInterval(3600))
-                reminderPreset("In 3 hours", date: Date.now.addingTimeInterval(10800))
-                reminderPreset("Tomorrow 9 AM", date: Calendar.current.date(
+                reminderPreset("1 小时后", date: Date.now.addingTimeInterval(3600))
+                reminderPreset("3 小时后", date: Date.now.addingTimeInterval(10800))
+                reminderPreset("明天上午 9 点", date: Calendar.current.date(
                     bySettingHour: 9, minute: 0, second: 0,
                     of: Calendar.current.date(byAdding: .day, value: 1, to: .now) ?? .now
                 ))
                 if let dueDate = item.dueDate, dueDate > Date.now.addingTimeInterval(3600) {
                     reminderPreset(
-                        "1h before due",
+                        "截止前 1 小时",
                         date: dueDate.addingTimeInterval(-3600)
                     )
                 }
@@ -432,13 +432,13 @@ private struct ActionItemRow: View {
 
             Divider()
 
-            DatePicker("Custom:", selection: $selectedReminderDate, in: Date.now..., displayedComponents: [.date, .hourAndMinute])
+            DatePicker("自定义：", selection: $selectedReminderDate, in: Date.now..., displayedComponents: [.date, .hourAndMinute])
                 .datePickerStyle(.field)
                 .font(.caption)
 
             HStack {
                 if item.reminderDate != nil {
-                    Button("Remove") {
+                    Button("移除") {
                         store.cancelActionItemReminder(itemID: item.id, in: meetingID)
                         showReminderPicker = false
                     }
@@ -447,7 +447,7 @@ private struct ActionItemRow: View {
 
                 Spacer()
 
-                Button("Set") {
+                Button("设置") {
                     store.setActionItemReminder(
                         itemID: item.id,
                         in: meetingID,

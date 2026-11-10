@@ -61,7 +61,7 @@ struct MeetingWorkspaceView: View {
                     HStack(spacing: 8) {
                         Image(systemName: "arrow.clockwise.circle")
                             .foregroundStyle(.secondary)
-                        Text("Recovered after an unexpected quit — the last few seconds may be missing.")
+                        Text("应用意外退出后已恢复录音——最后几秒可能缺失。")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                         Spacer()
@@ -201,13 +201,13 @@ struct MeetingWorkspaceView: View {
             .onReceive(NotificationCenter.default.publisher(for: .openMeetingExportPanel)) { _ in
                 MeetingExportPanelView.exportMarkdown(meeting: meeting)
             }
-            .alert("Delete Meeting?", isPresented: $showDeleteConfirmation) {
-                Button("Delete", role: .destructive) {
+            .alert("删除会议？", isPresented: $showDeleteConfirmation) {
+                Button("删除", role: .destructive) {
                     store.trashMeeting(id: meeting.id)
                 }
-                Button("Cancel", role: .cancel) {}
+                Button("取消", role: .cancel) {}
             } message: {
-                Text("\"\(meeting.title)\" will be moved to Trash.")
+                Text("“\(meeting.title)”将移到废纸篓。")
             }
         }
     }
@@ -232,13 +232,13 @@ extension MeetingWorkspaceView {
         ToolbarItem(placement: .navigation) {
             Button {
                 let newMeeting = store.createMeeting(
-                    title: "Meeting \(Date.now.formatted(date: .abbreviated, time: .shortened))"
+                    title: "会议 \(Date.now.formatted(date: .abbreviated, time: .shortened))"
                 )
                 store.selectedMeetingID = newMeeting.id
             } label: {
                 Image(systemName: "plus")
             }
-            .help("New Meeting")
+            .help("新建会议")
         }
     }
 
@@ -272,7 +272,7 @@ extension MeetingWorkspaceView {
                         .font(.caption)
                         .foregroundStyle(recorder.isMicActive ? .primary : .secondary)
                 }
-                .help(recorder.isMicActive ? "Mute microphone" : "Unmute microphone")
+                .help(recorder.isMicActive ? "静音麦克风" : "取消麦克风静音")
             }
         }
     }
@@ -317,14 +317,14 @@ extension MeetingWorkspaceView {
     @ViewBuilder
     func startStopButton(for meeting: MeetingNote) -> some View {
         if recorder.isRecovering {
-            recordProgressButton(label: "Finishing an interrupted recording…")
+            recordProgressButton(label: "正在结束中断的录音…")
         } else if recorder.isStartingRecording {
-            recordProgressButton(label: "Starting…")
+            recordProgressButton(label: "正在开始…")
         } else if recorder.isStopping {
-            recordProgressButton(label: "Stopping…")
+            recordProgressButton(label: "正在停止…")
         } else if recorder.isDiarizing(for: meeting.id) {
             recordProgressButton(
-                label: recorder.diarizationStage.isEmpty ? "Identifying speakers…" : recorder.diarizationStage
+                label: recorder.diarizationStage.isEmpty ? "正在识别发言人…" : recorder.diarizationStage
             )
         } else if recorder.isRecording {
             stopRecordingButton(for: meeting)
@@ -350,13 +350,13 @@ extension MeetingWorkspaceView {
         } label: {
             HStack(spacing: 4) {
                 Image(systemName: "stop.circle.fill")
-                Text("Stop")
+                Text("停止")
             }
         }
         .tint(AppThemeConstants.error)
         .keyboardShortcut("r", modifiers: .command)
-        .accessibilityLabel("Stop recording")
-        .accessibilityHint("Stops the current meeting recording")
+        .accessibilityLabel("停止录音")
+        .accessibilityHint("停止当前会议录音")
     }
 
     func startRecordingButton(for meeting: MeetingNote) -> some View {
@@ -365,17 +365,17 @@ extension MeetingWorkspaceView {
         } label: {
             HStack(spacing: 4) {
                 Image(systemName: "record.circle")
-                Text("Start")
+                Text("开始")
             }
         }
         .keyboardShortcut("r", modifiers: .command)
-        .accessibilityLabel("Start recording")
-        .help("Start Recording (⌘R)")
+        .accessibilityLabel("开始录音")
+        .help("开始录音（⌘R）")
     }
 
     func quickBookmarkButton(for meeting: MeetingNote) -> some View {
         Button {
-            let bookmark = Bookmark(label: "Bookmark", timestamp: recorder.elapsedTime, color: .orange)
+            let bookmark = Bookmark(label: "书签", timestamp: recorder.elapsedTime, color: .orange)
             store.addBookmark(bookmark, to: meeting.id)
             showBookmarkConfirm = true
             Task { @MainActor in
@@ -387,8 +387,8 @@ extension MeetingWorkspaceView {
                 .foregroundStyle(showBookmarkConfirm ? AppThemeConstants.warning : .secondary)
         }
         .keyboardShortcut("b", modifiers: .command)
-        .help("Add Bookmark (⌘B)")
-        .accessibilityLabel("Add bookmark")
+        .help("添加书签（⌘B）")
+        .accessibilityLabel("添加书签")
     }
 
     @ToolbarContentBuilder
@@ -398,18 +398,18 @@ extension MeetingWorkspaceView {
             Menu {
                 moreMenuContent(for: meeting)
             } label: {
-                Label("More", systemImage: "ellipsis.circle")
+                Label("更多", systemImage: "ellipsis.circle")
             }
-            .help("More options")
+            .help("更多选项")
             .popover(isPresented: $showTagPopover, arrowEdge: .bottom) {
                 tagPopoverContent(meeting: meeting)
             }
-            .alert("Rename Meeting", isPresented: $showRenameAlert) {
-                TextField("Title", text: $renameText)
-                Button("Rename") {
+            .alert("重命名会议", isPresented: $showRenameAlert) {
+                TextField("标题", text: $renameText)
+                Button("重命名") {
                     store.renameMeeting(id: meeting.id, newTitle: renameText)
                 }
-                Button("Cancel", role: .cancel) {}
+                Button("取消", role: .cancel) {}
             }
         }
     }
@@ -420,7 +420,7 @@ extension MeetingWorkspaceView {
             store.togglePin(id: meeting.id)
         } label: {
             Label(
-                meeting.isPinned ? "Unpin" : "Pin",
+                meeting.isPinned ? "取消置顶" : "置顶",
                 systemImage: meeting.isPinned ? "pin.slash" : "pin"
             )
         }
@@ -428,7 +428,7 @@ extension MeetingWorkspaceView {
             store.toggleArchive(id: meeting.id)
         } label: {
             Label(
-                meeting.isArchived ? "Unarchive" : "Archive",
+                meeting.isArchived ? "取消归档" : "归档",
                 systemImage: meeting.isArchived ? "tray.and.arrow.up" : "archivebox"
             )
         }
@@ -437,31 +437,31 @@ extension MeetingWorkspaceView {
                 await store.regenerateAITitle(for: meeting.id)
             }
         } label: {
-            Label("Generate Title", systemImage: "sparkles")
+            Label("生成标题", systemImage: "sparkles")
         }
         .disabled(meeting.segments.isEmpty)
         Button {
             renameText = meeting.title
             showRenameAlert = true
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
         Button {
             showTagPopover = true
         } label: {
-            Label("Add Tag", systemImage: "tag")
+            Label("添加标签", systemImage: "tag")
         }
         Divider()
         Menu {
             exportMenuContent(for: meeting)
         } label: {
-            Label("Export", systemImage: "square.and.arrow.up")
+            Label("导出", systemImage: "square.and.arrow.up")
         }
         Divider()
         Button(role: .destructive) {
             showDeleteConfirmation = true
         } label: {
-            Label("Delete Meeting", systemImage: "trash")
+            Label("删除会议", systemImage: "trash")
         }
     }
 
@@ -470,17 +470,17 @@ extension MeetingWorkspaceView {
         Button {
             MeetingExportPanelView.exportTranscript(meeting: meeting)
         } label: {
-            Label("Full Transcript", systemImage: "doc.text")
+            Label("完整转写", systemImage: "doc.text")
         }
         Button {
             MeetingExportPanelView.exportSmartMinutes(meeting: meeting)
         } label: {
-            Label("Smart Minutes", systemImage: "doc.plaintext")
+            Label("会议纪要", systemImage: "doc.plaintext")
         }
         Button {
             MeetingExportPanelView.exportActionItems(meeting: meeting)
         } label: {
-            Label("Action Items", systemImage: "checklist")
+            Label("待办事项", systemImage: "checklist")
         }
         Button {
             MeetingExportPanelView.exportMarkdown(meeting: meeting)
@@ -491,22 +491,22 @@ extension MeetingWorkspaceView {
             Button {
                 MeetingExportPanelView.exportBookmarks(meeting: meeting)
             } label: {
-                Label("Bookmarked Moments", systemImage: "bookmark.fill")
+                Label("书签时刻", systemImage: "bookmark.fill")
             }
         }
         Divider()
         Button {
             MeetingExportPanelView.copyToClipboard(meeting.fullTranscript)
         } label: {
-            Label("Copy Transcript", systemImage: "doc.on.doc")
+            Label("复制转写", systemImage: "doc.on.doc")
         }
         Button {
             let content = meeting.smartMinutes != nil
                 ? meeting.smartMinutesMarkdown()
-                : (meeting.summary ?? "No summary available")
+                : (meeting.summary ?? "暂无摘要")
             MeetingExportPanelView.copyToClipboard(content)
         } label: {
-            Label("Copy Summary", systemImage: "doc.on.doc")
+            Label("复制摘要", systemImage: "doc.on.doc")
         }
     }
 
@@ -520,8 +520,8 @@ extension MeetingWorkspaceView {
             } label: {
                 Image(systemName: "sidebar.right")
             }
-            .help(isSidebarCollapsed ? "Show Tools Sidebar" : "Hide Tools Sidebar")
-            .accessibilityLabel(isSidebarCollapsed ? "Show Tools Sidebar" : "Hide Tools Sidebar")
+            .help(isSidebarCollapsed ? "显示工具侧边栏" : "隐藏工具侧边栏")
+            .accessibilityLabel(isSidebarCollapsed ? "显示工具侧边栏" : "隐藏工具侧边栏")
         }
     }
 }
@@ -533,17 +533,17 @@ extension MeetingWorkspaceView {
         var parts: [String] = []
         if meeting.duration > 0 {
             let minutes = Int(meeting.duration / 60)
-            parts.append("\(minutes) min")
+            parts.append("\(minutes) 分钟")
         }
         let segmentCount = meeting.segments.count
         if segmentCount > 0 {
-            parts.append("\(segmentCount) segment\(segmentCount == 1 ? "" : "s")")
+            parts.append("\(segmentCount) 条转写")
         }
         // Count only speakers that appear in at least one transcript segment,
         // not all Speaker objects (some may have no segments assigned by diarization).
         let speakerCount = Set(meeting.segments.compactMap(\.speakerLabel)).count
         if speakerCount > 0 {
-            parts.append("\(speakerCount) speaker\(speakerCount == 1 ? "" : "s")")
+            parts.append("\(speakerCount) 位发言人")
         }
         return parts.joined(separator: " · ")
     }
@@ -568,7 +568,7 @@ extension MeetingWorkspaceView {
             }
 
             HStack(spacing: 6) {
-                TextField("Add tag…", text: $newTagText)
+                TextField("添加标签…", text: $newTagText)
                     .textFieldStyle(.plain)
                     .font(.subheadline)
                     .focused($isTagFieldFocused)
@@ -580,7 +580,7 @@ extension MeetingWorkspaceView {
                             .foregroundStyle(AppThemeConstants.accent)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("Add tag")
+                    .accessibilityLabel("添加标签")
                 }
             }
             .padding(8)
@@ -629,13 +629,14 @@ extension MeetingWorkspaceView {
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Spacer()
-            if message.contains("permission") || message.contains("Permission") || message.contains("access denied") {
+            if message.contains("permission") || message.contains("Permission") || message.contains("access denied")
+                || message.contains("权限") || message.contains("访问被拒绝") {
                 Button {
                     if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Microphone") {
                         NSWorkspace.shared.open(url)
                     }
                 } label: {
-                    Text("Open Settings")
+                    Text("打开设置")
                         .font(.caption.weight(.medium))
                 }
                 .buttonStyle(.bordered)
@@ -648,7 +649,7 @@ extension MeetingWorkspaceView {
                     .foregroundStyle(.tertiary)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Dismiss error")
+            .accessibilityLabel("关闭错误提示")
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
@@ -661,7 +662,7 @@ extension MeetingWorkspaceView {
                 .font(.callout)
                 .foregroundStyle(AppThemeConstants.brandPrimary)
 
-            Text("File in")
+            Text("归档到")
                 .font(.callout)
                 .foregroundStyle(.secondary)
             Text(spaceName)
@@ -669,7 +670,7 @@ extension MeetingWorkspaceView {
 
             Spacer()
 
-            Button("Move") {
+            Button("移动") {
                 withAnimation(.easeOut(duration: 0.2)) {
                     store.moveMeeting(id: meetingID, toSpace: spaceID)
                     recorder.postRecordingPipeline.suggestedSpaceID = nil
@@ -691,7 +692,7 @@ extension MeetingWorkspaceView {
                     .foregroundStyle(.secondary)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Dismiss suggestion")
+            .accessibilityLabel("忽略建议")
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
@@ -726,10 +727,10 @@ extension MeetingWorkspaceView {
 
 extension MeetingWorkspaceView {
     static let bookmarkPresets: [(String, BookmarkColor)] = [
-        ("Key Decision", .blue),
-        ("Action Item", .orange),
-        ("Important", .red),
-        ("Question", .purple),
+        ("关键决策", .blue),
+        ("待办事项", .orange),
+        ("重要", .red),
+        ("问题", .purple),
     ]
 
     /// Renaming to a name another speaker already holds merges the two — see
@@ -753,7 +754,7 @@ extension MeetingWorkspaceView {
 
     func bookmarkPopoverContent(meeting: MeetingNote) -> some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Add Bookmark")
+            Text("添加书签")
                 .font(.subheadline.weight(.semibold))
 
             VStack(spacing: 4) {
@@ -789,7 +790,7 @@ extension MeetingWorkspaceView {
 
     func bookmarkCustomLabel(meeting: MeetingNote) -> some View {
         HStack(spacing: 6) {
-            TextField("Custom label", text: $bookmarkLabel)
+            TextField("自定义标签", text: $bookmarkLabel)
                 .textFieldStyle(.plain)
                 .font(.caption)
                 .frame(maxWidth: .infinity)
@@ -804,7 +805,7 @@ extension MeetingWorkspaceView {
                     .foregroundColor(AppThemeConstants.accent)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Add custom bookmark")
+            .accessibilityLabel("添加自定义书签")
         }
     }
 
@@ -861,11 +862,11 @@ struct RecordingStatusView: View {
             Circle()
                 .fill(AppThemeConstants.error)
                 .frame(width: 8, height: 8)
-                .accessibilityLabel("Recording")
+                .accessibilityLabel("录音中")
 
             Text(TranscriptSegment.formatTime(elapsedTime))
                 .font(.caption.monospacedDigit().weight(.medium))
-                .accessibilityLabel("Recording time: \(TranscriptSegment.formatTime(elapsedTime))")
+                .accessibilityLabel("录音时间：\(TranscriptSegment.formatTime(elapsedTime))")
 
             AudioLevelMeter(level: audioLevel)
                 .frame(width: 64, height: 14)
@@ -874,7 +875,7 @@ struct RecordingStatusView: View {
                 Image(systemName: "display")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
-                    .help("Also capturing system audio")
+                    .help("同时捕获系统音频")
             }
         }
         .padding(.horizontal, 12)

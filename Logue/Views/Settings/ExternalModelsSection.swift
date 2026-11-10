@@ -19,7 +19,7 @@ struct ConnectionStatusDot: View {
                 value: isPulsing
             )
             .help(status.label)
-            .accessibilityLabel("Connection status: \(status.label)")
+            .accessibilityLabel("连接状态：\(status.label)")
             .onChange(of: status) {
                 isPulsing = status == .checking
             }
@@ -111,11 +111,11 @@ struct APIModelRow: View {
                             }
                             .buttonStyle(.plain)
                             .foregroundStyle(.secondary)
-                            .help("Test connection")
-                            .accessibilityLabel("Test connection")
+                            .help("测试连接")
+                            .accessibilityLabel("测试连接")
 
                             if isBusy {
-                                InlineProgressLabel(text: "Testing…")
+                                InlineProgressLabel(text: "测试中…")
                             }
 
                             if isHovered {
@@ -130,8 +130,8 @@ struct APIModelRow: View {
                                         .foregroundStyle(.secondary)
                                 }
                                 .buttonStyle(.plain)
-                                .help("Edit configuration")
-                                .accessibilityLabel("Edit configuration")
+                                .help("编辑配置")
+                                .accessibilityLabel("编辑配置")
 
                                 Button {
                                     modelManager.removeCustomModel(id: record.id)
@@ -141,8 +141,8 @@ struct APIModelRow: View {
                                         .foregroundStyle(AppThemeConstants.error)
                                 }
                                 .buttonStyle(.plain)
-                                .help("Remove model")
-                                .accessibilityLabel("Remove model")
+                                .help("移除模型")
+                                .accessibilityLabel("移除模型")
                             }
                         }
                     }
@@ -180,8 +180,8 @@ struct APIModelRow: View {
             .onHover { isHovered = $0 }
             .animation(.easeInOut(duration: 0.15), value: isActive)
             .animation(.easeInOut(duration: 0.1), value: isHovered)
-            .accessibilityLabel("\(record.displayName)\(isActive ? ", active" : "")")
-            .accessibilityHint(isActive ? "Currently active model" : "Double-tap to activate")
+            .accessibilityLabel("\(record.displayName)\(isActive ? "，使用中" : "")")
+            .accessibilityHint(isActive ? "当前使用的模型" : "双击以启用")
 
             // Inline edit form
             if isEditing {
@@ -197,16 +197,16 @@ struct APIModelRow: View {
         VStack(alignment: .leading, spacing: 14) {
             // Display Name
             VStack(alignment: .leading, spacing: 4) {
-                Text("Display Name")
+                Text("显示名称")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.secondary)
-                TextField("Model display name", text: $editDisplayName)
+                TextField("模型显示名称", text: $editDisplayName)
                     .textFieldStyle(.roundedBorder)
             }
 
             // Provider (read-only)
             HStack {
-                Text("Provider")
+                Text("提供商")
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.secondary)
                 Spacer()
@@ -243,14 +243,14 @@ struct APIModelRow: View {
             // Action buttons
             HStack {
                 Spacer()
-                Button("Cancel") {
+                Button("取消") {
                     withAnimation(.easeInOut(duration: 0.25)) {
                         editingModelID = nil
                     }
                 }
                 .controlSize(.small)
 
-                Button("Save") { saveChanges() }
+                Button("保存") { saveChanges() }
                     .buttonStyle(.borderedProminent)
                     .tint(AppThemeConstants.accent)
                     .controlSize(.small)
@@ -272,17 +272,17 @@ struct APIModelRow: View {
 
     private var editApiKeyField: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("API Key")
+            Text("API 密钥")
                 .font(.caption.weight(.medium))
                 .foregroundStyle(.secondary)
-            SecureField("Enter your API key", text: $editApiKey)
+            SecureField("输入你的 API 密钥", text: $editApiKey)
                 .textFieldStyle(.roundedBorder)
         }
     }
 
     private var editEndpointField: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Endpoint URL")
+            Text("端点 URL")
                 .font(.caption.weight(.medium))
                 .foregroundStyle(.secondary)
             TextField(
@@ -295,21 +295,21 @@ struct APIModelRow: View {
 
     private var editModelNameField: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Model Name")
+            Text("模型名称")
                 .font(.caption.weight(.medium))
                 .foregroundStyle(.secondary)
-            TextField("e.g. gpt-5.4, gpt-5.4-mini, llama3, mistral", text: $editModelName)
+            TextField("例如 gpt-5.4、gpt-5.4-mini、llama3、mistral", text: $editModelName)
                 .textFieldStyle(.roundedBorder)
         }
     }
 
     private var editAuthToggle: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Toggle("Requires API Key", isOn: $editRequiresAuth)
+            Toggle("需要 API 密钥", isOn: $editRequiresAuth)
                 .font(.caption.weight(.medium))
 
             if editRequiresAuth {
-                SecureField("Bearer API Key", text: $editApiKey)
+                SecureField("Bearer API 密钥", text: $editApiKey)
                     .textFieldStyle(.roundedBorder)
             }
         }
@@ -326,7 +326,7 @@ struct APIModelRow: View {
                     } else {
                         HStack(spacing: 4) {
                             ConnectionStatusDot(status: editConnectionStatus)
-                            Text("Scan Models").font(.caption)
+                            Text("扫描模型").font(.caption)
                         }
                     }
                 }
@@ -403,7 +403,7 @@ struct APIModelRow: View {
         let trimmed = editEndpoint.trimmingCharacters(in: .whitespacesAndNewlines)
         let isLocal = trimmed.contains("localhost") || trimmed.contains("127.0.0.1")
         guard isLocal || trimmed.hasPrefix("https://") else {
-            editConnectionStatus = .error("Endpoint must use HTTPS")
+            editConnectionStatus = .error("端点必须使用 HTTPS")
             return
         }
         editIsScanning = true
@@ -430,13 +430,13 @@ struct APIModelRow: View {
                     editModelName = first
                 }
             } else {
-                editConnectionStatus = .error("No models found")
+                editConnectionStatus = .error("未找到模型")
             }
         }
     }
 
     private func saveChanges() {
-        let name = editModelName.isEmpty ? "Custom Model" : editModelName
+        let name = editModelName.isEmpty ? "自定义模型" : editModelName
         let finalDisplayName = editDisplayName.isEmpty ? "\(name) (\(record.providerType.displayName))" : editDisplayName
 
         let updated = ModelConfiguration(

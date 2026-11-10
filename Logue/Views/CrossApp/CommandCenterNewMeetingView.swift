@@ -44,13 +44,13 @@ struct CommandCenterNewMeetingView: View {
                     .background(Circle().fill(Color.primary.opacity(AppThemeConstants.opacityLight)))
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Back")
+            .accessibilityLabel("返回")
 
             Image(systemName: "record.circle.fill")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(AppThemeConstants.error)
 
-            Text("New Meeting")
+            Text("新建会议")
                 .font(AppThemeConstants.islandTitle)
                 .foregroundStyle(.primary)
 
@@ -66,7 +66,7 @@ struct CommandCenterNewMeetingView: View {
 
     private var templateSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Template")
+            Text("模板")
                 .font(AppThemeConstants.islandLabel)
                 .foregroundStyle(.secondary)
 
@@ -108,7 +108,7 @@ struct CommandCenterNewMeetingView: View {
 
     private var languageSection: some View {
         HStack {
-            Text("Language")
+            Text("语言")
                 .font(AppThemeConstants.islandLabel)
                 .foregroundStyle(.secondary)
 
@@ -154,7 +154,7 @@ struct CommandCenterNewMeetingView: View {
             HStack(spacing: 8) {
                 Image(systemName: "record.circle.fill")
                     .font(.subheadline.weight(.bold))
-                Text("Start Recording")
+                Text("开始录制")
                     .font(.subheadline.weight(.semibold))
             }
             .foregroundStyle(.white)
@@ -167,6 +167,6 @@ struct CommandCenterNewMeetingView: View {
             )
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Start recording")
+        .accessibilityLabel("开始录制")
     }
 }

@@ -12,13 +12,12 @@ extension MeetingStore {
         let bookmarks = makeWelcomeBookmarks()
         let smartMinutes = makeWelcomeSmartMinutes(actionItems: actionItems)
 
-        let summary = "The team walked through Logue's key features including real-time "
-            + "transcription, speaker diarization, bookmarks, AI-generated summaries, "
-            + "and organization tools. All processing stays on-device for privacy. "
-            + "Follow-up scheduled to explore writing features."
+        let summary = "团队一起了解了 Logue 的核心功能，包括实时转写、发言人识别、书签、"
+            + "AI 生成的摘要和整理工具。所有处理都在设备端完成，以保护隐私。"
+            + "后续将安排一次会议，探索写作功能。"
 
         return MeetingNote(
-            title: "Getting Started with Logue",
+            title: "Logue 入门",
             duration: 110,
             segments: segments,
             actionItems: actionItems,
@@ -28,7 +27,7 @@ extension MeetingStore {
             tags: ["getting-started", "demo"],
             template: .general,
             bookmarks: bookmarks,
-            topicKeywords: ["transcription", "speaker diarization", "bookmarks", "AI summary", "privacy"],
+            topicKeywords: ["转写", "发言人识别", "书签", "AI 摘要", "隐私"],
             hasSpeakerData: true,
             speakers: speakers,
             speakerSegments: speakerSegments
@@ -54,52 +53,52 @@ extension MeetingStore {
     private static func makeWelcomeSegments() -> [TranscriptSegment] {
         [
             TranscriptSegment(
-                text: "Welcome everyone! Let's kick off our first meeting in Logue. "
-                    + "I wanted to walk through some of the features.",
+                text: "欢迎大家！我们开始 Logue 里的第一场会议吧。"
+                    + "我想带大家过一遍部分功能。",
                 startTime: 0, endTime: 12, speakerLabel: "Alice"
             ),
             TranscriptSegment(
-                text: "Sounds great. I've been looking forward to trying the transcription. "
-                    + "The speaker detection is really nice.",
+                text: "听起来不错。我一直想试试转写功能。"
+                    + "发言人识别做得很好。",
                 startTime: 12, endTime: 22, speakerLabel: "Bob"
             ),
             TranscriptSegment(
-                text: "Yes, and I love that everything stays on-device. No audio is sent to "
-                    + "the cloud, which is important for our team's privacy.",
+                text: "是啊，而且我很喜欢所有处理都在设备端完成。音频不会上传到"
+                    + "云端，这对我们团队的隐私很重要。",
                 startTime: 22, endTime: 34, speakerLabel: "Carol"
             ),
             TranscriptSegment(
-                text: "Exactly. So the key features to highlight: real-time transcription, "
-                    + "speaker diarization, bookmarks during recording, and AI-generated summaries.",
+                text: "没错。要重点介绍的功能有：实时转写、"
+                    + "发言人识别、录制中加书签，以及 AI 生成的摘要。",
                 startTime: 34, endTime: 48, speakerLabel: "Alice"
             ),
             TranscriptSegment(
-                text: "I also noticed we can add action items with due dates and reminders. "
-                    + "That's going to be useful for follow-ups.",
+                text: "我还注意到可以添加带截止日期和提醒的待办事项。"
+                    + "这对后续跟进很有用。",
                 startTime: 48, endTime: 58, speakerLabel: "Bob"
             ),
             TranscriptSegment(
-                text: "The smart minutes feature is impressive too. It breaks down key decisions, "
-                    + "discussion points, and action items automatically.",
+                text: "智能纪要功能也很厉害。它会自动整理关键决策、"
+                    + "讨论要点和待办事项。",
                 startTime: 58, endTime: 70, speakerLabel: "Carol"
             ),
             TranscriptSegment(
-                text: "Let me bookmark this moment. You can add bookmarks at any point during "
-                    + "a recording to mark important moments.",
+                text: "我把这一刻加个书签。录制过程中随时可以添加书签，"
+                    + "标记重要时刻。",
                 startTime: 70, endTime: 80, speakerLabel: "Alice"
             ),
             TranscriptSegment(
-                text: "One more thing — you can organize meetings into folders and tag them "
-                    + "for easy filtering. Really helps when you have lots of meetings.",
+                text: "还有一点——你可以把会议整理到文件夹里并加上标签，"
+                    + "方便筛选。会议多的时候特别有用。",
                 startTime: 80, endTime: 94, speakerLabel: "Bob"
             ),
             TranscriptSegment(
-                text: "Great overview. I think we should schedule a follow-up next week "
-                    + "to discuss the writing assistant features as well.",
+                text: "介绍得很全面。我觉得我们应该安排下周再跟进一次，"
+                    + "也讨论一下写作助手功能。",
                 startTime: 94, endTime: 105, speakerLabel: "Carol"
             ),
             TranscriptSegment(
-                text: "Agreed. Let's wrap up. Thanks everyone!",
+                text: "同意。我们收尾吧。谢谢大家！",
                 startTime: 105, endTime: 110, speakerLabel: "Alice"
             ),
         ]
@@ -129,28 +128,28 @@ extension MeetingStore {
     private static func makeWelcomeActionItems() -> [ActionItem] {
         [
             ActionItem(
-                title: "Explore the AI summary and smart minutes features",
+                title: "体验 AI 摘要和智能纪要功能",
                 assignee: "Bob",
-                dueDescription: "This week"
+                dueDescription: "本周内"
             ),
             ActionItem(
-                title: "Schedule follow-up meeting to discuss the writing assistant",
+                title: "安排跟进会议，讨论写作助手",
                 assignee: "Carol",
-                dueDescription: "Next Monday"
+                dueDescription: "下周一"
             ),
             ActionItem(
-                title: "Try organizing meetings into folders and adding tags",
+                title: "试着把会议整理到文件夹并添加标签",
                 assignee: "Alice",
-                dueDescription: "This week"
+                dueDescription: "本周内"
             ),
         ]
     }
 
     private static func makeWelcomeBookmarks() -> [Bookmark] {
         [
-            Bookmark(label: "Feature overview starts", timestamp: 34, color: .blue),
-            Bookmark(label: "Bookmarks demo", timestamp: 70, color: .orange),
-            Bookmark(label: "Wrap up & next steps", timestamp: 94, color: .purple),
+            Bookmark(label: "功能概览开始", timestamp: 34, color: .blue),
+            Bookmark(label: "书签演示", timestamp: 70, color: .orange),
+            Bookmark(label: "收尾与下一步", timestamp: 94, color: .purple),
         ]
     }
 
@@ -159,35 +158,35 @@ extension MeetingStore {
     private static func makeWelcomeSmartMinutes(actionItems: [ActionItem]) -> SmartMinutes {
         SmartMinutes(
             keyDecisions: [
-                "Adopt Logue as the team's meeting notes tool",
-                "Schedule a follow-up to explore writing assistant features",
+                "确定将 Logue 作为团队的会议笔记工具",
+                "安排一次跟进，探索写作助手功能",
             ],
             discussionPoints: [
-                "Real-time transcription with speaker identification",
-                "On-device processing ensures complete privacy",
-                "Bookmarks can be placed during recording to mark key moments",
-                "AI-generated smart minutes automate note-taking",
-                "Folder and tag organization for managing many meetings",
+                "实时转写并识别发言人",
+                "设备端处理确保完全的隐私",
+                "录制过程中可以添加书签，标记关键时刻",
+                "AI 生成的智能纪要让记笔记自动化",
+                "用文件夹和标签整理大量会议",
             ],
             actionItems: actionItems.map(\.title),
             followUps: [
-                "Review the writing assistant and document analysis features",
-                "Explore calendar integration for upcoming meetings",
+                "了解写作助手和文档分析功能",
+                "探索日历集成，用于即将到来的会议",
             ],
             attendeeSummary: [
                 AttendeeContribution(
                     name: "Alice",
-                    keyPoints: ["Led the feature walkthrough", "Demonstrated bookmarks"],
+                    keyPoints: ["主导了功能演示", "演示了书签功能"],
                     speakingTimePercent: 40
                 ),
                 AttendeeContribution(
                     name: "Bob",
-                    keyPoints: ["Highlighted action items and organization features"],
+                    keyPoints: ["重点介绍了待办事项和整理功能"],
                     speakingTimePercent: 30
                 ),
                 AttendeeContribution(
                     name: "Carol",
-                    keyPoints: ["Emphasized privacy benefits and smart minutes"],
+                    keyPoints: ["强调了隐私优势和智能纪要"],
                     speakingTimePercent: 30
                 ),
             ]

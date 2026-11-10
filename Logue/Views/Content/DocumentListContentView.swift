@@ -92,7 +92,7 @@ struct DocumentListContentView<TrailingPanel: View>: View {
         if let spaceID, let space = spaceStore.space(for: spaceID) {
             return space.name
         }
-        return "All Documents"
+        return "全部文档"
     }
 
     var body: some View {
@@ -123,9 +123,9 @@ struct DocumentListContentView<TrailingPanel: View>: View {
         }
         .background(AppThemeConstants.contentBackground)
         .onDisappear { searchDebounceTask?.cancel() }
-        .alert("Rename Document", isPresented: $showRenameAlert) {
-            TextField("Title", text: $renameText)
-            Button("Rename") {
+        .alert("重命名文档", isPresented: $showRenameAlert) {
+            TextField("标题", text: $renameText)
+            Button("重命名") {
                 let trimmed = renameText.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !trimmed.isEmpty else { return }
                 if let id = renamingDocID {
@@ -133,13 +133,13 @@ struct DocumentListContentView<TrailingPanel: View>: View {
                 }
                 renamingDocID = nil
             }
-            Button("Cancel", role: .cancel) {
+            Button("取消", role: .cancel) {
                 renamingDocID = nil
             }
         }
         .navigationTitle(title)
-        .navigationSubtitle("\(documents.count) document\(documents.count == 1 ? "" : "s")")
-        .searchable(text: $searchText, placement: .toolbar, prompt: "Search documents")
+        .navigationSubtitle("\(documents.count) 个文档")
+        .searchable(text: $searchText, placement: .toolbar, prompt: "搜索文档")
         .toolbar {
             docListToolbarContent
         }
@@ -167,20 +167,20 @@ struct DocumentListContentView<TrailingPanel: View>: View {
                 store.selectedDocumentID = doc.id
             } label: {
                 Image(systemName: "square.and.pencil")
-                    .accessibilityLabel("New Document")
+                    .accessibilityLabel("新建文档")
             }
-            .help("New Document")
+            .help("新建文档")
         }
         ToolbarItemGroup(placement: .primaryAction) {
             Menu {
-                Section("View") {
+                Section("视图") {
                     Button {
                         withAnimation(.easeInOut(duration: 0.2)) {
                             viewModeRaw = ContentViewMode.list.rawValue
                         }
                     } label: {
                         HStack {
-                            Label("List", systemImage: "list.bullet")
+                            Label("列表", systemImage: "list.bullet")
                             if viewMode == .list {
                                 Spacer(); Image(systemName: "checkmark")
                             }
@@ -192,20 +192,20 @@ struct DocumentListContentView<TrailingPanel: View>: View {
                         }
                     } label: {
                         HStack {
-                            Label("Grid", systemImage: "square.grid.2x2")
+                            Label("网格", systemImage: "square.grid.2x2")
                             if viewMode == .grid {
                                 Spacer(); Image(systemName: "checkmark")
                             }
                         }
                     }
                 }
-                Section("Filter") {
+                Section("筛选") {
                     ForEach(DocFilterMode.allCases, id: \.rawValue) { mode in
                         Button {
                             filterMode = mode
                         } label: {
                             HStack {
-                                Label(mode.rawValue, systemImage: mode.icon)
+                                Label(mode.displayName, systemImage: mode.icon)
                                 if filterMode == mode {
                                     Spacer()
                                     Image(systemName: "checkmark")
@@ -214,13 +214,13 @@ struct DocumentListContentView<TrailingPanel: View>: View {
                         }
                     }
                 }
-                Section("Sort By") {
+                Section("排序方式") {
                     ForEach(DocSortOrder.allCases, id: \.rawValue) { order in
                         Button {
                             sortOrderRaw = order.rawValue
                         } label: {
                             HStack {
-                                Text(order.rawValue)
+                                Text(order.displayName)
                                 if sortOrder == order {
                                     Spacer()
                                     Image(systemName: "checkmark")
@@ -232,8 +232,8 @@ struct DocumentListContentView<TrailingPanel: View>: View {
             } label: {
                 Image(systemName: "ellipsis.circle")
             }
-            .help("Options")
-            .accessibilityLabel("Options")
+            .help("选项")
+            .accessibilityLabel("选项")
 
             Button {
                 withAnimation(.easeInOut(duration: 0.2)) {
@@ -244,8 +244,8 @@ struct DocumentListContentView<TrailingPanel: View>: View {
             } label: {
                 Image(systemName: viewMode == .list ? "square.grid.2x2" : "list.bullet")
             }
-            .help(viewMode == .list ? "Grid View" : "List View")
-            .accessibilityLabel(viewMode == .list ? "Switch to grid view" : "Switch to list view")
+            .help(viewMode == .list ? "网格视图" : "列表视图")
+            .accessibilityLabel(viewMode == .list ? "切换到网格视图" : "切换到列表视图")
         }
     }
 
@@ -254,7 +254,7 @@ struct DocumentListContentView<TrailingPanel: View>: View {
     private var tagFilterBar: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 6) {
-                FilterChip(label: "All", isSelected: selectedTagFilter == nil) {
+                FilterChip(label: "全部", isSelected: selectedTagFilter == nil) {
                     filterMode = .all
                     selectedTagFilter = nil
                 }
@@ -323,7 +323,7 @@ struct DocumentListContentView<TrailingPanel: View>: View {
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
 
-                Text(doc.snippet.isEmpty ? "Empty document" : doc.snippet)
+                Text(doc.snippet.isEmpty ? "空文档" : doc.snippet)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(snippetLines)
@@ -332,7 +332,7 @@ struct DocumentListContentView<TrailingPanel: View>: View {
                 Spacer(minLength: 0)
 
                 HStack {
-                    Text("\(doc.wordCount)w")
+                    Text("\(doc.wordCount) 字")
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
 
@@ -383,13 +383,13 @@ struct DocumentListContentView<TrailingPanel: View>: View {
     }
 
     private func documentRow(_ doc: WritingDocument) -> some View {
-        let pinnedLabel = doc.isPinned ? "pinned, " : ""
+        let pinnedLabel = doc.isPinned ? "已置顶，" : ""
         let modifiedLabel = doc.modifiedAt.formatted(.relative(presentation: .named))
-        let axLabel = "\(doc.title), \(doc.wordCount) words, \(pinnedLabel)modified \(modifiedLabel)"
+        let axLabel = "\(doc.title)，\(doc.wordCount) 字，\(pinnedLabel)修改于 \(modifiedLabel)"
         return HomeCardShell(
             action: { store.selectedDocumentID = doc.id },
             accessibilityLabel: axLabel,
-            accessibilityHint: "Opens document",
+            accessibilityHint: "打开文档",
             content: { _ in
                 HStack(spacing: 12) {
                     DocumentIconLabel(icon: doc.icon)
@@ -406,12 +406,12 @@ struct DocumentListContentView<TrailingPanel: View>: View {
                                     .foregroundStyle(AppThemeConstants.pinnedColor)
                             }
                         }
-                        Text(doc.snippet.isEmpty ? "Empty document" : doc.snippet)
+                        Text(doc.snippet.isEmpty ? "空文档" : doc.snippet)
                             .font(.subheadline)
                             .foregroundStyle(.secondary)
                             .lineLimit(1)
                         HStack(spacing: 8) {
-                            Text("\(doc.wordCount) words")
+                            Text("\(doc.wordCount) 字")
                             Text("\u{00B7}")
                             Text(doc.readingTimeLabel)
                         }
@@ -439,13 +439,13 @@ struct DocumentListContentView<TrailingPanel: View>: View {
         Button {
             store.selectedDocumentID = doc.id
         } label: {
-            Label("Open", systemImage: "doc.text")
+            Label("打开", systemImage: "doc.text")
         }
         Button {
             store.togglePin(id: doc.id)
         } label: {
             Label(
-                doc.isPinned ? "Unpin" : "Pin",
+                doc.isPinned ? "取消置顶" : "置顶",
                 systemImage: doc.isPinned ? "pin.slash" : "pin"
             )
         }
@@ -454,11 +454,11 @@ struct DocumentListContentView<TrailingPanel: View>: View {
             renamingDocID = doc.id
             showRenameAlert = true
         } label: {
-            Label("Rename", systemImage: "pencil")
+            Label("重命名", systemImage: "pencil")
         }
 
         if !spaceStore.topLevelSpaces.isEmpty || doc.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: doc.spaceID) { newSpaceID in
                     store.moveDocument(id: doc.id, toSpace: newSpaceID)
                 }
@@ -468,7 +468,7 @@ struct DocumentListContentView<TrailingPanel: View>: View {
         Button {
             PDFExportService.export(document: doc)
         } label: {
-            Label("Export as PDF", systemImage: "arrow.down.doc")
+            Label("导出为 PDF", systemImage: "arrow.down.doc")
         }
 
         Divider()
@@ -476,7 +476,7 @@ struct DocumentListContentView<TrailingPanel: View>: View {
         Button(role: .destructive) {
             store.deleteDocument(id: doc.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 
@@ -485,18 +485,18 @@ struct DocumentListContentView<TrailingPanel: View>: View {
     private var emptyState: some View {
         ContentUnavailableView {
             Label(
-                searchText.isEmpty ? "No Documents" : "No Results",
+                searchText.isEmpty ? "没有文档" : "没有结果",
                 systemImage: searchText.isEmpty ? "doc.text" : "magnifyingglass"
             )
         } description: {
             if searchText.isEmpty {
-                Text("Create a new document to get started.")
+                Text("新建一个文档开始使用。")
             } else {
-                Text("No documents match '\(searchText)'")
+                Text("没有与“\(searchText)”匹配的文档")
             }
         } actions: {
             if searchText.isEmpty {
-                Button("New Document") {
+                Button("新建文档") {
                     let doc = store.createDocument(inSpace: spaceID)
                     store.selectedDocumentID = doc.id
                 }

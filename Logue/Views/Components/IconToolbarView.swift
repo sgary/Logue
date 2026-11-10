@@ -3,6 +3,8 @@ import SwiftUI
 /// Protocol for tool enums used with `UnifiedSidebarView`.
 protocol ToolbarTool: RawRepresentable, CaseIterable, Identifiable, Equatable where RawValue == String {
     var icon: String { get }
+    /// Localized name shown in tooltips and accessibility labels.
+    var displayName: String { get }
     /// Whether this tool has a live implementation (vs "Coming Soon").
     var isImplemented: Bool { get }
     /// Preferred default panel width for this tool.

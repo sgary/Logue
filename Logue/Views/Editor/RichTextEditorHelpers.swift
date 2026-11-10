@@ -23,20 +23,20 @@ enum BlockType: String, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .mermaid: "Diagram"
-        case .math: "Equation"
-        case .callout: "Callout"
-        case .text: "Text"
-        case .heading1: "Heading 1"
-        case .heading2: "Heading 2"
-        case .heading3: "Heading 3"
-        case .bulletList: "Bullet List"
-        case .numberedList: "Numbered List"
-        case .todoList: "To-Do List"
-        case .quote: "Quote"
-        case .divider: "Divider"
-        case .codeBlock: "Code Block"
-        case .table: "Table"
+        case .mermaid: "图表"
+        case .math: "公式"
+        case .callout: "标注"
+        case .text: "正文"
+        case .heading1: "标题 1"
+        case .heading2: "标题 2"
+        case .heading3: "标题 3"
+        case .bulletList: "项目符号列表"
+        case .numberedList: "编号列表"
+        case .todoList: "待办列表"
+        case .quote: "引用"
+        case .divider: "分隔线"
+        case .codeBlock: "代码块"
+        case .table: "表格"
         }
     }
 
@@ -61,20 +61,20 @@ enum BlockType: String, CaseIterable {
 
     var description: String {
         switch self {
-        case .mermaid: "Mermaid diagram, stored as markdown"
-        case .math: "LaTeX equation block"
-        case .callout: "Note, tip, or warning block"
-        case .text: "Plain text paragraph"
-        case .heading1: "Large section heading"
-        case .heading2: "Medium section heading"
-        case .heading3: "Small section heading"
-        case .bulletList: "Unordered list item"
-        case .numberedList: "Ordered list item"
-        case .todoList: "Checkbox item"
-        case .quote: "Highlighted quote block"
-        case .divider: "Horizontal separator line"
-        case .codeBlock: "Syntax-highlighted code"
-        case .table: "Grid of rows and columns"
+        case .mermaid: "以 Markdown 保存的 Mermaid 图表"
+        case .math: "LaTeX 公式块"
+        case .callout: "提示、建议或警告块"
+        case .text: "普通文本段落"
+        case .heading1: "大号章节标题"
+        case .heading2: "中号章节标题"
+        case .heading3: "小号章节标题"
+        case .bulletList: "无序列表项"
+        case .numberedList: "有序列表项"
+        case .todoList: "复选框条目"
+        case .quote: "高亮引用块"
+        case .divider: "水平分隔线"
+        case .codeBlock: "语法高亮代码"
+        case .table: "由行和列组成的表格"
         }
     }
 
@@ -82,6 +82,14 @@ enum BlockType: String, CaseIterable {
         case text = "Text"
         case lists = "Lists"
         case advanced = "Advanced"
+
+        var displayName: String {
+            switch self {
+            case .text: "文本"
+            case .lists: "列表"
+            case .advanced: "高级"
+            }
+        }
     }
 
     var category: Category {
@@ -260,8 +268,8 @@ extension WritingNSTextView {
         menu.autoenablesItems = false
 
         // Turn into submenu
-        let turnIntoItem = NSMenuItem(title: "Turn into", action: nil, keyEquivalent: "")
-        turnIntoItem.image = .menuIcon(systemName: "arrow.triangle.swap", description: "Turn into")
+        let turnIntoItem = NSMenuItem(title: "转换为", action: nil, keyEquivalent: "")
+        turnIntoItem.image = .menuIcon(systemName: "arrow.triangle.swap", description: "转换为")
         let turnIntoMenu = NSMenu()
         for blockType in BlockType.turnIntoTypes {
             let item = NSMenuItem(
@@ -282,34 +290,34 @@ extension WritingNSTextView {
         menu.addItem(.separator())
 
         // Move
-        let upItem = NSMenuItem(title: "Move Up", action: #selector(moveLineUp), keyEquivalent: "")
+        let upItem = NSMenuItem(title: "上移", action: #selector(moveLineUp), keyEquivalent: "")
         upItem.target = self; upItem.isEnabled = true
-        upItem.image = .menuIcon(systemName: "arrow.up", description: "Move Up")
+        upItem.image = .menuIcon(systemName: "arrow.up", description: "上移")
         menu.addItem(upItem)
 
-        let downItem = NSMenuItem(title: "Move Down", action: #selector(moveLineDown), keyEquivalent: "")
+        let downItem = NSMenuItem(title: "下移", action: #selector(moveLineDown), keyEquivalent: "")
         downItem.target = self; downItem.isEnabled = true
-        downItem.image = .menuIcon(systemName: "arrow.down", description: "Move Down")
+        downItem.image = .menuIcon(systemName: "arrow.down", description: "下移")
         menu.addItem(downItem)
 
         menu.addItem(.separator())
 
         // Duplicate
-        let dupItem = NSMenuItem(title: "Duplicate", action: #selector(duplicateLine), keyEquivalent: "")
+        let dupItem = NSMenuItem(title: "创建副本", action: #selector(duplicateLine), keyEquivalent: "")
         dupItem.target = self; dupItem.isEnabled = true
-        dupItem.image = .menuIcon(systemName: "plus.square.on.square", description: "Duplicate")
+        dupItem.image = .menuIcon(systemName: "plus.square.on.square", description: "创建副本")
         menu.addItem(dupItem)
 
         // Copy
-        let copyItem = NSMenuItem(title: "Copy", action: #selector(copyLine), keyEquivalent: "")
+        let copyItem = NSMenuItem(title: "复制", action: #selector(copyLine), keyEquivalent: "")
         copyItem.target = self; copyItem.isEnabled = true
-        copyItem.image = .menuIcon(systemName: "doc.on.doc", description: "Copy")
+        copyItem.image = .menuIcon(systemName: "doc.on.doc", description: "复制")
         menu.addItem(copyItem)
 
         // Delete
-        let delItem = NSMenuItem(title: "Delete", action: #selector(deleteLine), keyEquivalent: "")
+        let delItem = NSMenuItem(title: "删除", action: #selector(deleteLine), keyEquivalent: "")
         delItem.target = self; delItem.isEnabled = true
-        delItem.image = .menuIcon(systemName: "trash", description: "Delete")
+        delItem.image = .menuIcon(systemName: "trash", description: "删除")
         menu.addItem(delItem)
 
         menu.popUp(positioning: menu.items.first, at: blockOptionsButton.frame.origin, in: self)
@@ -465,20 +473,20 @@ struct SelectionToolbarView: View {
 
     var body: some View {
         HStack(spacing: 0) {
-            FormatButton(symbol: "bold", tooltip: "Bold", isActive: formattingState.isBold, action: { onAction(.bold) })
-            FormatButton(symbol: "italic", tooltip: "Italic", isActive: formattingState.isItalic, action: { onAction(.italic) })
-            FormatButton(symbol: "underline", tooltip: "Underline", isActive: formattingState.isUnderlined, action: { onAction(.underline) })
+            FormatButton(symbol: "bold", tooltip: "粗体", isActive: formattingState.isBold, action: { onAction(.bold) })
+            FormatButton(symbol: "italic", tooltip: "斜体", isActive: formattingState.isItalic, action: { onAction(.italic) })
+            FormatButton(symbol: "underline", tooltip: "下划线", isActive: formattingState.isUnderlined, action: { onAction(.underline) })
             toolbarDivider
             FormatButton(
                 symbol: "strikethrough",
-                tooltip: "Strikethrough",
+                tooltip: "删除线",
                 isActive: formattingState.isStrikethrough,
                 action: { onAction(.strikethrough) }
             )
-            FormatButton(symbol: "chevron.left.forwardslash.chevron.right", tooltip: "Inline Code", action: { onAction(.inlineCode) })
+            FormatButton(symbol: "chevron.left.forwardslash.chevron.right", tooltip: "行内代码", action: { onAction(.inlineCode) })
             toolbarDivider
-            FormatButton(symbol: "link", tooltip: "Link", action: { onAction(.link) })
-            FormatButton(symbol: "doc.on.doc", tooltip: "Copy", action: { onAction(.copySelection) })
+            FormatButton(symbol: "link", tooltip: "链接", action: { onAction(.link) })
+            FormatButton(symbol: "doc.on.doc", tooltip: "复制", action: { onAction(.copySelection) })
             toolbarDivider
             rewriteButton
             askAIButton
@@ -514,7 +522,7 @@ struct SelectionToolbarView: View {
             HStack(spacing: 4) {
                 Image(systemName: "sparkles")
                     .font(.system(size: 11, weight: .semibold))
-                Text("Ask AI")
+                Text("询问 AI")
                     .font(.system(size: 12, weight: .semibold))
             }
             .padding(.horizontal, 10)
@@ -527,7 +535,7 @@ struct SelectionToolbarView: View {
         }
         .buttonStyle(.plain)
         .padding(.leading, 2)
-        .help("Ask AI about selection")
+        .help("就所选内容询问 AI")
     }
 
     /// Triggers in-place rewrite of the selection with a user-provided instruction.
@@ -539,7 +547,7 @@ struct SelectionToolbarView: View {
             HStack(spacing: 4) {
                 Image(systemName: "wand.and.stars")
                     .font(.system(size: 11, weight: .semibold))
-                Text("Rewrite")
+                Text("重写")
                     .font(.system(size: 12, weight: .semibold))
             }
             .padding(.horizontal, 10)
@@ -552,7 +560,7 @@ struct SelectionToolbarView: View {
         }
         .buttonStyle(.plain)
         .padding(.trailing, 2)
-        .help("Rewrite selection with AI (⌘⇧E)")
+        .help("用 AI 重写所选内容（⌘⇧E）")
     }
 }
 

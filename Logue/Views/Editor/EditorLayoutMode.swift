@@ -32,10 +32,10 @@ enum EditorLayoutMode: String, CaseIterable, Codable, Sendable {
 
     var label: String {
         switch self {
-        case .editorOnly: "Editor Only"
-        case .editorAndList: "Editor and List"
-        case .allPanels: "All Panels"
-        case .editorAndInspector: "Editor and Inspector"
+        case .editorOnly: "仅编辑器"
+        case .editorAndList: "编辑器与列表"
+        case .allPanels: "所有面板"
+        case .editorAndInspector: "编辑器与检查器"
         }
     }
 

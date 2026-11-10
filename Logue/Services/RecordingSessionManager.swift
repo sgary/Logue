@@ -15,15 +15,15 @@ enum RecordingError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .micPermissionDenied:
-            "Microphone access denied. Grant permission in System Settings > Privacy > Microphone."
+            "麦克风访问被拒绝。请在系统设置 > 隐私与安全性 > 麦克风中授予权限。"
         case .systemAudioPermissionDenied:
-            "System audio permission required. Grant permission in System Settings > Privacy & Security > System Audio Recording."
+            "需要系统音频权限。请在系统设置 > 隐私与安全性 > 系统音频录制中授予权限。"
         case let .micStartFailed(detail):
-            "Failed to start microphone: \(detail)"
+            "麦克风启动失败：\(detail)"
         case let .systemAudioStartFailed(detail):
-            "Failed to start system audio capture: \(detail)"
+            "系统音频采集启动失败：\(detail)"
         case let .speechEngineSetupFailed(detail):
-            "Failed to set up speech recognition: \(detail)"
+            "语音识别设置失败：\(detail)"
         }
     }
 }
@@ -382,8 +382,13 @@ final class RecordingSessionManager {
             MeetingStore.shared.appendSegment(tagged, to: meetingID, persistImmediately: false)
         }
 
+        // Resolve the language once, up front: the live transcriber and the post-recording batch
+        // pass have to agree on it. A meeting recorded before the language was ever stored has
+        // none, and that used to mean English regardless of what was being spoken.
+        let requestedLocale = TranscriptionLanguage(rawValue: meeting.transcriptionLanguage ?? "auto")?.locale
+        let locale = await SpeechTranscriberEngine.resolvedLocale(preferred: requestedLocale)
+
         do {
-            let locale = TranscriptionLanguage(rawValue: meeting.transcriptionLanguage ?? "auto")?.locale
             recordingLocale = locale
             try await engine.setup(locale: locale)
         } catch {
@@ -399,6 +404,9 @@ final class RecordingSessionManager {
         let diarizer = DiarizationManager(
             config: DiarizerConfig(clusteringThreshold: 0.65, minSpeechDuration: 2.0)
         )
+        // Parakeet cannot transcribe this session's language — leave the live transcript alone
+        // rather than letting English batch words overwrite it.
+        diarizer.batchASRVersion = BatchASRModel.version(for: locale)
         diarizationManager = diarizer
         sessionStartDate = Date()
         micSegments = CaptureSegmentTimeline()
@@ -725,8 +733,8 @@ final class RecordingSessionManager {
     /// Saying nothing is the worst outcome available here: the user believes the remote side is
     /// being recorded, and discovers it was not when they go looking for it afterwards.
     private func noteSystemAudioUnavailable() {
-        captureNotice = "System audio needs Screen Recording access — enable Logue in "
-            + "System Settings › Privacy & Security › Screen Recording"
+        captureNotice = "系统音频需要屏幕录制权限，请在"
+            + "「系统设置 › 隐私与安全性 › 屏幕录制」中启用 Logue"
         logger.info("System audio not armed — screen recording access not granted")
     }
 

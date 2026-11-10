@@ -8,9 +8,9 @@ struct UpcomingEventCard: View {
         VStack(alignment: .leading, spacing: 8) {
             // Time badge
             if event.isHappeningNow {
-                StatusBadge(text: "Now", color: AppThemeConstants.error, showDot: true)
+                StatusBadge(text: "现在", color: AppThemeConstants.error, showDot: true)
             } else if event.isStartingSoon {
-                StatusBadge(text: "Soon", color: AppThemeConstants.warning, showDot: true)
+                StatusBadge(text: "即将开始", color: AppThemeConstants.warning, showDot: true)
             } else {
                 HStack(spacing: 4) {
                     Image(systemName: "clock")
@@ -27,7 +27,7 @@ struct UpcomingEventCard: View {
                 .lineLimit(2)
 
             // Duration
-            Text("\(event.durationMinutes) min")
+            Text("\(event.durationMinutes) 分钟")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
 
@@ -44,7 +44,7 @@ struct UpcomingEventCard: View {
                         HStack(spacing: 4) {
                             Image(systemName: "video.fill")
                                 .font(.caption2)
-                            Text("Join")
+                            Text("加入")
                                 .font(.caption.weight(.medium))
                         }
                         .frame(maxWidth: .infinity)
@@ -52,7 +52,7 @@ struct UpcomingEventCard: View {
                     .buttonStyle(.bordered)
                     .tint(AppThemeConstants.success)
                     .controlSize(.mini)
-                    .accessibilityLabel("Join meeting for \(event.title)")
+                    .accessibilityLabel("加入会议：\(event.title)")
                 }
 
                 // Start recording button
@@ -62,7 +62,7 @@ struct UpcomingEventCard: View {
                     HStack(spacing: 4) {
                         Image(systemName: "record.circle")
                             .font(.caption2)
-                        Text("Record")
+                        Text("录制")
                             .font(.caption.weight(.medium))
                     }
                     .frame(maxWidth: .infinity)
@@ -70,7 +70,7 @@ struct UpcomingEventCard: View {
                 .buttonStyle(.borderedProminent)
                 .tint(event.isHappeningNow ? AppThemeConstants.error : AppThemeConstants.accent)
                 .controlSize(.mini)
-                .accessibilityLabel("Record meeting for \(event.title)")
+                .accessibilityLabel("录制会议：\(event.title)")
             }
         }
         .padding(AppThemeConstants.paddingMedium)

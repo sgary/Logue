@@ -83,15 +83,15 @@ struct DocumentIconPicker: View {
             HStack(spacing: 6) {
                 // A typed field as well as the grid, because the grid is a shortlist and any
                 // single grapheme is a legal icon. `sanitised` is what decides, not this field.
-                TextField("Type any emoji…", text: $customIcon)
+                TextField("输入任意表情符号…", text: $customIcon)
                     .textFieldStyle(.plain)
                     .font(.callout)
                     .onSubmit { commitCustomIcon() }
-                    .accessibilityLabel("Custom document icon")
-                    .accessibilityHint("Type a single emoji and press Return")
+                    .accessibilityLabel("自定义文档图标")
+                    .accessibilityHint("输入单个表情符号并按回车")
 
                 if !customIcon.isEmpty {
-                    Button("Use") { commitCustomIcon() }
+                    Button("使用") { commitCustomIcon() }
                         .controlSize(.small)
                         .disabled(DocumentIcon.sanitised(customIcon) == nil)
                 }
@@ -108,7 +108,7 @@ struct DocumentIconPicker: View {
                 HStack(spacing: 6) {
                     Image(systemName: "slash.circle")
                         .frame(width: 20)
-                    Text("No icon")
+                    Text("无图标")
                         .font(.caption)
                     Spacer()
                     if currentIcon == nil {
@@ -120,8 +120,8 @@ struct DocumentIconPicker: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("No document icon")
-            .accessibilityHint("Removes the document's icon")
+            .accessibilityLabel("无文档图标")
+            .accessibilityHint("移除文档图标")
             .accessibilityAddTraits(currentIcon == nil ? .isSelected : [])
         }
         .padding(.horizontal, 12)
@@ -152,7 +152,7 @@ struct DocumentIconPicker: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(icon)
-        .accessibilityHint("Sets the document icon")
+        .accessibilityHint("设置文档图标")
         .accessibilityAddTraits(currentIcon == icon ? .isSelected : [])
     }
 
@@ -171,23 +171,23 @@ struct DocumentIconPicker: View {
 
     /// A shortlist for the grid. Not exhaustive by design — the typed field covers the rest.
     static let emojiGroups: [(String, [String])] = [
-        ("General", [
+        ("通用", [
             "📄", "📝", "📋", "📌", "📎", "🔖", "🗂", "📁",
             "⭐️", "❤️", "🔥", "✅", "❌", "⚠️", "❓", "💡",
         ]),
-        ("Work", [
+        ("工作", [
             "💼", "📊", "📈", "📉", "🗓", "⏰", "🎯", "🏆",
             "🤝", "💰", "🧾", "🏢", "✉️", "📞", "🖇", "🗒",
         ]),
-        ("Product & Design", [
+        ("产品与设计", [
             "🎨", "🖌", "✏️", "📐", "🧩", "🪄", "🖼", "🎬",
             "🚀", "🛠", "🔧", "🧪", "🔬", "📦", "🧭", "🗺",
         ]),
-        ("Engineering", [
+        ("工程", [
             "💻", "🖥", "⌨️", "🐛", "🔒", "🔑", "☁️", "🗄",
             "⚙️", "🧱", "🔌", "📡", "🤖", "🧠", "♻️", "🔍",
         ]),
-        ("People & Places", [
+        ("人物与地点", [
             "👤", "👥", "🗣", "🎓", "🏠", "🌍", "✈️", "🚗",
             "☕️", "🍽", "🌱", "🌤", "🌙", "🎉", "🎁", "🎵",
         ]),

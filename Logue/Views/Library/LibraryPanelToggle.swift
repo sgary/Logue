@@ -48,7 +48,7 @@ struct LibraryPanelToggle: ViewModifier {
 
     private var accessibilityLabel: String {
         guard let badgeCount, badgeCount > 0 else { return panel.title }
-        return "\(panel.title), \(badgeCount) waiting"
+        return "\(panel.title)，\(badgeCount) 条待处理"
     }
 }
 

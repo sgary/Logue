@@ -19,7 +19,7 @@ extension RecordingSessionManager {
 
         switch decision {
         case .keepWaiting:
-            captureNotice = "\(deviceName) disconnected — waiting for it"
+            captureNotice = "\(deviceName) 已断开，正在等待重新连接"
             // The tap is dead but the file stays open, so the activation is closed here and a new
             // one opens if and when capture resumes.
             if isMicActive {
@@ -33,7 +33,7 @@ extension RecordingSessionManager {
             resumeMicrophoneCapture()
 
         case .fallBackToDefault:
-            captureNotice = "Switched to \(deviceName)"
+            captureNotice = "已切换到 \(deviceName)"
             resumeMicrophoneCapture()
         }
     }
@@ -69,7 +69,7 @@ extension RecordingSessionManager {
             logger.info("Microphone capture resumed")
         } catch {
             audioRecorder.onAudioBuffer = nil
-            captureNotice = "Could not reopen the microphone"
+            captureNotice = "无法重新打开麦克风"
             errorMessage = RecordingError.micStartFailed(error.localizedDescription).localizedDescription
             logger.error("Could not resume the microphone: \(error.localizedDescription, privacy: .public)")
         }

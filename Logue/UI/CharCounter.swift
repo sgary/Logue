@@ -25,7 +25,7 @@ struct CharCounter: View {
                 Capsule().fill(tint.opacity(0.08))
             )
             .transition(.opacity.combined(with: .scale(scale: 0.95)))
-            .accessibilityLabel("\(count) of \(limit) characters used")
+            .accessibilityLabel("已使用 \(count) 个字符，上限 \(limit) 个字符")
         }
     }
 

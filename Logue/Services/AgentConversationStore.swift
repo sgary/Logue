@@ -37,7 +37,7 @@ final class AgentConversationStore {
     ///   looking at, silently navigated away from whatever they left open.
     @discardableResult
     func createConversation(
-        title: String = "New Conversation",
+        title: String = "新建对话",
         select: Bool = true
     ) -> AgentConversation {
         let conversation = AgentConversation(title: title)
@@ -202,12 +202,12 @@ final class AgentConversationStore {
         for msg in conv.messages {
             switch msg.role {
             case .user:
-                out += "## You\n\n\(msg.content)\n\n"
+                out += "## 你\n\n\(msg.content)\n\n"
             case .assistant:
                 out += "## Logue\n\n\(msg.content)\n\n"
             case .toolCall:
                 for call in msg.toolCalls {
-                    out += "_called `\(call.toolName)`_\n\n"
+                    out += "_调用了 `\(call.toolName)`_\n\n"
                 }
             case .toolResult:
                 if let result = msg.toolResult {

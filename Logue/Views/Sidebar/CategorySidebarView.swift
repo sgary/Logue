@@ -37,17 +37,17 @@ struct CategorySidebarView: View {
                     // AXButton whose title is empty, breaking VoiceOver. Rely on the selection-row
                     // role + AXValue text (which lands from the Label's visible content) instead.
                     Section {
-                        Label("Home", systemImage: "house")
+                        Label("首页", systemImage: "house")
                             .tag(SidebarItem.home)
-                            .accessibilityLabel("Home")
-                            .accessibilityHint("Ask Logue, and see what needs you today")
+                            .accessibilityLabel("首页")
+                            .accessibilityHint("向 Logue 提问，看看今天需要你处理什么")
                     }
 
                     // Pinned & Recent
                     Section {
                         Label {
                             HStack {
-                                Text("Pinned")
+                                Text("已置顶")
                                 Spacer()
                                 let pinCount = documentStore.pinnedDocuments.count
                                     + meetingStore.activeMeetings.filter(\.isPinned).count
@@ -63,16 +63,16 @@ struct CategorySidebarView: View {
                         .tag(SidebarItem.pinned)
                         .accessibilityLabel(pinnedAccessibilityLabel)
 
-                        Label("Recent", systemImage: "clock")
+                        Label("最近", systemImage: "clock")
                             .tag(SidebarItem.recent)
-                            .accessibilityLabel("Recent")
+                            .accessibilityLabel("最近")
                     }
 
                     // Smart Views
-                    Section("Library") {
+                    Section("资料库") {
                         Label {
                             HStack {
-                                Text("All Documents")
+                                Text("全部文档")
                                 Spacer()
                                 Text("\(documentStore.activeDocuments.count)")
                                     .font(.caption2)
@@ -82,11 +82,11 @@ struct CategorySidebarView: View {
                             Image(systemName: "doc.text")
                         }
                         .tag(SidebarItem.allDocuments)
-                        .accessibilityLabel("All Documents, \(documentStore.activeDocuments.count) items")
+                        .accessibilityLabel("全部文档，\(documentStore.activeDocuments.count) 个项目")
 
                         Label {
                             HStack {
-                                Text("All Meetings")
+                                Text("全部会议")
                                 Spacer()
                                 Text("\(meetingStore.activeMeetings.filter { !$0.isArchived }.count)")
                                     .font(.caption2)
@@ -96,11 +96,11 @@ struct CategorySidebarView: View {
                             Image(systemName: "waveform")
                         }
                         .tag(SidebarItem.allMeetings)
-                        .accessibilityLabel("All Meetings, \(meetingStore.activeMeetings.filter { !$0.isArchived }.count) items")
+                        .accessibilityLabel("全部会议，\(meetingStore.activeMeetings.filter { !$0.isArchived }.count) 个项目")
 
                         Label {
                             HStack {
-                                Text("Tasks")
+                                Text("任务")
                                 Spacer()
                                 let openCount = taskStore.openTasks.count
                                 if openCount > 0 {
@@ -117,8 +117,8 @@ struct CategorySidebarView: View {
                             Image(systemName: "checkmark.circle")
                         }
                         .tag(SidebarItem.tasks)
-                        .accessibilityLabel("Tasks, \(taskStore.openTasks.count) open")
-                        .accessibilityHint("View and capture your own tasks")
+                        .accessibilityLabel("任务，\(taskStore.openTasks.count) 个未完成")
+                        .accessibilityHint("查看并记录你自己的任务")
                     }
 
                     // Phase H: AI Detector moved into the document Verify
@@ -128,7 +128,7 @@ struct CategorySidebarView: View {
                     // point for those capabilities.
 
                     // Spaces (limited to first N when collapsed)
-                    Section("Spaces") {
+                    Section("空间") {
                         ForEach(visibleSpaces) { space in
                             SpaceTreeRow(
                                 space: space, selection: $selection,
@@ -143,7 +143,7 @@ struct CategorySidebarView: View {
                                 withAnimation { showAllSpaces = true }
                             } label: {
                                 Label(
-                                    "Show \(spaceStore.topLevelSpaces.count - Self.maxCollapsedSpaces) more…",
+                                    "再显示 \(spaceStore.topLevelSpaces.count - Self.maxCollapsedSpaces) 个…",
                                     systemImage: "chevron.down"
                                 )
                                 .font(.callout).foregroundStyle(.secondary)
@@ -164,11 +164,11 @@ struct CategorySidebarView: View {
                                 isNewSpaceFieldFocused = true
                             }
                         } label: {
-                            Label("New Space", systemImage: "plus").font(.callout).foregroundStyle(.secondary)
+                            Label("新建空间", systemImage: "plus").font(.callout).foregroundStyle(.secondary)
                         }
                         .buttonStyle(.plain)
-                        .accessibilityLabel("New Space")
-                        .accessibilityHint("Creates a new space for organizing items")
+                        .accessibilityLabel("新建空间")
+                        .accessibilityHint("创建一个用于整理项目的新空间")
                     }
                 }
                 .listStyle(.sidebar)
@@ -190,8 +190,8 @@ struct CategorySidebarView: View {
                         } label: {
                             Image(systemName: "folder.badge.plus")
                         }
-                        .help("New Space")
-                        .accessibilityLabel("New Space")
+                        .help("新建空间")
+                        .accessibilityLabel("新建空间")
                     }
                 }
             } // ScrollViewReader
@@ -229,7 +229,7 @@ struct CategorySidebarView: View {
             }
             .disabled(documentStorage.isScanning)
             .help(rescanTooltip)
-            .accessibilityLabel("Rescan Documents Folder")
+            .accessibilityLabel("重新扫描文档文件夹")
         }
     }
 
@@ -245,9 +245,9 @@ struct CategorySidebarView: View {
 
     private var rescanTooltip: String {
         guard let summary = documentStorage.lastScanSummary else {
-            return "Check the Logue folder for changes made outside Logue"
+            return "检查 Logue 文件夹中在 Logue 之外所做的更改"
         }
-        return "Check the Logue folder for changes made outside Logue — last check: \(summary.lowercased())"
+        return "检查 Logue 文件夹中在 Logue 之外所做的更改 — 上次检查：\(summary.lowercased())"
     }
 
     // MARK: - Task Counts
@@ -259,7 +259,7 @@ struct CategorySidebarView: View {
 
     private var pinnedAccessibilityLabel: String {
         let count = documentStore.pinnedDocuments.count + meetingStore.activeMeetings.filter(\.isPinned).count
-        return count > 0 ? "Pinned, \(count) items" : "Pinned"
+        return count > 0 ? "已置顶，\(count) 个项目" : "已置顶"
     }
 
     // MARK: - Spaces Helpers
@@ -286,7 +286,7 @@ struct CategorySidebarView: View {
                     Image(systemName: "trash")
                         .foregroundStyle(selection == .trash ? AppThemeConstants.accent : .secondary)
                         .frame(width: 20)
-                    Text("Trash")
+                    Text("废纸篓")
                     Spacer()
                     let trashCount = documentStore.trashedDocuments.count + meetingStore.trashedMeetings.count
                     if trashCount > 0 {
@@ -305,7 +305,7 @@ struct CategorySidebarView: View {
                 )
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Trash")
+            .accessibilityLabel("废纸篓")
 
             // Settings row
             Button {
@@ -315,7 +315,7 @@ struct CategorySidebarView: View {
                     Image(systemName: "gear")
                         .foregroundStyle(.secondary)
                         .frame(width: 20)
-                    Text("Settings")
+                    Text("设置")
                         .foregroundStyle(.secondary)
                     Spacer()
                 }
@@ -323,7 +323,7 @@ struct CategorySidebarView: View {
                 .padding(.vertical, 6)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Settings")
+            .accessibilityLabel("设置")
         }
         .font(.callout)
         .padding(.horizontal, 12)
@@ -338,7 +338,7 @@ struct CategorySidebarView: View {
             Image(systemName: "folder.badge.plus")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-            TextField("Space name", text: $newSpaceName, onCommit: {
+            TextField("空间名称", text: $newSpaceName, onCommit: {
                 let trimmed = newSpaceName.trimmingCharacters(in: .whitespacesAndNewlines)
                 if !trimmed.isEmpty {
                     if let space = spaceStore.createSpace(name: trimmed) {

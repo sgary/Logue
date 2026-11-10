@@ -9,6 +9,14 @@ enum SidebarSection: String, CaseIterable, Identifiable {
         rawValue
     }
 
+    var displayName: String {
+        switch self {
+        case .all: "全部文档"
+        case .recent: "最近"
+        case .pinned: "已置顶"
+        }
+    }
+
     var icon: String {
         switch self {
         case .all: "doc.text"
@@ -69,9 +77,9 @@ struct DocumentSidebarView: View {
                     .font(.body)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Home")
-            .accessibilityHint("Returns to the home screen")
-            .help("Home")
+            .accessibilityLabel("首页")
+            .accessibilityHint("返回首页")
+            .help("首页")
 
             Spacer()
 
@@ -82,9 +90,9 @@ struct DocumentSidebarView: View {
                     .font(.body)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("New Document")
-            .accessibilityHint("Creates a new blank document")
-            .help("New Document")
+            .accessibilityLabel("新建文档")
+            .accessibilityHint("创建新的空白文档")
+            .help("新建文档")
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
@@ -97,19 +105,19 @@ struct DocumentSidebarView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.secondary)
                 .font(.callout)
-            TextField("Search", text: $searchText)
+            TextField("搜索", text: $searchText)
                 .textFieldStyle(.plain)
                 .font(.callout)
-                .accessibilityLabel("Search documents")
-                .accessibilityHint("Type to filter the document list")
+                .accessibilityLabel("搜索文档")
+                .accessibilityHint("输入以筛选文档列表")
             if !searchText.isEmpty {
                 Button { searchText = "" } label: {
                     Image(systemName: "xmark.circle.fill")
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Clear search")
-                .accessibilityHint("Clears the search text")
+                .accessibilityLabel("清除搜索")
+                .accessibilityHint("清除搜索文本")
             }
         }
         .padding(.horizontal, 8)
@@ -143,7 +151,7 @@ struct DocumentSidebarView: View {
             ContentLoadingView()
         } else if filteredDocs.isEmpty {
             ContentUnavailableView(
-                searchText.isEmpty ? "No Documents" : "No Results",
+                searchText.isEmpty ? "没有文档" : "没有结果",
                 systemImage: searchText.isEmpty ? "doc.text" : "magnifyingglass"
             )
             .font(.callout)
@@ -155,8 +163,8 @@ struct DocumentSidebarView: View {
             )) { doc in
                 DocumentListRow(document: doc, isRevealed: revealedRowID == doc.id)
                     .tag(doc.id)
-                    .accessibilityLabel("\(doc.title)\(doc.isPinned ? ", pinned" : "")")
-                    .accessibilityHint("Opens this document")
+                    .accessibilityLabel("\(doc.title)\(doc.isPinned ? "，已置顶" : "")")
+                    .accessibilityHint("打开此文档")
                     .sidebarRowMenu(
                         isSelected: store.selectedDocumentID == doc.id,
                         revealed: $revealedRowID.isRevealed(doc.id)
@@ -174,13 +182,13 @@ struct DocumentSidebarView: View {
     private var sidebarFooter: some View {
         HStack {
             Button(action: { openSettings() }, label: {
-                Label("Settings", systemImage: "gear")
+                Label("设置", systemImage: "gear")
                     .font(.callout)
                     .foregroundStyle(.secondary)
             })
             .buttonStyle(.plain)
-            .accessibilityLabel("Settings")
-            .accessibilityHint("Opens application settings")
+            .accessibilityLabel("设置")
+            .accessibilityHint("打开应用设置")
             Spacer()
         }
         .padding(.horizontal, 14)
@@ -194,18 +202,18 @@ struct DocumentSidebarView: View {
         Button {
             store.selectedDocumentID = doc.id
         } label: {
-            Label("Open", systemImage: "doc.text")
+            Label("打开", systemImage: "doc.text")
         }
         Button {
             store.togglePin(id: doc.id)
         } label: {
             Label(
-                doc.isPinned ? "Unpin" : "Pin",
+                doc.isPinned ? "取消置顶" : "置顶",
                 systemImage: doc.isPinned ? "pin.slash" : "pin"
             )
         }
         if !spaceStore.topLevelSpaces.isEmpty || doc.spaceID != nil {
-            Menu("Move to") {
+            Menu("移动到") {
                 HierarchicalSpaceMenu(currentSpaceID: doc.spaceID) { newSpaceID in
                     store.moveDocument(id: doc.id, toSpace: newSpaceID)
                 }
@@ -214,13 +222,13 @@ struct DocumentSidebarView: View {
         Button {
             PDFExportService.export(document: doc)
         } label: {
-            Label("Export as PDF", systemImage: "arrow.down.doc")
+            Label("导出为 PDF", systemImage: "arrow.down.doc")
         }
         Divider()
         Button(role: .destructive) {
             store.deleteDocument(id: doc.id)
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 }
@@ -245,10 +253,10 @@ private struct SectionPillButton: View {
                 )
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(section.rawValue)
-        .accessibilityHint("Filters to show \(section.rawValue.lowercased())")
+        .accessibilityLabel(section.displayName)
+        .accessibilityHint("筛选以显示\(section.displayName)")
         .accessibilityAddTraits(isActive ? .isSelected : [])
-        .help(section.rawValue)
+        .help(section.displayName)
     }
 }
 
@@ -279,7 +287,7 @@ struct DocumentListRow: View {
                         .opacity(isRevealed ? 0 : 1)
                 }
             }
-            Text(document.snippet.isEmpty ? "Empty document" : document.snippet)
+            Text(document.snippet.isEmpty ? "空文档" : document.snippet)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(2)

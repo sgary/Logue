@@ -47,9 +47,9 @@ final class DocumentSearchState {
     var matchCountText: String {
         guard !query.isEmpty else { return "" }
         if matches.isEmpty {
-            return "0 results"
+            return "没有结果"
         }
-        return "\(currentMatchIndex + 1) of \(matches.count)"
+        return "第 \(currentMatchIndex + 1) 项，共 \(matches.count) 项"
     }
 
     func nextMatch() {

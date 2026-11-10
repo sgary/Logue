@@ -43,12 +43,11 @@ struct PrivacySettingsTab: View {
     /// would bury the part the user needs to weigh.
     private var markdownStorageSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text("Plain Markdown Storage")
+            Text("纯 Markdown 存储")
                 .font(.headline)
 
-            Text("Store documents as ordinary .md files in a Logue folder in your home folder, so you can "
-                + "edit them in another app, track them in git, or let AI agents read them. "
-                + "Meetings, transcripts and audio always stay encrypted.")
+            Text("将文档作为普通 .md 文件存储在主文件夹的 Logue 文件夹中，这样你可以在其他应用中编辑、"
+                + "使用 git 跟踪，或让 AI 智能体读取。会议、转写和音频始终加密。")
                 .font(.callout)
                 .foregroundStyle(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -63,21 +62,21 @@ struct PrivacySettingsTab: View {
                         .lineLimit(1)
                         .truncationMode(.middle)
                     Spacer()
-                    Button("Reveal") {
+                    Button("显示") {
                         NSWorkspace.shared.activateFileViewerSelecting(
                             [DocumentStorage.markdownRootURL]
                         )
                     }
                     .controlSize(.small)
-                    Button("Turn Off") { showingDisableConfirmation = true }
+                    Button("关闭") { showingDisableConfirmation = true }
                         .controlSize(.small)
                 }
 
-                Label("Documents in this folder are not encrypted.", systemImage: "lock.open")
+                Label("此文件夹中的文档未加密。", systemImage: "lock.open")
                     .font(.caption)
                     .foregroundStyle(.orange)
             } else {
-                Button("Turn On…") { showingEnableWarning = true }
+                Button("开启…") { showingEnableWarning = true }
                     .controlSize(.small)
             }
 
@@ -92,7 +91,7 @@ struct PrivacySettingsTab: View {
             MarkdownStorageWarningSheet { enableMarkdownStorage() }
         }
         .confirmationDialog(
-            "Turn off plain markdown storage?",
+            "关闭纯 Markdown 存储？",
             isPresented: $showingDisableConfirmation,
             titleVisibility: .visible
         ) {
@@ -100,13 +99,12 @@ struct PrivacySettingsTab: View {
             // folder left behind looks like the library but is not one: nothing writes to it and
             // nothing reads it, so an edit made there silently does nothing. Keeping it is still
             // offered for anyone who tracks it in git or wants to move it themselves.
-            Button("Turn Off and Move Folder to Trash") { disableMarkdownStorage(retiringFolder: true) }
-            Button("Turn Off and Keep Folder") { disableMarkdownStorage(retiringFolder: false) }
-            Button("Cancel", role: .cancel) {}
+            Button("关闭并将文件夹移到废纸篓") { disableMarkdownStorage(retiringFolder: true) }
+            Button("关闭并保留文件夹") { disableMarkdownStorage(retiringFolder: false) }
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("Your documents move back into Logue's encrypted storage. The Logue folder is no "
-                + "longer read or written after this, so leaving it behind means edits made there "
-                + "do nothing. Moving it to the Trash keeps it recoverable.")
+            Text("你的文档会移回 Logue 的加密存储。此后 Logue 不再读取或写入 Logue 文件夹，"
+                + "因此将文件夹留在原处意味着在那里所做的编辑不会生效。移到废纸篓可保留恢复的可能。")
         }
     }
 
@@ -164,13 +162,13 @@ struct PrivacySettingsTab: View {
     // MARK: - Encryption
 
     private var encryptionSection: some View {
-        sectionCard(title: "Encryption") {
+        sectionCard(title: "加密") {
             HStack(spacing: 10) {
                 Image(systemName: "lock.fill")
                     .font(.title3)
                     .foregroundStyle(.green)
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("AES-256-GCM at rest")
+                    Text("AES-256-GCM 静态加密")
                         .font(.callout.weight(.semibold))
                     Text(encryptionDetail)
                         .font(.caption)
@@ -187,17 +185,16 @@ struct PrivacySettingsTab: View {
     /// this.
     private var encryptionDetail: String {
         if storage.mode.isMarkdown {
-            return "Conversations and meetings are encrypted on disk, and the key never leaves this "
-                + "Mac. Documents are not: plain markdown storage is on, so they are readable files "
-                + "in your home folder."
+            return "对话和会议在磁盘上加密，密钥绝不会离开这台 Mac。文档则不然：纯 Markdown 存储已开启，"
+                + "因此它们是主文件夹中的可读文件。"
         }
-        return "Conversations, meetings, and documents are encrypted on disk. The key never leaves this Mac."
+        return "对话、会议和文档均在磁盘上加密。密钥绝不会离开这台 Mac。"
     }
 
     // MARK: - Data location
 
     private var dataLocationSection: some View {
-        sectionCard(title: "Data location") {
+        sectionCard(title: "数据位置") {
             VStack(alignment: .leading, spacing: 8) {
                 Text(dataDirectory.path)
                     .font(.system(.caption, design: .monospaced))
@@ -211,7 +208,7 @@ struct PrivacySettingsTab: View {
                     Button {
                         NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: dataDirectory.path)
                     } label: {
-                        Label("Reveal in Finder", systemImage: "folder")
+                        Label("在访达中显示", systemImage: "folder")
                     }
                     .controlSize(.small)
                     Spacer()
@@ -223,39 +220,39 @@ struct PrivacySettingsTab: View {
     // MARK: - Permissions summary
 
     private var permissionsSection: some View {
-        sectionCard(title: "Permissions") {
+        sectionCard(title: "权限") {
             VStack(alignment: .leading, spacing: 6) {
                 permissionRow(
                     icon: "mic",
-                    title: "Microphone",
-                    detail: "Used while recording meetings — never sent off-device."
+                    title: "麦克风",
+                    detail: "录制会议时使用，绝不会发送到设备外。"
                 )
                 permissionRow(
                     icon: "calendar",
-                    title: "Calendar",
-                    detail: "Read upcoming events, create / edit / delete on request."
+                    title: "日历",
+                    detail: "读取即将开始的事件，按请求创建/编辑/删除。"
                 )
                 permissionRow(
                     icon: "checklist",
-                    title: "Reminders",
-                    detail: "Read + write reminders on request."
+                    title: "提醒事项",
+                    detail: "按请求读取和写入提醒事项。"
                 )
                 permissionRow(
                     icon: "person.crop.circle",
-                    title: "Contacts",
-                    detail: "Look up names + email addresses for drafting messages."
+                    title: "通讯录",
+                    detail: "查找姓名和电子邮件地址以起草消息。"
                 )
                 permissionRow(
                     icon: "accessibility",
-                    title: "Accessibility",
-                    detail: "Required for the ⌘⌃I inline writing assistant to read selected text."
+                    title: "辅助功能",
+                    detail: "⌘⌃I 内联写作助手读取选中文本所必需。"
                 )
                 Button {
                     if let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy") {
                         NSWorkspace.shared.open(url)
                     }
                 } label: {
-                    Label("Open System Settings → Privacy", systemImage: "arrow.up.right.square")
+                    Label("打开系统设置 → 隐私", systemImage: "arrow.up.right.square")
                 }
                 .controlSize(.small)
                 .padding(.top, 4)
@@ -282,22 +279,22 @@ struct PrivacySettingsTab: View {
     // MARK: - Erase
 
     private var eraseSection: some View {
-        sectionCard(title: "Reset") {
+        sectionCard(title: "重置") {
             VStack(alignment: .leading, spacing: 8) {
-                Text("Erase all on-device Logue data — conversations, meetings, documents, and the vector store. Cannot be undone.")
+                Text("抹除所有设备端 Logue 数据，包括对话、会议、文档和向量存储。此操作无法撤销。")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Button(role: .destructive) {
                     showEraseConfirm = true
                 } label: {
-                    Label("Erase all data…", systemImage: "trash")
+                    Label("抹除所有数据…", systemImage: "trash")
                 }
                 .controlSize(.small)
-                .alert("Erase all Logue data?", isPresented: $showEraseConfirm) {
-                    Button("Cancel", role: .cancel) {}
-                    Button("Erase", role: .destructive) { eraseAllData() }
+                .alert("抹除所有 Logue 数据？", isPresented: $showEraseConfirm) {
+                    Button("取消", role: .cancel) {}
+                    Button("抹除", role: .destructive) { eraseAllData() }
                 } message: {
-                    Text("This will delete all conversations, meetings, and documents from this Mac. It cannot be undone.")
+                    Text("这将从此 Mac 删除所有对话、会议和文档。此操作无法撤销。")
                 }
             }
         }
@@ -337,9 +334,9 @@ struct PrivacySettingsTab: View {
                 try storage.eraseMarkdownFolder()
             }
 
-            ToastCenter.shared.show("All data erased — restart Logue", kind: .warning)
+            ToastCenter.shared.show("所有数据已抹除，请重启 Logue", kind: .warning)
         } catch {
-            ToastCenter.shared.show("Couldn't erase data", kind: .warning)
+            ToastCenter.shared.show("无法抹除数据", kind: .warning)
         }
     }
 }

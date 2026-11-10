@@ -71,7 +71,7 @@ struct DetectorResultBody: View {
 
     private var indicatorsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("AI Indicators Found")
+            Text("发现的 AI 特征")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(.secondary)
                 .textCase(.uppercase)
@@ -97,7 +97,7 @@ struct DetectorResultBody: View {
 
     private var sentencesSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Sentence Breakdown")
+            Text("句子明细")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(.secondary)
                 .textCase(.uppercase)
@@ -121,7 +121,7 @@ struct DetectorResultBody: View {
                     Text(rewritten)
                         .font(.callout)
                         .fixedSize(horizontal: false, vertical: true)
-                    Text("Rewritten — original: \(sent.sentence.prefix(80))…")
+                    Text("已重写——原文：\(sent.sentence.prefix(80))…")
                         .font(.caption2)
                         .foregroundStyle(.tertiary)
                         .lineLimit(2)
@@ -132,7 +132,7 @@ struct DetectorResultBody: View {
                 }
 
                 HStack(spacing: 8) {
-                    Text("\(Int(sent.aiProbability * 100))% AI")
+                    Text("AI 生成概率 \(Int(sent.aiProbability * 100))%")
                         .font(.caption2.monospacedDigit())
                         .foregroundStyle(Self.labelColor(sent.aiProbability))
                     if !sent.foundAIPhrases.isEmpty {
@@ -158,7 +158,7 @@ struct DetectorResultBody: View {
                 Button {
                     rewrittenSentences[sent.id] = nil
                 } label: {
-                    Label("Undo", systemImage: "arrow.uturn.backward")
+                    Label("撤销", systemImage: "arrow.uturn.backward")
                         .font(.caption2)
                 }
                 .buttonStyle(.plain)
@@ -167,12 +167,12 @@ struct DetectorResultBody: View {
                 Button {
                     rewriteSentence(sent)
                 } label: {
-                    Label("Rewrite", systemImage: "wand.and.stars")
+                    Label("重写", systemImage: "wand.and.stars")
                         .font(.caption2)
                 }
                 .buttonStyle(.plain)
                 .foregroundStyle(Color.accentColor)
-                .help("Rewrite this sentence to sound more human-authored")
+                .help("重写这句话，使其读起来更像真人写作")
                 .disabled(LLMEngineStatus.shared.isBusy)
             }
         }
@@ -198,7 +198,7 @@ struct DetectorResultBody: View {
             } catch {
                 await MainActor.run {
                     rewritingSentenceID = nil
-                    ToastCenter.shared.show("Rewrite failed", kind: .warning)
+                    ToastCenter.shared.show("重写失败", kind: .warning)
                 }
             }
         }

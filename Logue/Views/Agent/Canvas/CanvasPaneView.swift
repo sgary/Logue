@@ -38,7 +38,7 @@ struct CanvasPaneView: View {
             Image(systemName: "rectangle.split.2x1")
                 .font(.caption)
                 .foregroundStyle(.secondary)
-            Text("Canvas")
+            Text("画布")
                 .font(.callout.weight(.semibold))
             if let active = controller.active {
                 Text(active.language.uppercased())
@@ -53,20 +53,20 @@ struct CanvasPaneView: View {
                 Button {
                     exportSlideDeckPDF()
                 } label: {
-                    Label("Export PDF", systemImage: "arrow.down.doc")
+                    Label("导出 PDF", systemImage: "arrow.down.doc")
                         .font(.caption)
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
             }
             Menu {
-                Button("Copy", action: copyActive)
-                Button("Save as file…", action: saveActive)
+                Button("复制", action: copyActive)
+                Button("保存为文件…", action: saveActive)
                 if controller.active?.isSlideDeck == true {
-                    Button("Export PDF…", action: exportSlideDeckPDF)
+                    Button("导出 PDF…", action: exportSlideDeckPDF)
                 }
                 Divider()
-                Button("Close Canvas", role: .destructive) {
+                Button("关闭画布", role: .destructive) {
                     withAnimation(Motion.spring) { controller.dismiss() }
                 }
             } label: {
@@ -132,8 +132,8 @@ struct CanvasPaneView: View {
 
     private var tabBar: some View {
         HStack(spacing: 4) {
-            tabButton(title: "Preview", systemImage: "eye", tab: .preview)
-            tabButton(title: "Source", systemImage: "chevron.left.forwardslash.chevron.right", tab: .source)
+            tabButton(title: "预览", systemImage: "eye", tab: .preview)
+            tabButton(title: "源代码", systemImage: "chevron.left.forwardslash.chevron.right", tab: .source)
             Spacer()
         }
         .padding(.horizontal, 12)
@@ -209,7 +209,7 @@ struct CanvasPaneView: View {
                 try active.content.write(to: url, atomically: true, encoding: .utf8)
                 ToastCenter.shared.show(UICopy.Toast.saved)
             } catch {
-                ToastCenter.shared.show("Couldn't save", kind: .warning)
+                ToastCenter.shared.show("无法保存", kind: .warning)
             }
         }
     }
@@ -238,7 +238,7 @@ struct CanvasPaneView: View {
             case .success:
                 ToastCenter.shared.show(UICopy.Toast.saved)
             case let .failure(error):
-                ToastCenter.shared.show("Export failed: \(error.localizedDescription)", kind: .warning)
+                ToastCenter.shared.show("导出失败：\(error.localizedDescription)", kind: .warning)
             }
         }
     }

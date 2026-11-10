@@ -40,6 +40,9 @@ enum MeetingPromptBuilder {
             "other meeting", "before", "earlier", "previously", "last week",
             "follow up", "follow-up", "carried over", "recurring",
             "we discussed", "we talked", "we agreed", "mentioned before",
+            // Chinese questions use the same triggers, written without spaces.
+            "上次", "上一次", "之前", "以前", "过去", "历史", "跟进", "后续",
+            "讨论过", "谈过", "同意过", "提到过", "遗留", "延续", "回顾",
         ]
         return triggers.contains { lowered.contains($0) }
     }

@@ -97,8 +97,8 @@ final class BackupManager {
             panel.allowedContentTypes = [UTType(filenameExtension: "loguebackup") ?? .json]
             panel.nameFieldStringValue = backupFilename()
             panel.canCreateDirectories = true
-            panel.title = "Export Logue Backup"
-            panel.message = "Choose where to save your backup file."
+            panel.title = "导出 Logue 备份"
+            panel.message = "选择备份文件的保存位置。"
 
             panel.begin { @MainActor [weak self] response in
                 guard let self else { return }
@@ -114,16 +114,16 @@ final class BackupManager {
                         [.posixPermissions: 0o600], ofItemAtPath: url.path
                     )
                     lastExportDate = Date()
-                    statusMessage = "Backup exported successfully."
+                    statusMessage = "备份导出成功。"
                     logger.info("Backup exported: \(url.lastPathComponent) (\(data.count) bytes)")
                 } catch {
-                    statusMessage = "Export failed: \(error.localizedDescription)"
+                    statusMessage = "导出失败：\(error.localizedDescription)"
                     logger.error("Export failed: \(error.localizedDescription, privacy: .public)")
                 }
             }
         } catch {
             isExporting = false
-            statusMessage = "Export failed: \(error.localizedDescription)"
+            statusMessage = "导出失败：\(error.localizedDescription)"
             logger.error("Export encoding failed: \(error.localizedDescription, privacy: .public)")
         }
     }
@@ -151,8 +151,8 @@ final class BackupManager {
         panel.allowedContentTypes = [UTType(filenameExtension: "loguebackup") ?? .json, .json]
         panel.allowsMultipleSelection = false
         panel.canChooseDirectories = false
-        panel.title = "Import Logue Backup"
-        panel.message = "Select a .loguebackup or .json file to restore."
+        panel.title = "导入 Logue 备份"
+        panel.message = "选择要恢复的 .loguebackup 或 .json 文件。"
 
         panel.begin { @MainActor [weak self] response in
             guard let self else { return }
@@ -177,7 +177,7 @@ final class BackupManager {
                 let sc = envelope.spaces.count
                 logger.info("Backup imported: \(mc) meetings, \(dc) documents, \(sc) spaces")
             } catch {
-                statusMessage = "Import failed: \(error.localizedDescription)"
+                statusMessage = "导入失败：\(error.localizedDescription)"
                 logger.error("Import failed: \(error.localizedDescription, privacy: .public)")
             }
         }
@@ -192,7 +192,7 @@ final class BackupManager {
     ) {
         // Sec-3: Validate backup version before importing
         guard envelope.version <= BackupEnvelope.currentVersion else {
-            statusMessage = "This backup was created by a newer version of Logue. Please update the app."
+            statusMessage = "此备份由更新版本的 Logue 创建。请更新应用。"
             return
         }
 
@@ -209,7 +209,7 @@ final class BackupManager {
             meetingStore.invalidateCaches()
             documentStore.rebuildIndexMap()
             documentStore.invalidateCaches()
-            statusMessage = "Restored \(envelope.meetings.count) meetings, \(envelope.documents.count) documents, \(envelope.spaces.count) spaces."
+            statusMessage = "已恢复 \(envelope.meetings.count) 场会议、\(envelope.documents.count) 个文档、\(envelope.spaces.count) 个空间。"
 
         case .merge:
             let existingMeetingIDs = Set(meetingStore.meetings.map(\.id))
@@ -224,7 +224,7 @@ final class BackupManager {
             let newSpaces = envelope.spaces.filter { !existingSpaceIDs.contains($0.id) }
             spaceStore.spaces.append(contentsOf: newSpaces)
 
-            statusMessage = "Merged \(newMeetings.count) meetings, \(newDocs.count) documents, \(newSpaces.count) spaces."
+            statusMessage = "已合并 \(newMeetings.count) 场会议、\(newDocs.count) 个文档、\(newSpaces.count) 个空间。"
             // B-N7: Rebuild index maps after merge-import too
             meetingStore.rebuildIndexMap()
             meetingStore.invalidateCaches()
@@ -247,7 +247,7 @@ final class BackupManager {
         spaceStore: SpaceStore
     ) {
         guard isICloudAvailable else {
-            statusMessage = "iCloud is not available. Sign in to iCloud in System Settings."
+            statusMessage = "iCloud 不可用。请在系统设置中登录 iCloud。"
             return
         }
 
@@ -283,14 +283,14 @@ final class BackupManager {
                 await MainActor.run { [weak self] in
                     guard let self else { return }
                     lastICloudBackupDate = Date()
-                    statusMessage = "Backed up to iCloud Drive (encrypted)."
+                    statusMessage = "已备份到 iCloud 云盘（加密）。"
                     isSyncingToiCloud = false
                     logger.info("iCloud backup saved: \(filename)")
                 }
             } catch {
                 await MainActor.run { [weak self] in
                     guard let self else { return }
-                    statusMessage = "iCloud backup failed: \(error.localizedDescription)"
+                    statusMessage = "iCloud 备份失败：\(error.localizedDescription)"
                     isSyncingToiCloud = false
                     logger.error("iCloud backup failed: \(error.localizedDescription, privacy: .public)")
                 }
@@ -368,7 +368,7 @@ final class BackupManager {
                 }
             } catch {
                 await MainActor.run {
-                    self.statusMessage = "iCloud restore failed: \(error.localizedDescription)"
+                    self.statusMessage = "iCloud 恢复失败：\(error.localizedDescription)"
                     self.isImporting = false
                     self.logger.error("iCloud restore failed: \(error.localizedDescription, privacy: .public)")
                 }
@@ -381,9 +381,9 @@ final class BackupManager {
         do {
             try FileManager.default.removeItem(at: entry.url)
             iCloudBackups.removeAll { $0.id == entry.id }
-            statusMessage = "Deleted backup: \(entry.id)"
+            statusMessage = "已删除备份：\(entry.id)"
         } catch {
-            statusMessage = "Delete failed: \(error.localizedDescription)"
+            statusMessage = "删除失败：\(error.localizedDescription)"
         }
     }
 
@@ -428,7 +428,7 @@ final class BackupManager {
 
         var errorDescription: String? {
             switch self {
-            case .iCloudUnavailable: "iCloud Drive is not available. Please sign in to iCloud in System Settings."
+            case .iCloudUnavailable: "iCloud 云盘不可用。请在系统设置中登录 iCloud。"
             }
         }
     }

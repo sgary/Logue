@@ -74,7 +74,7 @@ struct TemplateListPanel: View {
                     .foregroundStyle(.secondary)
                     .accessibilityHidden(true)
                 SearchBarField(
-                    text: $searchText, placeholder: "Search templates", expandable: true
+                    text: $searchText, placeholder: "搜索模板", expandable: true
                 )
             }
             categoryPicker
@@ -85,19 +85,19 @@ struct TemplateListPanel: View {
 
     private var categoryPicker: some View {
         Menu {
-            Button("All categories") { selectedCategory = nil }
+            Button("全部分类") { selectedCategory = nil }
             Divider()
             ForEach(TemplateCategory.allCases) { category in
-                Button(category.rawValue) { selectedCategory = category }
+                Button(category.displayName) { selectedCategory = category }
             }
         } label: {
-            Label(selectedCategory?.rawValue ?? "All categories", systemImage: "square.grid.2x2")
+            Label(selectedCategory?.displayName ?? "全部分类", systemImage: "square.grid.2x2")
                 .font(.caption)
                 .lineLimit(1)
                 .truncationMode(.tail)
         }
         .controlSize(.small)
-        .help("Filter by category")
+        .help("按分类筛选")
     }
 
     // MARK: - List
@@ -123,7 +123,7 @@ struct TemplateListPanel: View {
     }
 
     private func sectionHeader(_ category: TemplateCategory) -> some View {
-        Text(category.rawValue)
+        Text(category.displayName)
             .font(.caption.weight(.semibold))
             .foregroundStyle(.secondary)
     }
@@ -134,7 +134,7 @@ struct TemplateListPanel: View {
         Button {
             showGallery = true
         } label: {
-            Label("Browse all", systemImage: "square.grid.2x2")
+            Label("浏览全部", systemImage: "square.grid.2x2")
                 .font(.callout)
                 .frame(maxWidth: .infinity)
         }
@@ -142,16 +142,16 @@ struct TemplateListPanel: View {
         .controlSize(.small)
         .padding(.horizontal, AppThemeConstants.paddingLarge)
         .padding(.vertical, 10)
-        .help("Open the full template gallery")
+        .help("打开完整模板库")
     }
 
     private var gallerySheet: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Templates")
+                Text("模板")
                     .font(.headline)
                 Spacer()
-                Button("Done") { showGallery = false }
+                Button("完成") { showGallery = false }
                     .keyboardShortcut(.defaultAction)
             }
             .padding(16)
@@ -166,10 +166,10 @@ struct TemplateListPanel: View {
     private var emptyState: some View {
         EmptyStateView(
             icon: searchText.isEmpty ? "doc.on.doc" : "magnifyingglass",
-            title: searchText.isEmpty ? "No Templates" : "No Matching Templates",
+            title: searchText.isEmpty ? "没有模板" : "没有匹配的模板",
             description: searchText.isEmpty
-                ? "Templates you save will appear here."
-                : "No templates match \"\(searchText)\""
+                ? "你保存的模板会显示在这里。"
+                : "没有与“\(searchText)”匹配的模板"
         )
     }
 }
@@ -217,6 +217,6 @@ private struct TemplateListRow: View {
         }
         .buttonStyle(.plain)
         .onHover { isHovered = $0 }
-        .accessibilityLabel("\(template.name), \(template.category.rawValue)")
+        .accessibilityLabel("\(template.name), \(template.category.displayName)")
     }
 }

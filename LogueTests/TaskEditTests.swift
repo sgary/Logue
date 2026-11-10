@@ -91,7 +91,7 @@ struct TaskEditTests {
     @Test("Renaming to nothing falls back rather than producing an empty title")
     func renameToEmptyFallsBack() {
         let task = TaskItem(title: "Old")
-        #expect(TaskEdit.renamed(task, to: "   ").title == "Untitled task")
+        #expect(TaskEdit.renamed(task, to: "   ").title == "未命名任务")
     }
 
     @Test("A renamed title is bounded, because it reaches a filename")

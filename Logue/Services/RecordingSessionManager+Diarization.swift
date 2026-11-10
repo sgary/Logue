@@ -63,7 +63,7 @@ extension RecordingSessionManager {
         sessionDuration: TimeInterval
     ) async {
         diarizingMeetingID = meetingID
-        diarizationStage = "Identifying speakers…"
+        diarizationStage = "正在识别发言人…"
 
         // Primary path: Sortformer processComplete on full audio buffer
         if await processSortformerDiarization(
@@ -77,7 +77,7 @@ extension RecordingSessionManager {
         }
 
         // Fallback: batch DiarizerManager
-        diarizationStage = "Identifying speakers…"
+        diarizationStage = "正在识别发言人…"
         logger.info("Starting batch post-recording diarization for meeting \(meetingID)...")
 
         guard let result = await diarizer.finishProcessing() else {
@@ -101,7 +101,7 @@ extension RecordingSessionManager {
             sessionStart: sessionStart
         )
 
-        diarizationStage = "Aligning transcript…"
+        diarizationStage = "正在对齐转写…"
 
         // Align transcription text with speaker segments
         alignTranscriptionWithSpeakers(
@@ -189,7 +189,7 @@ extension RecordingSessionManager {
             renumberSpeakers(for: meetingID)
         }
 
-        diarizationStage = "Aligning transcript…"
+        diarizationStage = "正在对齐转写…"
 
         // Align transcript text with speaker segments
         let store = MeetingStore.shared
@@ -246,10 +246,10 @@ extension RecordingSessionManager {
         }
 
         // Re-number speaker names
-        for i in speakers.indices where speakers[i].name.hasPrefix("Speaker ") {
+        for i in speakers.indices where Speaker.isAutoName(speakers[i].name) {
             speakers[i] = Speaker(
                 id: speakers[i].id,
-                name: "Speaker \(i + 1)",
+                name: Speaker.autoName(i + 1),
                 color: Speaker.generateColor(for: i),
                 embedding: speakers[i].embedding
             )
@@ -273,7 +273,7 @@ extension RecordingSessionManager {
         var seen = Set<String>()
         var orderedLabels: [String] = []
         for seg in meeting.segments.sorted(by: { $0.startTime < $1.startTime }) {
-            guard let label = seg.speakerLabel, label.hasPrefix("Speaker ") else { continue }
+            guard let label = seg.speakerLabel, Speaker.isAutoName(label) else { continue }
             if seen.insert(label).inserted {
                 orderedLabels.append(label)
             }
@@ -284,7 +284,7 @@ extension RecordingSessionManager {
         // Map old label → sequential label ("Speaker 3" → "Speaker 1", etc.)
         var labelRemap: [String: String] = [:]
         for (idx, oldLabel) in orderedLabels.enumerated() {
-            let newLabel = "Speaker \(idx + 1)"
+            let newLabel = Speaker.autoName(idx + 1)
             if oldLabel != newLabel {
                 labelRemap[oldLabel] = newLabel
             }
@@ -292,7 +292,7 @@ extension RecordingSessionManager {
 
         let activeLabels = Set(meeting.segments.compactMap(\.speakerLabel))
         let hasUnused = meeting.speakers.contains {
-            $0.name.hasPrefix("Speaker ") && !activeLabels.contains($0.name)
+            Speaker.isAutoName($0.name) && !activeLabels.contains($0.name)
         }
 
         guard !labelRemap.isEmpty || hasUnused else { return }
@@ -306,12 +306,12 @@ extension RecordingSessionManager {
             guard let speaker = meeting.speakers.first(where: { $0.name == oldLabel }) else { continue }
             newSpeakers.append(Speaker(
                 id: speaker.id,
-                name: "Speaker \(seqIdx + 1)",
+                name: Speaker.autoName(seqIdx + 1),
                 color: Speaker.generateColor(for: seqIdx),
                 embedding: speaker.embedding
             ))
         }
-        for speaker in meeting.speakers where !speaker.name.hasPrefix("Speaker ") {
+        for speaker in meeting.speakers where !Speaker.isAutoName(speaker.name) {
             newSpeakers.append(speaker)
         }
         updated.speakers = newSpeakers
@@ -349,7 +349,7 @@ extension RecordingSessionManager {
                 let speakerIndex = speakers.count
                 speakers.append(Speaker(
                     id: segment.speakerId,
-                    name: "Speaker \(speakerIndex + 1)",
+                    name: Speaker.autoName(speakerIndex + 1),
                     color: Speaker.generateColor(for: speakerIndex),
                     embedding: segment.embedding
                 ))
@@ -392,7 +392,7 @@ extension RecordingSessionManager {
                 let sequentialIndex = speakers.count
                 let speaker = Speaker(
                     id: speakerID,
-                    name: "Speaker \(sequentialIndex + 1)",
+                    name: Speaker.autoName(sequentialIndex + 1),
                     color: Speaker.generateColor(for: sequentialIndex)
                 )
                 speakers.append(speaker)

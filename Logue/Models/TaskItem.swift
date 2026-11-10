@@ -33,9 +33,9 @@ enum TaskPriority: String, Codable, Sendable, CaseIterable, Comparable {
 
     var displayName: String {
         switch self {
-        case .low: "Low"
-        case .medium: "Medium"
-        case .high: "High"
+        case .low: "低"
+        case .medium: "中"
+        case .high: "高"
         }
     }
 
@@ -92,7 +92,12 @@ struct TaskRecurrence: Codable, Sendable, Equatable {
     }
 
     var displayName: String {
-        interval == 1 ? "Every \(unit.rawValue)" : "Every \(interval) \(unit.rawValue)s"
+        let unitName: String = switch unit {
+        case .day: "天"
+        case .week: "周"
+        case .month: "个月"
+        }
+        return interval == 1 ? "每\(unitName)" : "每 \(interval) \(unitName)"
     }
 
     /// Parses the storage form, plus the three words a person might write by hand.

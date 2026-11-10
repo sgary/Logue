@@ -65,6 +65,6 @@ enum DroppedFileImport {
         guard isBareExtension || (trimmed as NSString).deletingPathExtension.isEmpty else {
             return trimmed
         }
-        return "Untitled Document.md"
+        return "未命名文档.md"
     }
 }

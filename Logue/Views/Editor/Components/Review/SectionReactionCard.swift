@@ -15,7 +15,7 @@ struct SectionReactionCard: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(reaction.sectionTitle)
                         .font(.subheadline.weight(.semibold))
-                    Text(reaction.dominantEmotion.rawValue)
+                    Text(reaction.dominantEmotion.displayName)
                         .font(.caption)
                         .foregroundStyle(reaction.dominantEmotion.color)
                 }
@@ -48,7 +48,7 @@ struct SectionReactionCard: View {
                                     .foregroundStyle(emotion.color)
                                     .frame(width: 16)
 
-                                Text(emotion.rawValue)
+                                Text(emotion.displayName)
                                     .font(.caption2)
                                     .foregroundStyle(.secondary)
                                     .frame(width: 70, alignment: .leading)

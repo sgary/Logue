@@ -55,6 +55,7 @@ final class SpeechTranscriberEngine {
 
     // MARK: - Locale Configuration
 
+    /// Tried in order once the requested language and the user's own languages are exhausted.
     private static let fallbackLocales: [Locale] = [
         Locale(components: .init(languageCode: .english, script: nil, languageRegion: .unitedStates)),
         Locale(components: .init(languageCode: .english, script: nil, languageRegion: .unitedKingdom)),
@@ -62,8 +63,57 @@ final class SpeechTranscriberEngine {
         Locale(components: .init(languageCode: .english, script: nil, languageRegion: .australia)),
         Locale(identifier: "en-US"),
         Locale(identifier: "en"),
-        Locale.current,
     ]
+
+    /// The locale a transcriber can actually run in: the requested one when Apple supports it,
+    /// otherwise the user's own language, otherwise English.
+    ///
+    /// `SpeechTranscriber` is single-locale and requesting one it does not have is not a soft
+    /// failure. That makes this a decision to take before the transcriber is created, not a
+    /// fallback to apply afterwards — which is how every meeting ended up transcribed as English
+    /// while the app's sessions were labelled "自动检测".
+    static func resolvedLocale(preferred: Locale? = nil) async -> Locale {
+        var candidates: [Locale] = []
+        if let preferred {
+            candidates.append(preferred)
+        }
+        candidates.append(contentsOf: Locale.preferredLanguages.map { Locale(identifier: $0) })
+        candidates.append(Locale.current)
+        candidates.append(contentsOf: fallbackLocales)
+
+        let supported = await SpeechTranscriber.supportedLocales
+        // An empty list means the assets have not been enumerated yet, not that nothing is
+        // supported. Let the requested locale through and leave the failure to setup, which can
+        // say so, rather than silently starting in English.
+        guard !supported.isEmpty else {
+            return preferred ?? Locale.current
+        }
+
+        for candidate in candidates {
+            if let match = supported.first(where: { languagesMatch($0, candidate) }) {
+                return match
+            }
+        }
+        return supported[0]
+    }
+
+    /// Whether two locales name the same language for the same region.
+    ///
+    /// Compared component-wise because the identifiers line up on neither side of a string
+    /// comparison: the system reports `zh-Hans-CN` where `supportedLocales` lists `zh_CN`, and
+    /// string equality would call that a miss and drop through to English. A missing script or
+    /// region on either side is a wildcard, so `zh-Hans-CN` matches `zh_CN` while `en-GB` does
+    /// not match `en-US`.
+    static func languagesMatch(_ lhs: Locale, _ rhs: Locale) -> Bool {
+        guard lhs.language.languageCode == rhs.language.languageCode else { return false }
+        if let left = lhs.language.script, let right = rhs.language.script, left != right {
+            return false
+        }
+        if let left = lhs.region, let right = rhs.region, left != right {
+            return false
+        }
+        return true
+    }
 
     // MARK: - Init
 
@@ -76,11 +126,11 @@ final class SpeechTranscriberEngine {
     // MARK: - Setup
 
     /// Set up the transcriber with the given locale and start listening for results.
-    /// - Parameter locale: The locale for transcription, or `nil` to use en-US default.
+    /// - Parameter locale: The preferred locale, or `nil` to follow the user's system languages.
+    ///   The locale actually used is the first one Apple's transcriber supports; see
+    ///   `resolvedLocale(preferred:)`.
     func setup(locale: Locale? = nil) async throws {
-        let targetLocale = locale ?? Locale(
-            components: .init(languageCode: .english, script: nil, languageRegion: .unitedStates)
-        )
+        let targetLocale = await Self.resolvedLocale(preferred: locale)
 
         logger.info("Setting up SpeechTranscriber for locale: \(targetLocale.identifier)")
 
@@ -250,49 +300,10 @@ final class SpeechTranscriberEngine {
             logger.info("Speech model ready")
         }
 
-        // Check supported locales
-        let supportedLocales = await SpeechTranscriber.supportedLocales
-
-        if supportedLocales.isEmpty {
-            logger.warning("No supported locales found — trying fallbacks")
-            for fallback in Self.fallbackLocales {
-                do {
-                    try await reserveLocale(fallback)
-                    logger.info("Fallback locale reserved: \(fallback.identifier)")
-                    return
-                } catch {
-                    continue
-                }
-            }
-            throw SpeechTranscriberError.localeNotSupported
-        }
-
-        // Find a supported locale
-        var localeToUse = locale
-        if await !isSupported(locale: locale) {
-            logger.info("Preferred locale not supported, trying fallbacks...")
-            var found = false
-            for fallback in Self.fallbackLocales where await isSupported(locale: fallback) {
-                localeToUse = fallback
-                found = true
-                break
-            }
-            guard found else {
-                throw SpeechTranscriberError.localeNotSupported
-            }
-        }
-
-        try await reserveLocale(localeToUse)
-    }
-
-    // B2: Fixed — removed incorrect en-US fallback that made this always return true
-    private func isSupported(locale: Locale) async -> Bool {
-        let supported = await SpeechTranscriber.supportedLocales
-        let bcp47 = locale.identifier(.bcp47)
-        return supported.contains { supportedLocale in
-            supportedLocale.identifier == locale.identifier
-                || supportedLocale.identifier(.bcp47) == bcp47
-        }
+        // The transcriber was built for a locale `resolvedLocale` already matched against
+        // `supportedLocales`, so reserving a replacement here would leave it transcribing in a
+        // different language than the one it was created with.
+        try await reserveLocale(locale)
     }
 
     private func reserveLocale(_ locale: Locale) async throws {
@@ -317,9 +328,9 @@ enum SpeechTranscriberError: Error, LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .failedToSetup: "Failed to set up speech recognizer."
-        case .invalidAudioFormat: "No compatible audio format found."
-        case .localeNotSupported: "Selected language is not supported for transcription."
+        case .failedToSetup: "无法设置语音识别器。"
+        case .invalidAudioFormat: "找不到兼容的音频格式。"
+        case .localeNotSupported: "所选语言不支持转写。"
         }
     }
 }

@@ -18,7 +18,7 @@ struct HomeAttentionCard: View {
                 VStack(alignment: .leading, spacing: 14) {
                     CardSectionHeader(
                         icon: "exclamationmark.triangle.fill",
-                        title: "Needs Attention",
+                        title: "需要关注",
                         color: urgentItems.contains(where: \.isOverdue)
                             ? AppThemeConstants.error : AppThemeConstants.warning
                     )
@@ -67,7 +67,7 @@ struct HomeAttentionCard: View {
                         ? AppThemeConstants.success : .secondary)
             }
             .buttonStyle(.plain)
-            .accessibilityLabel(item.actionItem.isCompleted ? "Mark incomplete" : "Mark complete")
+            .accessibilityLabel(item.actionItem.isCompleted ? "标记为未完成" : "标记为完成")
 
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.actionItem.title)
@@ -98,7 +98,7 @@ struct HomeAttentionCard: View {
 
             if let onAsk {
                 HomeAskAffordance(
-                    accessibilityLabel: "Ask Logue about \(item.actionItem.title)"
+                    accessibilityLabel: "向 Logue 询问 \(item.actionItem.title)"
                 ) {
                     onAsk(HomeAskPrompts.actionItem(title: item.actionItem.title))
                 }
@@ -138,7 +138,7 @@ struct HomeAttentionCard: View {
         HStack(spacing: 10) {
             Group {
                 if event.isHappeningNow {
-                    Text("NOW")
+                    Text("现在")
                         .font(.caption2.weight(.bold))
                         .foregroundStyle(AppThemeConstants.error)
                 } else {
@@ -153,7 +153,7 @@ struct HomeAttentionCard: View {
                 Text(event.title)
                     .font(.callout.weight(.medium))
                     .lineLimit(1)
-                Text("\(event.durationMinutes) min")
+                Text("\(event.durationMinutes) 分钟")
                     .font(.caption)
                     .foregroundStyle(.tertiary)
             }
@@ -161,7 +161,7 @@ struct HomeAttentionCard: View {
             Spacer()
 
             if let onAsk {
-                HomeAskAffordance(accessibilityLabel: "Ask Logue about \(event.title)") {
+                HomeAskAffordance(accessibilityLabel: "向 Logue 询问 \(event.title)") {
                     onAsk(HomeAskPrompts.calendarEvent(title: event.title))
                 }
             }
@@ -176,14 +176,14 @@ struct HomeAttentionCard: View {
                         .foregroundStyle(AppThemeConstants.success)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Join meeting")
+                .accessibilityLabel("加入会议")
             }
 
             Button { onStartMeeting(event) } label: {
                 HStack(spacing: 3) {
                     Image(systemName: "record.circle")
                         .font(.caption)
-                    Text("Record")
+                    Text("录制")
                         .font(.caption.weight(.medium))
                 }
             }

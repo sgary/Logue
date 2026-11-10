@@ -29,9 +29,9 @@ struct BugReportView: View {
                 Image(systemName: "ladybug")
                     .font(.system(size: 28))
                     .foregroundStyle(AppThemeConstants.accent)
-                Text("Report Bug / Issue")
+                Text("报告问题")
                     .font(.headline)
-                Text("Describe what happened. Device info is attached automatically.")
+                Text("描述发生了什么，设备信息会自动附加。")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -43,14 +43,14 @@ struct BugReportView: View {
             // Form
             VStack(alignment: .leading, spacing: 12) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Title")
+                    Text("标题")
                         .font(.subheadline.weight(.medium))
-                    TextField("Brief summary of the issue", text: $title)
+                    TextField("简要描述问题", text: $title)
                         .textFieldStyle(.roundedBorder)
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Description")
+                    Text("描述")
                         .font(.subheadline.weight(.medium))
                     TextEditor(text: $description)
                         .font(.body)
@@ -67,15 +67,15 @@ struct BugReportView: View {
                 // Auto-attached info hint
                 DisclosureGroup {
                     VStack(alignment: .leading, spacing: 4) {
-                        infoRow("App Version", BugReportInfo.appVersion)
-                        infoRow("Build", BugReportInfo.buildNumber)
+                        infoRow("应用版本", BugReportInfo.appVersion)
+                        infoRow("构建号", BugReportInfo.buildNumber)
                         infoRow("macOS", BugReportInfo.macOSVersion)
-                        infoRow("Device", BugReportInfo.deviceModel)
+                        infoRow("设备", BugReportInfo.deviceModel)
                     }
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 } label: {
-                    Label("Attached device info", systemImage: "info.circle")
+                    Label("附加的设备信息", systemImage: "info.circle")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -89,7 +89,7 @@ struct BugReportView: View {
                 Group {
                     switch result {
                     case .success:
-                        Label("Opening GitHub to file your report — thank you!", systemImage: "checkmark.circle.fill")
+                        Label("正在打开 GitHub 提交报告，谢谢！", systemImage: "checkmark.circle.fill")
                             .foregroundStyle(AppThemeConstants.success)
                     case let .error(message):
                         Label(message, systemImage: "exclamationmark.triangle.fill")
@@ -103,7 +103,7 @@ struct BugReportView: View {
 
             // Buttons
             HStack {
-                Button("Cancel") { dismiss() }
+                Button("取消") { dismiss() }
                     .keyboardShortcut(.cancelAction)
 
                 Spacer()
@@ -113,7 +113,7 @@ struct BugReportView: View {
                         ProgressView()
                             .controlSize(.small)
                     } else {
-                        Text("Submit Report")
+                        Text("提交报告")
                     }
                 }
                 .buttonStyle(.borderedProminent)
@@ -132,16 +132,16 @@ struct BugReportView: View {
     private var screenshotsSection: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 6) {
-                Text("Screenshots")
+                Text("截图")
                     .font(.subheadline.weight(.medium))
-                Text("(optional, up to \(Self.maxScreenshots))")
+                Text("（可选，最多 \(Self.maxScreenshots) 张）")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                 Spacer()
                 Button {
                     pickScreenshots()
                 } label: {
-                    Label("Add", systemImage: "plus")
+                    Label("添加", systemImage: "plus")
                         .font(.caption)
                 }
                 .buttonStyle(.bordered)
@@ -171,8 +171,8 @@ struct BugReportView: View {
         panel.allowsMultipleSelection = true
         panel.canChooseDirectories = false
         panel.canChooseFiles = true
-        panel.title = "Choose Screenshots"
-        panel.message = "Select up to \(remaining) image\(remaining == 1 ? "" : "s") to attach"
+        panel.title = "选择截图"
+        panel.message = "最多选择 \(remaining) 张图片附加"
 
         panel.begin { @MainActor response in
             guard response == .OK else { return }
@@ -184,11 +184,11 @@ struct BugReportView: View {
                 guard let attrs = try? FileManager.default.attributesOfItem(atPath: url.path),
                       let size = attrs[.size] as? Int
                 else {
-                    submitResult = .error("Could not read \(url.lastPathComponent).")
+                    submitResult = .error("无法读取 \(url.lastPathComponent)。")
                     continue
                 }
                 if size > Self.maxScreenshotBytes {
-                    submitResult = .error("\(url.lastPathComponent) is larger than 10 MB and was skipped.")
+                    submitResult = .error("\(url.lastPathComponent) 超过 10 MB，已跳过。")
                     continue
                 }
                 screenshots.append(url)
@@ -205,7 +205,7 @@ struct BugReportView: View {
 
     private func infoRow(_ label: String, _ value: String) -> some View {
         HStack {
-            Text(label + ":")
+            Text(label + "：")
                 .foregroundStyle(.tertiary)
             Text(value)
         }
@@ -228,7 +228,7 @@ struct BugReportView: View {
                 isSubmitting = false
                 dismiss()
             } catch {
-                submitResult = .error("Failed to submit: \(error.localizedDescription)")
+                submitResult = .error("提交失败：\(error.localizedDescription)")
                 isSubmitting = false
             }
         }
@@ -267,7 +267,7 @@ private struct ScreenshotThumbnail: View {
             }
             .buttonStyle(.plain)
             .padding(2)
-            .help("Remove")
+            .help("移除")
         }
         .help(url.lastPathComponent)
     }
@@ -292,7 +292,7 @@ enum BugReportInfo {
     static var deviceModel: String {
         var size = 0
         sysctlbyname("hw.model", nil, &size, nil, 0)
-        guard size > 0 else { return "Unknown" }
+        guard size > 0 else { return "未知" }
         var model = [CChar](repeating: 0, count: size)
         sysctlbyname("hw.model", &model, &size, nil, 0)
         return String(cString: model)
@@ -306,7 +306,7 @@ enum BugReportError: LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .invalidURL: "Could not build the bug report URL."
+        case .invalidURL: "无法构建问题报告链接。"
         }
     }
 }
@@ -326,13 +326,13 @@ enum BugReportService {
             description,
             "",
             "---",
-            "**Diagnostics**",
+            "**诊断信息**",
             DiagnosticsReport.generate(),
         ]
 
         if !screenshots.isEmpty {
             bodyLines.append("")
-            bodyLines.append("_\(screenshots.count) screenshot(s) selected — please drag them into this issue after it opens._")
+            bodyLines.append("_已选择 \(screenshots.count) 张截图，请在问题页面打开后将它们拖入其中。_")
         }
 
         var components = URLComponents(string: newIssueURL)

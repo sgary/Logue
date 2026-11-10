@@ -33,9 +33,9 @@ final class MermaidRenderer {
 
         var errorDescription: String? {
             switch self {
-            case .libraryUnavailable: "Mermaid library could not be loaded."
-            case let .parseFailed(detail): "Mermaid parse error: \(detail)"
-            case let .renderFailed(detail): "Mermaid render error: \(detail)"
+            case .libraryUnavailable: "无法加载 Mermaid 库。"
+            case let .parseFailed(detail): "Mermaid 解析错误：\(detail)"
+            case let .renderFailed(detail): "Mermaid 渲染错误：\(detail)"
             }
         }
     }
@@ -69,7 +69,7 @@ final class MermaidRenderer {
             // WKWebView. Prior errors don't propagate — we just need the
             // serialization barrier.
             _ = try? await prior?.value
-            guard let self else { throw MermaidError.renderFailed("Renderer deallocated") }
+            guard let self else { throw MermaidError.renderFailed("渲染器已释放") }
             return try await self.performRender(code: code)
         }
         inFlightToken += 1
@@ -116,7 +116,7 @@ final class MermaidRenderer {
             {
                 return svg
             }
-            throw MermaidError.renderFailed("No SVG produced")
+            throw MermaidError.renderFailed("未生成 SVG")
         } catch let err as MermaidError {
             throw err
         } catch {

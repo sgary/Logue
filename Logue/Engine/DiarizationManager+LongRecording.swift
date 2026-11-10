@@ -245,7 +245,7 @@ extension DiarizationManager {
             for segment in speaker.finalizedSegments {
                 updates.append(SortformerSpeakerUpdate(
                     speakerIndex: speakerIndex,
-                    speakerName: speaker.name ?? "Speaker \(speakerIndex + 1)",
+                    speakerName: speaker.name ?? Speaker.autoName(speakerIndex + 1),
                     startTime: TimeInterval(segment.startTime),
                     endTime: TimeInterval(segment.endTime)
                 ))

@@ -145,7 +145,7 @@ final class DeepResearchCoordinator {
         runGeneration += 1
         if isRunning {
             currentStep = .failed
-            lastError = "Cancelled."
+            lastError = "已取消。"
         }
         isRunning = false
     }
@@ -189,7 +189,7 @@ final class DeepResearchCoordinator {
                 guard generation == runGeneration else { return }
                 clarifyingQuestions = questions
                 currentStep = .failed
-                lastError = "Need more detail."
+                lastError = "需要更多细节。"
                 postClarification(to: conversationID, questions: questions)
                 return
             }
@@ -284,7 +284,7 @@ final class DeepResearchCoordinator {
         if header.hasPrefix("INSUFFICIENT") {
             let questions = Array(lines.dropFirst()).filter { !$0.isEmpty }
             return .insufficient(questions: questions.isEmpty
-                ? ["Could you clarify the scope of your research request?"]
+                ? ["能否说明一下你的研究范围？"]
                 : questions
             )
         }
@@ -330,7 +330,7 @@ final class DeepResearchCoordinator {
         // Fallback: a single all-encompassing section the LLM can fill in via research.
         return [
             ResearchSection(
-                title: "Overview",
+                title: "概述",
                 description: synthesizedPrompt,
                 isSearchNeeded: true
             ),
@@ -561,11 +561,11 @@ final class DeepResearchCoordinator {
 
     private func postClarification(to conversationID: UUID, questions: [String]) {
         let body = """
-        I need a bit more detail before starting Deep Research:
+        开始深度研究前，我需要更多细节：
 
         \(questions.enumerated().map { "\($0.offset + 1). \($0.element)" }.joined(separator: "\n"))
 
-        Reply with the missing context and I'll start the research.
+        请补充缺失的信息，我会开始研究。
         """
         AgentConversationStore.shared.appendMessage(
             AgentMessage(role: .assistant, content: body),
@@ -584,7 +584,7 @@ final class DeepResearchCoordinator {
 
     private func postFailure(to conversationID: UUID, error: String) {
         AgentConversationStore.shared.appendMessage(
-            AgentMessage(role: .assistant, content: "Deep Research failed: \(error). Try again, or rephrase your request."),
+            AgentMessage(role: .assistant, content: "深度研究失败：\(error)。请重试或换个说法。"),
             to: conversationID
         )
         AgentConversationStore.shared.persistConversation(conversationID)
@@ -618,7 +618,7 @@ enum DeepResearchError: Error, LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .planEmpty: "Couldn't plan the research — try rephrasing your prompt."
+        case .planEmpty: "无法规划研究，请换个提示词再试。"
         }
     }
 }

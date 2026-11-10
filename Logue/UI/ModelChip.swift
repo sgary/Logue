@@ -37,8 +37,8 @@ struct ModelChip: View {
             )
         }
         .buttonStyle(.plain)
-        .help("Active model — click to change")
-        .accessibilityLabel("Active model: \(displayName). Click to change.")
+        .help("当前模型，点击切换")
+        .accessibilityLabel("当前模型：\(displayName)。点击切换。")
     }
 
     /// Trim namespacey model IDs ("mlx-community/Llama-3.2-3B-Instruct-4bit")

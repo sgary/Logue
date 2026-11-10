@@ -17,19 +17,19 @@ struct PermissionsSettingsTab: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Text("Permissions")
+            Text("权限")
                 .font(.title3.bold())
                 .padding(.horizontal, 20)
                 .padding(.top, 20)
                 .padding(.bottom, 4)
 
-            Text("Logue needs these permissions to power its features. All processing stays on your Mac.")
+            Text("Logue 需要这些权限来运行其功能。所有处理都在你的 Mac 上进行。")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 20)
                 .padding(.bottom, 4)
 
-            PrivacyBadge("No data ever leaves your device.")
+            PrivacyBadge("任何数据都不会离开你的设备。")
                 .padding(.horizontal, 20)
                 .padding(.bottom, 16)
 
@@ -40,8 +40,8 @@ struct PermissionsSettingsTab: View {
                     // Microphone
                     PermissionRow(
                         icon: "mic.fill",
-                        title: "Microphone",
-                        description: "Record and transcribe meetings on-device.",
+                        title: "麦克风",
+                        description: "在设备端录制并转写会议。",
                         isGranted: micGranted,
                         onRevoke: { openPrivacySettings(section: .microphone) },
                         onGrant: {
@@ -59,8 +59,8 @@ struct PermissionsSettingsTab: View {
                     // Speech Recognition
                     PermissionRow(
                         icon: "waveform",
-                        title: "Speech Recognition",
-                        description: "Voice-to-text for transcription and push-to-talk.",
+                        title: "语音识别",
+                        description: "用于转写和按住说话的语音转文字。",
                         isGranted: speechGranted,
                         onRevoke: { openPrivacySettings(section: .speechRecognition) },
                         onGrant: {
@@ -78,8 +78,8 @@ struct PermissionsSettingsTab: View {
                     // Calendar
                     PermissionRow(
                         icon: "calendar",
-                        title: "Calendar",
-                        description: "Show upcoming meetings and auto-populate titles.",
+                        title: "日历",
+                        description: "显示即将开始的会议并自动填充标题。",
                         isGranted: calendarGranted,
                         onRevoke: { openPrivacySettings(section: .calendars) },
                         onGrant: {
@@ -108,9 +108,9 @@ struct PermissionsSettingsTab: View {
                             }
                         )) {
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Show Upcoming Meetings")
+                                Text("显示即将开始的会议")
                                     .font(.subheadline.weight(.medium))
-                                Text("Display calendar events on the meetings home screen.")
+                                Text("在会议主页显示日历事件。")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
@@ -118,15 +118,15 @@ struct PermissionsSettingsTab: View {
                         .toggleStyle(.switch)
                         .tint(AppThemeConstants.accent)
                         .padding(.leading, 36)
-                        .accessibilityLabel("Show Upcoming Meetings")
-                        .accessibilityHint("Toggle display of calendar events on the meetings home screen")
+                        .accessibilityLabel("显示即将开始的会议")
+                        .accessibilityHint("切换是否在会议主页显示日历事件")
 
-                        PrivacyBadge("Calendar data is read locally via EventKit. Nothing is uploaded or shared.")
+                        PrivacyBadge("日历数据通过 EventKit 在本地读取，不会上传或共享。")
                             .padding(.leading, 36)
 
                         if calendarManager.isEnabled, !calendarManager.upcomingEvents.isEmpty {
                             VStack(alignment: .leading, spacing: 8) {
-                                Text("Upcoming Events")
+                                Text("即将开始的事件")
                                     .font(.caption.weight(.semibold))
                                     .foregroundStyle(.secondary)
 
@@ -154,8 +154,8 @@ struct PermissionsSettingsTab: View {
                     // Accessibility
                     PermissionRow(
                         icon: "accessibility",
-                        title: "Accessibility",
-                        description: "Writing assistant, auto-suggestions, and text replacement across apps.",
+                        title: "辅助功能",
+                        description: "跨应用的写作助手、自动建议和文本替换。",
                         isGranted: accessibilityGranted,
                         onRevoke: { openPrivacySettings(section: .accessibility) },
                         onGrant: {
@@ -255,25 +255,25 @@ private struct PermissionRow: View {
             Spacer()
 
             if isGranted {
-                Button("Revoke") {
+                Button("撤销") {
                     onRevoke()
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .accessibilityLabel("Revoke \(title) permission")
-                .accessibilityHint("Opens System Settings to manage \(title.lowercased()) permission")
+                .accessibilityLabel("撤销\(title)权限")
+                .accessibilityHint("打开系统设置以管理\(title.lowercased())权限")
             } else {
-                Button("Grant") {
+                Button("授予") {
                     onGrant()
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(AppThemeConstants.accent)
                 .controlSize(.small)
-                .accessibilityLabel("Grant \(title) permission")
-                .accessibilityHint("Requests \(title.lowercased()) access for Logue")
+                .accessibilityLabel("授予\(title)权限")
+                .accessibilityHint("为 Logue 请求\(title.lowercased())访问权限")
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(title) permission, \(isGranted ? "granted" : "not granted")")
+        .accessibilityLabel("\(title)权限，\(isGranted ? "已授予" : "未授予")")
     }
 }

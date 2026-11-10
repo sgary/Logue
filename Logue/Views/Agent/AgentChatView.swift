@@ -111,7 +111,7 @@ struct AgentChatView: View {
         // The landing state is Home, whatever the auto-created conversation happens to
         // be called — titling an empty screen "New Conversation" names a thread the user
         // has not started yet. The conversation's own title takes over once it has one.
-        .navigationTitle(hasMessages ? (activeConversation?.title ?? "Home") : "Home")
+        .navigationTitle(hasMessages ? (activeConversation?.title ?? "首页") : "首页")
         .navigationSubtitle(topBarSubtitle)
         .toolbar { chatToolbar }
         .toastOverlay()
@@ -128,7 +128,7 @@ struct AgentChatView: View {
             )
             let msg = AgentMessage(
                 role: .assistant,
-                content: "Generated with Apple ImagePlayground. Tap and hold to save.",
+                content: "由 Apple ImagePlayground 生成。长按即可保存。",
                 attachments: [attachment]
             )
             AgentConversationStore.shared.appendMessage(msg, to: conversationID)
@@ -208,7 +208,7 @@ struct AgentChatView: View {
             }
 
             if modelManager.activeModelID == nil {
-                Label("Set up a model to ask Logue", systemImage: "exclamationmark.circle")
+                Label("设置模型后即可向 Logue 提问", systemImage: "exclamationmark.circle")
                     .font(.callout)
                     .foregroundStyle(AppThemeConstants.warning)
                     .padding(.horizontal, AppThemeConstants.paddingXXLarge)
@@ -386,7 +386,7 @@ struct AgentChatView: View {
             } label: {
                 Image(systemName: "clock")
             }
-            .help("Conversation history")
+            .help("对话历史")
             .popover(isPresented: $showConversationList, arrowEdge: .bottom) {
                 AgentConversationListView { selectedID in
                     conversationStore.selectedConversationID = selectedID
@@ -402,7 +402,7 @@ struct AgentChatView: View {
             } label: {
                 Image(systemName: "plus.circle")
             }
-            .help("New conversation")
+            .help("新建对话")
 
             // Offered once there is anything to draw — the agent's sources, or a file the user
             // has staged in the prompt bar. A toggle that is always present on Home advertises
@@ -416,7 +416,7 @@ struct AgentChatView: View {
                     Image(systemName: showSourcesPanel ? "sidebar.right" : "sidebar.squares.right")
                         .foregroundStyle(showSourcesPanel ? Color.accentColor : Color.primary)
                 }
-                .help(showSourcesPanel ? "Hide sources panel" : "Show sources panel")
+                .help(showSourcesPanel ? "隐藏来源面板" : "显示来源面板")
             }
         }
     }
@@ -454,7 +454,7 @@ struct AgentChatView: View {
         if messageCount == 0 {
             return UICopy.Trust.bannerFull
         }
-        return "\(messageCount) message\(messageCount == 1 ? "" : "s")"
+        return "\(messageCount) 条消息"
     }
 
     // MARK: - Error Banner
@@ -489,7 +489,7 @@ struct AgentChatView: View {
                     .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Dismiss error")
+            .accessibilityLabel("关闭错误")
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 10)
@@ -504,7 +504,7 @@ struct AgentChatView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 8)
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Error: \(message)")
+        .accessibilityLabel("错误：\(message)")
     }
 
     // MARK: - Actions

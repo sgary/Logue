@@ -26,22 +26,22 @@ struct MemoryListView: View {
         }
         .frame(minWidth: 320, minHeight: 360)
         .task { await reload() }
-        .alert("Clear all memories?", isPresented: $showClearConfirm) {
-            Button("Cancel", role: .cancel) {}
-            Button("Clear", role: .destructive) {
+        .alert("清除所有记忆？", isPresented: $showClearConfirm) {
+            Button("取消", role: .cancel) {}
+            Button("清除", role: .destructive) {
                 Task {
                     await MemoryStore.shared.clearAll()
                     await reload()
                 }
             }
         } message: {
-            Text("This deletes everything Logue has remembered about you across conversations. The agent will start with a clean slate.")
+            Text("这会删除 Logue 在所有对话中记住的关于你的一切。智能体将从头开始。")
         }
     }
 
     private var header: some View {
         HStack {
-            Text("Memories")
+            Text("记忆")
                 .font(.headline)
             Spacer()
             if !memories.isEmpty {
@@ -52,7 +52,7 @@ struct MemoryListView: View {
                         .font(.callout)
                 }
                 .buttonStyle(.plain)
-                .help("Clear all memories")
+                .help("清除所有记忆")
             }
         }
         .padding(.horizontal, 16)
@@ -64,7 +64,7 @@ struct MemoryListView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(.tertiary)
                 .font(.caption)
-            TextField("Search memories...", text: $searchText)
+            TextField("搜索记忆…", text: $searchText)
                 .textFieldStyle(.plain)
                 .font(.callout)
         }
@@ -85,7 +85,7 @@ struct MemoryListView: View {
         } else if filteredMemories.isEmpty {
             VStack {
                 Spacer()
-                Text("No matches")
+                Text("没有匹配项")
                     .font(.callout)
                     .foregroundStyle(.secondary)
                 Spacer()
@@ -106,10 +106,10 @@ struct MemoryListView: View {
             Image(systemName: "brain")
                 .font(.largeTitle)
                 .foregroundStyle(.tertiary)
-            Text("No memories yet")
+            Text("还没有记忆")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-            Text("Logue will remember persistent facts you share — your role, preferences, ongoing projects — across conversations.")
+            Text("Logue 会记住你分享的长期信息——你的角色、偏好和进行中的项目——并跨对话保留。")
                 .font(.caption)
                 .foregroundStyle(.tertiary)
                 .multilineTextAlignment(.center)
@@ -129,12 +129,12 @@ struct MemoryListView: View {
                     .background(Color.primary.opacity(0.04), in: RoundedRectangle(cornerRadius: 4))
                 HStack(spacing: 8) {
                     Spacer()
-                    Button("Cancel") {
+                    Button("取消") {
                         editingID = nil
                     }
                     .buttonStyle(.bordered)
                     .controlSize(.small)
-                    Button("Save") {
+                    Button("保存") {
                         Task {
                             await MemoryStore.shared.updateMemory(id: memory.id, newText: draftText)
                             editingID = nil
@@ -158,12 +158,12 @@ struct MemoryListView: View {
             }
             .contentShape(Rectangle())
             .contextMenu {
-                Button("Edit") {
+                Button("编辑") {
                     draftText = memory.text
                     editingID = memory.id
                 }
                 Divider()
-                Button("Delete", role: .destructive) {
+                Button("删除", role: .destructive) {
                     Task {
                         await MemoryStore.shared.deleteMemory(id: memory.id)
                         await reload()

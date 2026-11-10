@@ -143,7 +143,7 @@ private struct KaTeXWebView: NSViewRepresentable {
               });
             } catch (e) {
               document.getElementById("out").innerHTML =
-                '<span class="err">' + (e.message || 'render error') + '</span>';
+                '<span class="err">' + (e.message || '渲染错误') + '</span>';
             }
           </script>
         </body></html>

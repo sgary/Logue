@@ -60,7 +60,7 @@ struct ChatBubble: View {
                             }
                         } label: {
                             Label(
-                                insertedFeedback ? "Inserted!" : "Insert",
+                                insertedFeedback ? "已插入" : "插入",
                                 systemImage: insertedFeedback ? "checkmark" : "arrow.down.doc"
                             )
                             .font(.caption.weight(.medium))
@@ -74,8 +74,8 @@ struct ChatBubble: View {
                         }
                         .buttonStyle(.plain)
                         .animation(.easeInOut(duration: 0.2), value: insertedFeedback)
-                        .accessibilityLabel(insertedFeedback ? "Inserted into document" : "Insert into document")
-                        .accessibilityHint("Inserts this response into your document")
+                        .accessibilityLabel(insertedFeedback ? "已插入文档" : "插入文档")
+                        .accessibilityHint("将此回复插入到你的文档")
                     }
 
                     if let copyAction = onCopy {
@@ -98,8 +98,8 @@ struct ChatBubble: View {
                         }
                         .buttonStyle(.plain)
                         .animation(.easeInOut(duration: 0.2), value: copiedFeedback)
-                        .help(copiedFeedback ? "Copied!" : "Copy to clipboard")
-                        .accessibilityLabel(copiedFeedback ? "Copied to clipboard" : "Copy response to clipboard")
+                        .help(copiedFeedback ? "已复制" : "复制到剪贴板")
+                        .accessibilityLabel(copiedFeedback ? "已复制到剪贴板" : "复制回复到剪贴板")
                     }
                 }
                 .opacity(isHovered || onInsert != nil ? 1 : 0)

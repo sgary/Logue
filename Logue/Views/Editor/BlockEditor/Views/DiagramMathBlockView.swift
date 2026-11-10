@@ -66,7 +66,7 @@ struct MermaidBlockView: View {
         let code = source.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !code.isEmpty else {
             svg = nil
-            renderError = "Empty diagram"
+            renderError = "图表为空"
             return
         }
 
@@ -79,7 +79,7 @@ struct MermaidBlockView: View {
             guard !Task.isCancelled else { return }
             Self.logger.error("Mermaid render failed: \(error.localizedDescription, privacy: .public)")
             svg = nil
-            renderError = "Diagram could not be rendered"
+            renderError = "无法渲染图表"
         }
     }
 }
@@ -103,7 +103,7 @@ struct MathBlockView: View {
                 onTextChange: onLatexChange
             )
         } else if latex.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            Text("Empty equation")
+            Text("公式为空")
                 .font(.system(size: fontSize))
                 .foregroundStyle(.tertiary)
                 .frame(maxWidth: .infinity, alignment: .leading)

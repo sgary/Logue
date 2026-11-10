@@ -48,9 +48,9 @@ enum SpaceFilterType: CaseIterable {
 
     var label: String {
         switch self {
-        case .all: "All"
-        case .documents: "Documents"
-        case .meetings: "Meetings"
+        case .all: "全部"
+        case .documents: "文档"
+        case .meetings: "会议"
         }
     }
 
@@ -68,12 +68,12 @@ enum SpaceSortOrder: CaseIterable {
 
     var label: String {
         switch self {
-        case .modifiedNewest: "Modified (Newest)"
-        case .modifiedOldest: "Modified (Oldest)"
-        case .titleAZ: "Title (A-Z)"
-        case .titleZA: "Title (Z-A)"
-        case .createdNewest: "Created (Newest)"
-        case .createdOldest: "Created (Oldest)"
+        case .modifiedNewest: "修改时间（最新）"
+        case .modifiedOldest: "修改时间（最早）"
+        case .titleAZ: "标题（A-Z）"
+        case .titleZA: "标题（Z-A）"
+        case .createdNewest: "创建时间（最新）"
+        case .createdOldest: "创建时间（最早）"
         }
     }
 }
@@ -89,11 +89,11 @@ enum SidebarSpaceSortOrder: String, CaseIterable {
 
     var label: String {
         switch self {
-        case .custom: "Custom"
-        case .nameAZ: "Name (A–Z)"
-        case .nameZA: "Name (Z–A)"
-        case .createdNewest: "Date Created (Newest)"
-        case .createdOldest: "Date Created (Oldest)"
+        case .custom: "自定义"
+        case .nameAZ: "名称（A–Z）"
+        case .nameZA: "名称（Z–A）"
+        case .createdNewest: "创建日期（最新）"
+        case .createdOldest: "创建日期（最早）"
         }
     }
 }

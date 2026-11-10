@@ -48,10 +48,10 @@ struct MarkdownStorageMigrator {
         var errorDescription: String? {
             switch self {
             case let .rootHoldsUnrelatedFiles(count):
-                "That folder already contains \(count) unrelated item(s). "
-                    + "Choose an empty folder so Logue does not mix its documents into it."
+                "该文件夹中已包含 \(count) 个不相关的项目。"
+                    + "请选择一个空文件夹，以免 Logue 将文档混入其中。"
             case let .couldNotCreateRoot(reason):
-                "The folder could not be created: \(reason)"
+                "无法创建文件夹：\(reason)"
             }
         }
     }
@@ -416,11 +416,11 @@ struct MarkdownStorageMigrator {
 
         var errorDescription: String? {
             switch self {
-            case .unreadable: "The written file could not be read back"
-            case .identifierMismatch: "The written file has a different identifier"
-            case .titleMismatch: "The written file has a different title"
-            case .bodyMismatch: "The written file has different text"
-            case let .fieldMismatch(field): "The written file lost or changed “\(field)”"
+            case .unreadable: "无法读回写入的文件"
+            case .identifierMismatch: "写入的文件标识符不一致"
+            case .titleMismatch: "写入的文件标题不一致"
+            case .bodyMismatch: "写入的文件正文不一致"
+            case let .fieldMismatch(field): "写入的文件丢失或更改了“\(field)”"
             }
         }
     }

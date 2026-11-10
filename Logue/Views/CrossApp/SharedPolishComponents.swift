@@ -27,7 +27,7 @@ struct DismissCircleButton: View {
         .buttonStyle(.plain)
         .frame(width: size, height: size)
         .background(Circle().fill(Color.primary.opacity(AppThemeConstants.opacityLight)))
-        .accessibilityLabel("Close")
+        .accessibilityLabel("关闭")
     }
 }
 
@@ -57,7 +57,7 @@ struct PolishProcessingView: View {
                 }
             }
 
-            Text("Polishing with \(modeName)...")
+            Text("正在用 \(modeName) 润色…")
                 .font(.subheadline.weight(.medium))
                 .foregroundStyle(.secondary)
 
@@ -65,7 +65,7 @@ struct PolishProcessingView: View {
                 HStack(spacing: 6) {
                     Image(systemName: "xmark.circle.fill")
                         .font(.caption.weight(.bold))
-                    Text("Cancel")
+                    Text("取消")
                         .font(.subheadline.weight(.semibold))
                 }
                 .foregroundStyle(.white)
@@ -105,7 +105,7 @@ struct PolishErrorView: View {
                 .padding(.horizontal, 20)
 
             HStack(spacing: 10) {
-                Button("Back", action: onBack)
+                Button("返回", action: onBack)
                     .font(.caption.weight(.medium))
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 16)
@@ -116,7 +116,7 @@ struct PolishErrorView: View {
                     )
                     .buttonStyle(.plain)
 
-                Button("Try Again", action: onRetry)
+                Button("重试", action: onRetry)
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.primary)
                     .padding(.horizontal, 20)
@@ -143,7 +143,7 @@ struct PolishButton: View {
     var body: some View {
         Button(action: action) {
             HStack(spacing: 5) {
-                Text("Polish")
+                Text("润色")
                     .font(.subheadline.weight(.semibold))
                 Image(systemName: "sparkles")
                     .font(.caption.weight(.bold))
@@ -159,7 +159,7 @@ struct PolishButton: View {
         }
         .buttonStyle(.plain)
         .disabled(isDisabled)
-        .accessibilityHint("Improve your text with AI")
+        .accessibilityHint("用 AI 改进你的文本")
     }
 }
 
@@ -263,7 +263,7 @@ struct PolishResultActionBar: View {
     var body: some View {
         HStack(spacing: 10) {
             Button(action: onDismiss) {
-                Text("Dismiss")
+                Text("关闭")
                     .font(.subheadline.weight(.medium))
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 14)
@@ -279,7 +279,7 @@ struct PolishResultActionBar: View {
                     HStack(spacing: 4) {
                         Image(systemName: "square.and.arrow.down")
                             .font(.caption.weight(.semibold))
-                        Text("Save to Doc")
+                        Text("保存到文档")
                             .font(.subheadline.weight(.medium))
                     }
                     .foregroundStyle(.secondary)
@@ -294,7 +294,7 @@ struct PolishResultActionBar: View {
                 HStack(spacing: 4) {
                     Image(systemName: showCopied ? "checkmark" : "doc.on.doc.fill")
                         .font(.caption.weight(.semibold))
-                    Text(showCopied ? "Copied!" : "Copy")
+                    Text(showCopied ? "已复制！" : "复制")
                         .font(.subheadline.weight(.medium))
                 }
                 .foregroundStyle(showCopied ? AppThemeConstants.success : .white)
@@ -310,7 +310,7 @@ struct PolishResultActionBar: View {
                     HStack(spacing: 4) {
                         Image(systemName: "text.insert")
                             .font(.caption.weight(.bold))
-                        Text("Insert")
+                        Text("插入")
                             .font(.subheadline.weight(.semibold))
                     }
                     .foregroundStyle(.white)

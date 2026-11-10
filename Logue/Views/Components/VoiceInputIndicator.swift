@@ -18,7 +18,7 @@ struct VoiceInputIndicator: View {
                 .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: pulse)
                 .onAppear { pulse = true }
 
-            Text(partialTranscript.isEmpty ? "Listening..." : partialTranscript)
+            Text(partialTranscript.isEmpty ? "正在聆听…" : partialTranscript)
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .lineLimit(1)
@@ -27,8 +27,8 @@ struct VoiceInputIndicator: View {
 
             AudioLevelBars(level: audioLevel)
                 .frame(width: 36, height: 14)
-                .accessibilityLabel("Audio level")
-                .accessibilityValue("\(Int(min(max(Double(audioLevel), 0), 1) * 100)) percent")
+                .accessibilityLabel("音量")
+                .accessibilityValue("\(Int(min(max(Double(audioLevel), 0), 1) * 100))%")
 
             Button(action: onStop) {
                 Image(systemName: "stop.circle.fill")
@@ -36,8 +36,8 @@ struct VoiceInputIndicator: View {
                     .foregroundColor(AppThemeConstants.error)
             }
             .buttonStyle(.plain)
-            .help("Stop recording")
-            .accessibilityLabel("Stop recording")
+            .help("停止录音")
+            .accessibilityLabel("停止录音")
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 6)

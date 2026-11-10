@@ -67,7 +67,7 @@ extension RecordingSessionManager {
         }
 
         logger.info("Recording outgrew the in-memory timeline — processing it from disk instead")
-        diarizationStage = "Processing long recording…"
+        diarizationStage = "正在处理长录音…"
         // Deliberately before the disk pass and before the buffer is taken: the file is the whole
         // session, and holding half a gigabyte of now-redundant audio while two models run is how
         // a long recording runs the machine out of memory at the last moment.

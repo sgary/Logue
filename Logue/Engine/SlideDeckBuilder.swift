@@ -63,7 +63,7 @@ enum SlideDeckBuilder {
 
     private static func parse(json: String) throws -> [Slide] {
         guard let data = json.data(using: .utf8) else {
-            throw SlideError.parseFailed("Couldn't encode JSON to UTF-8")
+            throw SlideError.parseFailed("无法将 JSON 编码为 UTF-8")
         }
         do {
             return try JSONDecoder().decode([Slide].self, from: data)
@@ -170,8 +170,8 @@ enum SlideDeckBuilder {
 
         var errorDescription: String? {
             switch self {
-            case let .parseFailed(detail): "Couldn't parse slide JSON: \(detail)"
-            case let .generationFailed(detail): "Couldn't generate slides: \(detail)"
+            case let .parseFailed(detail): "无法解析幻灯片 JSON：\(detail)"
+            case let .generationFailed(detail): "无法生成幻灯片：\(detail)"
             }
         }
     }

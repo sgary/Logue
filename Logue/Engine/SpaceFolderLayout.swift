@@ -13,7 +13,7 @@ enum SpaceFolderLayout {
     /// the resulting path well inside filesystem length limits.
     static let maxDepth = 12
 
-    private static let fallbackComponent = "Untitled Space"
+    private static let fallbackComponent = "未命名空间"
 
     /// How many levels down a space sits, counting itself. `nil` is the top level, so zero.
     ///

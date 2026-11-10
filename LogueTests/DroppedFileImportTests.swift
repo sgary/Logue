@@ -77,7 +77,7 @@ struct DroppedFileImportTests {
     func namelessFileGetsATitle() throws {
         let fields = try #require(DroppedFileImport.fields(fileContents: "text", filename: ".md"))
 
-        #expect(fields.title == "Untitled Document")
+        #expect(fields.title == "未命名文档")
     }
 
     // MARK: - This path rewrites the file, so it must not reshape it

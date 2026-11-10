@@ -8,6 +8,7 @@ struct SpeakerShortLabelTests {
         #expect(SpeakerShortLabel.forSpeaker("Speaker 1") == "S1")
         #expect(SpeakerShortLabel.forSpeaker("Speaker 12") == "S12")
         #expect(SpeakerShortLabel.forSpeaker("speaker 3") == "S3")
+        #expect(SpeakerShortLabel.forSpeaker("发言人 2") == "S2")
     }
 
     @Test("A person's name becomes their initials")

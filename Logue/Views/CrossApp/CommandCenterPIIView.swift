@@ -55,13 +55,13 @@ struct CommandCenterPIIView: View {
                     .background(Circle().fill(Color.primary.opacity(AppThemeConstants.opacityLight)))
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Back")
+            .accessibilityLabel("返回")
 
             Image(systemName: "lock.shield")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(AppThemeConstants.warning)
 
-            Text("Privacy Scanner")
+            Text("隐私扫描")
                 .font(AppThemeConstants.islandTitle)
                 .foregroundStyle(.primary)
 
@@ -78,11 +78,11 @@ struct CommandCenterPIIView: View {
     private var categoryToggles: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Text("Categories")
+                Text("类别")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Spacer()
-                Button(enabledCategories.count == PIICategory.allCases.count ? "Deselect all" : "Select all") {
+                Button(enabledCategories.count == PIICategory.allCases.count ? "取消全选" : "全选") {
                     withAnimation(.easeInOut(duration: 0.2)) {
                         if enabledCategories.count == PIICategory.allCases.count {
                             enabledCategories.removeAll()
@@ -129,7 +129,7 @@ struct CommandCenterPIIView: View {
                 } else {
                     Image(systemName: "magnifyingglass")
                 }
-                Text(isScanning ? "Scanning\u{2026}" : "Scan Text")
+                Text(isScanning ? "扫描中\u{2026}" : "扫描文本")
             }
             .font(.subheadline.weight(.semibold))
             .foregroundStyle(.white)
@@ -146,7 +146,7 @@ struct CommandCenterPIIView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 12)
         .disabled(isScanning || enabledCategories.isEmpty || textToScan.isEmpty || LLMEngineStatus.shared.isBusy)
-        .accessibilityLabel(isScanning ? "Scanning for personal data" : "Scan text for personal data")
+        .accessibilityLabel(isScanning ? "正在扫描个人数据" : "扫描文本中的个人数据")
     }
 
     // MARK: - Results
@@ -180,7 +180,7 @@ struct CommandCenterPIIView: View {
             VStack(spacing: 12) {
                 ProgressView()
                     .controlSize(.regular)
-                Text("Analyzing text for personal data\u{2026}")
+                Text("正在分析文本中的个人数据\u{2026}")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -191,7 +191,7 @@ struct CommandCenterPIIView: View {
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.largeTitle)
                     .foregroundStyle(AppThemeConstants.warning)
-                Text("Scan failed")
+                Text("扫描失败")
                     .font(.subheadline.weight(.medium))
                 Text(error)
                     .font(.caption)
@@ -229,9 +229,9 @@ struct CommandCenterPIIView: View {
                     .font(.title3)
                     .foregroundStyle(AppThemeConstants.brandPrimary)
             }
-            Text("No PII detected")
+            Text("未检测到个人身份信息")
                 .font(.subheadline.weight(.medium))
-            Text("Your text appears safe to share.")
+            Text("你的文本看起来可以安全分享。")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -249,11 +249,11 @@ struct CommandCenterPIIView: View {
                     .font(.title3)
                     .foregroundStyle(AppThemeConstants.brandPrimary)
             }
-            Text("Scan for personal data")
+            Text("扫描个人数据")
                 .font(.subheadline.weight(.medium))
             Text(textToScan.isEmpty
-                ? "Type text in the prompt bar or copy text first, then scan."
-                : "Select categories above and scan to detect PII.")
+                ? "先在提示栏输入文本或复制文本，然后扫描。"
+                : "选择上方类别并扫描，以检测个人身份信息。")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -265,7 +265,7 @@ struct CommandCenterPIIView: View {
 
     private var summaryBar: some View {
         HStack(spacing: 12) {
-            Label("\(filteredFindings.count) found", systemImage: "exclamationmark.triangle.fill")
+            Label("发现 \(filteredFindings.count) 项", systemImage: "exclamationmark.triangle.fill")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(highestRisk.color)
 
@@ -300,7 +300,7 @@ struct CommandCenterPIIView: View {
         HStack(spacing: 3) {
             Text("\(count)")
                 .font(.caption2.weight(.bold))
-            Text(risk.rawValue)
+            Text(risk.displayName)
                 .font(.caption2)
         }
         .foregroundStyle(risk.badgeColor)

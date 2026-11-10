@@ -17,7 +17,7 @@ struct HomeContextBar: View {
             if todayCount > 0 {
                 pill(
                     icon: "waveform",
-                    text: "\(todayCount) meeting\(todayCount == 1 ? "" : "s") today",
+                    text: "今天 \(todayCount) 场会议",
                     color: AppThemeConstants.accent
                 )
             }
@@ -28,7 +28,7 @@ struct HomeContextBar: View {
                 }
                 pill(
                     icon: "exclamationmark.circle.fill",
-                    text: "\(overdueCount) overdue",
+                    text: "\(overdueCount) 个已逾期",
                     color: AppThemeConstants.error
                 )
             } else if pendingCount > 0 {
@@ -37,7 +37,7 @@ struct HomeContextBar: View {
                 }
                 pill(
                     icon: "checklist",
-                    text: "\(pendingCount) pending",
+                    text: "\(pendingCount) 个待处理",
                     color: AppThemeConstants.warning
                 )
             }
@@ -48,7 +48,7 @@ struct HomeContextBar: View {
                 }
                 pill(
                     icon: "doc.text",
-                    text: "\(recentDocCount) doc\(recentDocCount == 1 ? "" : "s") this week",
+                    text: "本周 \(recentDocCount) 个文档",
                     color: AppThemeConstants.categoryPurple
                 )
             }

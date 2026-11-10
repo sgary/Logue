@@ -21,7 +21,7 @@ struct AgentConversation: Identifiable, Codable {
 
     init(
         id: UUID = .init(),
-        title: String = "New Conversation",
+        title: String = "新建对话",
         messages: [AgentMessage] = [],
         createdAt: Date = .now,
         modifiedAt: Date = .now,
@@ -47,7 +47,7 @@ struct AgentConversation: Identifiable, Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
-        title = try container.decodeIfPresent(String.self, forKey: .title) ?? "New Conversation"
+        title = try container.decodeIfPresent(String.self, forKey: .title) ?? "新建对话"
         messages = try container.decodeIfPresent([AgentMessage].self, forKey: .messages) ?? []
         createdAt = try container.decodeIfPresent(Date.self, forKey: .createdAt) ?? .now
         modifiedAt = try container.decodeIfPresent(Date.self, forKey: .modifiedAt) ?? .now

@@ -69,9 +69,9 @@ struct TemplateGalleryView: View {
             }
         }
         .background(AppThemeConstants.contentBackground)
-        .navigationTitle("Templates")
-        .navigationSubtitle("\(filteredTemplates.count) template\(filteredTemplates.count == 1 ? "" : "s")")
-        .searchable(text: $searchText, placement: .toolbar, prompt: "Search templates")
+        .navigationTitle("模板")
+        .navigationSubtitle("\(filteredTemplates.count) 个模板")
+        .searchable(text: $searchText, placement: .toolbar, prompt: "搜索模板")
         .toolbar { galleryToolbarContent }
         // Arch-5: Sheets must explicitly propagate @Environment for @Observable
         .sheet(item: $selectedTemplate) { template in
@@ -94,7 +94,7 @@ struct TemplateGalleryView: View {
                 }
             )
         }
-        .alert("Delete Template", isPresented: Binding(
+        .alert("删除模板", isPresented: Binding(
             get: { templateToDelete != nil },
             set: {
                 if !$0 {
@@ -102,15 +102,15 @@ struct TemplateGalleryView: View {
                 }
             }
         )) {
-            Button("Cancel", role: .cancel) { templateToDelete = nil }
-            Button("Delete", role: .destructive) {
+            Button("取消", role: .cancel) { templateToDelete = nil }
+            Button("删除", role: .destructive) {
                 if let template = templateToDelete {
                     templateStore.deleteTemplate(id: template.id)
                     templateToDelete = nil
                 }
             }
         } message: {
-            Text("Are you sure you want to delete \"\(templateToDelete?.name ?? "")\"? This cannot be undone.")
+            Text("确定要删除“\(templateToDelete?.name ?? "")”吗？此操作无法撤销。")
         }
         .sheet(item: $templateToEdit) { template in
             EditTemplateSheet(template: template)
@@ -129,7 +129,7 @@ struct TemplateGalleryView: View {
 
     private func duplicateAsCustom(_ template: DocumentTemplate) {
         templateStore.createTemplate(
-            name: "\(template.name) (Copy)",
+            name: "\(template.name)（副本）",
             category: template.category,
             icon: template.icon,
             description: template.description,
@@ -144,13 +144,13 @@ struct TemplateGalleryView: View {
         Button {
             useTemplate(template)
         } label: {
-            Label("Use Template", systemImage: "doc.badge.plus")
+            Label("使用模板", systemImage: "doc.badge.plus")
         }
 
         Button {
             selectedTemplate = template
         } label: {
-            Label("Preview", systemImage: "eye")
+            Label("预览", systemImage: "eye")
         }
 
         Divider()
@@ -159,19 +159,19 @@ struct TemplateGalleryView: View {
             Button {
                 duplicateAsCustom(template)
             } label: {
-                Label("Duplicate as Custom", systemImage: "doc.on.doc")
+                Label("复制为自定义模板", systemImage: "doc.on.doc")
             }
         } else {
             Button {
                 templateToEdit = template
             } label: {
-                Label("Edit", systemImage: "pencil")
+                Label("编辑", systemImage: "pencil")
             }
 
             Button {
                 duplicateAsCustom(template)
             } label: {
-                Label("Duplicate", systemImage: "doc.on.doc")
+                Label("复制", systemImage: "doc.on.doc")
             }
 
             Divider()
@@ -179,7 +179,7 @@ struct TemplateGalleryView: View {
             Button(role: .destructive) {
                 templateToDelete = template
             } label: {
-                Label("Delete", systemImage: "trash")
+                Label("删除", systemImage: "trash")
             }
         }
     }
@@ -193,21 +193,21 @@ struct TemplateGalleryView: View {
                 importMarkdownTemplate()
             } label: {
                 Image(systemName: "square.and.arrow.down")
-                    .accessibilityLabel("Import Template")
+                    .accessibilityLabel("导入模板")
             }
-            .help("Import Template")
+            .help("导入模板")
         }
 
         ToolbarItemGroup(placement: .primaryAction) {
             Menu {
-                Section("View") {
+                Section("视图") {
                     Button {
                         withAnimation(.easeInOut(duration: 0.2)) {
                             viewModeRaw = ContentViewMode.list.rawValue
                         }
                     } label: {
                         HStack {
-                            Label("List", systemImage: "list.bullet")
+                            Label("列表", systemImage: "list.bullet")
                             if viewMode == .list {
                                 Spacer(); Image(systemName: "checkmark")
                             }
@@ -219,19 +219,19 @@ struct TemplateGalleryView: View {
                         }
                     } label: {
                         HStack {
-                            Label("Grid", systemImage: "square.grid.2x2")
+                            Label("网格", systemImage: "square.grid.2x2")
                             if viewMode == .grid {
                                 Spacer(); Image(systemName: "checkmark")
                             }
                         }
                     }
                 }
-                Section("Category") {
+                Section("分类") {
                     Button {
                         selectedCategory = nil
                     } label: {
                         HStack {
-                            Label("All Categories", systemImage: "square.grid.2x2")
+                            Label("全部分类", systemImage: "square.grid.2x2")
                             if selectedCategory == nil {
                                 Spacer(); Image(systemName: "checkmark")
                             }
@@ -242,7 +242,7 @@ struct TemplateGalleryView: View {
                             selectedCategory = category
                         } label: {
                             HStack {
-                                Label(category.rawValue, systemImage: category.icon)
+                                Label(category.displayName, systemImage: category.icon)
                                 if selectedCategory == category {
                                     Spacer(); Image(systemName: "checkmark")
                                 }
@@ -253,8 +253,8 @@ struct TemplateGalleryView: View {
             } label: {
                 Image(systemName: "ellipsis.circle")
             }
-            .help("Options")
-            .accessibilityLabel("Options")
+            .help("选项")
+            .accessibilityLabel("选项")
         }
     }
 
@@ -319,7 +319,7 @@ struct TemplateGalleryView: View {
             Image(systemName: category.icon)
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
-            Text(category.rawValue)
+            Text(category.displayName)
                 .font(.headline)
             Text("\(count)")
                 .font(.caption)
@@ -338,22 +338,22 @@ struct TemplateGalleryView: View {
     private var emptyState: some View {
         ContentUnavailableView {
             Label(
-                searchText.isEmpty ? "No Templates" : "No Results",
+                searchText.isEmpty ? "没有模板" : "没有结果",
                 systemImage: searchText.isEmpty ? "doc.on.doc" : "magnifyingglass"
             )
         } description: {
             if searchText.isEmpty {
                 if selectedCategory != nil {
-                    Text("No templates in this category.")
+                    Text("此分类下没有模板。")
                 } else {
-                    Text("Import a Markdown file to create your first template.")
+                    Text("导入 Markdown 文件来创建你的第一个模板。")
                 }
             } else {
-                Text("No templates match '\(searchText)'")
+                Text("没有与“\(searchText)”匹配的模板")
             }
         } actions: {
             if searchText.isEmpty {
-                Button("Import Template") {
+                Button("导入模板") {
                     importMarkdownTemplate()
                 }
                 .buttonStyle(.borderedProminent)
@@ -369,7 +369,7 @@ struct TemplateGalleryView: View {
         let panel = NSOpenPanel()
         panel.allowedContentTypes = [UTType(filenameExtension: "md") ?? .plainText]
         panel.allowsMultipleSelection = false
-        panel.message = "Select a Markdown file to import as a template"
+        panel.message = "选择要作为模板导入的 Markdown 文件"
         guard panel.runModal() == .OK, let url = panel.url else { return }
         _ = url.startAccessingSecurityScopedResource()
         defer { url.stopAccessingSecurityScopedResource() }
@@ -405,7 +405,7 @@ private struct TemplateCardView: View {
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
 
-                Text(template.description.isEmpty ? "No description" : template.description)
+                Text(template.description.isEmpty ? "暂无描述" : template.description)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(3)
@@ -414,7 +414,7 @@ private struct TemplateCardView: View {
                 Spacer(minLength: 0)
 
                 if !template.isBuiltIn {
-                    Text("Custom")
+                    Text("自定义")
                         .font(.caption2)
                         .foregroundStyle(AppThemeConstants.accent)
                         .padding(.horizontal, 6)
@@ -479,7 +479,7 @@ private struct TemplateRowView: View {
                             .font(.body.weight(.medium))
                             .lineLimit(1)
                         if !template.isBuiltIn {
-                            Text("Custom")
+                            Text("自定义")
                                 .font(.caption2)
                                 .foregroundStyle(AppThemeConstants.accent)
                                 .padding(.horizontal, 6)
@@ -490,7 +490,7 @@ private struct TemplateRowView: View {
                                 )
                         }
                     }
-                    Text(template.description.isEmpty ? "No description" : template.description)
+                    Text(template.description.isEmpty ? "暂无描述" : template.description)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
@@ -498,7 +498,7 @@ private struct TemplateRowView: View {
 
                 Spacer()
 
-                Text(template.category.rawValue)
+                Text(template.category.displayName)
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .padding(.horizontal, 8)
@@ -555,7 +555,7 @@ private struct ImportTemplateSheet: View {
     var body: some View {
         VStack(spacing: 0) {
             HStack {
-                Text("Import Template")
+                Text("导入模板")
                     .font(.headline)
                 Spacer()
                 Button { onDismiss() } label: {
@@ -569,16 +569,16 @@ private struct ImportTemplateSheet: View {
             Divider()
 
             Form {
-                TextField("Name", text: $name)
+                TextField("名称", text: $name)
 
-                Picker("Category", selection: $category) {
+                Picker("分类", selection: $category) {
                     ForEach(TemplateCategory.allCases) { cat in
-                        Label(cat.rawValue, systemImage: cat.icon)
+                        Label(cat.displayName, systemImage: cat.icon)
                             .tag(cat)
                     }
                 }
 
-                TextField("Description (optional)", text: $description)
+                TextField("描述（可选）", text: $description)
             }
             .formStyle(.grouped)
             .scrollDisabled(true)
@@ -594,9 +594,9 @@ private struct ImportTemplateSheet: View {
                         Image(systemName: "chevron.right")
                             .font(.caption2.weight(.semibold))
                             .rotationEffect(.degrees(showPreview ? 90 : 0))
-                        Text("File Preview")
+                        Text("文件预览")
                             .font(.subheadline.weight(.medium))
-                        Text("\(fileContent.count) characters")
+                        Text("\(fileContent.count) 个字符")
                             .font(.caption)
                             .foregroundStyle(.tertiary)
                     }
@@ -627,10 +627,10 @@ private struct ImportTemplateSheet: View {
             Divider()
 
             HStack {
-                Button("Cancel") { onDismiss() }
+                Button("取消") { onDismiss() }
                     .keyboardShortcut(.cancelAction)
                 Spacer()
-                Button("Import") {
+                Button("导入") {
                     let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
                     guard !trimmedName.isEmpty else { return }
                     templateStore.createTemplate(

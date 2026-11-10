@@ -31,7 +31,7 @@ struct HomeAskAffordance: View {
         .onHover { hovering in
             withAnimation(Motion.snappy) { isHovering = hovering }
         }
-        .help("Ask Logue about this")
+        .help("向 Logue 询问这个")
         .accessibilityLabel(accessibilityLabel)
     }
 }

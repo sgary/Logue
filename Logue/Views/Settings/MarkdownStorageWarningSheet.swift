@@ -29,9 +29,9 @@ struct MarkdownStorageWarningSheet: View {
                 .font(.title2)
                 .foregroundStyle(.orange)
             VStack(alignment: .leading, spacing: 2) {
-                Text("Store documents as plain markdown?")
+                Text("将文档存储为纯 Markdown？")
                     .font(.headline)
-                Text("This changes where your documents live and removes their encryption.")
+                Text("这会改变文档的存放位置，并移除加密。")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -42,39 +42,37 @@ struct MarkdownStorageWarningSheet: View {
         VStack(alignment: .leading, spacing: 10) {
             point(
                 "folder",
-                "Documents move to \(DocumentStorage.markdownRootURL.path.replacingOccurrences(of: NSHomeDirectory(), with: "~"))",
-                "One .md file per document, organised into folders matching your spaces."
+                "文档将移动到 \(DocumentStorage.markdownRootURL.path.replacingOccurrences(of: NSHomeDirectory(), with: "~"))",
+                "每个文档一个 .md 文件，按空间整理到对应文件夹。"
             )
             point(
                 "lock.open",
-                "They will no longer be encrypted",
-                "Any app, script, or AI agent that can read your home folder can read them."
+                "文档将不再加密",
+                "任何能读取你主文件夹的应用、脚本或 AI 智能体都能读取它们。"
             )
             point(
                 "icloud",
-                "It stays out of iCloud by default",
-                "The folder sits beside Documents rather than inside it, because iCloud Drive's "
-                    + "\"Desktop & Documents Folders\" option would otherwise sync unencrypted "
-                    + "copies of your notes. Backup tools that cover your whole home folder still "
-                    + "will."
+                "默认不会进入 iCloud",
+                "该文件夹位于“文档”旁边而不是其中，否则 iCloud 云盘的 "
+                    + "“桌面与文档文件夹”选项会同步你笔记的未加密副本。"
+                    + "覆盖整个主文件夹的备份工具仍会备份它。"
             )
             point(
                 "waveform",
-                "Meetings stay encrypted",
-                "Transcripts, audio, summaries and action items are unaffected."
+                "会议仍保持加密",
+                "转写文本、音频、摘要和待办事项不受影响。"
             )
             point(
                 "trash",
-                "Trash stays inside Logue",
-                "Deleted documents are not written to the folder. They stay in encrypted "
-                    + "storage and are back in Trash if you turn this off."
+                "废纸篓仍在 Logue 内",
+                "删除的文档不会写入该文件夹。它们保留在加密存储中，"
+                    + "关闭此功能后会回到废纸篓。"
             )
             point(
                 "arrow.uturn.backward",
-                "You can turn this off later",
-                "Turning it off moves documents back into encrypted storage, then moves the "
-                    + "folder to the Trash so there is only ever one place your documents live. "
-                    + "You can choose to keep it instead."
+                "之后可以关闭此功能",
+                "关闭后，文档会移回加密存储，然后该文件夹会被移到废纸篓，"
+                    + "确保文档始终只存放在一个地方。你也可以选择保留该文件夹。"
             )
         }
     }
@@ -99,15 +97,15 @@ struct MarkdownStorageWarningSheet: View {
     private var footer: some View {
         VStack(alignment: .leading, spacing: 12) {
             Toggle(isOn: $hasAcknowledged) {
-                Text("I understand my documents will not be encrypted")
+                Text("我了解我的文档将不再加密")
                     .font(.callout)
             }
 
             HStack {
                 Spacer()
-                Button("Cancel") { dismiss() }
+                Button("取消") { dismiss() }
                     .keyboardShortcut(.cancelAction)
-                Button("Turn On") {
+                Button("启用") {
                     onConfirm()
                     dismiss()
                 }

@@ -313,7 +313,7 @@ final class ScheduledTaskManager {
             logger.info("Daily digest: no meetings with summaries today")
             addRecord(TaskRunRecord(
                 taskType: .dailyDigest, status: .noContent,
-                resultSummary: "No meetings with summaries today."
+                resultSummary: "今天没有带摘要的会议。"
             ))
             return
         }
@@ -324,7 +324,7 @@ final class ScheduledTaskManager {
                 store.cachedDigest = digest
                 store.digestMeetingIDs = Set(todaysMeetings.map(\.id))
                 store.saveDigestCache()
-                sendNotification(title: "Daily Digest Ready", body: digest.headline)
+                sendNotification(title: "每日摘要已就绪", body: digest.headline)
                 addRecord(TaskRunRecord(
                     taskType: .dailyDigest, status: .success,
                     resultSummary: digest.headline
@@ -332,14 +332,14 @@ final class ScheduledTaskManager {
             } else {
                 addRecord(TaskRunRecord(
                     taskType: .dailyDigest, status: .failed,
-                    resultSummary: "Failed to parse digest from AI response."
+                    resultSummary: "无法从 AI 响应中解析摘要。"
                 ))
             }
         } catch {
             logger.warning("Scheduled daily digest failed: \(error.localizedDescription, privacy: .public)")
             addRecord(TaskRunRecord(
                 taskType: .dailyDigest, status: .failed,
-                resultSummary: "Error: \(error.localizedDescription)"
+                resultSummary: "错误：\(error.localizedDescription)"
             ))
         }
     }
@@ -422,7 +422,7 @@ final class ScheduledTaskManager {
             addRecord(TaskRunRecord(
                 taskType: .autoSummarize,
                 status: .noContent,
-                resultSummary: "No unsummarized meetings found."
+                resultSummary: "没有找到未生成摘要的会议。"
             ))
             return
         }
@@ -439,14 +439,13 @@ final class ScheduledTaskManager {
         }
 
         if summarizedCount > 0 {
-            let suffix = summarizedCount == 1 ? "" : "s"
-            let body = "\(summarizedCount) meeting\(suffix) summarized."
-            sendNotification(title: "Meetings Summarized", body: body)
+            let body = "\(summarizedCount) 场会议已生成摘要。"
+            sendNotification(title: "会议摘要已生成", body: body)
             let detail = titles.prefix(3).joined(separator: ", ")
             addRecord(TaskRunRecord(
                 taskType: .autoSummarize,
                 status: .success,
-                resultSummary: "\(summarizedCount) meeting\(suffix) summarized: \(detail)"
+                resultSummary: "\(summarizedCount) 场会议已生成摘要：\(detail)"
             ))
         }
     }
@@ -466,7 +465,7 @@ final class ScheduledTaskManager {
             logger.info("Weekly review: no meetings this week")
             addRecord(TaskRunRecord(
                 taskType: .weeklyReview, status: .noContent,
-                resultSummary: "No meetings recorded in the past 7 days."
+                resultSummary: "过去 7 天内没有记录的会议。"
             ))
             return
         }
@@ -509,9 +508,9 @@ final class ScheduledTaskManager {
         let hours = Int(seconds) / 3600
         let minutes = (Int(seconds) % 3600) / 60
         if hours > 0 {
-            return "\(hours)h \(minutes)m"
+            return "\(hours) 小时 \(minutes) 分钟"
         }
-        return "\(minutes)m"
+        return "\(minutes) 分钟"
     }
 
     // MARK: - Persistence

@@ -91,6 +91,6 @@ extension DocumentStore {
     }
 
     private func isDefaultDocumentTitle(_ title: String) -> Bool {
-        title == "Untitled Document"
+        title == "未命名文档"
     }
 }

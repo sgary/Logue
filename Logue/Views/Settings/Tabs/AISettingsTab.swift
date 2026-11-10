@@ -42,7 +42,7 @@ struct AISettingsTab: View {
 
     private var systemPromptSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("System prompt", subtitle: "Replace Logue's default agent instructions. Leave blank to use the built-in prompt.")
+            sectionHeader("系统提示词", subtitle: "替换 Logue 默认的智能体指令。留空则使用内置提示词。")
             TextEditor(text: $systemPromptOverride)
                 .font(.system(size: 12, design: .monospaced))
                 .frame(minHeight: 120, maxHeight: 220)
@@ -53,11 +53,11 @@ struct AISettingsTab: View {
                         .stroke(Color.primary.opacity(0.08), lineWidth: 0.5)
                 )
             HStack {
-                Text(systemPromptOverride.isEmpty ? "Using built-in default" : "Override active")
+                Text(systemPromptOverride.isEmpty ? "正在使用内置默认值" : "已启用覆盖")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                 Spacer()
-                Button("Reset") { systemPromptOverride = "" }
+                Button("重置") { systemPromptOverride = "" }
                     .controlSize(.small)
                     .disabled(systemPromptOverride.isEmpty)
             }
@@ -76,73 +76,73 @@ struct AISettingsTab: View {
     }
 
     private static let toolGroups: [(title: String, items: [(String, String)])] = [
-        ("Read — meetings & documents", [
-            ("list_meetings", "Browse meetings"),
-            ("search_meetings", "Keyword search meetings"),
-            ("semantic_search_meetings", "Concept search meetings"),
-            ("get_meeting_details", "Read a meeting"),
-            ("get_transcript", "Read full transcript"),
-            ("get_action_items", "Read action items"),
-            ("get_daily_digest", "Daily activity digest"),
-            ("list_documents", "Browse documents"),
-            ("search_documents", "Keyword search documents"),
-            ("semantic_search_documents", "Concept search documents"),
-            ("get_document", "Read a document"),
+        ("读取 — 会议与文档", [
+            ("list_meetings", "浏览会议"),
+            ("search_meetings", "关键词搜索会议"),
+            ("semantic_search_meetings", "概念搜索会议"),
+            ("get_meeting_details", "读取会议"),
+            ("get_transcript", "读取完整转写"),
+            ("get_action_items", "读取待办事项"),
+            ("get_daily_digest", "每日活动摘要"),
+            ("list_documents", "浏览文档"),
+            ("search_documents", "关键词搜索文档"),
+            ("semantic_search_documents", "概念搜索文档"),
+            ("get_document", "读取文档"),
         ]),
-        ("Write — content", [
-            ("create_document", "Create a document"),
-            ("update_document", "Edit a document"),
-            ("delete_document", "Delete a document"),
-            ("move_document", "Move a document"),
-            ("add_document_tag", "Tag a document"),
-            ("create_space", "Create a space"),
-            ("rename_space", "Rename a space"),
-            ("delete_space", "Delete a space"),
-            ("export_document_pdf", "Export a document as PDF"),
+        ("写入 — 内容", [
+            ("create_document", "创建文档"),
+            ("update_document", "编辑文档"),
+            ("delete_document", "删除文档"),
+            ("move_document", "移动文档"),
+            ("add_document_tag", "为文档添加标签"),
+            ("create_space", "创建空间"),
+            ("rename_space", "重命名空间"),
+            ("delete_space", "删除空间"),
+            ("export_document_pdf", "将文档导出为 PDF"),
         ]),
-        ("Calendar & Reminders", [
-            ("get_upcoming_events", "List upcoming events"),
-            ("create_calendar_event", "Create event"),
-            ("update_calendar_event", "Update event"),
-            ("delete_calendar_event", "Delete event"),
-            ("get_reminders", "List reminders"),
-            ("add_reminder", "Add reminder"),
-            ("update_reminder", "Update reminder"),
-            ("delete_reminder", "Delete reminder"),
+        ("日历与提醒事项", [
+            ("get_upcoming_events", "列出即将开始的事件"),
+            ("create_calendar_event", "创建事件"),
+            ("update_calendar_event", "更新事件"),
+            ("delete_calendar_event", "删除事件"),
+            ("get_reminders", "列出提醒事项"),
+            ("add_reminder", "添加提醒事项"),
+            ("update_reminder", "更新提醒事项"),
+            ("delete_reminder", "删除提醒事项"),
         ]),
-        ("AI helpers", [
-            ("summarize_document", "Summarize"),
-            ("rephrase_text", "Rephrase"),
-            ("check_grammar", "Grammar check"),
-            ("check_clarity", "Clarity check"),
-            ("detect_tone", "Tone detect"),
-            ("fact_check_document", "Fact-check"),
-            ("detect_pii", "PII detect"),
-            ("render_diagram", "Render diagram"),
-            ("generate_slides", "Generate slide deck"),
+        ("AI 辅助", [
+            ("summarize_document", "生成摘要"),
+            ("rephrase_text", "改写"),
+            ("check_grammar", "语法检查"),
+            ("check_clarity", "清晰度检查"),
+            ("detect_tone", "语气检测"),
+            ("fact_check_document", "事实核查"),
+            ("detect_pii", "PII 检测"),
+            ("render_diagram", "渲染图表"),
+            ("generate_slides", "生成幻灯片"),
         ]),
-        ("Apple-native", [
-            ("draft_email", "Draft email in Mail"),
-            ("fetch_contacts", "Look up contacts"),
-            ("get_location", "Get current location"),
+        ("Apple 原生", [
+            ("draft_email", "在邮件中起草邮件"),
+            ("fetch_contacts", "查找联系人"),
+            ("get_location", "获取当前位置"),
         ]),
-        ("Compute & dialogs", [
-            ("run_javascript", "Run JavaScript"),
-            ("get_confirmation", "Yes/no dialog"),
-            ("get_text_input", "Text input dialog"),
-            ("get_user_selection", "Pick-one dialog"),
+        ("计算与对话框", [
+            ("run_javascript", "运行 JavaScript"),
+            ("get_confirmation", "是/否对话框"),
+            ("get_text_input", "文本输入对话框"),
+            ("get_user_selection", "单选对话框"),
         ]),
-        ("Files (Phase G)", [
-            ("list_directory", "List directory contents"),
-            ("read_file_at_path", "Read file at path"),
-            ("write_text_to_file", "Write text to file"),
-            ("delete_file_at_path", "Delete file at path"),
+        ("文件（阶段 G）", [
+            ("list_directory", "列出目录内容"),
+            ("read_file_at_path", "读取指定路径的文件"),
+            ("write_text_to_file", "将文本写入文件"),
+            ("delete_file_at_path", "删除指定路径的文件"),
         ]),
     ]
 
     private var toolsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Tools", subtitle: "Turn off any tool you don't want the agent to call. Toggling takes effect on the next message.")
+            sectionHeader("工具", subtitle: "关闭你不想让智能体调用的工具。切换后将在下一条消息生效。")
             ForEach(Self.toolGroups, id: \.title) { group in
                 DisclosureGroup(group.title) {
                     VStack(alignment: .leading, spacing: 4) {
@@ -198,11 +198,11 @@ struct AISettingsTab: View {
 
     private var inferenceSection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            sectionHeader("Inference", subtitle: "Override sampling parameters. Defaults are good for most cases.")
+            sectionHeader("推理参数", subtitle: "覆盖采样参数。默认值适用于大多数场景。")
 
             inferenceSlider(
-                label: "Temperature",
-                detail: "Lower = focused, higher = creative",
+                label: "温度",
+                detail: "越低越聚焦，越高越有创意",
                 value: $temperature,
                 range: 0 ... 2,
                 step: 0.05,
@@ -210,7 +210,7 @@ struct AISettingsTab: View {
             )
             inferenceSlider(
                 label: "Top-p",
-                detail: "Nucleus sampling cutoff",
+                detail: "核采样阈值",
                 value: $topP,
                 range: 0 ... 1,
                 step: 0.05,
@@ -219,8 +219,8 @@ struct AISettingsTab: View {
 
             HStack(alignment: .center) {
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Max output tokens").font(.callout.weight(.medium))
-                    Text(maxTokens < 0 ? "Default" : "\(maxTokens) tokens")
+                    Text("最大输出 Token 数").font(.callout.weight(.medium))
+                    Text(maxTokens < 0 ? "默认" : "\(maxTokens) Token")
                         .font(.caption2).foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -233,7 +233,7 @@ struct AISettingsTab: View {
                     step: 256
                 ) { EmptyView() }
                 if maxTokens >= 0 {
-                    Button("Default") { maxTokens = -1 }.controlSize(.small)
+                    Button("默认") { maxTokens = -1 }.controlSize(.small)
                 }
             }
         }
@@ -254,10 +254,10 @@ struct AISettingsTab: View {
                     Text(detail).font(.caption2).foregroundStyle(.secondary)
                 }
                 Spacer()
-                Text(value.wrappedValue < 0 ? "Default" : String(format: "%.2f", value.wrappedValue))
+                Text(value.wrappedValue < 0 ? "默认" : String(format: "%.2f", value.wrappedValue))
                     .font(.caption.monospacedDigit())
                 if value.wrappedValue >= 0 {
-                    Button("Reset") { value.wrappedValue = defaultValue }.controlSize(.small)
+                    Button("重置") { value.wrappedValue = defaultValue }.controlSize(.small)
                 }
             }
             Slider(
@@ -281,11 +281,11 @@ struct AISettingsTab: View {
 
     private var memorySection: some View {
         VStack(alignment: .leading, spacing: 10) {
-            sectionHeader("Memory", subtitle: "How aggressively the agent recalls related meetings/documents while answering.")
+            sectionHeader("记忆", subtitle: "智能体回答时回忆相关会议或文档的积极程度。")
 
             inferenceSlider(
-                label: "Recall threshold",
-                detail: "Only recall snippets above this similarity",
+                label: "回忆阈值",
+                detail: "仅回忆相似度高于此值的片段",
                 value: $recallThreshold,
                 range: 0.3 ... 0.95,
                 step: 0.05,
@@ -295,7 +295,7 @@ struct AISettingsTab: View {
             HStack {
                 VStack(alignment: .leading, spacing: 2) {
                     Text("Top-K").font(.callout.weight(.medium))
-                    Text("Maximum recalled snippets per turn")
+                    Text("每轮最多回忆的片段数")
                         .font(.caption2).foregroundStyle(.secondary)
                 }
                 Spacer()
@@ -311,9 +311,9 @@ struct AISettingsTab: View {
 
     private var ttsSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            sectionHeader("Text-to-speech", subtitle: "Voice used by the chat's Read aloud action.")
-            Picker("Voice", selection: $voiceID) {
-                Text("System default").tag("")
+            sectionHeader("文字转语音", subtitle: "聊天中“朗读”操作使用的语音。")
+            Picker("语音", selection: $voiceID) {
+                Text("系统默认").tag("")
                 ForEach(Self.englishVoices(), id: \.identifier) { voice in
                     Text("\(voice.name) — \(voice.language)")
                         .tag(voice.identifier)
@@ -349,31 +349,31 @@ struct AISettingsTab: View {
     private var webSearchSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(
-                "Web search",
-                subtitle: "Off by default. When on, the agent can call DuckDuckGo (free) or Tavily (with key)."
+                "网页搜索",
+                subtitle: "默认关闭。开启后，智能体可以调用 DuckDuckGo（免费）或 Tavily（需要密钥）。"
             )
-            Toggle("Enable web tools", isOn: $webSearchEnabled)
+            Toggle("启用网络工具", isOn: $webSearchEnabled)
                 .toggleStyle(.switch)
 
             HStack {
                 SecureField(
-                    tavilyKeyPresent ? "•••• Tavily key saved" : "Optional Tavily API key",
+                    tavilyKeyPresent ? "•••• 已保存 Tavily 密钥" : "可选的 Tavily API 密钥",
                     text: $tavilyDraft
                 )
                 .textFieldStyle(.roundedBorder)
 
-                Button(tavilyKeyPresent ? "Replace" : "Save") {
+                Button(tavilyKeyPresent ? "替换" : "保存") {
                     saveTavilyKey()
                 }
                 .disabled(tavilyDraft.isEmpty)
 
                 if tavilyKeyPresent {
-                    Button("Clear") { clearTavilyKey() }
+                    Button("清除") { clearTavilyKey() }
                 }
             }
             Text(tavilyKeyPresent
-                ? "Tavily preferred when web search runs. Falls back to DuckDuckGo if removed."
-                : "Without a key, web search uses DuckDuckGo's free HTML endpoint.")
+                ? "进行网页搜索时优先使用 Tavily。移除密钥后会回退到 DuckDuckGo。"
+                : "没有密钥时，网页搜索使用 DuckDuckGo 的免费 HTML 端点。")
                 .font(.caption2)
                 .foregroundStyle(.secondary)
         }
@@ -404,14 +404,14 @@ struct AISettingsTab: View {
             tavilyDraft = ""
             ToastCenter.shared.show(UICopy.Toast.saved)
         } catch {
-            ToastCenter.shared.show("Couldn't save key", kind: .warning)
+            ToastCenter.shared.show("无法保存密钥", kind: .warning)
         }
     }
 
     private func clearTavilyKey() {
         _ = KeychainHelper.delete(key: Self.tavilyKeychainKey)
         tavilyKeyPresent = false
-        ToastCenter.shared.show("Cleared")
+        ToastCenter.shared.show("已清除")
     }
 
     // MARK: - Apple Intelligence routing (Phase F)
@@ -422,15 +422,15 @@ struct AISettingsTab: View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(
                 "Apple Intelligence",
-                subtitle: "Route image-generation prompts to ImagePlayground instead of the text agent."
+                subtitle: "将图像生成提示词路由到 ImagePlayground，而不是文本智能体。"
             )
-            Toggle("Enable image routing", isOn: $imageRoutingEnabled)
+            Toggle("启用图像路由", isOn: $imageRoutingEnabled)
                 .toggleStyle(.switch)
                 .onChange(of: imageRoutingEnabled) { _, newValue in
                     PromptIntentClassifier.setRoutingEnabled(newValue)
                 }
             if imageRoutingEnabled {
-                Text("Prompts scored ≥ 70 % image-intent open ImagePlayground. Requires Apple Intelligence on this Mac.")
+                Text("图像意图评分 ≥ 70% 的提示词会打开 ImagePlayground。需要此 Mac 支持 Apple Intelligence。")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             }
@@ -446,10 +446,10 @@ struct AISettingsTab: View {
     private var knowledgeGraphSection: some View {
         VStack(alignment: .leading, spacing: 8) {
             sectionHeader(
-                "Knowledge Graph",
-                subtitle: "After indexing, Logue extracts entities and relationships for cross-meeting recall. Uses inference — off by default."
+                "知识图谱",
+                subtitle: "索引完成后，Logue 会提取实体和关系以支持跨会议回忆。会使用推理资源，默认关闭。"
             )
-            Toggle("Build Knowledge Graph", isOn: $graphEnabled)
+            Toggle("构建知识图谱", isOn: $graphEnabled)
                 .toggleStyle(.switch)
                 .onChange(of: graphEnabled) { _, newValue in
                     Task {
@@ -458,8 +458,8 @@ struct AISettingsTab: View {
                 }
             if graphEnabled {
                 Text(
-                    "Entity extraction runs in the background after each meeting or document is indexed."
-                        + " Enabling this uses the active model and may take several minutes for large libraries."
+                    "每次会议或文档索引完成后，实体提取会在后台运行。"
+                        + "启用后会使用当前模型，资料库较大时可能需要几分钟。"
                 )
                 .font(.caption2)
                 .foregroundStyle(.secondary)
@@ -470,10 +470,10 @@ struct AISettingsTab: View {
                     } label: {
                         if isRebuildingCommunities {
                             ProgressView().controlSize(.mini)
-                            Text("Rebuilding…")
+                            Text("正在重建…")
                         } else {
                             Image(systemName: "circle.hexagongrid.fill")
-                            Text("Rebuild communities")
+                            Text("重建社区")
                         }
                     }
                     .controlSize(.small)
@@ -508,8 +508,8 @@ struct AISettingsTab: View {
 
     private var reasoningSection: some View {
         VStack(alignment: .leading, spacing: 6) {
-            sectionHeader("Reasoning", subtitle: "Some models emit a <thinking> block before the answer. Off by default.")
-            Toggle("Show reasoning blocks in responses", isOn: $showReasoning)
+            sectionHeader("推理", subtitle: "部分模型会在回答前输出 <thinking> 块。默认关闭。")
+            Toggle("在回答中显示推理块", isOn: $showReasoning)
                 .toggleStyle(.switch)
         }
     }

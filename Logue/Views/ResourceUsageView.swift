@@ -14,7 +14,7 @@ struct ResourceUsageView: View {
                 Circle()
                     .fill(AppThemeConstants.accent)
                     .frame(width: 8, height: 8)
-                Text("Live")
+                Text("实时")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
@@ -28,25 +28,25 @@ struct ResourceUsageView: View {
                     color: gaugeColor(for: monitor.cpuPercent / 100)
                 )
                 MetricCard(
-                    title: "Memory",
+                    title: "内存",
                     value: monitor.memoryUsedFormatted,
                     fraction: monitor.memoryFraction,
                     color: gaugeColor(for: monitor.memoryFraction),
-                    subtitle: "of \(monitor.totalMemoryFormatted)"
+                    subtitle: "共 \(monitor.totalMemoryFormatted)"
                 )
             }
 
             // Sparklines
             VStack(alignment: .leading, spacing: AppThemeConstants.paddingMedium) {
                 SparklineRow(
-                    title: "CPU History",
+                    title: "CPU 历史",
                     values: monitor.cpuHistory,
                     maxValue: 100,
                     color: gaugeColor(for: monitor.cpuPercent / 100),
                     formatValue: { String(format: "%.0f%%", $0) }
                 )
                 SparklineRow(
-                    title: "Memory History",
+                    title: "内存历史",
                     values: monitor.memoryHistory.map { Double($0) },
                     maxValue: Double(monitor.totalMemoryBytes),
                     color: gaugeColor(for: monitor.memoryFraction),
@@ -149,8 +149,8 @@ private struct SparklineRow: View {
                 Chart {
                     ForEach(Array(values.enumerated()), id: \.offset) { index, val in
                         AreaMark(
-                            x: .value("Time", index),
-                            y: .value("Value", val)
+                            x: .value("时间", index),
+                            y: .value("数值", val)
                         )
                         .foregroundStyle(
                             LinearGradient(
@@ -160,8 +160,8 @@ private struct SparklineRow: View {
                             )
                         )
                         LineMark(
-                            x: .value("Time", index),
-                            y: .value("Value", val)
+                            x: .value("时间", index),
+                            y: .value("数值", val)
                         )
                         .foregroundStyle(color)
                         .lineStyle(StrokeStyle(lineWidth: 1.5))
@@ -177,7 +177,7 @@ private struct SparklineRow: View {
                     .fill(color.opacity(0.1))
                     .frame(height: 44)
                     .overlay(
-                        Text("Collecting data…")
+                        Text("正在收集数据…")
                             .font(.caption2)
                             .foregroundStyle(.tertiary)
                     )

@@ -26,7 +26,7 @@ struct TemplatePreviewView: View {
                             .fontWeight(.semibold)
 
                         if !template.isBuiltIn {
-                            Text("Custom")
+                            Text("自定义")
                                 .font(.caption2)
                                 .foregroundStyle(AppThemeConstants.accent)
                                 .padding(.horizontal, 6)
@@ -81,19 +81,19 @@ struct TemplatePreviewView: View {
                     Button {
                         duplicateAsCustom()
                     } label: {
-                        Label("Duplicate as Custom", systemImage: "doc.on.doc")
+                        Label("复制为自定义模板", systemImage: "doc.on.doc")
                     }
                 } else {
                     Button {
                         templateToEdit = template
                     } label: {
-                        Label("Edit", systemImage: "pencil")
+                        Label("编辑", systemImage: "pencil")
                     }
 
                     Button(role: .destructive) {
                         showDeleteConfirmation = true
                     } label: {
-                        Label("Delete", systemImage: "trash")
+                        Label("删除", systemImage: "trash")
                     }
                 }
 
@@ -104,7 +104,7 @@ struct TemplatePreviewView: View {
                     documentStore.selectedDocumentID = doc.id
                     dismiss()
                 } label: {
-                    Label("Use Template", systemImage: "doc.badge.plus")
+                    Label("使用模板", systemImage: "doc.badge.plus")
                 }
                 .buttonStyle(.borderedProminent)
                 .tint(AppThemeConstants.accent)
@@ -113,14 +113,14 @@ struct TemplatePreviewView: View {
         }
         .frame(minWidth: 600, maxWidth: 600, minHeight: 500, maxHeight: 700)
         .background(AppThemeConstants.contentBackground)
-        .alert("Delete Template", isPresented: $showDeleteConfirmation) {
-            Button("Cancel", role: .cancel) {}
-            Button("Delete", role: .destructive) {
+        .alert("删除模板", isPresented: $showDeleteConfirmation) {
+            Button("取消", role: .cancel) {}
+            Button("删除", role: .destructive) {
                 templateStore.deleteTemplate(id: template.id)
                 dismiss()
             }
         } message: {
-            Text("Are you sure you want to delete \"\(template.name)\"? This action cannot be undone.")
+            Text("确定要删除“\(template.name)”吗？此操作无法撤销。")
         }
         .sheet(item: $templateToEdit) { tmpl in
             EditTemplateSheet(template: tmpl)
@@ -130,7 +130,7 @@ struct TemplatePreviewView: View {
 
     private func duplicateAsCustom() {
         templateStore.createTemplate(
-            name: "\(template.name) (Copy)",
+            name: "\(template.name)（副本）",
             category: template.category,
             icon: template.icon,
             description: template.description,

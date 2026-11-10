@@ -174,7 +174,7 @@ enum EncryptionManager {
 
         var errorDescription: String? {
             switch self {
-            case .sealFailed: "Failed to create AES-GCM sealed box"
+            case .sealFailed: "无法创建 AES-GCM 加密数据块"
             }
         }
     }

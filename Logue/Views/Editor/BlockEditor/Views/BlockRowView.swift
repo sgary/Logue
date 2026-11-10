@@ -209,7 +209,7 @@ struct BlockRowView: View {
             }
         }
         .accessibilityAddTraits(.isHeader)
-        .accessibilityLabel("Heading level \(level): \(text)")
+        .accessibilityLabel("标题级别 \(level)：\(text)")
     }
 
     // MARK: - List Item Row Helper
@@ -254,9 +254,9 @@ struct BlockRowView: View {
             .accessibilityElement(children: .combine)
             .accessibilityLabel(
                 isChecked == true
-                    ? "\(itemText), completed"
+                    ? "\(itemText)，已完成"
                     : isChecked == false
-                    ? "\(itemText), not completed"
+                    ? "\(itemText)，未完成"
                     : itemText
             )
         }
@@ -269,11 +269,11 @@ struct BlockRowView: View {
             Button {
                 document.insertListItem(in: blockID, after: afterItemID)
             } label: {
-                Label("New item below", systemImage: "plus")
+                Label("在下方新建条目", systemImage: "plus")
             }
             Divider()
             ForEach(BlockType.groupedByCategory, id: \.category) { group in
-                Section(group.category.rawValue) {
+                Section(group.category.displayName) {
                     ForEach(group.types, id: \.rawValue) { blockType in
                         Button {
                             let newBlock = blockType.makeEmptyBlock()
@@ -291,16 +291,16 @@ struct BlockRowView: View {
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
         .fixedSize()
-        .help("Add item or block")
+        .help("添加条目或块")
     }
 
     private func listItemOptionsMenu(blockID: BlockID, itemID: UUID) -> some View {
         Menu {
-            Button("Duplicate") {
+            Button("创建副本") {
                 document.duplicateListItem(in: blockID, itemID: itemID)
             }
             Divider()
-            Button("Delete", role: .destructive) {
+            Button("删除", role: .destructive) {
                 document.deleteListItem(in: blockID, itemID: itemID)
             }
         } label: {
@@ -309,7 +309,7 @@ struct BlockRowView: View {
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
         .fixedSize()
-        .help("Item options")
+        .help("条目选项")
     }
 
     // MARK: - Bullet List
@@ -397,7 +397,7 @@ struct BlockRowView: View {
                                 .font(.system(size: AppThemeConstants.checkboxSize))
                         }
                         .buttonStyle(.plain)
-                        .accessibilityLabel(item.isChecked ? "Mark incomplete" : "Mark complete")
+                        .accessibilityLabel(item.isChecked ? "标记为未完成" : "标记为完成")
                         .frame(height: firstLineHeight)
                     },
                     editableContent: {
@@ -523,14 +523,14 @@ struct BlockRowView: View {
             }
             .menuStyle(.borderlessButton)
             .fixedSize()
-            .help("Callout type")
+            .help("标注类型")
 
             Spacer()
 
             if isFocused {
                 // Only offered while the block is focused: an always-visible field would put a
                 // text box in every callout in the document.
-                TextField("Optional title", text: calloutTitleBinding(for: id))
+                TextField("可选标题", text: calloutTitleBinding(for: id))
                     .textFieldStyle(.plain)
                     .font(.system(size: fontSize * 0.8))
                     .foregroundStyle(.secondary)
@@ -575,7 +575,7 @@ struct BlockRowView: View {
             // The free-text field stays alongside the menu so a language the highlighter
             // does not know — one that arrived in imported markdown, or a new one — can
             // still be written into the fence by hand.
-            TextField("language", text: languageBinding(for: id))
+            TextField("语言", text: languageBinding(for: id))
                 .textFieldStyle(.plain)
                 .font(.caption.monospaced())
                 .foregroundStyle(.secondary)
@@ -590,7 +590,7 @@ struct BlockRowView: View {
                     .foregroundStyle(.tertiary)
             }
             .buttonStyle(.plain)
-            .help("Copy code")
+            .help("复制代码")
         }
         .padding(.horizontal, 12)
         .padding(.top, 8)
@@ -607,7 +607,7 @@ struct BlockRowView: View {
         let current = CodeSyntaxHighlighter.displayName(forLanguage: binding.wrappedValue)
 
         return Menu {
-            Button("Plain Text") { binding.wrappedValue = "" }
+            Button("纯文本") { binding.wrappedValue = "" }
             Divider()
             ForEach(CodeSyntaxHighlighter.supportedLanguages) { language in
                 Button(language.displayName) {
@@ -616,12 +616,12 @@ struct BlockRowView: View {
                 }
             }
         } label: {
-            Text(current ?? "Plain Text")
+            Text(current ?? "纯文本")
                 .font(.caption)
         }
         .menuStyle(.borderlessButton)
         .fixedSize()
-        .help("Syntax highlighting language")
+        .help("语法高亮语言")
     }
 
     @ViewBuilder

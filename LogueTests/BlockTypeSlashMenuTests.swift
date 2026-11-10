@@ -37,7 +37,7 @@ struct BlockTypeSlashMenuTests {
     @Test("Filtering by name finds the diagram block")
     func filteringFindsDiagram() {
         let matches = BlockType.allCases.filter {
-            $0.displayName.localizedCaseInsensitiveContains("diagram")
+            $0.displayName.localizedCaseInsensitiveContains("图表")
         }
         #expect(matches.contains(.mermaid))
     }

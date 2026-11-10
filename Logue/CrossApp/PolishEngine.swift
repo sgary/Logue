@@ -102,7 +102,7 @@ final class PolishEngine {
             DocumentStore.shared.updateDocument(updated)
         } else {
             let components = trimmed.components(separatedBy: .newlines)
-            let firstLine = components.first(where: { !$0.trimmingCharacters(in: .whitespaces).isEmpty }) ?? "Quick Note"
+            let firstLine = components.first(where: { !$0.trimmingCharacters(in: .whitespaces).isEmpty }) ?? "快速笔记"
             let title = firstLine.count > 30 ? String(firstLine.prefix(30)) + "..." : firstLine
 
             let doc = DocumentStore.shared.createDocument(title: title)

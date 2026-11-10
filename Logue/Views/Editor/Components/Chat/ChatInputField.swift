@@ -40,7 +40,7 @@ struct ChatInputField: NSViewRepresentable {
         textView.textContainer?.lineFragmentPadding = 0
         textView.textContainer?.widthTracksTextView = true
         textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        textView.placeholderString = "Ask anything…"
+        textView.placeholderString = "问点什么…"
 
         scrollView.documentView = textView
         context.coordinator.textView = textView

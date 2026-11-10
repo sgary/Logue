@@ -407,17 +407,17 @@ enum SystemAudioError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case let .tapCreationFailed(status):
-            "Failed to create audio tap (error \(status)). System audio permission may be required."
+            "无法创建音频捕获（错误 \(status)）。可能需要系统音频权限。"
         case let .aggregateDeviceFailed(status):
-            "Failed to create aggregate audio device (error \(status))."
+            "无法创建聚合音频设备（错误 \(status)）。"
         case let .tapAssignmentFailed(status):
-            "Failed to configure audio tap (error \(status))."
+            "无法配置音频捕获（错误 \(status)）。"
         case let .formatRetrievalFailed(status):
-            "Failed to retrieve audio format (error \(status))."
+            "无法获取音频格式（错误 \(status)）。"
         case .invalidFormat:
-            "Invalid audio format from system audio tap."
+            "系统音频捕获返回了无效的音频格式。"
         case let .ioStartFailed(status):
-            "Failed to start audio capture (error \(status))."
+            "无法启动音频捕获（错误 \(status)）。"
         }
     }
 }

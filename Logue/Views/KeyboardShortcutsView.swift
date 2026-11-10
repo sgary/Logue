@@ -6,21 +6,21 @@ struct KeyboardShortcutsView: View {
 
     private var shortcuts: [(label: String, shortcut: String)] {
         [
-            ("Ask Logue", shortcutManager.commandCenterShortcut.displayString),
-            ("New Document", "⌘N"),
-            ("New Meeting", "⇧⌘N"),
-            ("Command Palette", "⌘K"),
-            ("Quick Open", "⌘P"),
-            ("Zoom In", "⌘+ or ⌘="),
-            ("Zoom Out", "⌘-"),
-            ("Actual Size", "⌘0"),
+            ("询问 Logue", shortcutManager.commandCenterShortcut.displayString),
+            ("新建文档", "⌘N"),
+            ("新建会议", "⇧⌘N"),
+            ("命令面板", "⌘K"),
+            ("快速打开", "⌘P"),
+            ("放大", "⌘+ 或 ⌘="),
+            ("缩小", "⌘-"),
+            ("实际大小", "⌘0"),
             (EditorLayoutMode.editorOnly.label, "⌘1"),
             (EditorLayoutMode.editorAndList.label, "⌘2"),
             (EditorLayoutMode.allPanels.label, "⌘3"),
-            ("Export Meeting", "⌘E"),
-            ("Settings", "⌘,"),
-            ("Close Window", "⌘W"),
-            ("Quit Logue", "⌘Q"),
+            ("导出会议", "⌘E"),
+            ("设置", "⌘,"),
+            ("关闭窗口", "⌘W"),
+            ("退出 Logue", "⌘Q"),
         ]
     }
 

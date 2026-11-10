@@ -22,7 +22,7 @@ extension DocumentStore {
     /// paid that once per tag on top of once per document.
     @discardableResult
     func createDocument(
-        title: String = "Untitled Document",
+        title: String = "未命名文档",
         body: String = "",
         tags: [String] = [],
         createdAt: Date? = nil,

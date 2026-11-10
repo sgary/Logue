@@ -61,7 +61,7 @@ struct VocabularyEnhancementPanelView: View {
                     } label: {
                         HStack(spacing: 4) {
                             ProgressView().controlSize(.mini)
-                            Text("Cancel")
+                            Text("取消")
                         }
                     }
                     .buttonStyle(.bordered)
@@ -70,7 +70,7 @@ struct VocabularyEnhancementPanelView: View {
                     Button(action: enhanceVocabulary) {
                         HStack(spacing: 4) {
                             Image(systemName: "wand.and.stars")
-                            Text("Enhance")
+                            Text("增强")
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -81,8 +81,8 @@ struct VocabularyEnhancementPanelView: View {
             }
             .padding(.horizontal, 16)
             .padding(.vertical, 10)
-            .accessibilityLabel("Enhance vocabulary")
-            .accessibilityHint("Suggests stronger synonyms and better phrasing for your text")
+            .accessibilityLabel("增强词汇")
+            .accessibilityHint("为你的文本建议更有力的同义词和更好的表达")
 
             Divider()
 
@@ -103,9 +103,9 @@ struct VocabularyEnhancementPanelView: View {
             Image(systemName: "textformat.alt")
                 .font(.largeTitle)
                 .foregroundStyle(.secondary)
-            Text("Enhance your vocabulary")
+            Text("增强你的词汇")
                 .font(.subheadline.weight(.medium))
-            Text("Find stronger synonyms and better phrasing")
+            Text("找到更有力的同义词和更好的表达")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
@@ -119,7 +119,7 @@ struct VocabularyEnhancementPanelView: View {
         VStack(spacing: 12) {
             ProgressView()
                 .controlSize(.regular)
-            Text("Analyzing vocabulary…")
+            Text("正在分析词汇…")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }
@@ -132,7 +132,7 @@ struct VocabularyEnhancementPanelView: View {
             Image(systemName: "exclamationmark.triangle")
                 .font(.largeTitle)
                 .foregroundStyle(AppThemeConstants.error)
-            Text("Analysis Failed")
+            Text("分析失败")
                 .font(.subheadline.weight(.medium))
             Text(message)
                 .font(.caption)
@@ -142,7 +142,7 @@ struct VocabularyEnhancementPanelView: View {
             Button(action: enhanceVocabulary) {
                 HStack(spacing: 4) {
                     Image(systemName: "arrow.clockwise")
-                    Text("Retry")
+                    Text("重试")
                 }
             }
             .buttonStyle(.bordered)
@@ -157,7 +157,7 @@ struct VocabularyEnhancementPanelView: View {
         VStack(spacing: 0) {
             // Summary header
             HStack {
-                Text("\(suggestions.count) suggestions")
+                Text("\(suggestions.count) 条建议")
                     .font(.caption.weight(.semibold))
                     .foregroundStyle(.secondary)
                 Spacer()
@@ -170,10 +170,10 @@ struct VocabularyEnhancementPanelView: View {
                             appliedCount += 1
                         }
                         if appliedCount < pending.count {
-                            errorMessage = "Applied \(appliedCount) of \(pending.count) suggestions. Some text may have changed."
+                            errorMessage = "已应用 \(appliedCount) 条建议，共 \(pending.count) 条。部分文本可能已发生变化。"
                         }
                     } label: {
-                        Text("Apply All")
+                        Text("全部应用")
                             .font(.caption.weight(.medium))
                     }
                     .buttonStyle(.borderless)
@@ -315,7 +315,7 @@ private struct VocabSuggestionCard: View {
                 if isApplied {
                     HStack(spacing: 3) {
                         Image(systemName: "checkmark")
-                        Text("Applied")
+                        Text("已应用")
                     }
                     .font(.caption2.weight(.medium))
                     .foregroundStyle(AppThemeConstants.success)
@@ -323,7 +323,7 @@ private struct VocabSuggestionCard: View {
                     Button(action: onReplace) {
                         HStack(spacing: 3) {
                             Image(systemName: "arrow.triangle.2.circlepath")
-                            Text("Replace")
+                            Text("替换")
                         }
                         .font(.caption2.weight(.medium))
                     }

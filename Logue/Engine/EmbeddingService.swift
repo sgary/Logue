@@ -28,9 +28,9 @@ actor EmbeddingService {
 
         var errorDescription: String? {
             switch self {
-            case .unavailable: "Contextual embedding model is not available on this OS."
-            case let .loadFailed(reason): "Failed to load embedding model: \(reason)"
-            case let .embeddingFailed(reason): "Failed to embed text: \(reason)"
+            case .unavailable: "此操作系统不支持上下文向量嵌入模型。"
+            case let .loadFailed(reason): "无法加载向量嵌入模型：\(reason)"
+            case let .embeddingFailed(reason): "无法对文本进行向量嵌入：\(reason)"
             }
         }
     }
@@ -46,7 +46,7 @@ actor EmbeddingService {
     func embed(_ text: String) async throws -> [Float] {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
-            throw EmbeddingError.embeddingFailed("Empty input")
+            throw EmbeddingError.embeddingFailed("输入为空")
         }
 
         let model = try await getOrLoad()
@@ -79,11 +79,11 @@ actor EmbeddingService {
         }
         if dimMismatch {
             throw EmbeddingError.embeddingFailed(
-                "Token vector dimension mismatch (expected \(dim))"
+                "Token 向量维度不匹配（期望 \(dim)）"
             )
         }
         guard count > 0 else {
-            throw EmbeddingError.embeddingFailed("No token vectors produced")
+            throw EmbeddingError.embeddingFailed("未生成任何 Token 向量")
         }
 
         // Normalize to unit length so cosine similarity reduces to a dot product.

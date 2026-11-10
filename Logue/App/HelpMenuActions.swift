@@ -72,16 +72,16 @@ enum HelpMenuActions {
         let macOSVersion = ProcessInfo.processInfo.operatingSystemVersionString
         let deviceModel = Self.hwModel()
 
-        let subject = "[Logue Support] v\(appVersion)"
+        let subject = "【Logue 支持】v\(appVersion)"
         let body = """
-        Hi,
+        你好，
 
-        Describe what happened:
+        请描述发生了什么：
 
 
         ---
-        App: \(appVersion) (\(buildNumber)) · macOS \(macOSVersion)
-        Device: \(deviceModel)
+        应用：\(appVersion) (\(buildNumber)) · macOS \(macOSVersion)
+        设备：\(deviceModel)
         """
 
         var components = URLComponents()
@@ -101,7 +101,7 @@ enum HelpMenuActions {
     private static func hwModel() -> String {
         var size = 0
         sysctlbyname("hw.model", nil, &size, nil, 0)
-        guard size > 0 else { return "Unknown" }
+        guard size > 0 else { return "未知" }
         var model = [CChar](repeating: 0, count: size)
         sysctlbyname("hw.model", &model, &size, nil, 0)
         return String(cString: model)

@@ -43,13 +43,13 @@ extension ScheduledTaskManager {
         }
 
         // Save the report as a document so it's browsable in the library.
-        let title = "Weekly Review — \(snapshot.dateRangeLabel)"
+        let title = "每周回顾 — \(snapshot.dateRangeLabel)"
         let doc = DocumentStore.shared.createDocument(title: title, body: body, select: false)
 
-        let meetingsLabel = "\(snapshot.meetingCount) meeting\(snapshot.meetingCount == 1 ? "" : "s")"
-        let pendingLabel = "\(snapshot.pendingItems.count) pending action\(snapshot.pendingItems.count == 1 ? "" : "s")"
-        let notifBody = "\(meetingsLabel), \(pendingLabel)"
-        sendNotification(title: "Weekly Review Ready", body: notifBody)
+        let meetingsLabel = "\(snapshot.meetingCount) 场会议"
+        let pendingLabel = "\(snapshot.pendingItems.count) 项待办"
+        let notifBody = "\(meetingsLabel)，\(pendingLabel)"
+        sendNotification(title: "每周回顾已就绪", body: notifBody)
         logger.info("Weekly review saved as document \(doc.id)")
         return TaskRunRecord(
             taskType: .weeklyReview,
@@ -90,32 +90,32 @@ extension ScheduledTaskManager {
 
     /// Assembles the final markdown document from structured snapshot data + optional LLM themes.
     func buildWeeklyReviewMarkdown(snapshot: WeeklyReviewSnapshot, themes: String?) -> String {
-        var out = "# Weekly Review — \(snapshot.dateRangeLabel)\n\n"
-        out += "_Generated \(Date().formatted(date: .complete, time: .shortened))_\n\n"
+        var out = "# 每周回顾 — \(snapshot.dateRangeLabel)\n\n"
+        out += "_生成于 \(Date().formatted(date: .complete, time: .shortened))_\n\n"
 
         // Overview
-        out += "## Overview\n\n"
-        out += "- **Meetings:** \(snapshot.meetingCount) (total \(formatDuration(snapshot.totalDuration)))\n"
-        out += "- **Action items:** \(snapshot.completedItems.count) completed · \(snapshot.pendingItems.count) pending"
+        out += "## 概览\n\n"
+        out += "- **会议：** \(snapshot.meetingCount) 场（共 \(formatDuration(snapshot.totalDuration))）\n"
+        out += "- **待办事项：** \(snapshot.completedItems.count) 已完成 · \(snapshot.pendingItems.count) 待处理"
         if !snapshot.overdueItems.isEmpty {
-            out += " · **\(snapshot.overdueItems.count) overdue**"
+            out += " · **\(snapshot.overdueItems.count) 已逾期**"
         }
         out += "\n"
-        out += "- **Key decisions:** \(snapshot.keyDecisions.count)\n\n"
+        out += "- **关键决策：** \(snapshot.keyDecisions.count) 项\n\n"
 
         // Themes (LLM narrative)
         if let themes, !themes.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-            out += "## Themes of the Week\n\n"
+            out += "## 本周主题\n\n"
             out += themes.trimmingCharacters(in: .whitespacesAndNewlines) + "\n\n"
         }
 
         // Overdue items (highlighted)
         if !snapshot.overdueItems.isEmpty {
-            out += "## Overdue Action Items\n\n"
+            out += "## 逾期待办事项\n\n"
             for (meetingTitle, item) in snapshot.overdueItems {
                 let assignee = item.assignee.map { " — _\($0)_" } ?? ""
-                let due = item.dueDate.map { " (due \($0.formatted(.relative(presentation: .named))))" } ?? ""
-                out += "- [ ] \(item.title)\(assignee)\(due) · from _\(meetingTitle)_\n"
+                let due = item.dueDate.map { "（到期 \($0.formatted(.relative(presentation: .named)))）" } ?? ""
+                out += "- [ ] \(item.title)\(assignee)\(due) · 来自 _\(meetingTitle)_\n"
             }
             out += "\n"
         }
@@ -125,18 +125,18 @@ extension ScheduledTaskManager {
             !snapshot.overdueItems.contains { $0.item.id == pair.item.id }
         }
         if !nonOverduePending.isEmpty {
-            out += "## Pending Action Items\n\n"
+            out += "## 待处理待办事项\n\n"
             for (meetingTitle, item) in nonOverduePending {
                 let assignee = item.assignee.map { " — _\($0)_" } ?? ""
-                let due = item.dueDate.map { " (due \($0.formatted(.relative(presentation: .named))))" } ?? ""
-                out += "- [ ] \(item.title)\(assignee)\(due) · from _\(meetingTitle)_\n"
+                let due = item.dueDate.map { "（到期 \($0.formatted(.relative(presentation: .named)))）" } ?? ""
+                out += "- [ ] \(item.title)\(assignee)\(due) · 来自 _\(meetingTitle)_\n"
             }
             out += "\n"
         }
 
         // Key decisions
         if !snapshot.keyDecisions.isEmpty {
-            out += "## Key Decisions\n\n"
+            out += "## 关键决策\n\n"
             for (meetingTitle, decision) in snapshot.keyDecisions {
                 out += "- \(decision) _— \(meetingTitle)_\n"
             }
@@ -144,10 +144,10 @@ extension ScheduledTaskManager {
         }
 
         // Meeting index
-        out += "## Meetings\n\n"
+        out += "## 会议\n\n"
         for meeting in snapshot.meetings.sorted(by: { $0.createdAt > $1.createdAt }) {
             let date = meeting.createdAt.formatted(date: .abbreviated, time: .shortened)
-            out += "- **\(meeting.title)** — \(date) (\(formatDuration(meeting.duration)))\n"
+            out += "- **\(meeting.title)** — \(date)（\(formatDuration(meeting.duration))）\n"
         }
 
         return out
@@ -217,7 +217,7 @@ extension ScheduledTaskManager {
                 }
                 return briefing
             }
-            sendNotification(title: "Meeting Prep: \(event.title)", body: String(briefing.prefix(200)))
+            sendNotification(title: "会议准备：\(event.title)", body: String(briefing.prefix(200)))
             logger.info("Meeting prep generated for: \(event.title, privacy: .private)")
             return TaskRunRecord(
                 taskType: .meetingPrep, status: .success,
@@ -226,7 +226,7 @@ extension ScheduledTaskManager {
         } catch {
             return TaskRunRecord(
                 taskType: .meetingPrep, status: .failed,
-                resultSummary: "[\(event.title)] Error: \(error.localizedDescription)"
+                resultSummary: "[\(event.title)] 错误：\(error.localizedDescription)"
             )
         }
     }

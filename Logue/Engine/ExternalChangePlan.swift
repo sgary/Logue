@@ -26,18 +26,18 @@ struct ExternalChangePlan: Sendable {
 
     /// A one-line description for the rescan button's tooltip and the log.
     var summary: String {
-        guard !isEmpty else { return "No changes" }
+        guard !isEmpty else { return "无更改" }
         var parts: [String] = []
         if !updated.isEmpty {
-            parts.append("\(updated.count) updated")
+            parts.append("\(updated.count) 项更新")
         }
         if !inserted.isEmpty {
-            parts.append("\(inserted.count) added")
+            parts.append("\(inserted.count) 项新增")
         }
         if !trashed.isEmpty {
-            parts.append("\(trashed.count) removed")
+            parts.append("\(trashed.count) 项移除")
         }
-        return parts.joined(separator: ", ")
+        return parts.joined(separator: "，")
     }
 }
 

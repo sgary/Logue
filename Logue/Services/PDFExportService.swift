@@ -147,7 +147,7 @@ enum PDFExportService {
         let exported = dateFormatter.string(from: Date())
         let metaPara = NSMutableParagraphStyle()
         metaPara.paragraphSpacing = 16
-        result.append(NSAttributedString(string: "Created: \(created)   |   Exported: \(exported)\n\n", attributes: [
+        result.append(NSAttributedString(string: "创建时间：\(created)   |   导出时间：\(exported)\n\n", attributes: [
             .font: NSFont.systemFont(ofSize: 10),
             .foregroundColor: NSColor.gray,
             .paragraphStyle: metaPara,
@@ -207,7 +207,7 @@ enum PDFExportService {
         let textY = lineY + 12
 
         // Page number — centered
-        let pageStr = NSAttributedString(string: "Page \(page) of \(total)", attributes: [
+        let pageStr = NSAttributedString(string: "第 \(page) 页，共 \(total) 页", attributes: [
             .font: NSFont.systemFont(ofSize: 9),
             .foregroundColor: NSColor.gray,
         ])
@@ -215,7 +215,7 @@ enum PDFExportService {
         pageStr.draw(at: NSPoint(x: (pageWidth - pageSize.width) / 2, y: textY))
 
         // "Exported with Logue" — right-aligned
-        let label = NSMutableAttributedString(string: "Exported with ", attributes: [
+        let label = NSMutableAttributedString(string: "导出自 ", attributes: [
             .font: NSFont.systemFont(ofSize: 9),
             .foregroundColor: NSColor.gray,
         ])

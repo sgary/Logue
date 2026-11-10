@@ -135,12 +135,12 @@ extension BlockRowView {
         }
         slashTarget = target
 
-        let menu = NSMenu(title: "Blocks")
+        let menu = NSMenu(title: "块类型")
         for group in BlockType.groupedByCategory {
             if !menu.items.isEmpty {
                 menu.addItem(.separator())
             }
-            let header = NSMenuItem(title: group.category.rawValue, action: nil, keyEquivalent: "")
+            let header = NSMenuItem(title: group.category.displayName, action: nil, keyEquivalent: "")
             header.isEnabled = false
             menu.addItem(header)
 
@@ -192,14 +192,14 @@ extension BlockRowView {
     @ViewBuilder
     var turnIntoMenuItems: some View {
         if block.isTextBlock {
-            Menu("Turn into") {
-                Button("Text") { turnInto(.text) }
-                Button("Heading 1") { turnInto(.heading1) }
-                Button("Heading 2") { turnInto(.heading2) }
-                Button("Heading 3") { turnInto(.heading3) }
-                Button("Quote") { turnInto(.quote) }
-                Button("Callout") { turnInto(.callout) }
-                Button("Code Block") { turnInto(.codeBlock) }
+            Menu("转换为") {
+                Button("正文") { turnInto(.text) }
+                Button("标题 1") { turnInto(.heading1) }
+                Button("标题 2") { turnInto(.heading2) }
+                Button("标题 3") { turnInto(.heading3) }
+                Button("引用") { turnInto(.quote) }
+                Button("标注") { turnInto(.callout) }
+                Button("代码块") { turnInto(.codeBlock) }
             }
             Divider()
         }
@@ -211,13 +211,13 @@ extension BlockRowView {
     var blockContextMenu: some View {
         turnIntoMenuItems
 
-        Button("Duplicate") {
+        Button("创建副本") {
             let copy = duplicateBlock(block)
             document.insertBlock(copy, after: block.id)
             focusedBlockID = copy.id
         }
 
-        Button("Delete", role: .destructive) {
+        Button("删除", role: .destructive) {
             if let fallbackIdx = document.removeBlock(id: block.id) {
                 focusedBlockID = document.blocks[fallbackIdx].id
             }
@@ -575,7 +575,7 @@ extension BlockRowView {
     var addBlockMenu: some View {
         Menu {
             ForEach(BlockType.groupedByCategory, id: \.category) { group in
-                Section(group.category.rawValue) {
+                Section(group.category.displayName) {
                     ForEach(group.types, id: \.rawValue) { blockType in
                         Button {
                             let newBlock = blockType.makeEmptyBlock()
@@ -593,19 +593,19 @@ extension BlockRowView {
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
         .fixedSize()
-        .help("Add block below")
-        .accessibilityLabel("Add block below")
+        .help("在下方添加块")
+        .accessibilityLabel("在下方添加块")
     }
 
     var dragHandleMenu: some View {
         Menu {
             turnIntoMenuItems
-            Button("Duplicate") {
+            Button("创建副本") {
                 let copy = duplicateBlock(block)
                 document.insertBlock(copy, after: block.id)
                 focusedBlockID = copy.id
             }
-            Button("Delete", role: .destructive) {
+            Button("删除", role: .destructive) {
                 if let fallbackIdx = document.removeBlock(id: block.id) {
                     focusedBlockID = document.blocks[fallbackIdx].id
                 }
@@ -616,8 +616,8 @@ extension BlockRowView {
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
         .fixedSize()
-        .help("Block options")
-        .accessibilityLabel("Block options")
+        .help("块选项")
+        .accessibilityLabel("块选项")
     }
 
     // MARK: - Fonts

@@ -14,13 +14,13 @@ struct MeetingCardView: View {
             content: { isHovered in cardBody(isHovered: isHovered) },
             contextMenu: { contextMenuItems }
         )
-        .alert("Delete Meeting?", isPresented: $showDeleteConfirmation) {
-            Button("Delete", role: .destructive) {
+        .alert("删除会议？", isPresented: $showDeleteConfirmation) {
+            Button("删除", role: .destructive) {
                 store.trashMeeting(id: meeting.id)
             }
-            Button("Cancel", role: .cancel) {}
+            Button("取消", role: .cancel) {}
         } message: {
-            Text("\"\(meeting.title)\" will be permanently deleted.")
+            Text("“\(meeting.title)”将被永久删除。")
         }
     }
 
@@ -38,12 +38,12 @@ struct MeetingCardView: View {
 
     private var statusAccessibilityLabel: String {
         if meeting.summary != nil {
-            return "Summarized"
+            return "已生成摘要"
         }
         if !meeting.segments.isEmpty {
-            return "Transcribed"
+            return "已转写"
         }
-        return "No transcript"
+        return "没有转写文本"
     }
 
     private var completedActionCount: Int {
@@ -182,8 +182,8 @@ struct MeetingCardView: View {
                 }
                 .buttonStyle(.plain)
                 .overlay(HandCursorArea())
-                .help("Meeting options")
-                .accessibilityLabel("Meeting options")
+                .help("会议选项")
+                .accessibilityLabel("会议选项")
                 .popover(
                     isPresented: $showMenu,
                     arrowEdge: .bottom
@@ -258,8 +258,8 @@ struct MeetingCardView: View {
             } label: {
                 Label(
                     meeting.isPinned
-                        ? "Unpin"
-                        : "Pin",
+                        ? "取消置顶"
+                        : "置顶",
                     systemImage: meeting.isPinned
                         ? "pin.slash" : "pin"
                 )
@@ -274,7 +274,7 @@ struct MeetingCardView: View {
                 showMenu = false
             } label: {
                 Label(
-                    meeting.isArchived ? "Unarchive" : "Archive",
+                    meeting.isArchived ? "取消归档" : "归档",
                     systemImage: meeting.isArchived
                         ? "tray.and.arrow.up" : "archivebox"
                 )
@@ -290,7 +290,7 @@ struct MeetingCardView: View {
                 showMenu = false
                 showDeleteConfirmation = true
             } label: {
-                Label("Move to Trash", systemImage: "trash")
+                Label("移到废纸篓", systemImage: "trash")
                     .font(.subheadline)
                     .foregroundStyle(AppThemeConstants.error)
             }
@@ -309,15 +309,15 @@ struct MeetingCardView: View {
         Button {
             store.selectedMeetingID = meeting.id
         } label: {
-            Label("Open", systemImage: "waveform")
+            Label("打开", systemImage: "waveform")
         }
         Button {
             store.togglePin(id: meeting.id)
         } label: {
             Label(
                 meeting.isPinned
-                    ? "Unpin"
-                    : "Pin",
+                    ? "取消置顶"
+                    : "置顶",
                 systemImage: meeting.isPinned
                     ? "pin.slash" : "pin"
             )
@@ -326,7 +326,7 @@ struct MeetingCardView: View {
             store.toggleArchive(id: meeting.id)
         } label: {
             Label(
-                meeting.isArchived ? "Unarchive" : "Archive",
+                meeting.isArchived ? "取消归档" : "归档",
                 systemImage: meeting.isArchived
                     ? "tray.and.arrow.up" : "archivebox"
             )
@@ -335,7 +335,7 @@ struct MeetingCardView: View {
         Button(role: .destructive) {
             showDeleteConfirmation = true
         } label: {
-            Label("Move to Trash", systemImage: "trash")
+            Label("移到废纸篓", systemImage: "trash")
         }
     }
 }

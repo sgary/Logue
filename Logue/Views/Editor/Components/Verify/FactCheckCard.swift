@@ -13,14 +13,14 @@ struct FactCheckCard: View {
                     .foregroundStyle(factCheck.status.color)
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(factCheck.status.rawValue)
+                    Text(factCheck.status.displayName)
                         .font(.caption)
                         .foregroundStyle(factCheck.status.color)
 
                     HStack(spacing: 4) {
                         Image(systemName: "chart.bar.fill")
                             .font(.caption2)
-                        Text("\(factCheck.confidence)% confidence")
+                        Text("置信度 \(factCheck.confidence)%")
                             .font(.caption2)
                     }
                     .foregroundStyle(.secondary)
@@ -53,7 +53,7 @@ struct FactCheckCard: View {
 
                     if !factCheck.sources.isEmpty {
                         VStack(alignment: .leading, spacing: 4) {
-                            Text("Sources:")
+                            Text("来源：")
                                 .font(.caption.weight(.semibold))
                                 .foregroundStyle(.secondary)
 

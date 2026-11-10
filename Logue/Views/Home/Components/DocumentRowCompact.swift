@@ -25,7 +25,7 @@ struct DocumentRowCompact: View {
                 Image(systemName: "pin.fill")
                     .font(.caption2)
                     .foregroundStyle(AppThemeConstants.pinnedColor)
-                    .accessibilityLabel("Favorited")
+                    .accessibilityLabel("已置顶")
             }
         }
         .padding(AppThemeConstants.paddingMedium)
@@ -36,6 +36,6 @@ struct DocumentRowCompact: View {
         )
         .overlay(HandCursorArea())
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("Document: \(document.title)")
+        .accessibilityLabel("文档：\(document.title)")
     }
 }

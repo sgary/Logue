@@ -65,7 +65,7 @@ final class DeckPDFExporter {
         printInfo.horizontalPagination = .fit
         printInfo.verticalPagination = .fit
         guard let op = webView.printOperation(with: printInfo) as NSPrintOperation? else {
-            completion(.failure(SlideDeckBuilder.SlideError.generationFailed("Couldn't create print operation")))
+            completion(.failure(SlideDeckBuilder.SlideError.generationFailed("无法创建打印操作")))
             Self.inFlight = nil
             return
         }
@@ -75,7 +75,7 @@ final class DeckPDFExporter {
         if succeeded {
             completion(.success(destination))
         } else {
-            completion(.failure(SlideDeckBuilder.SlideError.generationFailed("Print returned false")))
+            completion(.failure(SlideDeckBuilder.SlideError.generationFailed("打印返回失败")))
         }
         Self.inFlight = nil
     }

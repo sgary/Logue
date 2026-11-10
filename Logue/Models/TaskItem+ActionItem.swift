@@ -38,7 +38,7 @@ extension TaskItem {
         if let assignee = actionItem.assignee?.trimmingCharacters(in: .whitespacesAndNewlines),
            !assignee.isEmpty
         {
-            lines.append("Assigned to: \(assignee)")
+            lines.append("负责人：\(assignee)")
         }
         // Only when no real date resolved it — otherwise the badge and the note say the same
         // thing, and the note is the vaguer of the two.
@@ -46,7 +46,7 @@ extension TaskItem {
             .trimmingCharacters(in: .whitespacesAndNewlines),
             !description.isEmpty, actionItem.dueDate == nil
         {
-            lines.append("Due: \(description)")
+            lines.append("截止：\(description)")
         }
         return lines.joined(separator: "\n")
     }

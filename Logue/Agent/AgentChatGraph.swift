@@ -132,7 +132,7 @@ actor AgentChatGraph {
                         "reasoning_text": "",
                         "has_tool_calls": false,
                         "pending_tool_calls": [ToolCall](),
-                        "error_message": "LLM error: \(errorDesc)",
+                        "error_message": "LLM 错误：\(errorDesc)",
                         "round": round,
                     ]
                 }

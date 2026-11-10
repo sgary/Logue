@@ -514,15 +514,15 @@ struct MainWindowView: View {
     private var breadcrumbSourceLabel: String {
         let source = editingSourceSelection ?? .home
         switch source {
-        case .home: return "Home"
-        case .pinned: return "Pinned"
-        case .recent: return "Recent"
-        case .allDocuments: return "All Documents"
-        case .allMeetings: return "All Meetings"
-        case .tasks: return "Tasks"
-        case let .space(id): return spaceStore.space(for: id)?.name ?? "Space"
-        case .trash: return "Trash"
-        case .document, .meeting: return "Back"
+        case .home: return "首页"
+        case .pinned: return "已置顶"
+        case .recent: return "最近"
+        case .allDocuments: return "全部文档"
+        case .allMeetings: return "全部会议"
+        case .tasks: return "任务"
+        case let .space(id): return spaceStore.space(for: id)?.name ?? "空间"
+        case .trash: return "废纸篓"
+        case .document, .meeting: return "返回"
         }
     }
 
@@ -542,13 +542,13 @@ struct MainWindowView: View {
 
     private func navigationCommands() -> [CommandItem] {
         let entries: [(String, String, SidebarItem)] = [
-            ("Home", "house", .home),
-            ("Pinned", "pin", .pinned),
-            ("Recent", "clock", .recent),
-            ("All Documents", "doc.text", .allDocuments),
-            ("All Meetings", "mic", .allMeetings),
-            ("Tasks", "checkmark.circle", .tasks),
-            ("Trash", "trash", .trash),
+            ("首页", "house", .home),
+            ("已置顶", "pin", .pinned),
+            ("最近", "clock", .recent),
+            ("全部文档", "doc.text", .allDocuments),
+            ("全部会议", "mic", .allMeetings),
+            ("任务", "checkmark.circle", .tasks),
+            ("废纸篓", "trash", .trash),
         ]
         let surfaces = entries.map { title, icon, destination in
             CommandItem(title, icon: icon, category: .navigation) {
@@ -570,7 +570,7 @@ struct MainWindowView: View {
 
     private func createCommands() -> [CommandItem] {
         [
-            CommandItem("New Document", icon: "plus.square", category: .create, subtitle: "Cmd+N") {
+            CommandItem("新建文档", icon: "plus.square", category: .create, subtitle: "⌘N") {
                 sidebarSelection = .allDocuments
                 let doc = store.createDocument()
                 store.selectedDocumentID = doc.id
@@ -579,7 +579,7 @@ struct MainWindowView: View {
     }
 
     private func focusModeCommand() -> CommandItem {
-        let focusLabel = focusState.isActive ? "Exit Focus Mode" : "Enter Focus Mode"
+        let focusLabel = focusState.isActive ? "退出专注模式" : "进入专注模式"
         let focusIcon = focusState.isActive ? "xmark.circle" : "rectangle.center.inset.filled"
         return CommandItem(focusLabel, icon: focusIcon, category: .navigation, subtitle: "⇧⌘F") {
             focusState.toggle()
@@ -594,10 +594,10 @@ struct MainWindowView: View {
             .prefix(5)
             .map { doc in
                 CommandItem(
-                    doc.title.isEmpty ? "Untitled Document" : doc.title,
+                    doc.title.isEmpty ? "未命名文档" : doc.title,
                     icon: "doc.text",
                     category: .document,
-                    subtitle: "Edited \(doc.modifiedAt.formatted(.relative(presentation: .named)))"
+                    subtitle: "编辑于 \(doc.modifiedAt.formatted(.relative(presentation: .named)))"
                 ) {
                     store.selectedDocumentID = doc.id
                 }

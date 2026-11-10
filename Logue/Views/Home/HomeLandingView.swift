@@ -79,7 +79,7 @@ struct HomeLandingView: View {
 
     private func newMeeting() {
         let meeting = meetingStore.createMeeting(
-            title: "Meeting \(Date.now.formatted(date: .abbreviated, time: .shortened))"
+            title: "会议 \(Date.now.formatted(date: .abbreviated, time: .shortened))"
         )
         meetingStore.selectedMeetingID = meeting.id
     }
@@ -101,7 +101,7 @@ struct HomeLandingView: View {
     /// `createSpace` has no selection side effect of its own, and a `nil` return reads
     /// exactly like success if it is discarded.
     private func createAndOpenSpace() {
-        guard let space = spaceStore.createSpace(name: "My Space") else { return }
+        guard let space = spaceStore.createSpace(name: "我的空间") else { return }
         onOpenSpace(space.id)
     }
 
@@ -129,28 +129,28 @@ struct HomeStarterCard: View {
     var body: some View {
         InsightCardShell {
             VStack(alignment: .leading, spacing: AppThemeConstants.paddingMedium) {
-                CardSectionHeader(icon: "sparkles", title: "Start with one of these")
+                CardSectionHeader(icon: "sparkles", title: "从这些开始")
 
-                Text("Logue gets useful the moment there is something to work from.")
+                Text("只要有可用的内容，Logue 就能派上用场。")
                     .font(.callout)
                     .foregroundStyle(AppThemeConstants.mutedText)
 
                 HStack(spacing: 10) {
                     HomeQuickActionButton(
                         icon: "mic.badge.plus",
-                        title: "Record a meeting",
+                        title: "录制会议",
                         color: AppThemeConstants.accent,
                         action: onStartRecording
                     )
                     HomeQuickActionButton(
                         icon: "doc.badge.plus",
-                        title: "Write a document",
+                        title: "写文档",
                         color: AppThemeConstants.categoryPurple,
                         action: onNewDocument
                     )
                     HomeQuickActionButton(
                         icon: "folder.badge.plus",
-                        title: "Create a space",
+                        title: "创建空间",
                         color: AppThemeConstants.success,
                         action: onNewSpace
                     )
@@ -169,7 +169,7 @@ struct HomeLandingHeader: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppThemeConstants.paddingMedium) {
-            Text("Good \(Self.timeOfDay)")
+            Text("\(Self.timeOfDay)好")
                 .font(.title2.weight(.semibold))
 
             HomeContextBar()
@@ -194,7 +194,7 @@ struct HomeLandingHeader: View {
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .accessibilityHint("Fills the prompt without sending it")
+                .accessibilityHint("填入提示词但不发送")
             }
             Spacer()
         }
@@ -202,9 +202,9 @@ struct HomeLandingHeader: View {
 
     static var timeOfDay: String {
         switch Calendar.current.component(.hour, from: Date()) {
-        case 0 ..< 12: "Morning"
-        case 12 ..< 17: "Afternoon"
-        default: "Evening"
+        case 0 ..< 12: "早上"
+        case 12 ..< 17: "下午"
+        default: "晚上"
         }
     }
 }

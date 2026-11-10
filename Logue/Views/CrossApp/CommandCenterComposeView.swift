@@ -30,7 +30,7 @@ struct CommandCenterComposeView: View {
                 }
             case .error:
                 PolishErrorView(
-                    message: polishEngine.errorMessage ?? "Something went wrong.",
+                    message: polishEngine.errorMessage ?? "出了点问题。",
                     onBack: { polishEngine.reset(); onBack() },
                     onRetry: { onStartCompose() }
                 )
@@ -52,13 +52,13 @@ struct CommandCenterComposeView: View {
                     .background(Circle().fill(Color.primary.opacity(AppThemeConstants.opacityLight)))
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Back")
+            .accessibilityLabel("返回")
 
             Image(systemName: "square.and.pencil")
                 .font(.subheadline.weight(.semibold))
                 .foregroundStyle(AppThemeConstants.brandPrimary)
 
-            Text(polishEngine.result != nil ? "Result" : "Quick Compose")
+            Text(polishEngine.result != nil ? "结果" : "快速撰写")
                 .font(.headline)
                 .foregroundStyle(.primary)
 
@@ -81,7 +81,7 @@ struct CommandCenterComposeView: View {
                     .padding(.top, -1)
 
                 if draftText.wrappedValue.isEmpty {
-                    Text("Draft your thought, message, or tweet\u{2026}")
+                    Text("写下你的想法、消息或推文\u{2026}")
                         .font(.body)
                         .foregroundStyle(.tertiary)
                         .padding(.leading, 5)
@@ -95,7 +95,7 @@ struct CommandCenterComposeView: View {
             ThinDivider()
 
             HStack(spacing: 10) {
-                Text("\(draftText.wrappedValue.count) chars")
+                Text("\(draftText.wrappedValue.count) 个字符")
                     .font(.caption2.weight(.medium))
                     .foregroundStyle(.tertiary)
 

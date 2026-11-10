@@ -11,7 +11,7 @@ import SwiftUI
 /// ```
 struct SearchBarField: View {
     @Binding var text: String
-    var placeholder: String = "Search"
+    var placeholder: String = "搜索"
     /// When `true`, the search bar stretches to fill available width instead of using a fixed width.
     var expandable: Bool = false
 
@@ -36,12 +36,12 @@ struct SearchBarField: View {
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Clear search")
+                .accessibilityLabel("清除搜索")
             }
         }
         .padding(.horizontal, 10)
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("Search")
+        .accessibilityLabel("搜索")
         .padding(.vertical, 6)
         .background(.quaternary, in: RoundedRectangle(cornerRadius: AppThemeConstants.radiusMedium))
         .onAppear { localText = text }

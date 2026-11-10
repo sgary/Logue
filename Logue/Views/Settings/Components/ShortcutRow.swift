@@ -18,7 +18,7 @@ struct ShortcutRow: View {
             Spacer()
 
             if isRecording {
-                Text("Press shortcut…")
+                Text("请按下快捷键…")
                     .font(.system(.callout, design: .monospaced))
                     .foregroundStyle(AppThemeConstants.accent)
                     .padding(.horizontal, 10)
@@ -32,13 +32,13 @@ struct ShortcutRow: View {
                             )
                     )
 
-                Button("Cancel") {
+                Button("取消") {
                     stopRecording()
                 }
                 .buttonStyle(.plain)
                 .font(.callout)
                 .foregroundStyle(.secondary)
-                .accessibilityLabel("Cancel shortcut recording")
+                .accessibilityLabel("取消快捷键录制")
             } else {
                 Text(shortcut.displayString)
                     .font(.system(.callout, design: .monospaced).weight(.medium))
@@ -53,17 +53,17 @@ struct ShortcutRow: View {
                             )
                     )
 
-                Button("Change") {
+                Button("更改") {
                     startRecording()
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)
-                .accessibilityLabel("Change \(title) shortcut")
-                .accessibilityHint("Records a new keyboard shortcut for \(title)")
+                .accessibilityLabel("更改\(title)快捷键")
+                .accessibilityHint("为\(title)录制新的键盘快捷键")
             }
         }
         .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(title) shortcut, \(shortcut.displayString)")
+        .accessibilityLabel("\(title)快捷键，\(shortcut.displayString)")
     }
 
     // MARK: - Recording
